@@ -1,0 +1,169 @@
+<div class="content-block">
+    <!-- <div class="dx-card responsive-paddings"> -->
+    <div class="dx-card">
+        <h4 class="m-0">Тендеры</h4>
+        <dx-data-grid 
+            id="gridContainer" 
+            [dataSource]="dataSource"
+            [showBorders]="true"
+            [selectedRowKeys]="[]"
+            (onRowClick) = "cellClick($event)">
+            <dxo-selection mode="single"></dxo-selection>
+            <dxo-paging [pageSize]="5"></dxo-paging>
+            <dxo-pager 
+                [showPageSizeSelector]="true"
+                [allowedPageSizes]="[5, 10, 20]"
+                [showInfo]="true">
+            </dxo-pager>
+            <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
+            <!-- [allowUpdating]="true"
+            [allowDeleting]="true" -->
+            <dxo-editing 
+                mode="row"
+                [allowAdding]="true">
+            </dxo-editing>
+            <dxo-export [enabled]="true" fileName="Tenders" [allowExportSelectedData]="true"></dxo-export>
+            <dxo-filter-row 
+                [visible]="showFilterRow" 
+                [applyFilter]="currentFilter"></dxo-filter-row>
+            <dxo-header-filter 
+                [visible]="showHeaderFilter"></dxo-header-filter>
+            <dxo-search-panel 
+                [visible]="true" 
+                placeholder="Search..."></dxo-search-panel>
+            <dxi-column 
+                dataField="Id" 
+                [width]="50" 
+                caption="Id">
+            </dxi-column>
+            <dxi-column 
+                dataField="TAMName" 
+                [width]="100" 
+                caption="TAM">
+            </dxi-column>
+            <dxi-column 
+                dataField="RegionName" 
+                [width]="100" 
+                caption="RegionName">
+            </dxi-column>
+            <dxi-column 
+                dataField="HospitalINN" 
+                [width]="100"
+                caption="Hospital INN">
+            </dxi-column>
+            <dxi-column 
+                dataField="HospitalName" 
+                [width]="100"
+                caption="Client name">
+            </dxi-column>
+            <dxi-column 
+                dataField="TenderStatusName" 
+                [width]="100">
+            </dxi-column>
+            <dxi-column 
+                dataField="GosZakupkiLink" 
+                [width]="200">
+            </dxi-column>
+            <dxi-column 
+                dataField="DateOfTender" 
+                [width]="150">
+            </dxi-column>
+            <dxi-column 
+                dataField="Winner" 
+                [width]="100">
+            </dxi-column>
+            <dxi-column 
+                dataField="IndicationName" 
+                [width]="200">
+            </dxi-column>
+            <dxi-column 
+                dataField="SupplierName" 
+                [width]="100">
+            </dxi-column>
+        </dx-data-grid>
+    <!-- </div> -->
+
+    <!-- <div class="dx-card responsive-paddings mt-4"> -->
+        <!-- <h5 class="m-0">Details of selected tender</h5>  -->
+        <dx-data-grid 
+            id="gridContainer" 
+            [dataSource]="dataSourceSKU"
+            [showBorders]="true"
+            (onContentReady)="initialized()">
+            <dxo-paging [pageSize]="5"></dxo-paging>
+            <dxo-pager 
+                [showPageSizeSelector]="true"
+                [allowedPageSizes]="[5, 10, 20]"
+                [showInfo]="true">
+            </dxo-pager>
+            <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
+            <dxo-filter-row 
+                [visible]="showFilterRow" 
+                [applyFilter]="currentFilter"></dxo-filter-row>
+            <dxo-header-filter 
+                [visible]="showHeaderFilter"></dxo-header-filter>
+            <!-- <dxo-search-panel 
+                [visible]="true" 
+                [width]="240" 
+                placeholder="Search..."></dxo-search-panel> -->
+            <dxi-column 
+                dataField="Id" 
+                caption="TenderSKU ID"
+                [width]="150"
+                alignment="center">
+                <dxo-header-filter 
+                    [groupInterval]="10000"></dxo-header-filter>
+            </dxi-column>
+            <dxi-column 
+                dataField="brandName" 
+                caption="Brand"
+                [width]="125"
+                alignment="center">
+                <dxo-header-filter 
+                    [dataSource]="orderHeaderFilter"></dxo-header-filter>
+            </dxi-column>
+            <dxi-column 
+                dataField="SKUNameRus" 
+                caption="SKU Name"
+                [width]="125"
+                alignment="center"
+                ></dxi-column>
+            <dxi-column 
+                dataField="SKUId" 
+                caption="SKU Code"
+                [width]="125"
+                ></dxi-column>
+            <dxi-column 
+                dataField="TenderVolume"
+                caption="Tender Volume (packs)"
+                [width]="200"
+                alignment="center"
+                ></dxi-column>
+            <dxi-column 
+                dataField="TenderValueUSD" 
+                caption="Tender Value (USD)"
+                [width]="200"
+                alignment="center"
+                ></dxi-column>
+            <dxi-column 
+                dataField="ForecastedValueUSD" 
+                caption="Forecasted Tender Value (USD)"
+                [width]="200"
+                alignment="center"
+                ></dxi-column>
+            <dxi-column 
+                dataField="DiffStartAndEDL" 
+                caption="Diff Tender Starting price and EDL price, %"
+                [width]="200"
+                alignment="center"
+                ></dxi-column>
+            <dxi-column 
+                dataField="DiffStartAndReference" 
+                caption="Diff Tender Starting price and Reference price, %"
+                [width]="200"            
+                alignment="center"
+                ></dxi-column>
+        </dx-data-grid>      
+    </div>
+
+</div>

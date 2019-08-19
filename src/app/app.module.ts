@@ -1,0 +1,66 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
+import { AppComponent } from './app.component';
+import { SideNavOuterToolbarModule, SideNavInnerToolbarModule, SingleCardModule } from './layouts';
+import { FooterModule, LoginFormModule } from './shared/components';
+import { AuthService, ScreenService, AppInfoService } from './shared/services';
+import { AppRoutingModule } from './app-routing.module';
+import { TenderdetailsComponent } from './pages/tenderdetails/tenderdetails.component';
+import { DisplayDataComponent } from './pages/display-data/display-data.component';
+import { HomeComponent } from './pages/home/home.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import {
+  DxDataGridModule,
+  DxFormModule,
+  DxSelectBoxModule,
+  DxCheckBoxModule,
+  DxTabsModule,
+  DxButtonModule,
+  DxLoadPanelModule
+} from 'devextreme-angular';
+import { Service } from './pages/home/app.service';
+import { RestService } from './services/rest.service';
+import { CasesComponent } from './pages/cases/cases.component';
+import { PlangraphicComponent } from './pages/plangraphic/plangraphic.component';
+import { SettingsComponent } from './pages/settings/settings.component';
+import { CasedetailsComponent } from './pages/casedetails/casedetails.component';
+import { CaseDescriptionComponent } from './pages/casedetails/case.description/case.description.component';
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    TenderdetailsComponent,
+    HomeComponent,
+    ProfileComponent,
+    DisplayDataComponent,
+    CasesComponent,
+    CaseDescriptionComponent,
+    PlangraphicComponent,
+    SettingsComponent,
+    CasedetailsComponent
+  ],
+  imports: [
+    HttpClientModule,
+    BrowserModule,
+    DxSelectBoxModule,
+    DxCheckBoxModule,
+    DxDataGridModule,
+    DxFormModule,
+    DxButtonModule,
+    DxLoadPanelModule,
+    DxTabsModule,
+    BrowserModule,
+    SideNavOuterToolbarModule,
+    SideNavInnerToolbarModule,
+    SingleCardModule,
+    FooterModule,
+    LoginFormModule,
+    AppRoutingModule
+  ],
+  providers: [AuthService, ScreenService, AppInfoService, Service, RestService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }

@@ -1,0 +1,55 @@
+
+
+::ng-deep{
+  .dx-box-item-content{
+    align-items: center;
+    .dx-field-item {
+      display: flex;
+      width: 600px;
+    }
+  }
+
+  .dx-box-flex.dx-box.dx-widget.dx-visibility-change-handler.dx-collection{
+    flex-direction: row !important;
+    flex-wrap: wrap;
+  }
+  .dx-first-col.dx-last-col.dx-field-item.dx-col-0.dx-field-item-optional.dx-flex-layout.dx-label-v-align {
+    width: 400px;
+    justify-content: center;
+    padding-top: 0;
+  }
+
+  label.dx-field-item-label.dx-field-item-label-location-top {
+    width: 50%;
+    float: right;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .dx-field-item-content.dx-field-item-content-location-bottom {
+    width: 50%;
+    display: flex;
+  }
+
+  .dx-numberbox.dx-texteditor.dx-editor-underlined.dx-widget,
+  .dx-textbox.dx-texteditor.dx-editor-underlined.dx-widget{
+    width: 100%;
+  }
+
+  span.dx-field-item-label-content {
+    width: auto !important;
+    margin-right: 16px;
+  }
+
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  dx-button {
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+}
