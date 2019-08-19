@@ -1,0 +1,89 @@
+<div class="approval-history">
+  <div class="history-left">
+    <div class="attachments">
+      <div class="attachments-header">
+        <div class="title">Attachments</div>
+        <div class="file-upload">
+          <dx-file-uploader
+            selectButtonText="Add"
+            uploadUrl="http://navpharm365app.ncdev.ru/odata/Annotation/Upload"
+            accept="*"
+            [multiple]="false"
+            uploadMode="instantly"
+            (onValueChanged)="onUploaded($event)">
+          </dx-file-uploader>
+        </div>
+      </div>
+      <dx-data-grid
+        #attachmentsGrid
+        [dataSource]="attachments"
+        [columnAutoWidth]="true"
+        [showBorders]="true"
+        [selectedRowKeys]="[]">
+
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+        <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
+
+        <dxi-column minWidth="100" dataField="FileName" caption="File"></dxi-column>
+        <dxi-column dataField="FileType" caption="Type"></dxi-column>
+        <dxi-column dataField="OwnerId" caption="User"></dxi-column>
+        <dxi-column dataField="NoteText" caption="Description"></dxi-column>
+        <dxi-column dataField="CreatedOn" caption="Create date"></dxi-column>
+        <dxi-column dataField="ModifiedOn" caption="Change date"></dxi-column>
+        <dxi-column dataField="FileValue" caption=""></dxi-column>
+      </dx-data-grid>
+    </div>
+    <div class="change-history">
+      <p class="title">Change History</p>
+      <dx-data-grid
+        [dataSource]="getTenderCaseApproved"
+        [columnAutoWidth]="true"
+        [showBorders]="true"
+        [selectedRowKeys]="[]">
+
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+        <dxo-filter-row [visible]="showFilterRow" [applyFilter]="currentFilter"></dxo-filter-row>
+        <dxo-header-filter [visible]="showHeaderFilter"></dxo-header-filter>
+        <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
+
+        <dxi-column dataField="TenderCaseStatusName" caption="Request approval status"></dxi-column>
+        <dxi-column dataField="MAL" caption="MAL"></dxi-column>
+        <dxi-column dataField="ApproverName" caption="Approver"></dxi-column>
+        <dxi-column dataField="ApproverCredentials" caption="Approver's credential"></dxi-column>
+        <dxi-column dataField="ModifiedOn" caption="Change date" sortOrder="asc"></dxi-column>
+        <dxi-column dataField="StatusStartDate" caption="State start"></dxi-column>
+        <dxi-column dataField="StatusEndDate" caption="State end"></dxi-column>
+        <dxi-column dataField="ApproverComment" caption="Approver comment"></dxi-column>
+      </dx-data-grid>
+    </div>
+  </div>
+  <div class="history-right">
+    <div class="comments" *ngIf="tenderCase">
+      <p class="title">Comments</p>
+      <div class="requestorComment">
+        <dx-form class="mb-3" [readOnly]="tenderCase.TenderCaseStatusId !== 1" [formData]="RequestorComment">
+          <dxi-item caption="Requestor Comment" dataField="RequestorComment" editorType="dxTextArea"></dxi-item>
+        </dx-form>
+        <dx-button
+          [disabled]="tenderCase.TenderCaseStatusId !== 1"
+          text="Save"
+          type="success"
+          (onClick)="RequestorCommentSave()">
+        </dx-button>
+      </div>
+
+      <div class="approverComment">
+        <dx-form [formData]="ApproverComment">
+          <dxi-item caption="Approver comment" dataField="ApproverComment" editorType="dxTextArea"></dxi-item>
+        </dx-form>
+        <dx-button
+          text="Save"
+          type="success"
+          (onClick)="ApproverCommentSave()">
+        </dx-button>
+      </div>
+    </div>
+  </div>
+</div>

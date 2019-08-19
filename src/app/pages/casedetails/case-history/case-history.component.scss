@@ -1,0 +1,85 @@
+.approval-history {
+  display: flex;
+  padding: 10px;
+
+  .title {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .history-left {
+    flex: 2;
+
+    .attachments {
+      margin-bottom: 20px;
+      background-color: #fff;
+
+      &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 15px;
+      }
+    }
+    
+    .change-history {
+      background-color: #fff;
+      padding-top: 5px;
+
+      .title {
+        margin-left: 15px;
+      }
+    }
+  }
+
+  .history-right {
+    flex: 1;
+    margin-left: 10px;
+    padding: 0 10px;
+    background: #fff;
+  }
+
+  .approverComment, .requestorComment {
+    dx-button {
+      margin-left: 126px;
+    }
+  }
+
+  .requestorComment {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .approval-history {
+    flex-direction: column;
+
+    .history-right {
+      margin: 20px 0 0;
+      padding-bottom: 20px;
+    }
+  }
+}
+
+::ng-deep  {
+  .dx-first-col.dx-last-col.dx-field-item.dx-col-0.dx-field-item-optional.dx-flex-layout.dx-label-v-align {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  label.dx-field-item-label.dx-field-item-label-location-top {
+    width: auto;
+  }
+
+  .dx-fileuploader-container {
+    width: auto;
+  }
+
+  .dx-fileuploader-input-container {
+    width: 120px;
+  }
+
+  .dx-fileuploader-show-file-list .dx-fileuploader-files-container {
+    display: none;
+  }
+}

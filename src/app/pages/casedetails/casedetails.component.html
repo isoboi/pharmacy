@@ -10,4 +10,9 @@
                         [selectBoxes]="selectBoxes"
                         *ngIf="tabIndex === 0"
                         [tenderCase]="tenderCase | async"></app-case-description>
+
+  <app-case-history
+    *ngIf="tabIndex === 2"
+    [tenderCase]="tenderCase | async">
+  </app-case-history>
 </div>
