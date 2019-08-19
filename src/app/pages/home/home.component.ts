@@ -38,7 +38,7 @@ export class HomeComponent {
     filterValue: number;
 
     constructor(
-        private service: Service, 
+        private service: Service,
         private router: Router,
         private restService: RestService
     ) {
@@ -48,19 +48,14 @@ export class HomeComponent {
 
         this.dataSource = this.restService.bindData(
             'https://navpharm365app.ncdev.ru/odata/Tender',
-            [ "Id" ],
-            { Id: 'Int32' },
-            [
-
-            ]
+            ['Id'],
+            { Id: 'Int32' }
         );
-        
+
         this.dataSourceSKU = this.restService.bindData(
             'https://navpharm365app.ncdev.ru/odata/TenderSKU',
             [ 'Id' ],
-            { Id: 'Int32' },
-            [
-            ]
+            { Id: 'Int32' }
         );
     }
 
