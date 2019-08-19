@@ -14,7 +14,7 @@ export class CasedetailsComponent implements OnInit {
   tender: Tender;
   tabs = CasesService.getTabs();
   case: any;
-  tabIndex = 0;
+  tabIndex = 1;
   tenderCase;
   channel;
   selectBoxes: any;

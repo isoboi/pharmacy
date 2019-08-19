@@ -60,4 +60,14 @@ export class CasesService {
     return this.http.patch(apiUrl + `TenderCase`, tenderCase);
   }
 
+
+
+  /********************************************************************************************************
+  * Case SKU
+   *********************************************************************************************************/
+
+  getCaseSku() {
+    return this.http.get(apiUrl + `TenderCaseSKU`);
+  }
+
 }

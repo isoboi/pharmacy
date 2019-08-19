@@ -18,7 +18,8 @@ import {
   DxCheckBoxModule,
   DxTabsModule,
   DxButtonModule,
-  DxLoadPanelModule, DxFileUploaderModule
+  DxLoadPanelModule,
+  DxFileUploaderModule
 } from 'devextreme-angular';
 import { Service } from './pages/home/app.service';
 import { RestService } from './services/rest.service';
@@ -27,6 +28,7 @@ import { PlangraphicComponent } from './pages/plangraphic/plangraphic.component'
 import { SettingsComponent } from './pages/settings/settings.component';
 import { CasedetailsComponent } from './pages/casedetails/casedetails.component';
 import { CaseDescriptionComponent } from './pages/casedetails/case.description/case.description.component';
+import {CaseSkuComponent} from './pages/casedetails/case.sku/case.sku.component';
 import { CaseHistoryComponent } from './pages/casedetails/case-history/case-history.component';
 
 
@@ -42,7 +44,8 @@ import { CaseHistoryComponent } from './pages/casedetails/case-history/case-hist
     PlangraphicComponent,
     SettingsComponent,
     CasedetailsComponent,
-    CaseHistoryComponent
+    CaseHistoryComponent,
+    CaseSkuComponent
   ],
   imports: [
     HttpClientModule,

@@ -1,0 +1,64 @@
+<dx-data-grid
+  id="gridContainer"
+  *ngIf="show"
+  [dataSource]="dataSource"
+  [showBorders]="true">
+  <dxi-column [width]="125" [caption]="'Brand'" dataField="BrandName"></dxi-column>
+  <dxi-column [width]="125" [caption]="'SKU mars'" dataField="ProductId">
+
+  </dxi-column>
+  <dxi-column [width]="125" [caption]="'SKU name Eng'" dataField="Name"></dxi-column>
+  <dxi-column [width]="125" [caption]="'SKU name Rus'" dataField="RussianSKUName"></dxi-column>
+  <dxi-column [width]="175" [caption]="'Price (price list, RUB)'" dataField="PriceRUB"></dxi-column>
+  <dxi-column [width]="250" [caption]="'Tender starting price (per pack, RUB)'" dataField="StartingPrice"></dxi-column>
+  <dxi-column [width]="200" [caption]="'Contract price (RUB) per pack'" dataField="ContracPriceRUB"></dxi-column>
+  <dxi-column [width]="200" [caption]="'On-Invoice Discount (base) (%)'" dataField="OnInvoiceDiscount"></dxi-column>
+  <dxi-column [width]="225" [caption]="'Additional On-Invoice Discount (%)'"
+              dataField="AddOnInvoiceDiscount"></dxi-column>
+  <dxi-column [width]="175" [caption]="'Price On-Invoice (RUB)'" dataField="PriceOnInvoiceRUB"></dxi-column>
+  <dxi-column [width]="250" [caption]="'Total Price On-Invoice Discount (RUB)'"
+              dataField="TotalPriceOnInvDiscRUB"></dxi-column>
+  <dxi-column [width]="250" [caption]="'Additional Off-Invoice Discount (%)'"
+              dataField="AddOffInvoiceDiscount"></dxi-column>
+  <dxi-column [width]="275" [caption]="'Total Additional Off-Invoice Discount (RUB)'"
+              dataField="TotalAddOffInvDiscRUB"></dxi-column>
+  <dxi-column [width]="150" [caption]="'Total Discount (%)'" dataField="TotalDiscount"></dxi-column>
+  <dxi-column [width]="275" [caption]="'Final Price w all discounts anticipated (RUB)'"
+              dataField="FinalPriceWAllDiscRUB "></dxi-column>
+  <dxi-column [width]="125" [caption]="'Net Sales (RUB)'" dataField="NetSalesRUB "></dxi-column>
+  <dxi-column [width]="125" [caption]="'Net Sales (USD)'" dataField="NetSalesUSD"></dxi-column>
+  <dxi-column [width]="175" [caption]="'Tender marginality (%)'" dataField="TenderMarginality"></dxi-column>
+  <dxi-column [width]="200" [caption]="'Case, Total shipped (packs)'" dataField="TotalShippedPacks"></dxi-column>
+  <dxi-column [width]="175" [caption]="'Case, Total shipped (USD)'" dataField="TotalShippedUSD"></dxi-column>
+  <dxi-column [width]="200" [caption]="'Case, total have to ship (packs)'" dataField="TotalToShipPacks"></dxi-column>
+  <dxi-column [width]="200" [caption]="'Case, total have to ship (USD)'" dataField="TotalToShipUSD"></dxi-column>
+  <dxi-column [width]="150" [caption]="'Gross Sales (RUB)'" dataField="GrossSalesRUB "></dxi-column>
+  <dxi-column [width]="150" [caption]="'Gross Sales (USD)'" dataField="GrossSalesUSD"></dxi-column>
+  <dxi-column [width]="200" [caption]="'Total On-Invoice sales (RUB)'" dataField="TotalOnInvSalesRUB"></dxi-column>
+  <dxi-column [width]="200" [caption]="'Total On-Invoice sales (USD)'" dataField="TotalOnInvSalesUSD"></dxi-column>
+  <dxi-column [width]="275" [caption]="'Demanded shelf life as per contract (months)'"
+              dataField="DemandedShelfLife"></dxi-column>
+  <dxi-column [width]="125" [caption]="'Shelf Life (%)'" dataField="ShelfLifePercent"></dxi-column>
+  <dxi-column [width]="200" [caption]="'Shelf Life (amount of months)'" dataField="ShelfLifeMonth"></dxi-column>
+  <dxi-column [width]="225" [caption]="'Commertial policy name'" cellTemplate="cellTemplate" dataField="CPCode">
+  </dxi-column>
+
+  <dxi-column [width]="125" [caption]="'BU'" dataField="ProductStructureId"></dxi-column>
+  <dxi-column [width]="125" [caption]="'Franchise'" dataField="Franchise "></dxi-column>
+  <dxi-column [width]="125" [caption]="'Exception'" dataField="IsException  "></dxi-column>
+  <dxi-column [width]="125" [caption]="'Create date'" dataField="CreatedOn"></dxi-column>
+  <dxi-column [width]="125" [caption]="'Change date'" dataField="ModifiedOn"></dxi-column>
+  <dxi-column [width]="150" [caption]="'Repetition case ID'" dataField="DupCaseId"></dxi-column>
+  <div *dxTemplate="let data of 'cellTemplate'">
+    <dx-select-box
+      [dataSource]="dataSourceCommercialPolicyRules"
+      displayExpr="Name"
+      valueExpr="Id"
+      [value]="data.value"
+      (valueChange)="valueChange($event, data)"
+    ></dx-select-box>
+  </div>
+
+</dx-data-grid>
+
+

@@ -19,43 +19,24 @@
             [editorOptions]="{ items: selectBoxes.distributor.value, displayExpr:'Name', valueExpr:'Id' }"
             dataField="SupplierId"></dxi-item>
   <dxi-item [label]="{text: 'Discount SAP number'}" dataField="DiscountNumber"></dxi-item>
-  <dxi-item [label]="{text: 'Discount validity date'}" editorType="dxDateBox" dataField="DiscountValidityDate"></dxi-item>
+  <dxi-item [label]="{text: 'Discount validity date'}" editorType="dxDateBox"
+            dataField="DiscountValidityDate"></dxi-item>
   <dxi-item [label]="{text: 'Sales channel in SAP'}"
             editorType="dxSelectBox"
             [editorOptions]="{ items: selectBoxes?.channel?.value, displayExpr:'Name', valueExpr:'Id' }"
             dataField="SalesChannelId"></dxi-item>
-  <dxi-item [disabled]="true" [label]="{text: 'Weighted average contract price (RUB)'}" dataField="WeightedAveConractPriceRUB"></dxi-item>
+  <dxi-item [disabled]="true" [label]="{text: 'Weighted average contract price (RUB)'}"
+            dataField="WeightedAveConractPriceRUB"></dxi-item>
   <dxi-item [label]="{text: 'Discount Provided'}" dataField="DiscountProvided"></dxi-item>
 </dx-form>
 
 
 <div class="buttons" *ngIf="tenderCase && selectBoxes">
-  <dx-button
-    text="Save Case"
-    type="default"
-    (onClick)="save()">
-  </dx-button>
-
-  <dx-button
-    text="Approver's requests"
-
-    (onClick)="save()">
-  </dx-button>
-  <dx-button
-    text="Approve"
-    (onClick)="save()">
-  </dx-button>
-
-  <dx-button
-    text="Reject"
-    type="danger"
-    icon="remove"
-    (onClick)="save()">
-  </dx-button>
-  <dx-button
-    text="Draft"
-    (onClick)="save()">
-  </dx-button>
+  <dx-button text="Save Case" type="default" (onClick)="save()"></dx-button>
+  <dx-button text="Approver's requests" (onClick)="save()"></dx-button>
+  <dx-button text="Approve" (onClick)="save()"></dx-button>
+  <dx-button text="Reject" type="danger" icon="remove" (onClick)="save()"></dx-button>
+  <dx-button text="Draft" (onClick)="save()"></dx-button>
 </div>
 
 
