@@ -13,17 +13,16 @@ export class CaseDescriptionComponent {
   @Input()tenderCase: TenderCase;
   @Input()selectBoxes;
   @Output()saveCase = new EventEmitter();
+
+  showLoadPanel = true;
+
   constructor(private restService: RestService,
               private cdr: ChangeDetectorRef,
               private casesService: CasesService) {
   }
-  visible = true;
 
-  onFieldDataChanged() {
-    console.log(this.tenderCase);
-  }
   onInitialized() {
-    this.visible = false;
+    this.showLoadPanel = false;
     this.cdr.detectChanges();
   }
 

@@ -1,5 +1,4 @@
 <dx-form *ngIf="tenderCase && selectBoxes" id="form"
-         (formDataChange)="onFieldDataChanged()"
          [readOnly]="tenderCase?.TenderCaseStatusId !== 1"
          (onInitialized)="onInitialized()"
          [formData]="tenderCase">
@@ -43,8 +42,7 @@
 <dx-load-panel
   #loadPanel
   shadingColor="rgba(0,0,0,0.4)"
-  [position]="{ of: '#employee' }"
-  [(visible)]="visible"
+  [(visible)]="showLoadPanel"
   [showIndicator]="true"
   [showPane]="true"
   [shading]="true"

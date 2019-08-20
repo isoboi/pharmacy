@@ -1,1 +1,91 @@
-<p>Tender description</p>
+<dx-form *ngIf="tender && federalDistrict && federalSubject && hospitals && federalLaw && tenderStatus && tenderStatusComment && indication" id="form"
+         (onInitialized)="onInitialized()"
+         [formData]="tender">
+  <dxi-item [disabled]="true" [label]="{text: 'Tender ID internal'}" dataField="TenderId"></dxi-item>
+  <dxi-item [disabled]="true" [label]="{text: 'Create date'}" dataField="CreatedOn"></dxi-item>
+  <dxi-item [disabled]="true" [label]="{text: 'TAM'}" dataField="TAMName"></dxi-item>
+  <dxi-item [label]="{text: 'Federal district'}"
+            dataField="FederalDistrictId"
+            editorType="dxSelectBox"
+            [editorOptions]="{ items: federalDistrict.value, displayExpr:'Name', valueExpr:'Id' }"
+  ></dxi-item>
+  <dxi-item [label]="{text: 'Region'}"
+            dataField="RegionId"
+            editorType="dxSelectBox"
+            [editorOptions]="{ items: federalSubject.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+
+  <dxi-item [label]="{text: 'INN'}"
+            dataField="HospitalINN"
+            editorType="dxSelectBox"
+            [editorOptions]="{ items: hospitals.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+  <dxi-item [label]="{text: 'Client name'}"
+            dataField="HospitalName"
+            editorType="dxSelectBox"
+            [editorOptions]="{ items: hospitals.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+  <dxi-item [disabled]="true" [label]="{text: 'Legal Entity Type'}" dataField="LegalEntityType"></dxi-item>
+  <dxi-item [disabled]="true" [label]="{text: 'Channel of financing'}" dataField="SourceOfFinId"></dxi-item>
+  <dxi-item [label]="{text: 'Federal law'}"
+            dataField="FederalLawId"
+            editorType="dxSelectBox"
+            [editorOptions]="{ items: federalLaw.value, displayExpr:'FederalLawNumber', valueExpr:'Id' }"></dxi-item>
+
+  <dxi-item [label]="{text: 'Tender Status'}"
+            dataField="FederalLawId"
+            editorType="dxSelectBox"
+            [editorOptions]="{ items: tenderStatus.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+  <dxi-item [label]="{text: 'Change of tender status, date'}" dataField="StatusChangedOn"></dxi-item>
+
+  <dxi-item [label]="{text: 'Tender Status Comment'}"
+            dataField="TenderStatusCommentId"
+            editorType="dxSelectBox"
+            [editorOptions]="{ items: tenderStatusComment.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+  <dxi-item [label]="{text: 'Notification ID'}" dataField="NotificationNumber"></dxi-item>
+  <dxi-item [label]="{text: 'Link to gos zakupki web-site'}" dataField="GosZakupkiLink"></dxi-item>
+
+  <dxi-item [label]="{text: 'Date of tender'}" editorType="dxDateBox" dataField="DateOfTender"></dxi-item>
+  <dxi-item [label]="{text: 'Winner (partner) of the tender'}" dataField="Winner"></dxi-item>
+
+
+  <dxi-item [label]="{text: 'Indication'}"
+            dataField="TenderStatusCommentId"
+            editorType="dxSelectBox"
+            [editorOptions]="{ items: indication.value, displayExpr:'Name', valueExpr:'Id' }">
+  </dxi-item>
+  <dxi-item [label]="{text: 'Supplier of the tender'}"
+            dataField="SupplierId"
+            editorType="dxSelectBox"
+            [editorOptions]="{ items: distributor.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+
+  <dxi-item [label]="{text: 'Deadline for supply'}" dataField="DeadlineForSupply"></dxi-item>
+
+
+  <dxi-item *ngIf="contractStatus" [label]="{text: 'Contract status'}"
+            dataField="ContractStatusId"
+            editorType="dxSelectBox"
+            [editorOptions]="{ items: contractStatus.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+  <dxi-item *ngIf="contractStatusComment" [label]="{text: 'Contract status comment'}"
+            dataField="ContractStatusCommentId"
+            editorType="dxSelectBox"
+            [editorOptions]="{ items: contractStatusComment.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+</dx-form>
+
+
+<div class="buttons" *ngIf="tenderCase && selectBoxes">
+  <dx-button text="Save Case" type="default" (onClick)="save()"></dx-button>
+  <dx-button text="Approver's requests" (onClick)="save()"></dx-button>
+  <dx-button text="Approve" (onClick)="save()"></dx-button>
+  <dx-button text="Reject" type="danger" icon="remove" (onClick)="save()"></dx-button>
+  <dx-button text="Draft" (onClick)="save()"></dx-button>
+</div>
+
+
+<dx-load-panel
+  #loadPanel
+  shadingColor="rgba(0,0,0,0.4)"
+  [(visible)]="showLoadPanel"
+  [showIndicator]="true"
+  [showPane]="true"
+  [shading]="true"
+  [closeOnOutsideClick]="false">
+</dx-load-panel>
+

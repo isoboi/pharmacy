@@ -67,7 +67,7 @@ export class Service {
 
   setSelectedTender(tenderData) {
     this.selectedTender = tenderData;
-  };
+  }
 
   getSelectedTender() {
     return this.selectedTender;

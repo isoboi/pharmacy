@@ -25,7 +25,7 @@ const routes: Routes = [
     component: SettingsComponent
   },
   {
-    path: 'tender',
+    path: 'tender/:id',
     component: TenderdetailsComponent
   },
   {

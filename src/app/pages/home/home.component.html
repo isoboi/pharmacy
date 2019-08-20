@@ -1,5 +1,4 @@
 <div class="content-block">
-    <!-- <div class="dx-card responsive-paddings"> -->
     <div class="dx-card">
         <h4 class="m-0">Тендеры</h4>
         <dx-data-grid 
@@ -7,6 +6,7 @@
             [dataSource]="dataSource"
             [showBorders]="true"
             [selectedRowKeys]="[]"
+            (onRowDblClick)="onRowDblClick($event)"
             (onRowClick) = "cellClick($event)">
             <dxo-selection mode="single"></dxo-selection>
             <dxo-paging [pageSize]="5"></dxo-paging>
@@ -16,8 +16,6 @@
                 [showInfo]="true">
             </dxo-pager>
             <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
-            <!-- [allowUpdating]="true"
-            [allowDeleting]="true" -->
             <dxo-editing 
                 mode="row"
                 [allowAdding]="true">
@@ -81,10 +79,6 @@
                 [width]="100">
             </dxi-column>
         </dx-data-grid>
-    <!-- </div> -->
-
-    <!-- <div class="dx-card responsive-paddings mt-4"> -->
-        <!-- <h5 class="m-0">Details of selected tender</h5>  -->
         <dx-data-grid 
             id="gridContainer" 
             [dataSource]="dataSourceSKU"
@@ -102,10 +96,6 @@
                 [applyFilter]="currentFilter"></dxo-filter-row>
             <dxo-header-filter 
                 [visible]="showHeaderFilter"></dxo-header-filter>
-            <!-- <dxo-search-panel 
-                [visible]="true" 
-                [width]="240" 
-                placeholder="Search..."></dxo-search-panel> -->
             <dxi-column 
                 dataField="Id" 
                 caption="TenderSKU ID"
@@ -165,5 +155,4 @@
                 ></dxi-column>
         </dx-data-grid>      
     </div>
-
 </div>
