@@ -1,0 +1,97 @@
+<div class="tender-sku">
+  <dx-data-grid
+    [dataSource]="tenderSku"
+    [columnAutoWidth]="true"
+    [showBorders]="true">
+
+    <dxo-selection mode="single"></dxo-selection>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true" [applyFilter]="currentFilter"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [visible]="true" placeholder="Search..."></dxo-search-panel>
+    <dxo-editing mode="cell" [allowUpdating]="false"></dxo-editing>
+
+    <dxi-column alignment="left" caption="Brand" [allowEditing]="false" [width]="100" dataField="BrandId"></dxi-column>
+    <dxi-column alignment="left" caption="SKU mars" [width]="250"  cellTemplate="Products" dataField="ProductId"></dxi-column>
+    <dxi-column alignment="left" caption="SKU name Eng" dataField="SKUNameEng"></dxi-column>
+    <dxi-column alignment="left" caption="SKU name Rus" dataField="SKUNameRus"></dxi-column>
+    <dxi-column alignment="left" caption="MNN" [width]="200" cellTemplate="SKUIAS" dataField="SKUIASId"></dxi-column>
+    <dxi-column alignment="left" caption="Dosage" dataField="Dosage"></dxi-column>
+    <dxi-column alignment="left" caption="Tender starting price (per pack, RUB)" dataField="StartingPrice"></dxi-column>
+    <dxi-column alignment="left" caption="Risk" [width]="120" dataField="RiskId" cellTemplate="Risk"></dxi-column>
+    <dxi-column alignment="left" caption="Tender Volume (packs)" dataField="TenderVolume"></dxi-column>
+    <dxi-column alignment="left" caption="Tender Value (RUB)" dataField="TenderValueRUB"></dxi-column>
+    <dxi-column alignment="left" caption="Tender Value (USD)" dataField="TenderValueUSD"></dxi-column>
+    <dxi-column alignment="left" caption="EDL Price (RUB)" dataField="EDLPriceRUB" cellTemplate="EDLPriceList"></dxi-column>
+    <dxi-column alignment="left" caption="Reference price (RUB)" dataField="ReferencePriceRUB" cellTemplate="ReferencePriceList"></dxi-column>
+    <dxi-column alignment="left" caption="Diff Tender starting price and EDL price (%)" dataField="DiffStartAndEDL "></dxi-column>
+    <dxi-column alignment="left" caption="Diff Tender starting price and Reference price (%)" dataField="DiffStartAndReference"></dxi-column>
+    <dxi-column alignment="left" caption="Won contract price (per pack in RUB)" dataField="WonContractPriceRUB"></dxi-column>
+    <dxi-column alignment="left" caption="Contract price (RUB) per pack" dataField="ContracPriceRUB"></dxi-column>
+    <dxi-column alignment="left" caption="Contract quantity (packs)" dataField="ContractQuantity"></dxi-column>
+    <dxi-column alignment="left" caption="Forecast Price per Pack (USD)" dataField="ForecastPriceRUB" cellTemplate="ForecastPriceList"></dxi-column>
+    <dxi-column alignment="left" caption="Forecasted Tender Value (RUB)" dataField="ForecastedValueRUB"></dxi-column>
+    <dxi-column alignment="left" caption="Forecasted Tender Value (USD)" dataField="ForecastedValueUSD"></dxi-column>
+
+    <div *dxTemplate="let data of 'Products'">
+      <dx-select-box
+        [dataSource]="products"
+        displayExpr="Name"
+        valueExpr="Id"
+        [value]="data.value"
+        (valueChange)="valueChange($event, data)">
+      </dx-select-box>
+    </div>
+
+    <div *dxTemplate="let data of 'SKUIAS'">
+      <dx-select-box
+        [dataSource]="skuias"
+        displayExpr="Name"
+        valueExpr="Id"
+        [value]="data.value"
+        (valueChange)="valueChange($event, data)">
+      </dx-select-box>
+    </div>
+
+    <div *dxTemplate="let data of 'Risk'">
+      <dx-select-box
+        [dataSource]="risk"
+        displayExpr="Name"
+        valueExpr="Id"
+        [value]="data.value"
+        (valueChange)="valueChange($event, data)">
+      </dx-select-box>
+    </div>
+
+    <div *dxTemplate="let data of 'EDLPriceList'">
+      <dx-select-box
+        [dataSource]="EDLPriceList"
+        displayExpr="Name"
+        valueExpr="Id"
+        [value]="data.value"
+        (valueChange)="valueChange($event, data)">
+      </dx-select-box>
+    </div>
+
+    <div *dxTemplate="let data of 'ReferencePriceList'">
+      <dx-select-box
+        [dataSource]="ReferencePriceList"
+        displayExpr="Name"
+        valueExpr="Id"
+        [value]="data.value"
+        (valueChange)="valueChange($event, data)">
+      </dx-select-box>
+    </div>
+
+    <div *dxTemplate="let data of 'ForecastPriceList'">
+      <dx-select-box
+        [dataSource]="ForecastPriceList"
+        displayExpr="Name"
+        valueExpr="Id"
+        [value]="data.value"
+        (valueChange)="valueChange($event, data)">
+      </dx-select-box>
+    </div>
+  </dx-data-grid>
+</div>

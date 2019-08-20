@@ -4,8 +4,8 @@
       #apiTabs
       [dataSource]="tabs"
       [selectedIndex]="tabIndex"
-      (onItemClick)="selectTab($event)"
-    ></dx-tabs>
+      (onItemClick)="selectTab($event)">
+    </dx-tabs>
 
     <app-tender-description *ngIf="tabIndex === 0" [tender]="tender | async"></app-tender-description>
     <app-tender-sku *ngIf="tabIndex === 1"></app-tender-sku>
