@@ -1,1 +1,20 @@
-<p>tender-case works!</p>
+<div class="tender-case">
+  <dx-data-grid
+    [dataSource]="tenderCase"
+    [columnAutoWidth]="true"
+    [showBorders]="true"
+    (onRowDblClick)="onRowDblClick($event)">
+
+    <dxo-selection mode="single"></dxo-selection>
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true" [applyFilter]="currentFilter"></dxo-filter-row>
+    <dxo-header-filter [visible]="true"></dxo-header-filter>
+    <dxo-search-panel [visible]="true" placeholder="Search..."></dxo-search-panel>
+
+    <dxi-column alignment="left" dataField="TenderCaseId" caption="Case ID"></dxi-column>
+    <dxi-column alignment="left" dataField="DiscountNumber" caption="Discount SAP number"></dxi-column>
+    <dxi-column alignment="left" dataField="DiscountValidityDate" caption="Discount validity date"></dxi-column>
+    <dxi-column alignment="left" dataField="DiscountProvided" caption="Discount Provided"></dxi-column>
+  </dx-data-grid>
+</div>

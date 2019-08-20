@@ -1,0 +1,9 @@
+.tender-case {
+  padding: 20px 10px;
+}
+
+::ng-deep {
+  .dx-datagrid .dx-datagrid-headers .dx-datagrid-content .dx-datagrid-table .dx-row > td {
+    text-align: center !important;
+  }
+}
