@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Tender, Service } from '../home/app.service';
 import { Router } from '@angular/router';
+import {TenderService} from '../../services/tender.service';
 
 @Component({
   selector: 'app-tenderdetails',
@@ -9,16 +10,24 @@ import { Router } from '@angular/router';
 })
 export class TenderdetailsComponent implements OnInit {
 
-  tender:Tender;
+  tender: Tender;
+  tabs;
+  tabIndex = 0;
   constructor(
     private service: Service,
-    private router: Router
+    private router: Router,
+    private tenderService: TenderService
   ) {
      
   }
 
   ngOnInit() {
     this.tender = this.service.getSelectedTender();
+    this.tabs = this.tenderService.getTabs();
+  }
+
+  selectTab(e) {
+    this.tabIndex = e.itemIndex;
   }
 
 }
