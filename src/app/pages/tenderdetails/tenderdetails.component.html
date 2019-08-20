@@ -1,12 +1,14 @@
-<div class="tabs">
-  <dx-tabs
-    #apiTabs
-    [dataSource]="tabs"
-    [selectedIndex]="tabIndex"
-    (onItemClick)="selectTab($event)"
-  ></dx-tabs>
+<div class="content-block">
+  <div class="dx-card">
+    <dx-tabs
+      #apiTabs
+      [dataSource]="tabs"
+      [selectedIndex]="tabIndex"
+      (onItemClick)="selectTab($event)"
+    ></dx-tabs>
 
-  <app-tender-description *ngIf="tabIndex === 0"></app-tender-description>
-  <app-tender-sku *ngIf="tabIndex === 1"></app-tender-sku>
-  <app-tender-case *ngIf="tabIndex === 2"></app-tender-case>
+    <app-tender-description *ngIf="tabIndex === 0"></app-tender-description>
+    <app-tender-sku *ngIf="tabIndex === 1"></app-tender-sku>
+    <app-tender-case *ngIf="tabIndex === 2"></app-tender-case>
+  </div>
 </div>
