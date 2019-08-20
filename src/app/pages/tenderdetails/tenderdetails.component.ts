@@ -12,7 +12,7 @@ export class TenderdetailsComponent implements OnInit {
 
   tender: Tender;
   tabs;
-  tabIndex = 2;
+  tabIndex = 1;
   constructor(
     private service: Service,
     private router: Router,

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {RestService} from '../../../services/rest.service';
+import {Router} from '@angular/router';
 import DataSource from 'devextreme/data/data_source';
+import {RestService} from '../../../services/rest.service';
 
 @Component({
   selector: 'app-tender-case',
@@ -12,7 +13,8 @@ export class TenderCaseComponent implements OnInit {
   tenderCase: DataSource;
   currentFilter: any;
 
-  constructor(private restService: RestService) {
+  constructor(private restService: RestService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -20,7 +22,7 @@ export class TenderCaseComponent implements OnInit {
   }
 
   onRowDblClick(e) {
-    console.log(e);
+    this.router.navigate(['/case', e.data.Id]);
   }
 
   private _getTenderCase() {
