@@ -55,38 +55,38 @@ export class TenderDescriptionComponent implements OnChanges, OnInit, OnDestroy 
         this.federalLaw = data;
       });
 
-    this.tenderService.get('TenderStatus')
+    this.tenderService.get('/TenderStatus')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.tenderStatus = data;
       });
 
-    this.tenderService.get('TenderStatusComment')
+    this.tenderService.get('/TenderStatusComment')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.tenderStatusComment = data;
       });
 
-    this.tenderService.get('Indication')
+    this.tenderService.get('/Indication')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.indication = data;
       });
 
 
-    this.tenderService.get('Distributor')
+    this.tenderService.get('/Distributor')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.distributor = data;
       });
 
-    this.tenderService.get('ContractStatus')
+    this.tenderService.get('/ContractStatus')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.contractStatus = data;
       });
 
-    this.tenderService.get('ContractStatusComment')
+    this.tenderService.get('/ContractStatusComment')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.contractStatusComment = data;

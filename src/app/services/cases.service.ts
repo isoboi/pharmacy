@@ -2,8 +2,9 @@ import {Tab} from '../models/ui.models';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {forkJoin, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {ActionEvent, Actions, TenderCase} from '../models/case.interface';
+import {environment} from '../../environments/environment.prod';
+
 
 
 const tabs: Tab[] = [
@@ -22,7 +23,7 @@ const tabs: Tab[] = [
 ];
 
 
-const apiUrl = 'https://navpharm365app.ncdev.ru/odata/';
+const apiUrl = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
@@ -42,49 +43,49 @@ export class CasesService {
   }
 
   getRelatedCaseComment() {
-    return this.http.get(apiUrl + 'RelatedCaseComment');
+    return this.http.get(apiUrl + '/RelatedCaseComment');
   }
   getDistributor() {
-    return this.http.get(apiUrl + 'Distributor');
+    return this.http.get(apiUrl + '/Distributor');
   }
   getChannel() {
-    return this.http.get(apiUrl + 'Channel');
+    return this.http.get(apiUrl + '/Channel');
   }
 
   getTenderCase(id) {
-    return this.http.get(apiUrl + `TenderCase/${id}`);
+    return this.http.get(apiUrl + `/TenderCase/${id}`);
   }
 
-  patchTenderCase(event: ActionEvent) {
-    if (event.action === this.actions.reject) {
-      event.tenderCase.TenderCaseStatusId = 11;
+  patchTenderCase(obj, action, id) {
+    if (action === this.actions.reject) {
+      obj.TenderCaseStatusId = 11;
     }
-    return this.http.patch(apiUrl + `TenderCase/${event.tenderCase.Id}`, event.tenderCase);
+    return this.http.patch(apiUrl + `/TenderCase/${id}`, obj);
   }
 
   approversRequests(tenderCase) {
-    return this.http.patch(apiUrl + `TenderCase`, tenderCase);
+    return this.http.patch(apiUrl + `/TenderCase`, tenderCase);
   }
 
   rejectTenderCase(tenderCase: TenderCase) {
     tenderCase.TenderCaseStatusId = 11;
-    return this.http.patch(apiUrl + `TenderCase`, tenderCase);
+    return this.http.patch(apiUrl + `/TenderCase`, tenderCase);
   }
 
   addFileData(data): Observable<any> {
-    return this.http.post(apiUrl + 'Annotation/AddData', data);
+    return this.http.post(apiUrl + '/Annotation/AddData', data);
   }
 
   fileDownload(data) {
-    return this.http.post(apiUrl + 'Annotation/Download', data);
+    return this.http.post(apiUrl + '/Annotation/Download', data);
   }
 
   fileDelete(data) {
-    return this.http.post(apiUrl + 'Annotation/Delete', data);
+    return this.http.post(apiUrl + '/Annotation/Delete', data);
   }
 
   addApproverComment(data) {
-    return this.http.post(apiUrl + 'ApproverComment/Post', data);
+    return this.http.post(apiUrl + '/ApproverComment/Post', data);
   }
 
   /********************************************************************************************************
@@ -92,7 +93,7 @@ export class CasesService {
    *********************************************************************************************************/
 
   getCaseSku() {
-    return this.http.get(apiUrl + `TenderCaseSKU`);
+    return this.http.get(apiUrl + `/TenderCaseSKU`);
   }
 
 }

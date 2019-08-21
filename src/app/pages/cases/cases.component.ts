@@ -1,21 +1,15 @@
-import {NgModule, Component, ViewChild, enableProdMode} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {Component, ViewChild, enableProdMode} from '@angular/core';
 import {
-  DxDataGridComponent,
-  DxDataGridModule,
-  DxSelectBoxModule,
-  DxCheckBoxModule
+  DxDataGridComponent
 } from 'devextreme-angular';
 
-import {Tender, Service, TenderDetails} from '../home/app.service';
+import {Service} from '../home/app.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import 'devextreme/data/odata/store';
-import {version} from 'punycode';
-import ODataStore from 'devextreme/data/odata/store';
 import DataSource from 'devextreme/data/data_source';
 import {RestService} from 'src/app/services/rest.service';
 import {TenderCase} from '../../models/case.interface';
+import {environment} from '../../../environments/environment';
 
 if (!/localhost/.test(document.location.host)) {
   enableProdMode();
@@ -47,12 +41,12 @@ export class CasesComponent {
     this.showFilterRow = true;
     this.showHeaderFilter = true;
     this.dataSource = this.restService.bindData(
-      'https://navpharm365app.ncdev.ru/odata/TenderCase',
+      environment.apiUrl + '/TenderCase',
       ['Id'],
       {Id: 'Int32'});
 
     this.dataSourceSKU = this.restService.bindData(
-      'https://navpharm365app.ncdev.ru/odata/TenderCaseSKU',
+      environment.apiUrl + '/TenderCaseSKU',
       ['Id'],
       {Id: 'Int32'});
     if (this.route.snapshot.params.id) {

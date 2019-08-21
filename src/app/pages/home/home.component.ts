@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import 'devextreme/data/odata/store';
 import DataSource from 'devextreme/data/data_source';
 import {RestService} from 'src/app/services/rest.service';
+import {environment} from '../../../environments/environment';
 
 if (!/localhost/.test(document.location.host)) {
   enableProdMode();
@@ -28,13 +29,13 @@ export class HomeComponent {
     this.showHeaderFilter = true;
 
     this.dataSource = this.restService.bindData(
-      'https://navpharm365app.ncdev.ru/odata/Tender',
+      environment.apiUrl + '/Tender',
       ['Id'],
       {Id: 'Int32'}
     );
 
     this.dataSourceSKU = this.restService.bindData(
-      'https://navpharm365app.ncdev.ru/odata/TenderSKU',
+      environment.apiUrl + '/TenderSKU',
       ['Id'],
       {Id: 'Int32'}
     );

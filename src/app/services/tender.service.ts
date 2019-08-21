@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Tab} from '../models/ui.models';
 import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import {environment} from '../../environments/environment.prod';
 
 const tabs: Tab[] = [
   {
@@ -17,7 +17,7 @@ const tabs: Tab[] = [
     text: 'Tender Case',
   }
 ];
-const apiUrl = 'http://navpharm365app.ncdev.ru/odata/';
+const apiUrl = environment.apiUrl;
 @Injectable({
   providedIn: 'root'
 })
@@ -30,26 +30,26 @@ export class TenderService {
   }
 
   getTender(id) {
-    return this.http.get(apiUrl + `Tender/${id}`)
+    return this.http.get(apiUrl + `/Tender/${id}`);
   }
 
   getFederalDistrict() {
-    return this.http.get(apiUrl + 'FederalDistrict');
+    return this.http.get(apiUrl + '/FederalDistrict');
   }
 
   getFederalSubject() {
-    return this.http.get(apiUrl +  'FederalSubject');
+    return this.http.get(apiUrl +  '/FederalSubject');
   }
 
   getHospitals() {
-    return this.http.get(apiUrl +  'Hospitals');
+    return this.http.get(apiUrl +  '/Hospitals');
   }
 
   getFederalLaw() {
-    return this.http.get(apiUrl +  'FederalLaw');
+    return this.http.get(apiUrl +  '/FederalLaw');
   }
   getDistributor() {
-    return this.http.get(apiUrl +  'Distributor');
+    return this.http.get(apiUrl +  '/Distributor');
   }
 
   get(url: string) {
