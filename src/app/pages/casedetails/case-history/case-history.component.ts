@@ -48,7 +48,12 @@ export class CaseHistoryComponent implements OnInit {
   }
 
   ApproverCommentSave() {
-    console.log(this.ApproverComment);
+    const formData = {
+      Comment: this.ApproverComment,
+      TenderCaseApprovedId: 7
+    };
+
+    this.caseService.addApproverComment(formData).subscribe(console.log);
   }
 
   private _getAttachments() {

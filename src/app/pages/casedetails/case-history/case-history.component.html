@@ -66,24 +66,21 @@
         <dx-form class="mb-3" [readOnly]="tenderCase.TenderCaseStatusId !== 1" [formData]="RequestorComment">
           <dxi-item caption="Requestor Comment" dataField="RequestorComment" editorType="dxTextArea"></dxi-item>
         </dx-form>
-        <dx-button
-          [disabled]="tenderCase.TenderCaseStatusId !== 1"
-          text="Save"
-          type="success"
-          (onClick)="RequestorCommentSave()">
-        </dx-button>
       </div>
 
       <div class="approverComment">
         <dx-form [formData]="ApproverComment">
           <dxi-item caption="Approver comment" dataField="ApproverComment" editorType="dxTextArea"></dxi-item>
         </dx-form>
-        <dx-button
-          text="Save"
-          type="success"
-          (onClick)="ApproverCommentSave()">
-        </dx-button>
       </div>
     </div>
   </div>
+</div>
+
+<div class="approval-history-buttons">
+  <dx-button
+    text="Add Approver Comment"
+    type="success"
+    (onClick)="ApproverCommentSave()">
+  </dx-button>
 </div>
