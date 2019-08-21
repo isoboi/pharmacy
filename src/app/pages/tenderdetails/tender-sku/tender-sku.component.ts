@@ -67,9 +67,4 @@ export class TenderSkuComponent implements OnInit {
       {Id: 'decimal'}
     );
   }
-
-  valueChange(e, date) {
-    //
-  }
-
 }
