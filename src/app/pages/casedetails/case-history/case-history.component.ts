@@ -3,6 +3,7 @@ import DataSource from 'devextreme/data/data_source';
 import {RestService} from '../../../services/rest.service';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {TenderCase} from '../../../models/case.interface';
+import {CasesService} from '../../../services/cases.service';
 
 @Component({
   selector: 'app-case-history',
@@ -21,7 +22,8 @@ export class CaseHistoryComponent implements OnInit {
   RequestorComment = {RequestorComment: ''};
   ApproverComment = {ApproverComment: ''};
 
-  constructor(private restService: RestService) {
+  constructor(private restService: RestService,
+              private caseService: CasesService) {
   }
 
   ngOnInit() {
@@ -30,7 +32,15 @@ export class CaseHistoryComponent implements OnInit {
   }
 
   onUploaded(e) {
-    this.attachmentsGrid.instance.refresh();
+    console.log(e);
+    const file = e.value[0];
+    const fileData = {
+      ObjectId: this.tenderCase.Id,
+      FileName: file.name,
+      FileType: file.type
+    };
+
+    this.caseService.addFileData(fileData).subscribe(() => this.attachmentsGrid.instance.refresh());
   }
 
   RequestorCommentSave() {

@@ -1,7 +1,7 @@
 import {Tab} from '../models/ui.models';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {forkJoin} from 'rxjs';
+import {forkJoin, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {TenderCase} from '../models/case.interface';
 
@@ -60,7 +60,21 @@ export class CasesService {
     return this.http.patch(apiUrl + `TenderCase`, tenderCase);
   }
 
+  addFileData(data): Observable<any> {
+    return this.http.post(apiUrl + 'Annotation/AddData', data);
+  }
 
+  fileDownload(data) {
+    return this.http.post(apiUrl + 'Annotation/Download', data);
+  }
+
+  fileDelete(data) {
+    return this.http.post(apiUrl + 'Annotation/Delete', data);
+  }
+
+  addApproverComment(data) {
+    return this.http.post(apiUrl + 'ApproverComment/Post', data);
+  }
 
   /********************************************************************************************************
   * Case SKU
