@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {forkJoin, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {TenderCase} from '../models/case.interface';
+import {ActionEvent, Actions, TenderCase} from '../models/case.interface';
 
 
 const tabs: Tab[] = [
@@ -22,14 +22,14 @@ const tabs: Tab[] = [
 ];
 
 
-const apiUrl = 'http://navpharm365app.ncdev.ru/odata/';
+const apiUrl = 'https://navpharm365app.ncdev.ru/odata/';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class CasesService {
-
+  private actions = Actions;
   constructor(private http: HttpClient) {
   }
 
@@ -52,11 +52,22 @@ export class CasesService {
   }
 
   getTenderCase(id) {
-    return this.http.get(apiUrl + `TenderCase/${id}`)
-      .pipe(map((tenders: any) => tenders.value.find((val) => String(val.Id) === id)));
+    return this.http.get(apiUrl + `TenderCase/${id}`);
   }
 
-  patchTenderCase(tenderCase: TenderCase) {
+  patchTenderCase(event: ActionEvent) {
+    if (event.action === this.actions.reject) {
+      event.tenderCase.TenderCaseStatusId = 11;
+    }
+    return this.http.patch(apiUrl + `TenderCase/${event.tenderCase.Id}`, event.tenderCase);
+  }
+
+  approversRequests(tenderCase) {
+    return this.http.patch(apiUrl + `TenderCase`, tenderCase);
+  }
+
+  rejectTenderCase(tenderCase: TenderCase) {
+    tenderCase.TenderCaseStatusId = 11;
     return this.http.patch(apiUrl + `TenderCase`, tenderCase);
   }
 

@@ -29,3 +29,21 @@ export interface TenderCase {
   VersionNumber: string;
   WeightedAveConractPriceRUB: string;
 }
+
+export enum Actions {
+  save = 'Save Case',
+  approversRequests = 'Approver\'s requests',
+  approve = 'Approve',
+  reject = 'Reject',
+  draft = 'Draft'
+}
+
+export interface ActionEvent {
+  action: string;
+  tenderCase: TenderCase;
+}
+
+export enum TenderCaseStatus {
+  reject = 11,
+  draft = 1
+}

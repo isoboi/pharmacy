@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output, ChangeDetectorRef} from '@angular/core';
-import {TenderCase} from '../../../models/case.interface';
+import {ActionEvent, Actions, TenderCase, TenderCaseStatus} from '../../../models/case.interface';
 import {RestService} from '../../../services/rest.service';
-import {CasesService} from '../../../services/cases.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-case-description',
@@ -12,13 +12,15 @@ export class CaseDescriptionComponent {
 
   @Input()tenderCase: TenderCase;
   @Input()selectBoxes;
-  @Output()saveCase = new EventEmitter();
-
+  @Output()saveCase = new EventEmitter<ActionEvent>();
+  actions = Actions;
   showLoadPanel = true;
-
+  tenderCaseStatus = TenderCaseStatus;
+  id
   constructor(private restService: RestService,
-              private cdr: ChangeDetectorRef,
-              private casesService: CasesService) {
+              private route: ActivatedRoute,
+              private cdr: ChangeDetectorRef) {
+    this.id = this.route.snapshot.params.id;
   }
 
   onInitialized() {
@@ -26,7 +28,7 @@ export class CaseDescriptionComponent {
     this.cdr.detectChanges();
   }
 
-  save() {
-    this.saveCase.emit(this.tenderCase);
+  save(action) {
+    this.saveCase.emit({tenderCase: this.tenderCase, action});
   }
 }

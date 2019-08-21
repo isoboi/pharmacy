@@ -29,6 +29,10 @@ const routes: Routes = [
     component: TenderdetailsComponent
   },
   {
+    path: 'case',
+    component: CasedetailsComponent
+  },
+  {
     path: 'case/:id',
     component: CasedetailsComponent
   },

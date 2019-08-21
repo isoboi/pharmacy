@@ -31,7 +31,6 @@ export class TenderService {
 
   getTender(id) {
     return this.http.get(apiUrl + `Tender/${id}`)
-      .pipe(map((tenders: any) => tenders.value.find((val) => String(val.Id) === id)));
   }
 
   getFederalDistrict() {

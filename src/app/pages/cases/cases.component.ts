@@ -9,7 +9,7 @@ import {
 } from 'devextreme-angular';
 
 import {Tender, Service, TenderDetails} from '../home/app.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import 'devextreme/data/odata/store';
 import {version} from 'punycode';
 import ODataStore from 'devextreme/data/odata/store';
@@ -30,37 +30,35 @@ if (!/localhost/.test(document.location.host)) {
 
 export class CasesComponent {
   @ViewChild(DxDataGridComponent, {static: false}) dataGrid: DxDataGridComponent;
-  saleAmountHeaderFilter: any;
-  applyFilterTypes: any;
   currentFilter: any;
   showFilterRow: boolean;
   showHeaderFilter: boolean;
   dataSource: DataSource;
   dataSourceSKU: DataSource;
-  store: ODataStore;
   filterValue: number;
 
   constructor(
     private service: Service,
     private router: Router,
+    private route: ActivatedRoute,
     private restService: RestService
   ) {
-    // this.tenders = service.getTenders();
+
     this.showFilterRow = true;
     this.showHeaderFilter = true;
-
     this.dataSource = this.restService.bindData(
-            'https://navpharm365app.ncdev.ru/odata/TenderCase',
-            [ 'Id' ],
-            { Id: 'Int32' }
-        );
+      'https://navpharm365app.ncdev.ru/odata/TenderCase',
+      ['Id'],
+      {Id: 'Int32'});
 
-        this.dataSourceSKU = this.restService.bindData(
-            'https://navpharm365app.ncdev.ru/odata/TenderCaseSKU',
-            [ 'Id' ],
-            { Id: 'Int32' }
-        );
+    this.dataSourceSKU = this.restService.bindData(
+      'https://navpharm365app.ncdev.ru/odata/TenderCaseSKU',
+      ['Id'],
+      {Id: 'Int32'});
+    if (this.route.snapshot.params.id) {
+
     }
+  }
 
   initialized() {
     this.service.setTenderDetails(this.dataSourceSKU);

@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Tender, Service} from '../home/app.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {RestService} from 'src/app/services/rest.service';
 import {CasesService} from '../../services/cases.service';
-import {TenderCase} from '../../models/case.interface';
+import {ActionEvent} from '../../models/case.interface';
 
 @Component({
   selector: 'app-casedetails',
@@ -14,7 +13,7 @@ export class CasedetailsComponent implements OnInit {
   tender: Tender;
   tabs = CasesService.getTabs();
   case: any;
-  tabIndex = 1;
+  tabIndex = 0;
   tenderCase;
   channel;
   selectBoxes: any;
@@ -22,8 +21,7 @@ export class CasedetailsComponent implements OnInit {
     private service: Service,
     private casesService: CasesService,
     private router: Router,
-    private route: ActivatedRoute,
-    private restService: RestService
+    private route: ActivatedRoute
   ) {
     this.casesService.getDetail()
       .subscribe(([relatedCaseComment, distributor, channel]) => {
@@ -42,11 +40,11 @@ export class CasedetailsComponent implements OnInit {
   }
 
 
-  saveCase(event: TenderCase) {
-    this.casesService.patchTenderCase(event)
-      .subscribe((x) => {
-        console.log(x);
-      })
+  saveCase(event: ActionEvent) {
+      this.casesService.patchTenderCase(event)
+        .subscribe((x) => {
+          console.log(x);
+        });
   }
 
 }
