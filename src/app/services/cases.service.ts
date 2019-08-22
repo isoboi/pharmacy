@@ -2,7 +2,7 @@ import {Tab} from '../models/ui.models';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {forkJoin, Observable} from 'rxjs';
-import {ActionEvent, Actions, TenderCase} from '../models/case.interface';
+import {Actions, TenderCase} from '../models/case.interface';
 import {environment} from '../../environments/environment.prod';
 
 

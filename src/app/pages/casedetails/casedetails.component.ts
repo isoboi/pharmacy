@@ -29,7 +29,7 @@ export class CasedetailsComponent implements OnInit {
       .subscribe(([relatedCaseComment, distributor, channel]) => {
         this.selectBoxes = {relatedCaseComment, distributor, channel};
       });
-    this.tenderCase = this.casesService.getTenderCase(this.route.snapshot.params.id)
+    this.tenderCase = this.casesService.getTenderCase(this.route.snapshot.params.id);
     this.tenderCase
       .subscribe((x) => {
         this.tenderCaseOriginal = JSON.parse(JSON.stringify(x));

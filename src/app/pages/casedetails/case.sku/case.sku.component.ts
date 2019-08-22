@@ -4,6 +4,8 @@ import {RestService} from '../../../services/rest.service';
 import DataSource from 'devextreme/data/data_source';
 import {HttpClient} from '@angular/common/http';
 import {TenderCase} from '../../../models/case.interface';
+import {environment} from '../../../../environments/environment';
+import {ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -22,37 +24,40 @@ export class CaseSkuComponent {
   currentFilter: any;
   dataSourceCommercialPolicyRules: DataSource;
   list;
-
+  apiUrl = environment.apiUrl;
+  private id;
   constructor(private casesService: CasesService,
               private http: HttpClient,
+              private route: ActivatedRoute,
               private restService: RestService) {
+    this.id = this.route.snapshot.params.id;
     this.dataSource = this.restService.bindData(
-      'https://navpharm365app.ncdev.ru/odata/TenderCaseSKU',
+      this.apiUrl + `TenderCaseSKU/${this.id}`,
       [ 'Id' ],
       { Id: 'Int32' }
     );
 
     this.dataSourceSkuMg = this.restService.bindData(
-      'https://navpharm365app.ncdev.ru/odata/CommercialPolicy',
+       this.apiUrl + 'CommercialPolicy',
       [ 'Id' ],
       { Id: 'string' }
     );
 
 
     this.dataSourceCommercialPolicyRules = this.restService.bindData(
-      'https://navpharm365app.ncdev.ru/odata/CommercialPolicy',
+      this.apiUrl + 'CommercialPolicy',
       [ 'Id' ],
       { Id: 'string' }
     );
 
     this.SKU_MG = this.restService.bindData(
-      'https://navpharm365app.ncdev.ru/odata/SKUMG',
+      this.apiUrl + 'SKUMG',
       [ 'Id' ],
       { Id: 'Int32' }
     );
 
     this.ProductStructure = this.restService.bindData(
-      'https://navpharm365app.ncdev.ru/odata/ProductStructure',
+      this.apiUrl + 'ProductStructure',
       [ 'Id' ],
       { Id: 'Int32' }
     );

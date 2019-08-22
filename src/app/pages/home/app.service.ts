@@ -3,6 +3,8 @@ import ODataStore from 'devextreme/data/odata/store';
 import DataSource from 'devextreme/data/data_source';
 import {RestService} from 'src/app/services/rest.service';
 import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs';
 
 export class Tender {
   Id: number;
@@ -34,7 +36,7 @@ let tenders: Tender[] = [];
 @Injectable()
 export class Service {
   tenderDetails: DataSource;
-
+  apiUrl = environment.apiUrl;
   constructor(private restService: RestService,
               private http: HttpClient) {
     // this.setTenderDetails();
@@ -55,7 +57,6 @@ export class Service {
   }
 
   setTenderDetails(dataSource) {
-    console.log('setting td');
     if (!this.tenderDetails) {
       this.tenderDetails = dataSource;
     }
@@ -73,10 +74,9 @@ export class Service {
     return this.selectedTender;
   }
 
-  getTenderDetails(tenderId: number): TenderDetails[] {
-    console.log(this.tenderDetails.items());
-    const aa = this.tenderDetails.items().filter(td => td.Id === tenderId);
-    console.log(aa);
-    return aa;
+  getTenderDetails(tenderId: number): Observable<Tender> {
+    return this.http.get(this.apiUrl + `/TenderCaseSKU/${tenderId}`);
   }
+
+
 }

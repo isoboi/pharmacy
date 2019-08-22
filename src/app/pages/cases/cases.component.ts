@@ -30,7 +30,7 @@ export class CasesComponent {
   dataSource: DataSource;
   dataSourceSKU: DataSource;
   filterValue: number;
-
+  apiUrl = environment.apiUrl
   constructor(
     private service: Service,
     private router: Router,
@@ -49,9 +49,6 @@ export class CasesComponent {
       environment.apiUrl + '/TenderCaseSKU',
       ['Id'],
       {Id: 'Int32'});
-    if (this.route.snapshot.params.id) {
-
-    }
   }
 
   initialized() {
@@ -65,10 +62,12 @@ export class CasesComponent {
     this.router.navigateByUrl(`/case/${data.Id}`);
   }
 
-  cellClick(e) {
-    const tenderId = e.data.Id;
-    this.filterValue = tenderId;
-    this.dataSourceSKU = new DataSource(this.service.getTenderDetails(tenderId));
+  onSelectionChanged(e) {
+    const tenderCaseId = e.selectedRowsData[0].Id;
+    this.filterValue = tenderCaseId;
+    this.dataSourceSKU.filter(['TenderCaseId', '=', tenderCaseId]);
+    this.dataSourceSKU.load();
+
   }
 
 
