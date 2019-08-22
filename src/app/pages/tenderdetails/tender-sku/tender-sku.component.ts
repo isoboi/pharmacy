@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import DataSource from 'devextreme/data/data_source';
 import {RestService} from '../../../services/rest.service';
+import {ActivatedRoute} from '@angular/router';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-tender-sku',
@@ -17,8 +19,12 @@ export class TenderSkuComponent implements OnInit {
   ReferencePriceList: DataSource;
   ForecastPriceList: DataSource;
   currentFilter: any;
-
-  constructor(private restService: RestService) { }
+  id;
+  apiUrl = environment.apiUrl;
+  constructor(private restService: RestService,
+              private route: ActivatedRoute) {
+    this.id = this.route.snapshot.params.id;
+  }
 
   ngOnInit() {
     this._getTenderSku();
@@ -26,43 +32,44 @@ export class TenderSkuComponent implements OnInit {
 
   private _getTenderSku() {
     this.tenderSku = this.restService.bindData(
-      'http://navpharm365app.ncdev.ru/odata/TenderSKU',
+      this.apiUrl + '/TenderSKU',
       ['Id'],
       {Id: 'Int32'}
     );
-
+    this.tenderSku.filter(['TenderId', '=', Number(this.id)]);
+    this.tenderSku.load();
     this.products = this.restService.bindData(
-      'http://navpharm365app.ncdev.ru/odata/Product',
+      this.apiUrl + '/Product',
       ['Id'],
       {Id: 'Int32'}
     );
 
     this.skuias = this.restService.bindData(
-      'http://navpharm365app.ncdev.ru/odata/SKUIAS',
+      this.apiUrl + '/SKUIAS',
       ['Id'],
       {Id: 'Int32'}
     );
 
     this.risk = this.restService.bindData(
-      'http://navpharm365app.ncdev.ru/odata/Risk',
+      this.apiUrl + '/Risk',
       ['Id'],
       {Id: 'Int32'}
     );
 
     this.EDLPriceList = this.restService.bindData(
-      'http://navpharm365app.ncdev.ru/odata/EDLPriceList',
+      this.apiUrl + '/EDLPriceList',
       ['Id'],
       {Id: 'decimal'}
     );
 
     this.ReferencePriceList = this.restService.bindData(
-      'http://navpharm365app.ncdev.ru/odata/ReferencePriceList',
+      this.apiUrl + '/ReferencePriceList',
       ['Id'],
       {Id: 'decimal'}
     );
 
     this.ForecastPriceList = this.restService.bindData(
-      'http://navpharm365app.ncdev.ru/odata/ForecastPriceList',
+      this.apiUrl + '/ForecastPriceList',
       ['Id'],
       {Id: 'decimal'}
     );

@@ -30,7 +30,7 @@ export class CasesComponent {
   dataSource: DataSource;
   dataSourceSKU: DataSource;
   filterValue: number;
-  apiUrl = environment.apiUrl
+  apiUrl = environment.apiUrl;
   constructor(
     private service: Service,
     private router: Router,
