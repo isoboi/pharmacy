@@ -11,10 +11,11 @@ import {ActivatedRoute} from '@angular/router';
 export class CaseDescriptionComponent {
 
   @Input()tenderCase: TenderCase;
-  @Input()selectBoxes;
+  @Input() selectBoxes;
+  @Output() saveCase = new EventEmitter<ActionEvent>();
   showLoadPanel = true;
   tenderCaseStatus = TenderCaseStatus;
-  id
+  id;
   constructor(private restService: RestService,
               private route: ActivatedRoute,
               private cdr: ChangeDetectorRef) {
@@ -24,5 +25,9 @@ export class CaseDescriptionComponent {
   onInitialized() {
     this.showLoadPanel = false;
     this.cdr.detectChanges();
+  }
+
+  save(action) {
+    this.saveCase.emit({tenderCase: this.tenderCase, action});
   }
 }

@@ -1,6 +1,6 @@
 .approval-history {
   display: flex;
-  padding: 10px;
+  padding: 10px 10px 0;
 
   .title {
     font-size: 16px;
@@ -36,7 +36,6 @@
     flex: 1;
     margin-left: 10px;
     padding: 0 10px;
-    background: #fff;
   }
 
   .approverComment, .requestorComment {
@@ -54,6 +53,15 @@
   text-align: center;
 }
 
+.buttons {
+  display: flex;
+  align-items: center;
+
+  .download-button {
+    margin-right: 10px;
+  }
+}
+
 @media (max-width: 1024px) {
   .approval-history {
     flex-direction: column;
@@ -68,11 +76,12 @@
 ::ng-deep  {
   .dx-first-col.dx-last-col.dx-field-item.dx-col-0.dx-field-item-optional.dx-flex-layout.dx-label-v-align {
     width: 100%;
-    justify-content: flex-start;
+    flex-direction: column;
   }
 
   label.dx-field-item-label.dx-field-item-label-location-top {
     width: auto;
+    justify-content: flex-start;
   }
 
   .dx-fileuploader-container {
@@ -85,5 +94,9 @@
 
   .dx-fileuploader-show-file-list .dx-fileuploader-files-container {
     display: none;
+  }
+
+  .dx-field-item-content.dx-field-item-content-location-bottom {
+    width: 100%;
   }
 }

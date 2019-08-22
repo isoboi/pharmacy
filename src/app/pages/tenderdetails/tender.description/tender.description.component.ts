@@ -93,6 +93,10 @@ export class TenderDescriptionComponent implements OnChanges, OnInit, OnDestroy 
       });
   }
 
+  save() {
+    //
+  }
+
   onInitialized() {
     this.showLoadPanel = false;
     this.cdr.detectChanges();

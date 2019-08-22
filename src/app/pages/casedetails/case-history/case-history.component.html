@@ -1,17 +1,21 @@
 <div class="approval-history">
   <div class="history-left">
-    <div class="attachments">
+    <div class="attachments dx-card">
       <div class="attachments-header">
         <div class="title">Attachments</div>
-        <div class="file-upload">
-          <dx-file-uploader
-            selectButtonText="Add"
-            uploadUrl="http://navpharm365app.ncdev.ru/odata/Annotation/Upload"
-            accept="*"
-            [multiple]="false"
-            uploadMode="instantly"
-            (onUploaded)="onUploaded($event)">
-          </dx-file-uploader>
+        <div class="buttons">
+          <dx-button text="Download" class="download-button" type="success"></dx-button>
+          <dx-button text="Delete" type="danger" icon="remove"></dx-button>
+          <div class="file-upload">
+            <dx-file-uploader
+              selectButtonText="Add"
+              uploadUrl="http://navpharm365app.ncdev.ru/odata/Annotation/Upload"
+              accept="*"
+              [multiple]="false"
+              uploadMode="instantly"
+              (onUploaded)="onUploaded($event)">
+            </dx-file-uploader>
+          </div>
         </div>
       </div>
       <dx-data-grid
@@ -34,7 +38,8 @@
         <dxi-column dataField="FileValue" caption=""></dxi-column>
       </dx-data-grid>
     </div>
-    <div class="change-history">
+
+    <div class="change-history dx-card">
       <p class="title">Change History</p>
       <dx-data-grid
         [dataSource]="getTenderCaseApproved"
@@ -59,7 +64,7 @@
       </dx-data-grid>
     </div>
   </div>
-  <div class="history-right">
+  <div class="history-right dx-card">
     <div class="comments" *ngIf="tenderCase">
       <p class="title">Comments</p>
       <div class="requestorComment">

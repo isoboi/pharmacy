@@ -9,7 +9,8 @@
   <app-case-description
     *ngIf="tabIndex === 0"
     [selectBoxes]="selectBoxes"
-    [tenderCase]="tenderCase | async">
+    [tenderCase]="tenderCase | async"
+    (saveCase)="saveCase($event)">
   </app-case-description>
 
   <app-case-sku
@@ -21,11 +22,4 @@
     *ngIf="tabIndex === 2"
     [tenderCase]="tenderCase | async">
   </app-case-history>
-
-  <app-case-buttons
-    [selectBoxes]="selectBoxes"
-    [tenderCase]="tenderCase | async"
-    [tabIndex]="tabIndex"
-    (saveCase)="saveCase($event)">
-  </app-case-buttons>
 </div>

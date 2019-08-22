@@ -42,3 +42,9 @@
   [closeOnOutsideClick]="false">
 </dx-load-panel>
 
+<app-case-buttons
+  [selectBoxes]="selectBoxes"
+  [tenderCase]="tenderCase"
+  [tabIndex]="1"
+  (saveCase)="save($event)">
+</app-case-buttons>
