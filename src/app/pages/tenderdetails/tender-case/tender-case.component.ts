@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import DataSource from 'devextreme/data/data_source';
 import {RestService} from '../../../services/rest.service';
 
@@ -12,9 +12,11 @@ export class TenderCaseComponent implements OnInit {
 
   tenderCase: DataSource;
   currentFilter: any;
-
+  id;
   constructor(private restService: RestService,
+              private route: ActivatedRoute,
               private router: Router) {
+    this.id = route.snapshot.params.id;
   }
 
   ngOnInit() {
@@ -31,6 +33,8 @@ export class TenderCaseComponent implements OnInit {
       ['Id'],
       {Id: 'Int32'}
     );
+    this.tenderCase.filter(['TenderId', '=', Number(this.id)]);
+    this.tenderCase.load();
   }
 
 }

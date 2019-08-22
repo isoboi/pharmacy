@@ -52,8 +52,10 @@ export class CasedetailsComponent implements OnInit {
       for (const key of keys) {
         if (event.tenderCase[key] !== this.tenderCaseOriginal[key]) {
           obj[key] = event.tenderCase[key];
+          this.tenderCaseOriginal[key] = event.tenderCase[key];
         }
       }
+
 
       this.casesService.patchTenderCase(obj, event.action, event.tenderCase.Id)
         .subscribe((x) => {
