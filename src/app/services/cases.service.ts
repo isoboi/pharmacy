@@ -77,11 +77,11 @@ export class CasesService {
   }
 
   fileDownload(data) {
-    return this.http.post(apiUrl + '/Annotation/Download', data);
+    return this.http.get(apiUrl + '/Annotation/Download', data);
   }
 
-  fileDelete(data) {
-    return this.http.post(apiUrl + '/Annotation/Delete', data);
+  fileDelete(id) {
+    return this.http.delete(apiUrl + '/Annotation', id);
   }
 
   addApproverComment(data) {

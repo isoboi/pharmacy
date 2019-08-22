@@ -21,6 +21,7 @@ export class CaseHistoryComponent implements OnInit {
   currentFilter: any;
   RequestorComment = {RequestorComment: ''};
   ApproverComment = {ApproverComment: ''};
+  selectedRow = null;
 
   constructor(private restService: RestService,
               private caseService: CasesService) {
@@ -43,8 +44,18 @@ export class CaseHistoryComponent implements OnInit {
     this.caseService.addFileData(fileData).subscribe(() => this.attachmentsGrid.instance.refresh());
   }
 
-  RequestorCommentSave() {
-    console.log(this.RequestorComment);
+  onFileDelete() {
+    
+  }
+
+  ApproverCommentSave() {
+    if (this.ApproverComment.ApproverComment) {
+      this.caseService.addApproverComment(this.ApproverComment);
+    }
+  }
+
+  onRowClick(evt) {
+    this.selectedRow = evt;
   }
 
   private _getAttachments() {

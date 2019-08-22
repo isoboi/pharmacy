@@ -5,7 +5,7 @@
         <div class="title">Attachments</div>
         <div class="buttons">
           <dx-button text="Download" class="download-button" type="success"></dx-button>
-          <dx-button text="Delete" type="danger" icon="remove"></dx-button>
+          <dx-button text="Delete" type="danger" icon="remove" (onClick)="onFileDelete()"></dx-button>
           <div class="file-upload">
             <dx-file-uploader
               selectButtonText="Add"
@@ -23,8 +23,10 @@
         [dataSource]="attachments"
         [columnAutoWidth]="true"
         [showBorders]="true"
-        [selectedRowKeys]="[]">
+        [selectedRowKeys]="[]"
+        (onRowClick)="onRowClick($event)">
 
+        <dxo-selection mode="single"></dxo-selection>
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
         <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
@@ -77,6 +79,7 @@
         <dx-form [formData]="ApproverComment">
           <dxi-item caption="Approver comment" dataField="ApproverComment" editorType="dxTextArea"></dxi-item>
         </dx-form>
+        <dx-button text="Add Approver Comment" type="success" icon="add" (onClick)="ApproverCommentSave()"></dx-button>
       </div>
     </div>
   </div>
