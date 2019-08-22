@@ -19,6 +19,8 @@ export class CasedetailsComponent implements OnInit, AfterViewInit {
   channel;
   selectBoxes: any;
   tenderCaseOriginal;
+  private actions = Actions;
+
   constructor(
     private service: Service,
     private casesService: CasesService,
@@ -49,7 +51,6 @@ export class CasedetailsComponent implements OnInit, AfterViewInit {
     this.tabIndex = event.itemIndex;
   }
 
-  private actions = Actions;
   saveCase(event: ActionEvent) {
       const obj = {};
       const keys = Object.keys(event.tenderCase);
@@ -59,16 +60,17 @@ export class CasedetailsComponent implements OnInit, AfterViewInit {
           this.tenderCaseOriginal[key] = event.tenderCase[key];
         }
       }
+
       this.casesService.patchTenderCase(obj, event.action, event.tenderCase.Id)
         .subscribe((x) => {
           if (event.action !== this.actions.save) {
             if (x && x.value) {
               notify({message: 'Successfully', position: 'top'}, 'success', 1500);
             } else if (x && !x.value) {
-              notify({message: 'error', position: 'top'}, 'error', 1500);
+              notify({message: 'error', position: 'top'}, 'Error', 1500);
             }
           }
-        });
+        }, () => notify({message: 'error', position: 'top'}, 'Error', 1500));
   }
 
 }

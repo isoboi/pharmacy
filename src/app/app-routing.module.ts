@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { TenderdetailsComponent } from './pages/tenderdetails/tenderdetails.component';
+import { TenderDetailsComponent } from './pages/tenderdetails/tenderdetails.component';
 import { CasedetailsComponent } from './pages/casedetails/casedetails.component';
 import { CasesComponent } from './pages/cases/cases.component';
 import { PlangraphicComponent } from './pages/plangraphic/plangraphic.component';
@@ -26,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'tender/:id',
-    component: TenderdetailsComponent
+    component: TenderDetailsComponent
   },
   {
     path: 'case',

@@ -7,7 +7,7 @@
       (onItemClick)="selectTab($event)">
     </dx-tabs>
 
-    <app-tender-description *ngIf="tabIndex === 0" [tender]="tender | async"></app-tender-description>
+    <app-tender-description (save)="save($event)" *ngIf="tabIndex === 0" [tender]="tender | async"></app-tender-description>
     <app-tender-sku *ngIf="tabIndex === 1"></app-tender-sku>
     <app-tender-case *ngIf="tabIndex === 2"></app-tender-case>
   </div>

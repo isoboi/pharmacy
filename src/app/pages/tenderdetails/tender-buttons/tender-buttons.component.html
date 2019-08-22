@@ -1,7 +1,7 @@
 <div class="buttons">
-  <dx-button text="Save Tender" type="default" (onClick)="save()"></dx-button>
-  <dx-button text="Decline Tender" type="danger" (onClick)="save()"></dx-button>
-  <dx-button *ngIf="tabIndex === 2" text="Create Case" type="success" (onClick)="save()"></dx-button>
-  <dx-button text="Planned" type="default" (onClick)="save()"></dx-button>
-  <dx-button text="Announced" type="default" (onClick)="save()"></dx-button>
+  <dx-button text="Save Tender" type="default" (onClick)="save(actions.save)"></dx-button>
+  <dx-button text="Decline Tender" type="danger" (onClick)="save(actions.decline)"></dx-button>
+  <dx-button *ngIf="tabIndex === 2" text="Create Case" type="success" (onClick)="save(actions.create)"></dx-button>
+  <dx-button text="Planned" type="default" (onClick)="save(actions.planned)"></dx-button>
+  <dx-button text="Announced" type="default" (onClick)="save(actions.announced)"></dx-button>
 </div>

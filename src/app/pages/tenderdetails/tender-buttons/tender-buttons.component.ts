@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ActionsTender} from '../../../models/tender';
 
 @Component({
   selector: 'app-tender-buttons',
@@ -9,14 +10,13 @@ export class TenderButtonsComponent implements OnInit {
 
   @Input() tabIndex;
   @Output() saveTender = new EventEmitter<any>();
-
+  actions = ActionsTender;
   constructor() { }
 
   ngOnInit() {
-    console.log(this.tabIndex)
   }
 
-  save() {
-    this.saveTender.emit();
+  save(event) {
+    this.saveTender.emit(event);
   }
 }

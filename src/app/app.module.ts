@@ -7,7 +7,7 @@ import { SideNavOuterToolbarModule, SideNavInnerToolbarModule, SingleCardModule 
 import { FooterModule, LoginFormModule } from './shared/components';
 import { AuthService, ScreenService, AppInfoService } from './shared/services';
 import { AppRoutingModule } from './app-routing.module';
-import { TenderdetailsComponent } from './pages/tenderdetails/tenderdetails.component';
+import { TenderDetailsComponent } from './pages/tenderdetails/tenderdetails.component';
 import { DisplayDataComponent } from './pages/display-data/display-data.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
@@ -40,7 +40,7 @@ import { TenderButtonsComponent } from './pages/tenderdetails/tender-buttons/ten
 @NgModule({
   declarations: [
     AppComponent,
-    TenderdetailsComponent,
+    TenderDetailsComponent,
     HomeComponent,
     ProfileComponent,
     DisplayDataComponent,

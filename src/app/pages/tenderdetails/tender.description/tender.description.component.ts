@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TenderService} from '../../../services/tender.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
@@ -12,6 +12,7 @@ import {Subject} from 'rxjs';
 
 export class TenderDescriptionComponent implements OnChanges, OnInit, OnDestroy {
   @Input()tender;
+  @Output()save = new EventEmitter();
   federalDistrict;
   federalSubject;
   hospitals;
@@ -93,8 +94,8 @@ export class TenderDescriptionComponent implements OnChanges, OnInit, OnDestroy 
       });
   }
 
-  save() {
-    //
+  saveTender(action) {
+    this.save.emit({tender: this.tender, action});
   }
 
   onInitialized() {
