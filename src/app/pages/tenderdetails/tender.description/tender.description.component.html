@@ -69,17 +69,6 @@
             [editorOptions]="{ items: contractStatusComment.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
 </dx-form>
 
-
-<!--<div class="buttons" *ngIf="tenderCase && selectBoxes">-->
-<div class="buttons">
-  <dx-button text="Save Case" type="default" (onClick)="save()"></dx-button>
-  <dx-button text="Approver's requests" (onClick)="save()"></dx-button>
-  <dx-button text="Approve" (onClick)="save()"></dx-button>
-  <dx-button text="Reject" type="danger" icon="remove" (onClick)="save()"></dx-button>
-  <dx-button text="Draft" (onClick)="save()"></dx-button>
-</div>
-
-
 <dx-load-panel
   #loadPanel
   shadingColor="rgba(0,0,0,0.4)"
@@ -90,3 +79,4 @@
   [closeOnOutsideClick]="false">
 </dx-load-panel>
 
+<app-tender-buttons *ngIf="tender" [tabIndex]="0"></app-tender-buttons>

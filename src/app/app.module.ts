@@ -34,6 +34,7 @@ import { TenderSkuComponent } from './pages/tenderdetails/tender-sku/tender-sku.
 import { TenderCaseComponent } from './pages/tenderdetails/tender-case/tender-case.component';
 import {TenderDescriptionComponent} from './pages/tenderdetails/tender.description/tender.description.component';
 import { CaseButtonsComponent } from './pages/casedetails/case-buttons/case-buttons.component';
+import { TenderButtonsComponent } from './pages/tenderdetails/tender-buttons/tender-buttons.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { CaseButtonsComponent } from './pages/casedetails/case-buttons/case-butt
     TenderDescriptionComponent,
     TenderSkuComponent,
     TenderCaseComponent,
-    CaseButtonsComponent
+    CaseButtonsComponent,
+    TenderButtonsComponent
   ],
   imports: [
     HttpClientModule,
