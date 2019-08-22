@@ -32,32 +32,34 @@ export class CaseSkuComponent {
               private restService: RestService) {
     this.id = this.route.snapshot.params.id;
     this.dataSource = this.restService.bindData(
-      this.apiUrl + `TenderCaseSKU/${this.id}`,
+      this.apiUrl + `/TenderCaseSKU`,
       [ 'Id' ],
       { Id: 'Int32' }
     );
+    this.dataSource.filter(['TenderCaseId', '=', Number(this.id)]);
+    this.dataSource.load();
 
     this.dataSourceSkuMg = this.restService.bindData(
-       this.apiUrl + 'CommercialPolicy',
+       this.apiUrl + '/CommercialPolicy',
       [ 'Id' ],
       { Id: 'string' }
     );
 
 
     this.dataSourceCommercialPolicyRules = this.restService.bindData(
-      this.apiUrl + 'CommercialPolicy',
+      this.apiUrl + '/CommercialPolicy',
       [ 'Id' ],
       { Id: 'string' }
     );
 
     this.SKU_MG = this.restService.bindData(
-      this.apiUrl + 'SKUMG',
+      this.apiUrl + '/SKUMG',
       [ 'Id' ],
       { Id: 'Int32' }
     );
 
     this.ProductStructure = this.restService.bindData(
-      this.apiUrl + 'ProductStructure',
+      this.apiUrl + '/ProductStructure',
       [ 'Id' ],
       { Id: 'Int32' }
     );
