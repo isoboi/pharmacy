@@ -33,6 +33,7 @@ import { CaseHistoryComponent } from './pages/casedetails/case-history/case-hist
 import { TenderSkuComponent } from './pages/tenderdetails/tender-sku/tender-sku.component';
 import { TenderCaseComponent } from './pages/tenderdetails/tender-case/tender-case.component';
 import {TenderDescriptionComponent} from './pages/tenderdetails/tender.description/tender.description.component';
+import { CaseButtonsComponent } from './pages/casedetails/case-buttons/case-buttons.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import {TenderDescriptionComponent} from './pages/tenderdetails/tender.descripti
     CaseSkuComponent,
     TenderDescriptionComponent,
     TenderSkuComponent,
-    TenderCaseComponent
+    TenderCaseComponent,
+    CaseButtonsComponent
   ],
   imports: [
     HttpClientModule,

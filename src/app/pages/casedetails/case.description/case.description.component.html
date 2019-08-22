@@ -1,43 +1,36 @@
-<dx-form *ngIf="!id && selectBoxes || tenderCase && selectBoxes"
-         id="form"
-         (onInitialized)="onInitialized()"
-         [disabled]="id && tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft"
-         [formData]="tenderCase">
-  <dxi-item [disabled]="!!id" [label]="{text: 'Case ID'}" dataField="Id"></dxi-item>
-  <dxi-item [disabled]="!!id" [label]="{text: 'Parent ID'}" dataField="ParentId"></dxi-item>
-  <dxi-item [disabled]="!!id" [label]="{text: 'Child ID'}" dataField="ChildId"></dxi-item>
-  <dxi-item [label]="{text: 'Related case comment'}" dataField="RelatedCaseCommentId"></dxi-item>
-  <dxi-item [disabled]="!!id" [label]="{text: 'Tender ID'}" dataField="TenderId"></dxi-item>
-  <dxi-item [disabled]="!!id" [label]="{text: 'Region'}" dataField="RegionName"></dxi-item>
-  <dxi-item [disabled]="!!id" [label]="{text: 'Client name'}" dataField="HospitalName"></dxi-item>
-  <dxi-item [disabled]="!!id" [label]="{text: 'TAM'}" dataField="TAMName"></dxi-item>
-  <dxi-item [disabled]="!!id" [label]="{text: 'Channel of financing'}" dataField="SourceOfFinName"></dxi-item>
-  <dxi-item [disabled]="!!id" [label]="{text: 'Federal law'}" dataField="FederalLawNumber"></dxi-item>
-  <dxi-item [disabled]="!!id" [label]="{text: 'Notification ID '}" dataField="NotificationNumber"></dxi-item>
-  <dxi-item [label]="{text: 'Supplier of the tender'}"
-            editorType="dxSelectBox"
-            [editorOptions]="{ items: selectBoxes.distributor.value, displayExpr:'Name', valueExpr:'Id' }"
-            dataField="SupplierId"></dxi-item>
-  <dxi-item [label]="{text: 'Discount SAP number'}" dataField="DiscountNumber"></dxi-item>
-  <dxi-item [label]="{text: 'Discount validity date'}" editorType="dxDateBox"
-            dataField="DiscountValidityDate"></dxi-item>
-  <dxi-item [label]="{text: 'Sales channel in SAP'}"
-            editorType="dxSelectBox"
-            [editorOptions]="{ items: selectBoxes?.channel?.value, displayExpr:'Name', valueExpr:'Id' }"
-            dataField="SalesChannelId"></dxi-item>
-  <dxi-item [disabled]="!!id" [label]="{text: 'Weighted average contract price (RUB)'}"
-            dataField="WeightedAveConractPriceRUB"></dxi-item>
-  <dxi-item editorType="dxCheckBox" [label]="{text: 'Discount Provided'}" dataField="DiscountProvided"></dxi-item>
-</dx-form>
-
-<div class="buttons" *ngIf="!id && selectBoxes || tenderCase && selectBoxes">
-  <dx-button [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject" text="Save Case" type="default" (onClick)="save(actions.save)"></dx-button>
-  <dx-button [disabled]="tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft" text="Approver's requests" (onClick)="save(actions.approversRequests)"></dx-button>
-  <dx-button [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject" text="Approve" (onClick)="save(actions.approve)"></dx-button>
-  <dx-button [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject" text="Reject" type="danger" icon="remove" (onClick)="save(actions.reject)"></dx-button>
-  <dx-button *ngIf="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject" text="Draft" (onClick)="save(actions.draft)"></dx-button>
+<div class="dx-card">
+  <dx-form *ngIf="!id && selectBoxes || tenderCase && selectBoxes"
+           id="form"
+           (onInitialized)="onInitialized()"
+           [disabled]="id && tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft"
+           [formData]="tenderCase">
+    <dxi-item [disabled]="!!id" [label]="{text: 'Case ID'}" dataField="Id"></dxi-item>
+    <dxi-item [disabled]="!!id" [label]="{text: 'Parent ID'}" dataField="ParentId"></dxi-item>
+    <dxi-item [disabled]="!!id" [label]="{text: 'Child ID'}" dataField="ChildId"></dxi-item>
+    <dxi-item [label]="{text: 'Related case comment'}" dataField="RelatedCaseCommentId"></dxi-item>
+    <dxi-item [disabled]="!!id" [label]="{text: 'Tender ID'}" dataField="TenderId"></dxi-item>
+    <dxi-item [disabled]="!!id" [label]="{text: 'Region'}" dataField="RegionName"></dxi-item>
+    <dxi-item [disabled]="!!id" [label]="{text: 'Client name'}" dataField="HospitalName"></dxi-item>
+    <dxi-item [disabled]="!!id" [label]="{text: 'TAM'}" dataField="TAMName"></dxi-item>
+    <dxi-item [disabled]="!!id" [label]="{text: 'Channel of financing'}" dataField="SourceOfFinName"></dxi-item>
+    <dxi-item [disabled]="!!id" [label]="{text: 'Federal law'}" dataField="FederalLawNumber"></dxi-item>
+    <dxi-item [disabled]="!!id" [label]="{text: 'Notification ID '}" dataField="NotificationNumber"></dxi-item>
+    <dxi-item [label]="{text: 'Supplier of the tender'}"
+              editorType="dxSelectBox"
+              [editorOptions]="{ items: selectBoxes.distributor.value, displayExpr:'Name', valueExpr:'Id' }"
+              dataField="SupplierId"></dxi-item>
+    <dxi-item [label]="{text: 'Discount SAP number'}" dataField="DiscountNumber"></dxi-item>
+    <dxi-item [label]="{text: 'Discount validity date'}" editorType="dxDateBox"
+              dataField="DiscountValidityDate"></dxi-item>
+    <dxi-item [label]="{text: 'Sales channel in SAP'}"
+              editorType="dxSelectBox"
+              [editorOptions]="{ items: selectBoxes?.channel?.value, displayExpr:'Name', valueExpr:'Id' }"
+              dataField="SalesChannelId"></dxi-item>
+    <dxi-item [disabled]="!!id" [label]="{text: 'Weighted average contract price (RUB)'}"
+              dataField="WeightedAveConractPriceRUB"></dxi-item>
+    <dxi-item editorType="dxCheckBox" [label]="{text: 'Discount Provided'}" dataField="DiscountProvided"></dxi-item>
+  </dx-form>
 </div>
-
 
 <dx-load-panel
   #loadPanel

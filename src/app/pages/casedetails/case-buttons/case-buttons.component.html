@@ -1,0 +1,11 @@
+<div class="buttons dx-card" *ngIf="!id && selectBoxes || tenderCase && selectBoxes">
+  <dx-button [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject" text="Save Case" type="default" (onClick)="save(actions.save)"></dx-button>
+  <dx-button [disabled]="tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft" text="Approver's requests" (onClick)="save(actions.approversRequests)"></dx-button>
+  <dx-button [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject" text="Approve" (onClick)="save(actions.approve)"></dx-button>
+  <dx-button [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject" text="Reject" type="danger" icon="remove" (onClick)="save(actions.reject)"></dx-button>
+  <dx-button *ngIf="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject" text="Draft" (onClick)="save(actions.draft)"></dx-button>
+
+  <ng-container *ngIf="tabIndex === 2">
+    <dx-button text="Add Approver Comment" type="success" icon="add"></dx-button>
+  </ng-container>
+</div>

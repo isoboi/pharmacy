@@ -12,8 +12,6 @@ export class CaseDescriptionComponent {
 
   @Input()tenderCase: TenderCase;
   @Input()selectBoxes;
-  @Output()saveCase = new EventEmitter<ActionEvent>();
-  actions = Actions;
   showLoadPanel = true;
   tenderCaseStatus = TenderCaseStatus;
   id
@@ -26,9 +24,5 @@ export class CaseDescriptionComponent {
   onInitialized() {
     this.showLoadPanel = false;
     this.cdr.detectChanges();
-  }
-
-  save(action) {
-    this.saveCase.emit({tenderCase: this.tenderCase, action});
   }
 }

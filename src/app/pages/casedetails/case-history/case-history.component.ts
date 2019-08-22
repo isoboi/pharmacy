@@ -47,15 +47,6 @@ export class CaseHistoryComponent implements OnInit {
     console.log(this.RequestorComment);
   }
 
-  ApproverCommentSave() {
-    const formData = {
-      Comment: this.ApproverComment,
-      TenderCaseApprovedId: 7
-    };
-
-    this.caseService.addApproverComment(formData).subscribe(console.log);
-  }
-
   private _getAttachments() {
     this.attachments = this.restService.bindData(
       'http://navpharm365app.ncdev.ru/odata/Annotation',

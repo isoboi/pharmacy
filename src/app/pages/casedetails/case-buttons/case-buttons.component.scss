@@ -1,0 +1,11 @@
+.buttons {
+  padding: 20px 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  dx-button {
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+}
