@@ -4,6 +4,7 @@ import {RestService} from '../../../services/rest.service';
 import {DxDataGridComponent} from 'devextreme-angular';
 import {TenderCase} from '../../../models/case.interface';
 import {CasesService} from '../../../services/cases.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-case-history',
@@ -22,7 +23,7 @@ export class CaseHistoryComponent implements OnInit {
   RequestorComment = {RequestorComment: ''};
   ApproverComment = {ApproverComment: ''};
   selectedRow = null;
-
+  apiUrl = environment.apiUrl;
   constructor(private restService: RestService,
               private caseService: CasesService) {
   }
@@ -60,7 +61,7 @@ export class CaseHistoryComponent implements OnInit {
 
   private _getAttachments() {
     this.attachments = this.restService.bindData(
-      'http://navpharm365app.ncdev.ru/odata/Annotation',
+      this.apiUrl + '/Annotation',
       ['Id'],
       {Id: 'Int32'}
     );
@@ -68,7 +69,7 @@ export class CaseHistoryComponent implements OnInit {
 
   private _getTenderCaseApproved() {
     this.getTenderCaseApproved = this.restService.bindData(
-      'http://navpharm365app.ncdev.ru/odata/TenderCaseApproved',
+      this.apiUrl + '/TenderCaseApproved',
       ['Id'],
       {Id: 'Int32'}
     );
