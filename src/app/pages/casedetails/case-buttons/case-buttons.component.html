@@ -1,11 +1,37 @@
-<div class="buttons dx-card" *ngIf="!id && selectBoxes || tenderCase && selectBoxes">
-  <dx-button [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject" text="Save Case" type="default" (onClick)="save(actions.save)"></dx-button>
-  <dx-button [disabled]="tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft" text="Approver's requests" (onClick)="save(actions.approversRequests)"></dx-button>
-  <dx-button [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject" text="Approve" (onClick)="save(actions.approve)"></dx-button>
-  <dx-button [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject" text="Reject" type="danger" icon="remove" (onClick)="save(actions.reject)"></dx-button>
-  <dx-button *ngIf="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject" text="Draft" (onClick)="save(actions.draft)"></dx-button>
+<div class="buttons dx-card" *ngIf="!id || tenderCase">
+  <dx-button
+    *ngIf="tabIndex === 0"
+    [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject"
+    (onClick)="save(actions.save)"
+    text="Save Case" type="default">
+  </dx-button>
 
-  <ng-container *ngIf="tabIndex === 2">
-    <dx-button text="Add Approver Comment" type="success" icon="add"></dx-button>
-  </ng-container>
+  <dx-button
+    [disabled]="tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft"
+    (onClick)="save(actions.approversRequests)"
+    text="Approver's requests">
+  </dx-button>
+
+  <dx-button
+    [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject"
+    (onClick)="save(actions.approve)"
+    text="Approve">
+  </dx-button>
+
+  <dx-button
+    [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject"
+    (onClick)="save(actions.reject)"
+    text="Reject" type="danger" icon="remove">
+  </dx-button>
+
+  <dx-button
+    *ngIf="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject"
+    (onClick)="save(actions.draft)"
+    text="Draft">
+  </dx-button>
+
+  <dx-button
+    *ngIf="tabIndex === 2"
+    text="Add Approver Comment" type="success" icon="add">
+  </dx-button>
 </div>

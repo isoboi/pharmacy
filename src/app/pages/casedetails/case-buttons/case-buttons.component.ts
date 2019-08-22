@@ -9,22 +9,22 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class CaseButtonsComponent implements OnInit {
 
-  @Input() tabIndex: number;
+  @Input() tabIndex = 0;
   @Input() tenderCase: TenderCase;
-  @Input() selectBoxes;
   @Output() saveCase = new EventEmitter<ActionEvent>();
   tenderCaseStatus = TenderCaseStatus;
   actions = Actions;
-  id;
+  id: number;
 
   constructor(private activateRoute: ActivatedRoute) {
     this.id = activateRoute.snapshot.params.id;
   }
 
   ngOnInit() {
+    console.log(0);
   }
 
   save(action) {
-    this.saveCase.emit({tenderCase: this.tenderCase, action});
+    this.saveCase.emit(action);
   }
 }

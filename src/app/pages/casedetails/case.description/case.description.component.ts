@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class CaseDescriptionComponent {
 
-  @Input()tenderCase: TenderCase;
+  @Input() tenderCase: TenderCase;
   @Input() selectBoxes;
   @Output() saveCase = new EventEmitter<ActionEvent>();
   showLoadPanel = true;

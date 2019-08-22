@@ -1,4 +1,4 @@
-<div class="dx-card">
+<div class="dx-card case-desc">
   <dx-form *ngIf="!id && selectBoxes || tenderCase && selectBoxes"
            id="form"
            (onInitialized)="onInitialized()"
@@ -43,8 +43,7 @@
 </dx-load-panel>
 
 <app-case-buttons
-  [selectBoxes]="selectBoxes"
   [tenderCase]="tenderCase"
-  [tabIndex]="1"
+  [tabIndex]="0"
   (saveCase)="save($event)">
 </app-case-buttons>

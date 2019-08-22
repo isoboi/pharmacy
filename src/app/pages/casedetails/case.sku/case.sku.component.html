@@ -1,5 +1,6 @@
 <dx-data-grid
   id="gridContainer"
+  class="dx-card case-sku"
   *ngIf="tenderCase"
   [dataSource]="dataSource"
   [showBorders]="true">
@@ -63,4 +64,7 @@
   <dxi-column [allowEditing]="false" [width]="150" [caption]="'Repetition case ID'" dataField="DupCaseId"></dxi-column>
 </dx-data-grid>
 
-
+<app-case-buttons
+  [tenderCase]="tenderCase"
+  [tabIndex]="1">
+</app-case-buttons>
