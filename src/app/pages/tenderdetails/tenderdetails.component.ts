@@ -50,7 +50,7 @@ export class TenderDetailsComponent implements OnInit {
       }
     }
     this.tenderService.save(obj, event.action, event.tender.Id)
-      .subscribe((x) => {
+      .subscribe((x: any) => {
         if (event.action !== this.actions.save) {
           if (x && x.value) {
             notify({message: 'Successfully', position: 'top'}, 'success', 1500);

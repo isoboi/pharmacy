@@ -62,7 +62,7 @@ export class CasedetailsComponent implements OnInit, AfterViewInit {
       }
 
       this.casesService.patchTenderCase(obj, event.action, event.tenderCase.Id)
-        .subscribe((x) => {
+        .subscribe((x: any) => {
           if (event.action !== this.actions.save) {
             if (x && x.value) {
               notify({message: 'Successfully', position: 'top'}, 'success', 1500);
