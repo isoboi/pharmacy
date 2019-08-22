@@ -58,10 +58,11 @@ export class HomeComponent {
     this.router.navigateByUrl(`/tender/${e.data.Id}`);
   }
 
-  cellClick(e) {
-    const tenderId = e.data.Id;
+  onSelectionChanged(e) {
+    const tenderId = e.selectedRowsData[0].Id;
     this.filterValue = tenderId;
-    this.dataSourceSKU = new DataSource(this.service.getTenderDetails(tenderId));
+    this.dataSourceSKU.filter(['TenderId', '=', tenderId]);
+    this.dataSourceSKU.load();
   }
 
   orderHeaderFilter(data) {

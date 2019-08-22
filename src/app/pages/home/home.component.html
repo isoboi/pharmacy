@@ -7,7 +7,7 @@
             [showBorders]="true"
             [selectedRowKeys]="[]"
             (onRowDblClick)="onRowDblClick($event)"
-            (onRowClick) = "cellClick($event)">
+            (onSelectionChanged) = "onSelectionChanged($event)">
             <dxo-selection mode="single"></dxo-selection>
             <dxo-paging [pageSize]="5"></dxo-paging>
             <dxo-pager 

@@ -74,7 +74,7 @@ export class Service {
     return this.selectedTender;
   }
 
-  getTenderDetails(tenderId: number): Observable<Tender> {
+  getTenderDetails(tenderId: number): Observable<any> {
     return this.http.get(this.apiUrl + `/TenderCaseSKU/${tenderId}`);
   }
 
