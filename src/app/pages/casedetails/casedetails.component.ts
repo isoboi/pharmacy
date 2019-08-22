@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Tender, Service} from '../home/app.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasesService} from '../../services/cases.service';
-import {ActionEvent} from '../../models/case.interface';
-import {subscribe} from 'graphql';
+import {ActionEvent, Actions} from '../../models/case.interface';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-casedetails',
   templateUrl: './casedetails.component.html',
   styleUrls: ['./casedetails.component.scss']
 })
-export class CasedetailsComponent implements OnInit {
+export class CasedetailsComponent implements OnInit, AfterViewInit {
   tender: Tender;
   tabs = CasesService.getTabs();
   case: any;
@@ -40,12 +40,16 @@ export class CasedetailsComponent implements OnInit {
     this.tender = this.service.getSelectedTender();
   }
 
+  ngAfterViewInit() {
+
+  }
+
 
   selectTab(event) {
     this.tabIndex = event.itemIndex;
   }
 
-
+  private actions = Actions;
   saveCase(event: ActionEvent) {
       const obj = {};
       const keys = Object.keys(event.tenderCase);
@@ -55,11 +59,15 @@ export class CasedetailsComponent implements OnInit {
           this.tenderCaseOriginal[key] = event.tenderCase[key];
         }
       }
-
-
       this.casesService.patchTenderCase(obj, event.action, event.tenderCase.Id)
         .subscribe((x) => {
-          console.log(x);
+          if (event.action !== this.actions.save) {
+            if (x && x.value) {
+              notify({message: 'Successfully', position: 'top'}, 'success', 1500);
+            } else if (x && !x.value) {
+              notify({message: 'error', position: 'top'}, 'error', 1500);
+            }
+          }
         });
   }
 

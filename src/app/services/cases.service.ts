@@ -6,7 +6,6 @@ import {Actions, TenderCase} from '../models/case.interface';
 import {environment} from '../../environments/environment.prod';
 
 
-
 const tabs: Tab[] = [
   {
     id: 0,
@@ -58,31 +57,24 @@ export class CasesService {
 
   patchTenderCase(obj, action, id) {
     if (action === this.actions.reject) {
-      obj.TenderCaseStatusId = 11;
+      return this.http.get(apiUrl + `/TenderCase/BusinessService.Reject(key=${id})`);
     }
+
+    if (action === this.actions.reject) {
+      return this.http.get(apiUrl + `/TenderCase/BusinessService.ToDraftFromReject(key=${id})`);
+    }
+
+    if (action === this.actions.approversRequests) {
+      return this.http.get(apiUrl + `/TenderCase/BusinessService.CheckOnCommercialPolicyAndDuplicates(key=${id})`);
+    }
+
+    if (action === this.actions.approve) {
+      return this.http.get(apiUrl + `/TenderCase/BusinessService.SendForApproval(key=${id})`);
+    }
+
     return this.http.patch(apiUrl + `/TenderCase/${id}`, obj);
   }
 
-  approversRequests(tenderCase) {
-    return this.http.patch(apiUrl + `/TenderCase`, tenderCase);
-  }
-
-  rejectTenderCase(tenderCase: TenderCase) {
-    tenderCase.TenderCaseStatusId = 11;
-    return this.http.patch(apiUrl + `/TenderCase`, tenderCase);
-  }
-
-  addFileData(data): Observable<any> {
-    return this.http.post(apiUrl + '/Annotation/AddData', data);
-  }
-
-  fileDownload(data) {
-    return this.http.get(apiUrl + '/Annotation/Download', data);
-  }
-
-  fileDelete(id) {
-    return this.http.delete(apiUrl + '/Annotation', id);
-  }
 
   addApproverComment(data) {
     return this.http.post(apiUrl + '/ApproverComment/Post', data);
