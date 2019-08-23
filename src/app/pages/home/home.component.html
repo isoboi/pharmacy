@@ -6,6 +6,7 @@
             [dataSource]="dataSource"
             [showBorders]="true"
             [selectedRowKeys]="[]"
+            [columnAutoWidth]="true"
             (onRowDblClick)="onRowDblClick($event)"
             (onSelectionChanged) = "onSelectionChanged($event)">
             <dxo-selection mode="single"></dxo-selection>
@@ -30,53 +31,42 @@
                 [visible]="true" 
                 placeholder="Search..."></dxo-search-panel>
             <dxi-column 
-                dataField="Id" 
-                [width]="50" 
+                dataField="Id"
                 caption="Id">
             </dxi-column>
             <dxi-column 
-                dataField="TAMName" 
-                [width]="100" 
+                dataField="TAMName"
                 caption="TAM">
             </dxi-column>
             <dxi-column 
-                dataField="RegionName" 
-                [width]="100" 
+                dataField="RegionName"
                 caption="RegionName">
             </dxi-column>
             <dxi-column 
-                dataField="HospitalINN" 
-                [width]="100"
+                dataField="HospitalINN"
                 caption="Hospital INN">
             </dxi-column>
             <dxi-column 
-                dataField="HospitalName" 
-                [width]="100"
+                dataField="HospitalName"
                 caption="Client name">
             </dxi-column>
             <dxi-column 
-                dataField="TenderStatusName" 
-                [width]="100">
+                dataField="TenderStatusName">
             </dxi-column>
             <dxi-column 
-                dataField="GosZakupkiLink" 
-                [width]="200">
+                dataField="GosZakupkiLink">
             </dxi-column>
             <dxi-column 
-                dataField="DateOfTender" 
-                [width]="150">
+                dataField="DateOfTender">
             </dxi-column>
             <dxi-column 
-                dataField="Winner" 
-                [width]="100">
+                dataField="Winner">
             </dxi-column>
             <dxi-column 
-                dataField="IndicationName" 
-                [width]="200">
+                dataField="IndicationName">
             </dxi-column>
             <dxi-column 
-                dataField="SupplierName" 
-                [width]="100">
+                dataField="SupplierName">
             </dxi-column>
         </dx-data-grid>
         <dx-data-grid 
@@ -99,7 +89,7 @@
             <dxi-column 
                 dataField="Id" 
                 caption="TenderSKU ID"
-                [width]="150"
+
                 alignment="center">
                 <dxo-header-filter 
                     [groupInterval]="10000"></dxo-header-filter>
@@ -107,7 +97,7 @@
             <dxi-column 
                 dataField="brandName" 
                 caption="Brand"
-                [width]="125"
+
                 alignment="center">
                 <dxo-header-filter 
                     [dataSource]="orderHeaderFilter"></dxo-header-filter>
@@ -115,44 +105,36 @@
             <dxi-column 
                 dataField="SKUNameRus" 
                 caption="SKU Name"
-                [width]="125"
-                alignment="center"
-                ></dxi-column>
+
+                alignment="center"></dxi-column>
             <dxi-column 
                 dataField="SKUId" 
-                caption="SKU Code"
-                [width]="125"
-                ></dxi-column>
+                caption="SKU Code"></dxi-column>
             <dxi-column 
                 dataField="TenderVolume"
                 caption="Tender Volume (packs)"
-                [width]="200"
-                alignment="center"
-                ></dxi-column>
+
+                alignment="center"></dxi-column>
             <dxi-column 
                 dataField="TenderValueUSD" 
                 caption="Tender Value (USD)"
-                [width]="200"
-                alignment="center"
-                ></dxi-column>
+
+                alignment="center"></dxi-column>
             <dxi-column 
                 dataField="ForecastedValueUSD" 
                 caption="Forecasted Tender Value (USD)"
-                [width]="200"
-                alignment="center"
-                ></dxi-column>
+
+                alignment="center"></dxi-column>
             <dxi-column 
                 dataField="DiffStartAndEDL" 
                 caption="Diff Tender Starting price and EDL price, %"
-                [width]="200"
-                alignment="center"
-                ></dxi-column>
+
+                alignment="center"></dxi-column>
             <dxi-column 
                 dataField="DiffStartAndReference" 
                 caption="Diff Tender Starting price and Reference price, %"
-                [width]="200"            
-                alignment="center"
-                ></dxi-column>
+
+                alignment="center"></dxi-column>
         </dx-data-grid>      
     </div>
 </div>
