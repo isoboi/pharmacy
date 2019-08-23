@@ -1,8 +1,9 @@
 export const navigation = [
   {
     text: 'Тендеры',
-    path: '/home',
-    icon: 'folder'
+    path: '/tender',
+    icon: 'folder',
+    selected: false
   },
   // {
   //   text: 'Tender Cart',
@@ -12,17 +13,20 @@ export const navigation = [
   {
     text: 'Кейсы',
     path: '/cases',
-    icon: 'folder'
+    icon: 'folder',
+    selected: false
   },
   {
     text: 'План график',
     path: '/plangraphic',
-    icon: 'clock'
+    icon: 'clock',
+    selected: false
   },
   {
     text: 'Настройки',
     path: '/settings',
-    icon: 'toolbox'
+    icon: 'toolbox',
+    selected: false
   },
   // {
   //   text: 'Настройки 2',

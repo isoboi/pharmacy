@@ -1,26 +1,28 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {Tender, Service} from '../home/app.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasesService} from '../../services/cases.service';
 import {ActionEvent, Actions} from '../../models/case.interface';
 import notify from 'devextreme/ui/notify';
+import {Observable, Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-casedetails',
   templateUrl: './casedetails.component.html',
   styleUrls: ['./casedetails.component.scss']
 })
-export class CasedetailsComponent implements OnInit, AfterViewInit {
+export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   tender: Tender;
   tabs = CasesService.getTabs();
   case: any;
   tabIndex = 0;
-  tenderCase;
+  tenderCase: Observable<any>;
   channel;
   selectBoxes: any;
   tenderCaseOriginal;
   private actions = Actions;
-
+  private destroy$ = new Subject();
   constructor(
     private service: Service,
     private casesService: CasesService,
@@ -33,6 +35,7 @@ export class CasedetailsComponent implements OnInit, AfterViewInit {
       });
     this.tenderCase = this.casesService.getTenderCase(this.route.snapshot.params.id);
     this.tenderCase
+      .pipe(takeUntil(this.destroy$))
       .subscribe((x) => {
         this.tenderCaseOriginal = JSON.parse(JSON.stringify(x));
       });
@@ -45,7 +48,6 @@ export class CasedetailsComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
 
   }
-
 
   selectTab(event) {
     this.tabIndex = event.itemIndex;
@@ -62,6 +64,7 @@ export class CasedetailsComponent implements OnInit, AfterViewInit {
       }
 
       this.casesService.patchTenderCase(obj, event.action, event.tenderCase.Id)
+        .pipe(takeUntil(this.destroy$))
         .subscribe((x: any) => {
           if (event.action !== this.actions.save) {
             if (x && x.value) {
@@ -71,6 +74,11 @@ export class CasedetailsComponent implements OnInit, AfterViewInit {
             }
           }
         }, () => notify({message: 'error', position: 'top'}, 'Error', 1500));
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

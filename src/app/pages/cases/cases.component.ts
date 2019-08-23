@@ -58,7 +58,7 @@ export class CasesComponent {
   onRowDblClick(e) {
     const data: TenderCase = e.data;
     this.service.setSelectedTender(data);
-    this.router.navigateByUrl(`/case/${data.Id}`);
+    this.router.navigateByUrl(`/cases/${data.Id}`);
   }
 
   onSelectionChanged(e) {

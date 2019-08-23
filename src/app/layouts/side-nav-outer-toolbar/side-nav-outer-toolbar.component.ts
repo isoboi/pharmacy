@@ -35,7 +35,8 @@ export class SideNavOuterToolbarComponent implements OnInit {
 
     this.router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
-        this.selectedRoute = val.urlAfterRedirects.split('?')[0];
+        const urlAfterRedirects = val.urlAfterRedirects.split('?')[0];
+        this.selectedRoute = this.menuItems.find((item) => urlAfterRedirects.includes(item.path)).path;
       }
     });
 
@@ -65,14 +66,13 @@ export class SideNavOuterToolbarComponent implements OnInit {
   navigationChanged(event) {
     const path = event.itemData.path;
     const pointerEvent = event.event;
+    const selectedRoute = this.selectedRoute;
 
     if (path && this.menuOpened) {
       if (event.node.selected) {
         pointerEvent.preventDefault();
-      } else {
-        this.router.navigate([path]);
       }
-
+      this.router.navigate([path]);
       if (this.hideMenuAfterNavigation) {
         this.temporaryMenuOpened = false;
         this.menuOpened = false;

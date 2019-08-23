@@ -51,11 +51,11 @@ export class CasesService {
     return this.http.get(apiUrl + '/Channel');
   }
 
-  getTenderCase(id) {
+  getTenderCase(id): Observable<any> {
     return this.http.get(apiUrl + `/TenderCase/${id}`);
   }
 
-  patchTenderCase(obj, action, id) {
+  patchTenderCase(obj, action, id): Observable<any> {
     if (action === this.actions.reject) {
       return this.http.get(apiUrl + `/TenderCase/BusinessService.Reject(key=${id})`);
     }

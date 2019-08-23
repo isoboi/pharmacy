@@ -9,7 +9,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: 'tender',
     component: HomeComponent
   },
   {
@@ -33,12 +33,12 @@ const routes: Routes = [
     component: CasedetailsComponent
   },
   {
-    path: 'case/:id',
+    path: 'cases/:id',
     component: CasedetailsComponent
   },
   {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'tender'
   }
 ];
 
