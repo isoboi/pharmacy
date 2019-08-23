@@ -7,6 +7,7 @@
             [showBorders]="true"
             [selectedRowKeys]="[]"
             [columnAutoWidth]="true"
+            (onInitNewRow)="onInitNewRow()"
             (onRowDblClick)="onRowDblClick($event)"
             (onSelectionChanged) = "onSelectionChanged($event)">
             <dxo-selection mode="single"></dxo-selection>

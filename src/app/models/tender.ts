@@ -1,5 +1,5 @@
 
-export interface Tender {
+export class Tender {
   Artificial: boolean;
   ContractStatusCommentId: number;
   ContractStatusCommentName: string;

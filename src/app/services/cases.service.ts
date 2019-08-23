@@ -72,6 +72,10 @@ export class CasesService {
       return this.http.get(apiUrl + `/TenderCase/BusinessService.SendForApproval(key=${id})`);
     }
 
+    if (id === 'new') {
+      return this.http.post(apiUrl + '/TenderCase', obj);
+    }
+
     return this.http.patch(apiUrl + `/TenderCase/${id}`, obj);
   }
 
@@ -80,25 +84,8 @@ export class CasesService {
     return this.http.post(apiUrl + '/ApproverComment/Post', data);
   }
 
-  approversRequests(tenderCase) {
-    return this.http.patch(apiUrl + `/TenderCase`, tenderCase);
-  }
-
-  rejectTenderCase(tenderCase: TenderCase) {
-    tenderCase.TenderCaseStatusId = 11;
-    return this.http.patch(apiUrl + `/TenderCase`, tenderCase);
-  }
-
   addFileData(data): Observable<any> {
     return this.http.post(apiUrl + '/Annotation/AddData', data);
-  }
-
-  fileDownload(data) {
-    return this.http.get(apiUrl + '/Annotation/Download', data);
-  }
-
-  fileDelete(id) {
-    return this.http.delete(apiUrl + '/Annotation', id);
   }
 
   /********************************************************************************************************

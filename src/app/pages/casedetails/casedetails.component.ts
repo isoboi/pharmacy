@@ -1,8 +1,8 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {Tender, Service} from '../home/app.service';
+import {Service} from '../home/app.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasesService} from '../../services/cases.service';
-import {ActionEvent, Actions} from '../../models/case.interface';
+import {ActionEvent, Actions, TenderCase} from '../../models/case.interface';
 import notify from 'devextreme/ui/notify';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -13,14 +13,14 @@ import {takeUntil} from 'rxjs/operators';
   styleUrls: ['./casedetails.component.scss']
 })
 export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
-  tender: Tender;
   tabs = CasesService.getTabs();
   case: any;
   tabIndex = 0;
   tenderCase: Observable<any>;
   channel;
   selectBoxes: any;
-  tenderCaseOriginal;
+  tenderCaseOriginal = new TenderCase();
+  id: string;
   private actions = Actions;
   private destroy$ = new Subject();
   constructor(
@@ -30,19 +30,23 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     private route: ActivatedRoute
   ) {
     this.casesService.getDetail()
+      .pipe(takeUntil(this.destroy$))
       .subscribe(([relatedCaseComment, distributor, channel]) => {
         this.selectBoxes = {relatedCaseComment, distributor, channel};
+        console.log(this.selectBoxes);
       });
-    this.tenderCase = this.casesService.getTenderCase(this.route.snapshot.params.id);
-    this.tenderCase
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((x) => {
-        this.tenderCaseOriginal = JSON.parse(JSON.stringify(x));
-      });
+    this.id = this.route.snapshot.params.id;
+    if (this.id !== 'new') {
+      this.tenderCase = this.casesService.getTenderCase(this.id);
+      this.tenderCase
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((x) => {
+          this.tenderCaseOriginal = JSON.parse(JSON.stringify(x));
+        });
+    }
   }
 
   ngOnInit() {
-    this.tender = this.service.getSelectedTender();
   }
 
   ngAfterViewInit() {
@@ -59,11 +63,12 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
       for (const key of keys) {
         if (event.tenderCase[key] !== this.tenderCaseOriginal[key]) {
           obj[key] = event.tenderCase[key];
-          this.tenderCaseOriginal[key] = event.tenderCase[key];
+          if (this.id !== 'new') {
+            this.tenderCaseOriginal[key] = event.tenderCase[key];
+          }
         }
       }
-
-      this.casesService.patchTenderCase(obj, event.action, event.tenderCase.Id)
+      this.casesService.patchTenderCase(obj, event.action, this.id)
         .pipe(takeUntil(this.destroy$))
         .subscribe((x: any) => {
           if (event.action !== this.actions.save) {

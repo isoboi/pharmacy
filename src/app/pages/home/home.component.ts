@@ -64,6 +64,9 @@ export class HomeComponent {
     this.dataSourceSKU.filter(['TenderId', '=', tenderId]);
     this.dataSourceSKU.load();
   }
+  onInitNewRow() {
+    this.router.navigate(['/tender/new']);
+  }
 
   orderHeaderFilter(data) {
     console.log('filter..');

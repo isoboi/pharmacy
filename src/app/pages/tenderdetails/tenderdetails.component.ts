@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Service } from '../home/app.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TenderService } from '../../services/tender.service';
-import {ActionsTender, ActionTenderEvent} from '../../models/tender';
+import {ActionsTender, ActionTenderEvent, Tender} from '../../models/tender';
 import notify from 'devextreme/ui/notify';
+import {TenderCase} from '../../models/case.interface';
 
 @Component({
   selector: 'app-tenderdetails',
@@ -16,7 +17,8 @@ export class TenderDetailsComponent implements OnInit {
   tabs;
   tabIndex = 0;
   private actions = ActionsTender;
-  private originalTender;
+  private originalTender = new Tender();
+  id = this.route.snapshot.params.id;
   constructor(
     private service: Service,
     private router: Router,
@@ -27,11 +29,14 @@ export class TenderDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.tender = this.tenderService.getTender(this.route.snapshot.params.id);
-    this.tender
-      .subscribe((x) => {
-        this.originalTender = x;
-      });
+    if (this.id !== 'new') {
+      this.tender = this.tenderService.getTender(this.route.snapshot.params.id);
+      this.tender
+        .subscribe((x) => {
+          this.originalTender = x;
+        });
+    }
+
     this.tabs = this.tenderService.getTabs();
   }
 
@@ -46,10 +51,12 @@ export class TenderDetailsComponent implements OnInit {
     for (const key of keys) {
       if (event.tender[key] !== this.originalTender[key]) {
         obj[key] = event.tender[key];
-        this.originalTender[key] = event.tender[key];
+        if (this.id !== 'new') {
+          this.originalTender[key] = event.tender[key];
+        }
       }
     }
-    this.tenderService.save(obj, event.action, event.tender.Id)
+    this.tenderService.save(obj, event.action, this.id)
       .subscribe((x: any) => {
         if (event.action !== this.actions.save) {
           if (x && x.value) {

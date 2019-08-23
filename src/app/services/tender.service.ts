@@ -59,7 +59,6 @@ export class TenderService {
   }
 
   save(obj, action, id) {
-
     if (action === this.actions.decline) {
       return this.http.get(apiUrl + `/TenderCase/BusinessServicePatch.Decline(key=${id})`);
     }
@@ -69,5 +68,10 @@ export class TenderService {
     if (action === this.actions.announced) {
       return this.http.get(apiUrl + `/TenderCase/BusinessService.ToAnnounced(key=${id})`);
     }
+
+    if (id === 'new') {
+      return this.http.post(apiUrl + '/Tender', obj);
+    }
+    return this.http.patch(apiUrl + '/Tender', obj);
   }
 }

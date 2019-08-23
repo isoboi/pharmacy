@@ -2,6 +2,8 @@ import {ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnDestroy,
 import {TenderService} from '../../../services/tender.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {Tender} from '../../../models/tender';
 
 
 @Component({
@@ -11,7 +13,7 @@ import {Subject} from 'rxjs';
 })
 
 export class TenderDescriptionComponent implements OnChanges, OnInit, OnDestroy {
-  @Input()tender;
+  @Input()tender: Tender;
   @Output()save = new EventEmitter();
   federalDistrict;
   federalSubject;
@@ -24,8 +26,10 @@ export class TenderDescriptionComponent implements OnChanges, OnInit, OnDestroy 
   contractStatus;
   contractStatusComment;
   showLoadPanel = true;
-  destroy$ = new Subject();
+  private destroy$ = new Subject();
+  isNewTender = this.route.snapshot.params.id === 'new';
   constructor(private tenderService: TenderService,
+              private route: ActivatedRoute,
               private cdr: ChangeDetectorRef) {
 
   }
@@ -35,6 +39,9 @@ export class TenderDescriptionComponent implements OnChanges, OnInit, OnDestroy 
   }
 
   ngOnInit() {
+    if (this.isNewTender) {
+      this.tender = new Tender();
+    }
     this.tenderService.getFederalDistrict()
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {

@@ -1,4 +1,4 @@
-export interface TenderCase {
+export class TenderCase {
   CPStatus: boolean;
   ChildId: number;
   CreatedBy: number;
@@ -9,7 +9,7 @@ export interface TenderCase {
   DupStatus: boolean;
   FederalLawNumber: number;
   HospitalName: number;
-  Id: number;
+  Id?: number;
   ModifiedBy: number;
   ModifiedOn: string;
   NotificationNumber: number;
