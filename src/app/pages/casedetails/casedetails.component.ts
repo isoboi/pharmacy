@@ -109,7 +109,7 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private success = (x) => {
     if (this.action !== this.actions.save) {
-      if (this.actions.approversRequests) {
+      if (this.action === this.actions.approversRequests) {
         if (x) {
           if (x.value) {
             this.showDialog();
