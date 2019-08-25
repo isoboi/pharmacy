@@ -7,7 +7,7 @@ import notify from 'devextreme/ui/notify';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
-import {confirm, custom} from 'devextreme/ui/dialog';
+import {custom} from 'devextreme/ui/dialog';
 @Component({
   selector: 'app-casedetails',
   templateUrl: './casedetails.component.html',
