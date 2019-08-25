@@ -1,6 +1,6 @@
 export const navigation = [
   {
-    text: 'Тендеры',
+    text: 'Tenders',
     path: '/tender',
     icon: 'folder',
     selected: false
@@ -11,23 +11,23 @@ export const navigation = [
   //   icon: 'folder'
   // },
   {
-    text: 'Кейсы',
+    text: 'Cases',
     path: '/cases',
     icon: 'folder',
     selected: false
-  },
-  {
-    text: 'План график',
-    path: '/plangraphic',
-    icon: 'clock',
-    selected: false
-  },
-  {
-    text: 'Настройки',
-    path: '/settings',
-    icon: 'toolbox',
-    selected: false
-  },
+  }
+  // {
+  //   text: 'План график',
+  //   path: '/plangraphic',
+  //   icon: 'clock',
+  //   selected: false
+  // },
+  // {
+  //   text: 'Настройки',
+  //   path: '/settings',
+  //   icon: 'toolbox',
+  //   selected: false
+  // },
   // {
   //   text: 'Настройки 2',
   //   path: '/settings',

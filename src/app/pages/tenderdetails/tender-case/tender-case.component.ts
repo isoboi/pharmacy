@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import DataSource from 'devextreme/data/data_source';
 import {RestService} from '../../../services/rest.service';

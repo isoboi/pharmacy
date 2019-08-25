@@ -52,10 +52,6 @@ export class Service {
     return tenders;
   }
 
-  getTenderCaseSKU() {
-    return this.http.get('https://navpharm365app.ncdev.ru/odata/TenderCaseSKU');
-  }
-
   setTenderDetails(dataSource) {
     if (!this.tenderDetails) {
       this.tenderDetails = dataSource;
