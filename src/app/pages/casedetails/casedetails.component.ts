@@ -7,20 +7,24 @@ import notify from 'devextreme/ui/notify';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
+import {confirm, custom} from 'devextreme/ui/dialog';
 @Component({
   selector: 'app-casedetails',
   templateUrl: './casedetails.component.html',
   styleUrls: ['./casedetails.component.scss']
 })
 export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
-  tabs = CasesService.getTabs();
+  actionSheet = false;
   case: any;
-  tabIndex = 0;
-  tenderCase: Observable<any>;
   channel;
-  selectBoxes: any;
-  tenderCaseOriginal = new TenderCase();
   id: string;
+  selectBoxes: any;
+  tabIndex = 0;
+  tabs = CasesService.getTabs();
+  tenderCase: Observable<any>;
+  tenderCaseOriginal = new TenderCase();
+
+  private action: string;
   private actions = Actions;
   private destroy$ = new Subject();
   constructor(
@@ -29,6 +33,9 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     private router: Router,
     private route: ActivatedRoute
   ) {
+  }
+
+  ngOnInit() {
     this.casesService.getDetail()
       .pipe(takeUntil(this.destroy$))
       .subscribe(([relatedCaseComment, distributor, channel]) => {
@@ -46,7 +53,29 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnInit() {
+  showDialog() {
+    const myDialog = custom({
+      title: 'Confirm',
+      messageHtml: '<i>The similar case  is already initiated in the system. Do you want to continue?</i>',
+      buttons: [{
+        text: 'Continue',
+        onClick: (e) => {
+          return {buttonText: true};
+        }
+      },
+        {
+          text: 'Cancel',
+          onClick: (e) => {
+            return {buttonText: false};
+          }
+        }
+      ],
+    });
+    myDialog.show().then((dialogResult) => {
+      if (dialogResult) {
+        this.patchTenderCase(null, this.actions.approve, this.id);
+      }
+    });
   }
 
   ngAfterViewInit() {
@@ -68,17 +97,39 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         }
       }
-      this.casesService.patchTenderCase(obj, event.action, this.id)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe((x: any) => {
-          if (event.action !== this.actions.save) {
-            if (x && x.value) {
-              notify({message: 'Successfully', position: 'top'}, 'success', 1500);
-            } else if (x && !x.value) {
-              notify({message: 'error', position: 'top'}, 'Error', 1500);
-            }
+      this.patchTenderCase(obj, event.action, this.id);
+  }
+
+  private patchTenderCase(obj, action, id) {
+    this.action = action;
+    this.casesService.patchTenderCase(obj, action, id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(this.success, this.error);
+  }
+
+  private success = (x) => {
+    if (this.action !== this.actions.save) {
+      if (this.actions.approversRequests) {
+        if (x) {
+          if (x.value) {
+            this.showDialog();
+          } else {
+            this.patchTenderCase(null, this.actions.approve, this.id);
           }
-        }, () => notify({message: 'error', position: 'top'}, 'Error', 1500));
+        }
+        return;
+      }
+
+      if (x && x.value) {
+        notify({message: 'Successfully', position: 'top'}, 'success', 1500);
+      } else if (x && !x.value) {
+        this.error();
+      }
+    }
+  }
+
+  private error = () => {
+    notify({message: 'Error', position: 'top'}, 'Error', 1500);
   }
 
   ngOnDestroy() {
