@@ -74,4 +74,19 @@ export class TenderService {
     }
     return this.http.patch(apiUrl + '/Tender', obj);
   }
+
+  canCreate() {
+    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanCreate`);
+  }
+
+  canSave(id) {
+    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanSave(entityId=${id})`);
+  }
+  canDelete(id) {
+    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanDelete(entityId=${id})`);
+  }
+  canDecline(id) {
+    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanDecline(entityId=${id})`);
+  }
+
 }

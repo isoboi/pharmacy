@@ -5,7 +5,7 @@
         <div class="title">Attachments</div>
         <div class="buttons">
           <dx-button text="Download" class="download-button" type="success"></dx-button>
-          <dx-button text="Delete" type="danger" icon="remove" (onClick)="onFileDelete()"></dx-button>
+          <dx-button [disabled]="!(canDelete$ | async)?.value" text="Delete" type="danger" icon="remove" (onClick)="onFileDelete()"></dx-button>
           <div class="file-upload">
             <dx-file-uploader
               selectButtonText="Add"

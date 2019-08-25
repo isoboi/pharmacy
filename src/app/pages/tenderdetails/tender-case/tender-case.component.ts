@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import DataSource from 'devextreme/data/data_source';
 import {RestService} from '../../../services/rest.service';
 import {environment} from '../../../../environments/environment';
+import {Tender} from '../../../models/tender';
 
 @Component({
   selector: 'app-tender-case',
@@ -10,7 +11,7 @@ import {environment} from '../../../../environments/environment';
   styleUrls: ['./tender-case.component.scss']
 })
 export class TenderCaseComponent implements OnInit {
-
+  @Input()tender: Tender;
   tenderCase: DataSource;
   currentFilter: any;
   id;

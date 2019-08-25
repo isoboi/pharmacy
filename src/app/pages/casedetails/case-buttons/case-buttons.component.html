@@ -1,31 +1,31 @@
 <div class="buttons dx-card" *ngIf="!id || tenderCase">
   <dx-button
     *ngIf="tabIndex === 0"
-    [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject"
+    [disabled]="!(canUpdate$ | async)?.value"
     (onClick)="save(actions.save)"
     text="Save Case" type="default">
   </dx-button>
 
   <dx-button
-    [disabled]="tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft"
+    [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.draft"
     (onClick)="save(actions.approversRequests)"
     text="Approver's requests">
   </dx-button>
 
   <dx-button
-    [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject"
+    *ngIf="(canApprove$ | async)?.value"
     (onClick)="save(actions.approve)"
     text="Approve">
   </dx-button>
 
   <dx-button
-    [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject"
+    [disabled]="!(canReject$ | async)?.value"
     (onClick)="save(actions.reject)"
     text="Reject" type="danger" icon="remove">
   </dx-button>
 
   <dx-button
-    *ngIf="tenderCase?.TenderCaseStatusId === tenderCaseStatus.reject"
+    [disabled]="tenderCase?.TenderCaseStatusId !== tenderCaseStatus.reject"
     (onClick)="save(actions.draft)"
     text="Draft">
   </dx-button>

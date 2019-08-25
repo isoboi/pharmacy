@@ -7,7 +7,7 @@
             [showBorders]="true"
             [selectedRowKeys]="[]"
             [columnAutoWidth]="true"
-            (onInitNewRow)="onInitNewRow()"
+            (onInitNewRow)="onInitNewRow($event)"
             (onRowDblClick)="onRowDblClick($event)"
             (onSelectionChanged) = "onSelectionChanged($event)">
             <dxo-selection mode="single"></dxo-selection>
@@ -20,7 +20,7 @@
             <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
             <dxo-editing
                 mode="row"
-                [allowAdding]="true">
+                [allowAdding]="(canCreate$ | async).value">
             </dxo-editing>
             <dxo-export [enabled]="true" fileName="Tenders" [allowExportSelectedData]="true"></dxo-export>
             <dxo-filter-row 

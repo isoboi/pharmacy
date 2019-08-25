@@ -96,4 +96,20 @@ export class CasesService {
     return this.http.get(apiUrl + `/TenderCaseSKU`);
   }
 
+  canUpdate(id) {
+    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanUpdate(entityId=${id})`);
+  }
+
+  canApprove(id) {
+    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanApprove(entityId=${id})`);
+  }
+
+  canReject(id) {
+    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanReject(entityId=${id})`);
+  }
+
+  canDelete(id) {
+    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanDelete(entityId=${id})`);
+  }
+
 }

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import DataSource from 'devextreme/data/data_source';
 import {RestService} from '../../../services/rest.service';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../../../environments/environment';
+import {Tender} from '../../../models/tender';
 
 @Component({
   selector: 'app-tender-sku',
@@ -10,7 +11,7 @@ import {environment} from '../../../../environments/environment';
   styleUrls: ['./tender-sku.component.scss']
 })
 export class TenderSkuComponent implements OnInit {
-
+  @Input()tender: Tender;
   tenderSku: DataSource;
   products: DataSource;
   skuias: DataSource;

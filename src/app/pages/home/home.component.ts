@@ -1,4 +1,4 @@
-import {Component, ViewChild, enableProdMode} from '@angular/core';
+import {Component, ViewChild, enableProdMode, OnInit} from '@angular/core';
 import {DxDataGridComponent} from 'devextreme-angular';
 import { Service} from './app.service';
 import {Router} from '@angular/router';
@@ -6,6 +6,8 @@ import 'devextreme/data/odata/store';
 import DataSource from 'devextreme/data/data_source';
 import {RestService} from 'src/app/services/rest.service';
 import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs';
+import {TenderService} from '../../services/tender.service';
 
 if (!/localhost/.test(document.location.host)) {
   enableProdMode();
@@ -18,10 +20,11 @@ if (!/localhost/.test(document.location.host)) {
   preserveWhitespaces: true
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   constructor(
     private service: Service,
+    private tenderService: TenderService,
     private router: Router,
     private restService: RestService
   ) {
@@ -48,6 +51,10 @@ export class HomeComponent {
   dataSource: DataSource;
   dataSourceSKU: DataSource;
   filterValue: number;
+  canCreate$: Observable<any>;
+  ngOnInit() {
+    this.canCreate$ = this.tenderService.canCreate();
+  }
 
   initialized() {
     this.service.setTenderDetails(this.dataSourceSKU);
@@ -64,8 +71,9 @@ export class HomeComponent {
     this.dataSourceSKU.filter(['TenderId', '=', tenderId]);
     this.dataSourceSKU.load();
   }
-  onInitNewRow() {
-    this.router.navigate(['/tender/new']);
+  onInitNewRow($event) {
+    $event.preventDefault();
+    this.router.navigate(['/foo']);
   }
 
   orderHeaderFilter(data) {

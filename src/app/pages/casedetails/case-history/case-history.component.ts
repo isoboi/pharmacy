@@ -5,6 +5,8 @@ import {DxDataGridComponent} from 'devextreme-angular';
 import {TenderCase} from '../../../models/case.interface';
 import {CasesService} from '../../../services/cases.service';
 import {environment} from '../../../../environments/environment';
+import {Observable} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-case-history',
@@ -24,17 +26,21 @@ export class CaseHistoryComponent implements OnInit {
   ApproverComment = {ApproverComment: ''};
   selectedRow = null;
   apiUrl = environment.apiUrl;
+  canDelete$: Observable<any>;
+  id;
   constructor(private restService: RestService,
+              private route: ActivatedRoute,
               private caseService: CasesService) {
   }
 
   ngOnInit() {
+    this.id = this.route.snapshot.params.id;
     this._getAttachments();
     this._getTenderCaseApproved();
+    this.canDelete$ = this.caseService.canDelete(this.id);
   }
 
   onUploaded(e) {
-    console.log(e);
     const file = e.value[0];
     const fileData = {
       ObjectId: this.tenderCase.Id,

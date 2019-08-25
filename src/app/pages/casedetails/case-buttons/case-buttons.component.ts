@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActionEvent, Actions, TenderCase, TenderCaseStatus} from '../../../models/case.interface';
 import {ActivatedRoute} from '@angular/router';
+import {CasesService} from '../../../services/cases.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-case-buttons',
@@ -15,13 +17,18 @@ export class CaseButtonsComponent implements OnInit {
   tenderCaseStatus = TenderCaseStatus;
   actions = Actions;
   id: number;
-
-  constructor(private activateRoute: ActivatedRoute) {
+  canUpdate$: Observable<any>;
+  canApprove$: Observable<any>;
+  canReject$: Observable<any>;
+  constructor(private activateRoute: ActivatedRoute,
+              private caseService: CasesService) {
     this.id = activateRoute.snapshot.params.id;
   }
 
   ngOnInit() {
-    console.log(0);
+    this.canUpdate$ = this.caseService.canUpdate(this.id);
+    this.canApprove$ = this.caseService.canApprove(this.id);
+    this.canReject$ = this.caseService.canReject(this.id);
   }
 
   save(action) {
