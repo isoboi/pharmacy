@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import DataSource from 'devextreme/data/data_source';
 import {RestService} from '../../../services/rest.service';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-tender-case',
@@ -13,6 +14,7 @@ export class TenderCaseComponent implements OnInit {
   tenderCase: DataSource;
   currentFilter: any;
   id;
+  apiUrl = environment.apiUrl;
   constructor(private restService: RestService,
               private route: ActivatedRoute,
               private router: Router) {
@@ -29,7 +31,7 @@ export class TenderCaseComponent implements OnInit {
 
   private _getTenderCase() {
     this.tenderCase = this.restService.bindData(
-      'http://navpharm365app.ncdev.ru/odata/TenderCase',
+      this.apiUrl + '/TenderCase',
       ['Id'],
       {Id: 'Int32'}
     );
