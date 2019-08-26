@@ -4,11 +4,6 @@ import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {Tender} from '../../../models/tender';
-import {Service} from '../../home/app.service';
-import {RestService} from '../../../services/rest.service';
-import {environment} from '../../../../environments/environment';
-import DevExpress from 'devextreme/bundles/dx.all';
-import DataSource = DevExpress.data.DataSource;
 
 
 @Component({
@@ -17,7 +12,7 @@ import DataSource = DevExpress.data.DataSource;
   styleUrls: ['./tender.description.component.scss']
 })
 
-export class TenderDescriptionComponent implements OnChanges, OnInit, OnDestroy {
+export class TenderDescriptionComponent implements OnInit, OnDestroy {
   @Input()tender: Tender;
   @Output()save = new EventEmitter();
   federalDistrict;
@@ -40,9 +35,6 @@ export class TenderDescriptionComponent implements OnChanges, OnInit, OnDestroy 
 
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-  }
 
   ngOnInit() {
     if (this.isNewTender) {

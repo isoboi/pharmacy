@@ -4,16 +4,23 @@
            [disabled]="!isNewCase && tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft"
            [formData]="tenderCase">
     <dxi-item [disabled]="true" [label]="{text: 'Case ID'}" dataField="Id"></dxi-item>
-    <dxi-item [disabled]="!isNewCase" [label]="{text: 'Parent ID'}" dataField="ParentId"></dxi-item>
-    <dxi-item [disabled]="!isNewCase" [label]="{text: 'Child ID'}" dataField="ChildId"></dxi-item>
-    <dxi-item [label]="{text: 'Related case comment'}" dataField="RelatedCaseCommentId"></dxi-item>
-    <dxi-item [disabled]="!isNewCase" [editorOptions]="{ value: tenderId }" [label]="{text: 'Tender ID'}" dataField="TenderId"></dxi-item>
-    <dxi-item [disabled]="!isNewCase" [label]="{text: 'Region'}" dataField="RegionName"></dxi-item>
-    <dxi-item [disabled]="!isNewCase" [label]="{text: 'Client name'}" dataField="HospitalName"></dxi-item>
-    <dxi-item [disabled]="!isNewCase" [label]="{text: 'TAM'}" dataField="TAMName"></dxi-item>
-    <dxi-item [disabled]="!isNewCase" [label]="{text: 'Channel of financing'}" dataField="SourceOfFinName"></dxi-item>
-    <dxi-item [disabled]="!isNewCase" [label]="{text: 'Federal law'}" dataField="FederalLawNumber"></dxi-item>
-    <dxi-item [disabled]="!isNewCase" [label]="{text: 'Notification ID '}" dataField="NotificationNumber"></dxi-item>
+    <dxi-item [disabled]="true" [label]="{text: 'Parent ID'}" dataField="ParentId"></dxi-item>
+
+
+    <dxi-item [disabled]="true" [label]="{text: 'Child ID'}" dataField="ChildId"></dxi-item>
+    
+    <dxi-item [label]="{text: 'Related case comment'}"
+              editorType="dxSelectBox"
+              [editorOptions]="{ items: selectBoxes.relatedCaseComment.value, displayExpr:'Name', valueExpr:'Id' }"
+              dataField="RelatedCaseCommentId"></dxi-item>
+
+    <dxi-item [disabled]="true" [editorOptions]="{ value: tenderId }" [label]="{text: 'Tender ID'}" dataField="TenderId"></dxi-item>
+    <dxi-item [disabled]="true" [label]="{text: 'Region'}" dataField="RegionName"></dxi-item>
+    <dxi-item [disabled]="true" [label]="{text: 'Client name'}" dataField="HospitalName"></dxi-item>
+    <dxi-item [disabled]="true" [label]="{text: 'TAM'}" dataField="TAMName"></dxi-item>
+    <dxi-item [disabled]="true" [label]="{text: 'Channel of financing'}" dataField="SourceOfFinName"></dxi-item>
+    <dxi-item [disabled]="true" [label]="{text: 'Federal law'}" dataField="FederalLawNumber"></dxi-item>
+    <dxi-item [disabled]="true" [label]="{text: 'Notification ID '}" dataField="NotificationNumber"></dxi-item>
     <dxi-item [label]="{text: 'Supplier of the tender'}"
               editorType="dxSelectBox"
               [editorOptions]="{ items: selectBoxes.distributor.value, displayExpr:'Name', valueExpr:'Id' }"
@@ -25,7 +32,7 @@
               editorType="dxSelectBox"
               [editorOptions]="{ items: selectBoxes?.channel?.value, displayExpr:'Name', valueExpr:'Id' }"
               dataField="SalesChannelId"></dxi-item>
-    <dxi-item [disabled]="!isNewCase" [label]="{text: 'Weighted average contract price (RUB)'}"
+    <dxi-item [disabled]="true" [label]="{text: 'Weighted average contract price (RUB)'}"
               dataField="WeightedAveConractPriceRUB"></dxi-item>
     <dxi-item editorType="dxCheckBox" [label]="{text: 'Discount Provided'}" dataField="DiscountProvided"></dxi-item>
   </dx-form>

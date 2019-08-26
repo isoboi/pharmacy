@@ -72,7 +72,7 @@ export class TenderService {
     if (id === 'new') {
       return this.http.post(apiUrl + '/Tender', obj);
     }
-    return this.http.patch(apiUrl + '/Tender', obj);
+    return this.http.patch(apiUrl + `/Tender/${id}`, obj);
   }
 
   canCreate() {
