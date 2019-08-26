@@ -37,7 +37,7 @@
             [editorOptions]="{ items: federalLaw.value, displayExpr:'FederalLawNumber', valueExpr:'Id' }"></dxi-item>
 
   <dxi-item [label]="{text: 'Tender Status'}"
-            dataField="FederalLawId"
+            dataField="TenderStatusId"
             editorType="dxSelectBox"
             [editorOptions]="{ items: tenderStatus.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
   <dxi-item [label]="{text: 'Change of tender status, date'}" dataField="StatusChangedOn"></dxi-item>
@@ -54,7 +54,7 @@
 
 
   <dxi-item [label]="{text: 'Indication'}"
-            dataField="TenderStatusCommentId"
+            dataField="IndicationId"
             editorType="dxSelectBox"
             [editorOptions]="{ items: indication.value, displayExpr:'Name', valueExpr:'Id' }">
   </dxi-item>
