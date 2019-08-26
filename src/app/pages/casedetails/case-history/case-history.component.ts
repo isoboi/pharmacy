@@ -91,6 +91,7 @@ export class CaseHistoryComponent implements OnInit {
       ['Id'],
       {Id: 'Int32'}
     );
+    this.getTenderCaseApproved.filter(['TenderCaseId', '=', Number(this.id)]);
   }
 
 }
