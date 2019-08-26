@@ -3,6 +3,7 @@ import {Tab} from '../models/ui.models';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment.prod';
 import {ActionsTender} from '../models/tender';
+import {map} from 'rxjs/operators';
 
 const tabs: Tab[] = [
   {
@@ -76,17 +77,17 @@ export class TenderService {
   }
 
   canCreate() {
-    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanCreate`);
+    return this.http.get(apiUrl + `/Tender/BusinessService.CanCreate`);
   }
 
   canSave(id) {
-    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanSave(entityId=${id})`);
+    return this.http.get(apiUrl + `/Tender/BusinessService.CanSave(entityId=${id})`);
   }
   canDelete(id) {
-    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanDelete(entityId=${id})`);
+    return this.http.get(apiUrl + `/Tender/BusinessService.CanDelete(entityId=${id})`);
   }
   canDecline(id) {
-    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanDecline(entityId=${id})`);
+    return this.http.get(apiUrl + `/Tender/BusinessService.CanDecline(entityId=${id})`);
   }
 
 }

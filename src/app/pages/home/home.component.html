@@ -20,7 +20,7 @@
             <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
             <dxo-editing
                 mode="row"
-                [allowAdding]="(canCreate$ | async).value">
+                [allowAdding]="(canCreate$ | async)?.value">
             </dxo-editing>
             <dxo-export [enabled]="true" fileName="Tenders" [allowExportSelectedData]="true"></dxo-export>
             <dxo-filter-row 
