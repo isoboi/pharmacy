@@ -40,7 +40,6 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(([relatedCaseComment, distributor, channel]) => {
         this.selectBoxes = {relatedCaseComment, distributor, channel};
-        console.log(this.selectBoxes);
       });
     this.id = this.route.snapshot.params.id;
     if (this.id !== 'new') {
@@ -129,7 +128,7 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private error = () => {
-    notify({message: 'Error', position: 'top'}, 'Error', 1500);
+    notify({message: 'Error', position: 'top'}, 'error', 1500);
   }
 
   ngOnDestroy() {

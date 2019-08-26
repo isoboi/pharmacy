@@ -7,6 +7,7 @@ import {CasesService} from '../../../services/cases.service';
 import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-case-history',
@@ -52,12 +53,23 @@ export class CaseHistoryComponent implements OnInit {
   }
 
   onFileDelete() {
-    
   }
 
   ApproverCommentSave() {
+    const tenderCaseApproved = this.getTenderCaseApproved.items().filter((item: any) => {
+      return String(item.TenderCaseId) === this.id;
+    }).sort((a, b) => {
+      return b.Id - a.Id;
+    });
     if (this.ApproverComment.ApproverComment) {
-      this.caseService.addApproverComment(this.ApproverComment);
+      this.caseService.addApproverComment({
+        Id: this.tenderCase.Id,
+        Comment: this.ApproverComment.ApproverComment,
+        TenderCaseApprovedId: tenderCaseApproved[0].Id
+      })
+        .subscribe((x) => {
+          notify({message: 'Approver Comment Added', position: 'top'}, 'success', 1500);
+        });
     }
   }
 
