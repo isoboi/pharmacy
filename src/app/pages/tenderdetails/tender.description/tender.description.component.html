@@ -17,13 +17,20 @@
   <dxi-item [label]="{text: 'INN'}"
             dataField="HospitalINN"
             editorType="dxSelectBox"
-            [editorOptions]="{ items: hospitals.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+            [editorOptions]="{ items: hospitals.value, displayExpr:'INN', valueExpr:'Id' }"></dxi-item>
   <dxi-item [label]="{text: 'Client name'}"
             dataField="HospitalName"
             editorType="dxSelectBox"
             [editorOptions]="{ items: hospitals.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
   <dxi-item [disabled]="!isNewTender" [label]="{text: 'Legal Entity Type'}" dataField="LegalEntityType"></dxi-item>
-  <dxi-item [disabled]="!isNewTender" [label]="{text: 'Channel of financing'}" dataField="SourceOfFinId"></dxi-item>
+
+
+  <dxi-item [label]="{text: 'Channel of financing'}"
+            dataField="SourceOfFinId"
+            editorType="dxSelectBox"
+            [editorOptions]="{ items: sourceOfFinancing, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+  <!--<dxi-item [disabled]="!isNewTender" [label]="{text: 'Channel of financing'}" dataField="SourceOfFinId"></dxi-item>-->
+
   <dxi-item [label]="{text: 'Federal law'}"
             dataField="FederalLawId"
             editorType="dxSelectBox"

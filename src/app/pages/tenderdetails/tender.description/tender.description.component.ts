@@ -4,6 +4,11 @@ import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {Tender} from '../../../models/tender';
+import {Service} from '../../home/app.service';
+import {RestService} from '../../../services/rest.service';
+import {environment} from '../../../../environments/environment';
+import DevExpress from 'devextreme/bundles/dx.all';
+import DataSource = DevExpress.data.DataSource;
 
 
 @Component({
@@ -26,6 +31,7 @@ export class TenderDescriptionComponent implements OnChanges, OnInit, OnDestroy 
   contractStatus;
   contractStatusComment;
   showLoadPanel = true;
+  sourceOfFinancing;
   private destroy$ = new Subject();
   isNewTender = this.route.snapshot.params.id === 'new';
   constructor(private tenderService: TenderService,
@@ -42,6 +48,7 @@ export class TenderDescriptionComponent implements OnChanges, OnInit, OnDestroy 
     if (this.isNewTender) {
       this.tender = new Tender();
     }
+
     this.tenderService.getFederalDistrict()
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
@@ -98,6 +105,14 @@ export class TenderDescriptionComponent implements OnChanges, OnInit, OnDestroy 
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.contractStatusComment = data;
+      });
+
+    this.tenderService.get('/SourceOfFinancing')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        if (data && data.value) {
+          this.sourceOfFinancing = data.value;
+        }
       });
   }
 
