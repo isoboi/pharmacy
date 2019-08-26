@@ -3,7 +3,6 @@ import {Tab} from '../models/ui.models';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment.prod';
 import {ActionsTender} from '../models/tender';
-import {map} from 'rxjs/operators';
 
 const tabs: Tab[] = [
   {

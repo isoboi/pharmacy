@@ -16,7 +16,7 @@ export class CaseButtonsComponent implements OnInit {
   @Output() saveCase = new EventEmitter<ActionEvent>();
   tenderCaseStatus = TenderCaseStatus;
   actions = Actions;
-  id: number;
+  id: string;
   canUpdate$: Observable<any>;
   canApprove$: Observable<any>;
   canReject$: Observable<any>;
@@ -26,9 +26,12 @@ export class CaseButtonsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.canUpdate$ = this.caseService.canUpdate(this.id);
-    this.canApprove$ = this.caseService.canApprove(this.id);
-    this.canReject$ = this.caseService.canReject(this.id);
+    if (this.id !== 'new') {
+      this.canUpdate$ = this.caseService.canUpdate(this.id);
+      this.canApprove$ = this.caseService.canApprove(this.id);
+      this.canReject$ = this.caseService.canReject(this.id);
+    }
+
   }
 
   save(action) {

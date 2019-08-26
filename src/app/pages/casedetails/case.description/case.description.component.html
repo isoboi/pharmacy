@@ -7,7 +7,7 @@
     <dxi-item [disabled]="!isNewCase" [label]="{text: 'Parent ID'}" dataField="ParentId"></dxi-item>
     <dxi-item [disabled]="!isNewCase" [label]="{text: 'Child ID'}" dataField="ChildId"></dxi-item>
     <dxi-item [label]="{text: 'Related case comment'}" dataField="RelatedCaseCommentId"></dxi-item>
-    <dxi-item [disabled]="!isNewCase" [label]="{text: 'Tender ID'}" dataField="TenderId"></dxi-item>
+    <dxi-item [disabled]="!isNewCase" [editorOptions]="{ value: tenderId }" [label]="{text: 'Tender ID'}" dataField="TenderId"></dxi-item>
     <dxi-item [disabled]="!isNewCase" [label]="{text: 'Region'}" dataField="RegionName"></dxi-item>
     <dxi-item [disabled]="!isNewCase" [label]="{text: 'Client name'}" dataField="HospitalName"></dxi-item>
     <dxi-item [disabled]="!isNewCase" [label]="{text: 'TAM'}" dataField="TAMName"></dxi-item>
