@@ -21,10 +21,10 @@
       <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
       <!-- [allowUpdating]="true"
       [allowDeleting]="true" -->
-      <!--<dxo-editing-->
-      <!--mode="row"-->
-      <!--[allowAdding]="true">-->
-      <!--</dxo-editing>-->
+      <dxo-editing
+      mode="row"
+      [allowDeleting]="true">
+      </dxo-editing>
       <dxo-export [enabled]="true" fileName="Tenders" [allowExportSelectedData]="true"></dxo-export>
       <dxo-filter-row
         [visible]="showFilterRow"
