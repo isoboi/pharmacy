@@ -8,10 +8,11 @@
           <dx-button [disabled]="!(canDelete$ | async)?.value" text="Delete" type="danger" icon="remove" (onClick)="onFileDelete()"></dx-button>
           <div class="file-upload">
             <dx-file-uploader
+              name="files"
               selectButtonText="Add"
               uploadUrl="{{this.apiUrl}}/Annotation/Upload"
               accept="*"
-              [multiple]="false"
+              [multiple]="true"
               uploadMode="instantly"
               (onUploaded)="onUploaded($event)">
             </dx-file-uploader>
