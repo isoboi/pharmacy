@@ -15,7 +15,7 @@ export class TenderButtonsComponent implements OnInit {
   @Output() saveTender = new EventEmitter<any>();
   actions = ActionsTender;
   canCreate$;
-  canSave$;
+  canUpdate$;
   canDecline$;
   id;
   constructor(private tenderService: TenderService,
@@ -23,9 +23,12 @@ export class TenderButtonsComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
-    this.canCreate$ = this.tenderService.canCreate();
-    this.canSave$ = this.tenderService.canSave(this.id);
-    this.canDecline$ = this.tenderService.canDecline(this.id);
+    if (this.id !== 'new') {
+      this.canCreate$ = this.tenderService.canCreate();
+      this.canUpdate$ = this.tenderService.canUpdate(this.id);
+      this.canDecline$ = this.tenderService.canDecline(this.id);
+    }
+
   }
 
   save(event) {

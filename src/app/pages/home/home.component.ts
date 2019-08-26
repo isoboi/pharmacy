@@ -71,13 +71,11 @@ export class HomeComponent implements OnInit {
     this.dataSourceSKU.filter(['TenderId', '=', tenderId]);
     this.dataSourceSKU.load();
   }
-  onInitNewRow($event) {
-    $event.preventDefault();
-    this.router.navigate(['/foo']);
+  onInitNewRow() {
+    this.router.navigate(['/tender/new']);
   }
 
   orderHeaderFilter(data) {
-    console.log('filter..');
     data.dataSource.postProcess = (results) => {
       results.push({
         text: 'Weekends',

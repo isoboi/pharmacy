@@ -1,5 +1,5 @@
 <div class="buttons">
-  <dx-button [disabled]="!(canSave$ | async)" text="Save Tender" type="default" (onClick)="save(actions.save)"></dx-button>
+  <dx-button [disabled]="!(canUpdate$ | async)" text="Save Tender" type="default" (onClick)="save(actions.save)"></dx-button>
   <dx-button [disabled]="!(canDecline$ | async)" text="Decline Tender" type="danger" (onClick)="save(actions.decline)"></dx-button>
   <dx-button [disabled]="!(canCreate$ | async)?.value" *ngIf="tabIndex === 2" text="Create Case" type="success" [routerLink]="'/cases/new'"></dx-button>
   <dx-button [disabled]="tender.TenderStatusId !== 2" text="Planned" type="default" (onClick)="save(actions.planned)"></dx-button>

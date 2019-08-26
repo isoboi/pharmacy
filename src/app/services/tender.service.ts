@@ -80,8 +80,8 @@ export class TenderService {
     return this.http.get(apiUrl + `/Tender/BusinessService.CanCreate`);
   }
 
-  canSave(id) {
-    return this.http.get(apiUrl + `/Tender/BusinessService.CanSave(entityId=${id})`);
+  canUpdate(id) {
+    return this.http.get(apiUrl + `/Tender/BusinessService.CanUpdate(entityId=${id})`);
   }
   canDelete(id) {
     return this.http.get(apiUrl + `/Tender/BusinessService.CanDelete(entityId=${id})`);
