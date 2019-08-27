@@ -12,6 +12,7 @@ import {Tender} from '../../../models/tender';
 })
 export class TenderSkuComponent implements OnInit {
   @Input()tender: Tender;
+  @Input()disabled: boolean;
   tenderSku: DataSource;
   products: DataSource;
   skuias: DataSource;
@@ -22,6 +23,7 @@ export class TenderSkuComponent implements OnInit {
   currentFilter: any;
   id;
   apiUrl = environment.apiUrl;
+
   constructor(private restService: RestService,
               private route: ActivatedRoute) {
     this.id = this.route.snapshot.params.id;

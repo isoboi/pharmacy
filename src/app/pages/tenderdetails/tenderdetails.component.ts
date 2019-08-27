@@ -29,7 +29,11 @@ export class TenderDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.tabs = this.tenderService.getTabs();
     if (this.id !== 'new') {
+      this.tabs.forEach((tab) => {
+        tab.disabled = false;
+      });
       this.tender = this.tenderService.getTender(this.route.snapshot.params.id);
       this.tender
         .subscribe((x) => {
@@ -37,7 +41,7 @@ export class TenderDetailsComponent implements OnInit {
         });
     }
 
-    this.tabs = this.tenderService.getTabs();
+
   }
 
   selectTab(e) {
@@ -58,7 +62,15 @@ export class TenderDetailsComponent implements OnInit {
     }
     this.tenderService.save(obj, event.action, this.id)
       .subscribe((x: any) => {
-        if (event.action !== this.actions.save) {
+        if (event.action === this.actions.save) {
+          if (x && x.Id) {
+            notify({message: 'Successfully', position: 'top'}, 'success', 1500);
+            this.router.navigate([`/tender/${x.Id}`]);
+            setTimeout(() => {
+              location.reload();
+            });
+          }
+        } else {
           if (x && x.value) {
             notify({message: 'Successfully', position: 'top'}, 'success', 1500);
           } else if (x && !x.value) {

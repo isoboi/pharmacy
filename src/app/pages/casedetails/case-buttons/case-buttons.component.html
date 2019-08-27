@@ -1,7 +1,7 @@
 <div class="buttons dx-card" *ngIf="!id || tenderCase">
   <dx-button
     *ngIf="tabIndex === 0"
-    [disabled]="!(canUpdate$ | async)?.value"
+    [disabled]="!(canSave | async)?.value"
     (onClick)="save(actions.save)"
     text="Save Case" type="default">
   </dx-button>

@@ -17,7 +17,7 @@ export class CaseButtonsComponent implements OnInit {
   tenderCaseStatus = TenderCaseStatus;
   actions = Actions;
   id: string;
-  canUpdate$: Observable<any>;
+  canSave: Observable<any>;
   canApprove$: Observable<any>;
   canReject$: Observable<any>;
   constructor(private activateRoute: ActivatedRoute,
@@ -27,9 +27,11 @@ export class CaseButtonsComponent implements OnInit {
 
   ngOnInit() {
     if (this.id !== 'new') {
-      this.canUpdate$ = this.caseService.canUpdate(this.id);
+      this.canSave = this.caseService.canUpdate(this.id);
       this.canApprove$ = this.caseService.canApprove(this.id);
       this.canReject$ = this.caseService.canReject(this.id);
+    } else {
+      this.canSave = this.caseService.canCreate();
     }
 
   }

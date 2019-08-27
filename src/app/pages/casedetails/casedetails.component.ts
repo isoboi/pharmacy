@@ -8,6 +8,7 @@ import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
 import {custom} from 'devextreme/ui/dialog';
+import {Tab} from '../../models/ui.models';
 @Component({
   selector: 'app-casedetails',
   templateUrl: './casedetails.component.html',
@@ -41,6 +42,11 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         this.selectBoxes = {relatedCaseComment, distributor, channel};
       });
     this.id = this.route.snapshot.params.id;
+
+    for (let i = 1; i < this.tabs.length; i++) {
+      const tab = this.tabs[i];
+      tab.disabled = this.id === 'new';
+    }
     if (this.id !== 'new') {
       this.tenderCase = this.casesService.getTenderCase(this.id);
       this.tenderCase

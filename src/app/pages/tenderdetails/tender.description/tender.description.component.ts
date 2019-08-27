@@ -133,7 +133,7 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   onFieldDataChanged($event) {
 
 
-    if ($event.dataField === 'HospitalINN') {
+    if ($event.dataField === 'HospitalINN' && this.originalHospital) {
       const inn = this.originalHospital.value.find((hosp) => hosp.Id == $event.value).INN
       console.log(inn)
       this.clientName.filter(['INN', '=', inn]);

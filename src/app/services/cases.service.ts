@@ -2,7 +2,7 @@ import {Tab} from '../models/ui.models';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {forkJoin, Observable} from 'rxjs';
-import {Actions, CommentType} from '../models/case.interface';
+import {Actions} from '../models/case.interface';
 import {environment} from '../../environments/environment.prod';
 
 
@@ -14,10 +14,12 @@ const tabs: Tab[] = [
   {
     id: 1,
     text: 'Case SKU',
+    disabled: false
   },
   {
     id: 2,
     text: 'Approval history',
+    disabled: false
   }
 ];
 
@@ -103,6 +105,10 @@ export class CasesService {
 
   canUpdate(id) {
     return this.http.get(apiUrl + `/TenderCase/BusinessService.CanUpdate(entityId=${id})`);
+  }
+
+  canCreate() {
+      return this.http.get(apiUrl + `/TenderCase/BusinessService.CanCreate`);
   }
 
   canApprove(id) {

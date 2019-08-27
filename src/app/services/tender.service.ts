@@ -12,10 +12,12 @@ const tabs: Tab[] = [
   {
     id: 1,
     text: 'Tender SKU',
+    disabled: false
   },
   {
     id: 2,
     text: 'Tender Case',
+    disabled: false
   }
 ];
 const apiUrl = environment.apiUrl;
@@ -77,6 +79,10 @@ export class TenderService {
 
   canCreate() {
     return this.http.get(apiUrl + `/Tender/BusinessService.CanCreate`);
+  }
+
+  canCreateCase() {
+    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanCreate`);
   }
 
   canUpdate(id) {

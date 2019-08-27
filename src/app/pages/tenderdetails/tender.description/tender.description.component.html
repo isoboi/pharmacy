@@ -67,7 +67,7 @@
   <dxi-item [label]="{text: 'Supplier of the tender'}"
             dataField="SupplierId"
             editorType="dxSelectBox"
-            [editorOptions]="{ items: distributor.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+            [editorOptions]="{ items: distributor?.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
 
   <dxi-item [label]="{text: 'Deadline for supply'}" dataField="DeadlineForSupply"></dxi-item>
 
@@ -75,7 +75,7 @@
   <dxi-item *ngIf="contractStatus" [label]="{text: 'Contract status'}"
             dataField="ContractStatusId"
             editorType="dxSelectBox"
-            [editorOptions]="{ items: contractStatus.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+            [editorOptions]="{ items: contractStatus?.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
   <dxi-item *ngIf="contractStatusComment" [label]="{text: 'Contract status comment'}"
             dataField="ContractStatusCommentId"
             editorType="dxSelectBox"
