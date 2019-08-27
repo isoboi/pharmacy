@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import DataSource from 'devextreme/data/data_source';
 import {RestService} from '../../../services/rest.service';
 import {DxDataGridComponent} from 'devextreme-angular';
@@ -14,7 +14,7 @@ import notify from 'devextreme/ui/notify';
   templateUrl: './case-history.component.html',
   styleUrls: ['./case-history.component.scss']
 })
-export class CaseHistoryComponent implements OnInit {
+export class CaseHistoryComponent implements OnInit, OnChanges {
 
   @ViewChild('attachmentsGrid', {static: true}) attachmentsGrid: DxDataGridComponent;
   @Input() tenderCase: TenderCase;
@@ -29,9 +29,19 @@ export class CaseHistoryComponent implements OnInit {
   canDelete$: Observable<any>;
   id;
   comment = CommentType;
+  approverList
   constructor(private restService: RestService,
               private route: ActivatedRoute,
               private caseService: CasesService) {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.tenderCase && changes.tenderCase.currentValue){
+      this.caseService.getApprover(this.tenderCase.OwnerId)
+        .subscribe((data) => {
+          this.approverList = data;
+        })
+    }
   }
 
   ngOnInit() {
@@ -39,6 +49,7 @@ export class CaseHistoryComponent implements OnInit {
     this._getAttachments();
     this._getTenderCaseApproved();
     this.canDelete$ = this.caseService.canDelete(this.id);
+
   }
 
   onUploaded(e) {

@@ -19,7 +19,7 @@ import {
   DxTabsModule,
   DxButtonModule,
   DxLoadPanelModule,
-  DxFileUploaderModule
+  DxFileUploaderModule, DxListModule
 } from 'devextreme-angular';
 import { Service } from './pages/home/app.service';
 import { RestService } from './services/rest.service';
@@ -74,7 +74,8 @@ import { TenderButtonsComponent } from './pages/tenderdetails/tender-buttons/ten
     FooterModule,
     LoginFormModule,
     AppRoutingModule,
-    DxFileUploaderModule
+    DxFileUploaderModule,
+    DxListModule
   ],
   providers: [AuthService, ScreenService, AppInfoService, Service, RestService],
   bootstrap: [AppComponent]

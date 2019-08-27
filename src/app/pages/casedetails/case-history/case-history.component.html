@@ -84,6 +84,11 @@
         <dx-button text="Add Approver Comment" type="success" icon="add" (onClick)="commentSave(comment.approverComment)"></dx-button>
       </div>
     </div>
+
+    <dx-list
+      [items]="approverList?.value"
+      [height]="400">
+    </dx-list>
   </div>
 </div>
 

@@ -99,8 +99,8 @@ export class CasesService {
   * Case SKU
    *********************************************************************************************************/
 
-  getCaseSku() {
-    return this.http.get(apiUrl + `/TenderCaseSKU`);
+  getApprover(ownerId) {
+    return this.http.get(apiUrl + `/TenderCase/BusinessService.GetApprover(ownerId=${ownerId})`);
   }
 
   canUpdate(id) {
@@ -122,5 +122,6 @@ export class CasesService {
   canDelete(id) {
     return this.http.get(apiUrl + `/TenderCase/BusinessService.CanDelete(entityId=${id})`);
   }
+
 
 }
