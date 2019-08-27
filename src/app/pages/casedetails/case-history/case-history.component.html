@@ -71,16 +71,17 @@
     <div class="comments" *ngIf="tenderCase">
       <p class="title">Comments</p>
       <div class="requestorComment">
-        <dx-form class="mb-3" [readOnly]="tenderCase.TenderCaseStatusId !== 1" [formData]="RequestorComment">
+        <dx-form class="mb-3" [readOnly]="tenderCase.TenderCaseStatusId !== 1" [formData]="form">
           <dxi-item caption="Requestor Comment" dataField="RequestorComment" editorType="dxTextArea"></dxi-item>
         </dx-form>
+        <dx-button text="Add Requestor Comment" type="success" icon="add" (onClick)="commentSave(comment.requestorComment)"></dx-button>
       </div>
 
       <div class="approverComment">
-        <dx-form [formData]="ApproverComment">
+        <dx-form [formData]="form">
           <dxi-item caption="Approver comment" dataField="ApproverComment" editorType="dxTextArea"></dxi-item>
         </dx-form>
-        <dx-button text="Add Approver Comment" type="success" icon="add" (onClick)="ApproverCommentSave()"></dx-button>
+        <dx-button text="Add Approver Comment" type="success" icon="add" (onClick)="commentSave(comment.approverComment)"></dx-button>
       </div>
     </div>
   </div>

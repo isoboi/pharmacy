@@ -2,7 +2,7 @@ import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import DataSource from 'devextreme/data/data_source';
 import {RestService} from '../../../services/rest.service';
 import {DxDataGridComponent} from 'devextreme-angular';
-import {TenderCase} from '../../../models/case.interface';
+import {CommentType, TenderCase} from '../../../models/case.interface';
 import {CasesService} from '../../../services/cases.service';
 import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs';
@@ -23,12 +23,12 @@ export class CaseHistoryComponent implements OnInit {
   showFilterRow = true;
   showHeaderFilter = true;
   currentFilter: any;
-  RequestorComment = {RequestorComment: ''};
-  ApproverComment = {ApproverComment: ''};
+  form = {RequestorComment: '', ApproverComment: ''};
   selectedRow = null;
   apiUrl = environment.apiUrl;
   canDelete$: Observable<any>;
   id;
+  comment = CommentType;
   constructor(private restService: RestService,
               private route: ActivatedRoute,
               private caseService: CasesService) {
@@ -55,23 +55,26 @@ export class CaseHistoryComponent implements OnInit {
   onFileDelete() {
   }
 
-  ApproverCommentSave() {
+  commentSave(commentType) {
     const tenderCaseApproved = this.getTenderCaseApproved.items().filter((item: any) => {
       return String(item.TenderCaseId) === this.id;
     }).sort((a, b) => {
       return b.Id - a.Id;
     });
-    if (this.ApproverComment.ApproverComment) {
-      this.caseService.addApproverComment({
+    if (this.form[commentType]) {
+      this.caseService.postComment({
         Id: this.tenderCase.Id,
-        Comment: this.ApproverComment.ApproverComment,
+        Comment: this.form[commentType],
         TenderCaseApprovedId: tenderCaseApproved[0].Id
-      })
+      }, commentType)
         .subscribe((x) => {
+          const cType = commentType === this.comment.approverComment ? 'Approver' : 'Requestor';
           notify({message: 'Approver Comment Added', position: 'top'}, 'success', 1500);
         });
     }
   }
+
+
 
   onRowClick(evt) {
     this.selectedRow = evt;

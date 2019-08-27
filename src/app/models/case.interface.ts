@@ -47,3 +47,8 @@ export enum TenderCaseStatus {
   reject = 11,
   draft = 1
 }
+
+export enum CommentType {
+  requestorComment = 'RequestorComment',
+  approverComment = 'ApproverComment'
+}

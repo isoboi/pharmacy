@@ -80,8 +80,8 @@ export class CasesService {
   }
 
 
-  addApproverComment(data) {
-    return this.http.post(apiUrl + '/ApproverComment', data);
+  postComment(data, commentType) {
+    return this.http.post(apiUrl + `/${commentType}`, data);
   }
 
   addFileData(data): Observable<any> {
