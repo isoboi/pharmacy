@@ -4,6 +4,10 @@
     [columnAutoWidth]="true"
     [showBorders]="true">
 
+    <dxo-editing
+      mode="row"
+      [allowAdding]="true">
+    </dxo-editing>
     <dxo-selection mode="single"></dxo-selection>
     <dxo-paging [pageSize]="10"></dxo-paging>
     <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>

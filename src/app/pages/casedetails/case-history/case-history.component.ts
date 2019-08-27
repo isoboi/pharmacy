@@ -62,15 +62,24 @@ export class CaseHistoryComponent implements OnInit {
       return b.Id - a.Id;
     });
     if (this.form[commentType]) {
-      this.caseService.postComment({
-        Id: this.tenderCase.Id,
-        Comment: this.form[commentType],
-        TenderCaseApprovedId: tenderCaseApproved[0].Id
-      }, commentType)
-        .subscribe((x) => {
-          const cType = commentType === this.comment.approverComment ? 'Approver' : 'Requestor';
-          notify({message: 'Approver Comment Added', position: 'top'}, 'success', 1500);
-        });
+      if (commentType === this.comment.approverComment) {
+        this.caseService.postComment({
+          Comment: this.form.ApproverComment,
+          TenderCaseApprovedId: tenderCaseApproved[0].Id
+        })
+          .subscribe((x) => {
+            notify({message: 'Approver Comment Added', position: 'top'}, 'success', 1500);
+          });
+      } else {
+        this.caseService.patchComment({
+          Id: this.tenderCase.Id,
+          Comment: this.form.RequestorComment,
+          TenderCaseApprovedId: tenderCaseApproved[0].Id
+        })
+          .subscribe((x) => {
+            notify({message: 'Requestor Comment Added', position: 'top'}, 'success', 1500);
+          });
+      }
     }
   }
 

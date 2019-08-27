@@ -2,7 +2,7 @@ import {Tab} from '../models/ui.models';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {forkJoin, Observable} from 'rxjs';
-import {Actions, TenderCase} from '../models/case.interface';
+import {Actions, CommentType} from '../models/case.interface';
 import {environment} from '../../environments/environment.prod';
 
 
@@ -80,8 +80,13 @@ export class CasesService {
   }
 
 
-  postComment(data, commentType) {
-    return this.http.post(apiUrl + `/${commentType}`, data);
+  postComment(data) {
+    return this.http.post(apiUrl + `/ApproverComment`, data);
+  }
+
+  patchComment(data) {
+
+    return this.http.patch(apiUrl + `/TenderCaseApproved/${data.TenderCaseApprovedId}`, {RequestorComment : data.Comment});
   }
 
   addFileData(data): Observable<any> {

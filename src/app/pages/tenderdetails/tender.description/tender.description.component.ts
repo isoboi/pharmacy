@@ -4,6 +4,9 @@ import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {Tender} from '../../../models/tender';
+import {environment} from '../../../../environments/environment';
+import {RestService} from '../../../services/rest.service';
+import DataSource from 'devextreme/data/data_source';
 
 
 @Component({
@@ -17,7 +20,7 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   @Output()save = new EventEmitter();
   federalDistrict;
   federalSubject;
-  hospitals;
+  hospitals: DataSource;
   federalLaw;
   tenderStatusComment;
   indication;
@@ -27,19 +30,39 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   contractStatusComment;
   showLoadPanel = true;
   sourceOfFinancing;
+  clientName: DataSource;
   private destroy$ = new Subject();
   isNewTender = this.route.snapshot.params.id === 'new';
+
+  private originalHospital: any;
   constructor(private tenderService: TenderService,
               private route: ActivatedRoute,
-              private cdr: ChangeDetectorRef) {
-
-  }
+              private restService: RestService,
+              private cdr: ChangeDetectorRef) {}
 
 
   ngOnInit() {
     if (this.isNewTender) {
       this.tender = new Tender();
     }
+    this.hospitals = this.restService.bindData(
+      environment.apiUrl + '/Hospitals',
+      ['Id'],
+      {Id: 'Int32'}
+    );
+
+
+    this.clientName = this.restService.bindData(
+      environment.apiUrl + '/Hospitals',
+      ['Id'],
+      {Id: 'Int32'}
+    );
+
+    this.tenderService.get('/Hospitals')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.originalHospital = data;
+      });
 
     this.tenderService.getFederalDistrict()
       .pipe(takeUntil(this.destroy$))
@@ -50,11 +73,6 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         this.federalSubject = data;
-      });
-    this.tenderService.getHospitals()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.hospitals = data;
       });
     this.tenderService.getFederalLaw()
       .pipe(takeUntil(this.destroy$))
@@ -112,6 +130,18 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
     this.save.emit({tender: this.tender, action});
   }
 
+  onFieldDataChanged($event) {
+
+
+    if ($event.dataField === 'HospitalINN') {
+      const inn = this.originalHospital.value.find((hosp) => hosp.Id == $event.value).INN
+      console.log(inn)
+      this.clientName.filter(['INN', '=', inn]);
+      this.clientName.load();
+    }
+
+
+  }
   onInitialized() {
     this.showLoadPanel = false;
     this.cdr.detectChanges();

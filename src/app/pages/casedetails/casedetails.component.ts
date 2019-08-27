@@ -14,7 +14,6 @@ import {custom} from 'devextreme/ui/dialog';
   styleUrls: ['./casedetails.component.scss']
 })
 export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
-  actionSheet = false;
   case: any;
   channel;
   id: string;
