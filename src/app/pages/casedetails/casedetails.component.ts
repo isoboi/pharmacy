@@ -3,12 +3,10 @@ import {Service} from '../home/app.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasesService} from '../../services/cases.service';
 import {ActionEvent, Actions, TenderCase} from '../../models/case.interface';
-import notify from 'devextreme/ui/notify';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-
 import {custom} from 'devextreme/ui/dialog';
-import {Tab} from '../../models/ui.models';
+
 @Component({
   selector: 'app-casedetails',
   templateUrl: './casedetails.component.html',
@@ -27,6 +25,7 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   private action: string;
   private actions = Actions;
   private destroy$ = new Subject();
+
   constructor(
     private service: Service,
     private casesService: CasesService,
@@ -91,24 +90,24 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   saveCase(event: ActionEvent) {
-      const obj = {};
-      const keys = Object.keys(event.tenderCase);
-      for (const key of keys) {
-        if (event.tenderCase[key] !== this.tenderCaseOriginal[key]) {
-          obj[key] = event.tenderCase[key];
-          if (this.id !== 'new') {
-            this.tenderCaseOriginal[key] = event.tenderCase[key];
-          }
+    const obj: any = {};
+    const keys = Object.keys(event.tenderCase);
+    for (const key of keys) {
+      if (event.tenderCase[key] !== this.tenderCaseOriginal[key]) {
+        obj[key] = event.tenderCase[key];
+        if (this.id !== 'new') {
+          this.tenderCaseOriginal[key] = event.tenderCase[key];
         }
       }
-      this.patchTenderCase(obj, event.action, this.id);
+    }
+    this.patchTenderCase(obj, event.action, this.id);
   }
 
   private patchTenderCase(obj, action, id) {
     this.action = action;
     this.casesService.patchTenderCase(obj, action, id)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(this.success, this.error);
+      .subscribe(this.success);
   }
 
   private success = (x) => {
@@ -123,18 +122,8 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         }
         return;
       }
-
-      if (x && x.value) {
-        notify({message: 'Successfully', position: 'top'}, 'success', 1500);
-      } else if (x && !x.value) {
-        this.error();
-      }
     }
-  }
-
-  private error = () => {
-    notify({message: 'Error', position: 'top'}, 'error', 1500);
-  }
+  };
 
   ngOnDestroy() {
     this.destroy$.next();

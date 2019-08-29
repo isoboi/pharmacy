@@ -38,7 +38,6 @@ export class CaseSkuComponent {
     );
     this.dataSource.filter(['TenderCaseId', '=', Number(this.id)]);
     this.dataSource.load();
-
     this.dataSourceSkuMg = this.restService.bindData(
        this.apiUrl + '/CommercialPolicy',
       [ 'Id' ],

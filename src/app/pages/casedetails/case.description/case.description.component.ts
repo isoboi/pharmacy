@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, ChangeDetectorRef, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ChangeDetectorRef, OnDestroy, OnInit} from '@angular/core';
 import {ActionEvent, TenderCase, TenderCaseStatus} from '../../../models/case.interface';
 import {RestService} from '../../../services/rest.service';
 import {ActivatedRoute} from '@angular/router';
@@ -8,7 +8,7 @@ import {ActivatedRoute} from '@angular/router';
   templateUrl: './case.description.component.html',
   styleUrls: ['./case.description.component.scss']
 })
-export class CaseDescriptionComponent {
+export class CaseDescriptionComponent implements OnInit{
 
   @Input() tenderCase: TenderCase;
   @Input() selectBoxes;
@@ -21,10 +21,15 @@ export class CaseDescriptionComponent {
   constructor(private restService: RestService,
               private route: ActivatedRoute,
               private cdr: ChangeDetectorRef) {
+
+  }
+
+  ngOnInit() {
     this.id = this.route.snapshot.params.id;
     this.isNewCase = this.id === 'new';
     if (this.isNewCase) {
       this.tenderCase = new TenderCase();
+      console.log(this.tenderCase)
       this.tenderId = this.route.snapshot.queryParams['tenderId'];
     }
   }
@@ -36,6 +41,7 @@ export class CaseDescriptionComponent {
   }
 
   save(action) {
+    console.log(this.tenderCase)
     this.saveCase.emit({tenderCase: this.tenderCase, action});
   }
 

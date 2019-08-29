@@ -17,6 +17,7 @@
   <dxo-header-filter [visible]="true"></dxo-header-filter>
   <dxo-search-panel [visible]="true" placeholder="Search..."></dxo-search-panel>
   <dxo-editing mode="cell" [allowUpdating]="tenderCase.TenderCaseStatusId === 1"></dxo-editing>
+  <dxo-editing mode="row" [allowUpdating]="true"></dxo-editing>
   <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
 
   <dxi-column [allowEditing]="false"  [caption]="'Brand'" dataField="BrandName"></dxi-column>
@@ -60,11 +61,11 @@
   <dxi-column [allowEditing]="true"  [caption]="'Commertial policy name'" dataField="CPCode">
     <dxo-lookup [dataSource]="dataSourceCommercialPolicyRules.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
   </dxi-column>
-  <dxi-column [allowEditing]="true"  [caption]="'BU'" dataField="ProductStructureId">
-    <dxo-lookup [dataSource]="ProductStructure.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
+  <dxi-column [minWidth]="100" [allowEditing]="true"  [caption]="'BU'" dataField="ProductStructureId">
+    <dxo-lookup [dataSource]="ProductStructure.store()" valueExpr="Id" displayExpr="BU"></dxo-lookup>
   </dxi-column>
-  <dxi-column [allowEditing]="true"  [caption]="'Franchise'" dataField="Franchise ">
-    <dxo-lookup [dataSource]="ProductStructure.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
+  <dxi-column [allowEditing]="true"  [caption]="'Franchise'" dataField="Franchise">
+    <dxo-lookup [dataSource]="ProductStructure.store()" valueExpr="Id" displayExpr="Franchise"></dxo-lookup>
   </dxi-column>
   <dxi-column [allowEditing]="false"  [caption]="'Exception'" dataField="IsException  "></dxi-column>
   <dxi-column [allowEditing]="false"  [caption]="'Create date'" dataField="CreatedOn"></dxi-column>

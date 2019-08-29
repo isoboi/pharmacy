@@ -40,8 +40,6 @@ export class TenderDetailsComponent implements OnInit {
           this.originalTender = x;
         });
     }
-
-
   }
 
   selectTab(e) {
@@ -72,19 +70,12 @@ export class TenderDetailsComponent implements OnInit {
       .subscribe((x: any) => {
         if (event.action === this.actions.save) {
           if (x && x.Id) {
-            notify({message: 'Successfully', position: 'top'}, 'success', 1500);
             this.router.navigate([`/tender/${x.Id}`]);
             setTimeout(() => {
               location.reload();
             });
           }
-        } else {
-          if (x && x.value) {
-            notify({message: 'Successfully', position: 'top'}, 'success', 1500);
-          } else if (x && !x.value) {
-            notify({message: 'error', position: 'top'}, 'Error', 1500);
-          }
         }
-      }, () => notify({message: 'error', position: 'top'}, 'Error', 1500));
+      });
   }
 }

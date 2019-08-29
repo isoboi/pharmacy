@@ -1,4 +1,4 @@
-<dx-form class="tender-description" *ngIf="(isNewTender || tender) && federalDistrict && federalSubject && hospitals && federalLaw && tenderStatus && tenderStatusComment && indication && sourceOfFinancing" id="form"
+<dx-form class="tender-description" *ngIf="(isNewTender || tender) " id="form"
          (onInitialized)="onInitialized()"
          (onFieldDataChanged)="onFieldDataChanged($event)"
          [formData]="tender">

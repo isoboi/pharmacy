@@ -1,22 +1,34 @@
-import { Injectable } from '@angular/core';
-import ODataStore from "devextreme/data/odata/store";
-import DataSource from "devextreme/data/data_source";
+import {Injectable} from '@angular/core';
+import ODataStore from 'devextreme/data/odata/store';
+import DataSource from 'devextreme/data/data_source';
+import notify from 'devextreme/ui/notify';
 
-export const VERSION = 4;
+export const version = 4;
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class RestService {
-  bindData(url: string, keys: string[], keyType: any) {
+  bindData(url: string, key: string[], keyType: any) {
     return new DataSource({
-        store: new ODataStore({
-            url: url,
-            key: keys,
-            keyType: keyType,
-            version: VERSION
-        }),
+      store: new ODataStore({
+        url,
+        key,
+        keyType,
+        version,
+        errorHandler: (data) => {
+          console.log(data.httpStatus);
+          if (data.httpStatus === 403) {
+            notify({message: 'Permission Denied', position: 'top'}, 'error', 1500);
+          } else {
+            notify({message: 'Error', position: 'top'}, 'error', 1500);
+          }
+        },
+        onModified: (data) => {
+          notify({message: 'Successful', position: 'top'}, 'success', 1500);
+        }
+      }),
     });
   }
 }

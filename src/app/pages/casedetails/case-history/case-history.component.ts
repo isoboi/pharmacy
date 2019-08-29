@@ -80,6 +80,7 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
         })
           .subscribe((x) => {
             notify({message: 'Approver Comment Added', position: 'top'}, 'success', 1500);
+            this.getTenderCaseApproved.reload();
           });
       } else {
         this.caseService.patchComment({
@@ -89,6 +90,7 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
         })
           .subscribe((x) => {
             notify({message: 'Requestor Comment Added', position: 'top'}, 'success', 1500);
+            this.getTenderCaseApproved.reload();
           });
       }
     }

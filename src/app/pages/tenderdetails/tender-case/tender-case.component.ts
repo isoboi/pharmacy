@@ -27,7 +27,7 @@ export class TenderCaseComponent implements OnInit {
   }
 
   onRowDblClick(e) {
-    this.router.navigate(['/case', e.data.Id]);
+    this.router.navigate(['/cases/', e.data.Id]);
   }
 
   private _getTenderCase() {

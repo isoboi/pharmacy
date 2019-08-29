@@ -94,10 +94,10 @@ export class TenderService {
     return this.http.get(apiUrl + `/Tender/BusinessService.CanUpdate(entityId=${id})`);
   }
   canDelete(id) {
-    return this.http.get(apiUrl + `/Tender/BusinessService.CanDelete(entityId=${id})`)
+    return this.http.get(apiUrl + `/Tender/BusinessService.CanDelete(entityId=${id})`);
   }
   canDecline(id) {
-    return this.http.get(apiUrl + `/Tender/BusinessService.CanDecline(entityId=${id})`);
+    return this.http.get(apiUrl + `/Tender/BusinessService.Decline(key=${id})`);
   }
 
 }
