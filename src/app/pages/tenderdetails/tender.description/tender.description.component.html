@@ -1,4 +1,4 @@
-<dx-form *ngIf="(isNewTender || tender) && federalDistrict && federalSubject && hospitals && federalLaw && tenderStatus && tenderStatusComment && indication && sourceOfFinancing" id="form"
+<dx-form class="tender-description" *ngIf="(isNewTender || tender) && federalDistrict && federalSubject && hospitals && federalLaw && tenderStatus && tenderStatusComment && indication && sourceOfFinancing" id="form"
          (onInitialized)="onInitialized()"
          (onFieldDataChanged)="onFieldDataChanged($event)"
          [formData]="tender">
@@ -16,23 +16,23 @@
             [editorOptions]="{ items: federalSubject.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
 
   <dxi-item [label]="{text: 'INN'}"
-            dataField="HospitalINN"
+            dataField="HospitalId"
             editorType="dxSelectBox"
-            [editorOptions]="{ dataSource: hospitals?.store(), displayExpr:'INN', valueExpr:'Id'}"></dxi-item>
+            [editorOptions]="{ dataSource: hospitals, displayExpr:'INN', valueExpr:'Id'}"></dxi-item>
   <dxi-item [label]="{text: 'Client name'}"
             dataField="HospitalName"
             editorType="dxSelectBox"
-            [editorOptions]="{ dataSource: clientName?.items(), displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
-
-  <dxi-item [disabled]="true" [label]="{text: 'Legal Entity Type'}" dataField="LegalEntityType"></dxi-item>
-
+            [editorOptions]="{ dataSource: clientName, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+  <dxi-item [label]="{text: 'Legal Entity Type'}"
+            dataField="LegalEntityTypeId"
+            [disabled]="true"
+            editorType="dxSelectBox"
+            [editorOptions]="{ dataSource: legalEntityType?.store(), displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
 
   <dxi-item [label]="{text: 'Channel of financing'}"
             dataField="SourceOfFinId"
-            [disabled]="true"
             editorType="dxSelectBox"
             [editorOptions]="{ items: sourceOfFinancing, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
-  <!--<dxi-item [disabled]="!isNewTender" [label]="{text: 'Channel of financing'}" dataField="SourceOfFinId"></dxi-item>-->
 
   <dxi-item [label]="{text: 'Federal law'}"
             dataField="FederalLawId"
@@ -56,8 +56,10 @@
   <dxi-item [label]="{text: 'Link to gos zakupki web-site'}" dataField="GosZakupkiLink"></dxi-item>
 
   <dxi-item [label]="{text: 'Date of tender'}" editorType="dxDateBox" dataField="DateOfTender"></dxi-item>
-  <dxi-item [label]="{text: 'Winner (partner) of the tender'}" dataField="Winner"></dxi-item>
-
+  <dxi-item [label]="{text: 'Winner (partner) of the tender'}"
+            dataField="TenderWinnerId"
+            editorType="dxSelectBox"
+            [editorOptions]="{ dataSource: tenderWinner, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
 
   <dxi-item [label]="{text: 'Indication'}"
             dataField="IndicationId"

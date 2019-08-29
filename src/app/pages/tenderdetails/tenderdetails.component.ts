@@ -50,16 +50,24 @@ export class TenderDetailsComponent implements OnInit {
 
 
   save(event: ActionTenderEvent) {
-    const obj = {};
+    const obj: any = {};
+
     const keys = Object.keys(event.tender);
+    const tender = Object.assign({}, event.tender);
+    tender.HospitalINN = null;
+    tender.LegalEntityTypeId = null;
+    tender.LegalEntityTypeName = null;
+    tender.HospitalId = tender.HospitalName;
+    tender.HospitalName = null;
     for (const key of keys) {
-      if (event.tender[key] !== this.originalTender[key]) {
-        obj[key] = event.tender[key];
+      if (tender[key] && tender[key] !== this.originalTender[key]) {
+        obj[key] = tender[key];
         if (this.id !== 'new') {
-          this.originalTender[key] = event.tender[key];
+          this.originalTender[key] = tender[key];
         }
       }
     }
+
     this.tenderService.save(obj, event.action, this.id)
       .subscribe((x: any) => {
         if (event.action === this.actions.save) {

@@ -31,10 +31,13 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   showLoadPanel = true;
   sourceOfFinancing;
   clientName: DataSource;
+  legalEntityType: DataSource;
+  tenderWinner: DataSource;
   private destroy$ = new Subject();
   isNewTender = this.route.snapshot.params.id === 'new';
 
   private originalHospital: any;
+  private originalClientName: any;
   constructor(private tenderService: TenderService,
               private route: ActivatedRoute,
               private restService: RestService,
@@ -51,18 +54,28 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
       {Id: 'Int32'}
     );
 
-
     this.clientName = this.restService.bindData(
       environment.apiUrl + '/Hospitals',
+      ['Id'],
+      {Id: 'Int32'});
+
+    this.legalEntityType = this.restService.bindData(
+      environment.apiUrl + '/LegalEntityType',
       ['Id'],
       {Id: 'Int32'}
     );
 
+    this.tenderWinner = this.restService.bindData(
+      environment.apiUrl + '/TenderWinner',
+      ['Id'],
+      {Id: 'Int32'}
+    );
     this.tenderService.get('/Hospitals')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
         this.originalHospital = data;
       });
+
 
     this.tenderService.getFederalDistrict()
       .pipe(takeUntil(this.destroy$))
@@ -131,16 +144,21 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   }
 
   onFieldDataChanged($event) {
-
-
-    if ($event.dataField === 'HospitalINN' && this.originalHospital) {
-      const inn = this.originalHospital.value.find((hosp) => hosp.Id == $event.value).INN
-      console.log(inn)
-      this.clientName.filter(['INN', '=', inn]);
-      this.clientName.load();
+    if ($event.dataField === 'HospitalId' && this.originalHospital) {
+      const hospiral = this.originalHospital.value.find((hosp) => hosp.Id == $event.value);
+      this.clientName.filter(['INN', '=', hospiral.INN]);
+      this.tender.LegalEntityTypeId = null;
+      this.tender.HospitalName = hospiral.HospitalName;
+      this.clientName.load().then((data) => {
+        this.originalClientName = data;
+      });
     }
-
-
+    if ($event.dataField === 'HospitalName' && this.originalClientName) {
+      const LegalEntityTypeId = this.originalClientName.find((hosp) => hosp.Id == $event.value).LegalEntityTypeId;
+      this.tender.LegalEntityTypeId = LegalEntityTypeId;
+      this.legalEntityType.filter(['Id', '=', LegalEntityTypeId]);
+      this.legalEntityType.load();
+    }
   }
   onInitialized() {
     this.showLoadPanel = false;

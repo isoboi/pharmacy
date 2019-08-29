@@ -15,7 +15,7 @@ export class Tender {
   FederalLawNumber: number;
   GosZakupkiLink: string;
   HospitalINN: string;
-  HospitalId: number;
+  HospitalId: string;
   HospitalName: string;
   Id: number;
   IndicationId: number;
@@ -37,6 +37,7 @@ export class Tender {
   TenderStatusCommentId: number;
   TenderStatusCommentName: string;
   TenderStatusId: number;
+  LegalEntityType: string;
   TenderStatusName: string;
   TenderWinnerId: number;
   TenderWinnerName: string;
