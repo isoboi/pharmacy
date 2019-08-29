@@ -9,6 +9,8 @@
             [showBorders]="true"
             [selectedRowKeys]="[]"
             [columnAutoWidth]="true"
+            (onContentReady)="onContentReady()"
+            (onToolbarPreparing)="onToolbarPreparing($event)"
             (onInitNewRow)="onInitNewRow()"
             (onRowDblClick)="onRowDblClick($event)"
             (onSelectionChanged) = "onSelectionChanged($event)">

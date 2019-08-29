@@ -11,7 +11,9 @@
       [selectedRowKeys]="[]"
       [allowColumnReordering]="true"
       [allowColumnResizing]="true"
-    (onRowDblClick)="onRowDblClick($event)"
+      (onRowDblClick)="onRowDblClick($event)"
+      (onContentReady)="onContentReady()"
+      (onToolbarPreparing)="onToolbarPreparing($event)"
       (onSelectionChanged)="onSelectionChanged($event)">
       <dxo-selection mode="single"></dxo-selection>
       <dxo-paging [pageSize]="5"></dxo-paging>

@@ -123,5 +123,8 @@ export class CasesService {
     return this.http.get(apiUrl + `/TenderCase/BusinessService.CanDelete(entityId=${id})`);
   }
 
+  detele(tenderCaseId) {
+    return this.http.delete(apiUrl + `/TenderCase/${tenderCaseId}`);
+  }
 
 }

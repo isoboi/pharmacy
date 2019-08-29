@@ -80,3 +80,15 @@
 .mt-4 {
   margin-top: 20px;
 }
+
+::ng-deep .dx-icon-trash:before {
+  color: #FF5722;
+}
+
+::ng-deep{
+  .disabled{
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+

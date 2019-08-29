@@ -1,4 +1,4 @@
-import {Component, ViewChild, enableProdMode} from '@angular/core';
+import {Component, ViewChild, enableProdMode, Renderer2, OnDestroy} from '@angular/core';
 import {
   DxDataGridComponent
 } from 'devextreme-angular';
@@ -10,6 +10,9 @@ import DataSource from 'devextreme/data/data_source';
 import {RestService} from 'src/app/services/rest.service';
 import {TenderCase} from '../../models/case.interface';
 import {environment} from '../../../environments/environment';
+import {takeUntil} from 'rxjs/operators';
+import {CasesService} from '../../services/cases.service';
+import {Subject} from 'rxjs';
 
 if (!/localhost/.test(document.location.host)) {
   enableProdMode();
@@ -22,7 +25,8 @@ if (!/localhost/.test(document.location.host)) {
   preserveWhitespaces: true
 })
 
-export class CasesComponent {
+export class CasesComponent implements OnDestroy {
+
   @ViewChild(DxDataGridComponent, {static: false}) dataGrid: DxDataGridComponent;
   currentFilter: any;
   showFilterRow: boolean;
@@ -31,11 +35,16 @@ export class CasesComponent {
   dataSourceSKU: DataSource;
   filterValue: number;
   apiUrl = environment.apiUrl;
+  selectedTenderCaseId: any;
+  removeButtonElement: any;
+  destroy$ = new Subject();
   constructor(
     private service: Service,
     private router: Router,
     private route: ActivatedRoute,
-    private restService: RestService
+    private restService: RestService,
+    private renderer: Renderer2,
+    private caseService: CasesService
   ) {
 
     this.showFilterRow = true;
@@ -51,6 +60,11 @@ export class CasesComponent {
       {Id: 'Int32'});
   }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete()
+  }
+
   initialized() {
     this.service.setTenderDetails(this.dataSourceSKU);
   }
@@ -63,6 +77,15 @@ export class CasesComponent {
 
   onSelectionChanged(e) {
     const tenderCaseId = e.selectedRowsData[0].Id;
+    this.selectedTenderCaseId = tenderCaseId;
+    this.renderer.addClass(this.removeButtonElement, 'disabled');
+    this.caseService.canDelete(tenderCaseId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        if (data && data.value) {
+          this.renderer.removeClass(this.removeButtonElement, 'disabled');
+        }
+      });
     this.filterValue = tenderCaseId;
     this.dataSourceSKU.filter(['TenderCaseId', '=', tenderCaseId]);
     this.dataSourceSKU.load();
@@ -95,6 +118,35 @@ export class CasesComponent {
 
   clearFilter() {
     this.dataGrid.instance.clearFilter();
+  }
+
+  onToolbarPreparing(e) {
+    const toolbarItems = e.toolbarOptions.items;
+    // Adds a new item
+    toolbarItems.push({
+      cssClass: 'remove-button',
+      widget: 'dxButton',
+      options: {
+        icon: 'trash', onClick: this.onClick,
+        disabled: false
+      },
+      location: 'after'
+    });
+  }
+
+  onContentReady() {
+    this.removeButtonElement = document.getElementsByClassName('remove-button')[0];
+    this.renderer.addClass(this.removeButtonElement, 'disabled');
+  }
+
+  private onClick = () => {
+    this.caseService.detele(this.selectedTenderCaseId)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.dataSource.reload();
+        this.dataSourceSKU.reload();
+        this.renderer.addClass(this.removeButtonElement, 'disabled');
+      });
   }
 }
 
