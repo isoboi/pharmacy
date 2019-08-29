@@ -9,10 +9,13 @@
       [showBorders]="true"
       [columnAutoWidth]="true"
       [selectedRowKeys]="[]"
-      (onRowDblClick)="onRowDblClick($event)"
+      [allowColumnReordering]="true"
+      [allowColumnResizing]="true"
+    (onRowDblClick)="onRowDblClick($event)"
       (onSelectionChanged)="onSelectionChanged($event)">
       <dxo-selection mode="single"></dxo-selection>
       <dxo-paging [pageSize]="5"></dxo-paging>
+      <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
       <dxo-pager
         [showPageSizeSelector]="true"
         [allowedPageSizes]="[5, 10, 20]"

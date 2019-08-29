@@ -35,6 +35,7 @@ import { TenderCaseComponent } from './pages/tenderdetails/tender-case/tender-ca
 import {TenderDescriptionComponent} from './pages/tenderdetails/tender.description/tender.description.component';
 import { CaseButtonsComponent } from './pages/casedetails/case-buttons/case-buttons.component';
 import { TenderButtonsComponent } from './pages/tenderdetails/tender-buttons/tender-buttons.component';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { TenderButtonsComponent } from './pages/tenderdetails/tender-buttons/ten
     DxFileUploaderModule,
     DxListModule
   ],
-  providers: [AuthService, ScreenService, AppInfoService, Service, RestService],
+
+  providers: [AuthService, ScreenService, AppInfoService, Service, RestService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

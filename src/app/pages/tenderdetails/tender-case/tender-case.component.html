@@ -1,10 +1,12 @@
 <div class="tender-case">
   <dx-data-grid
     [dataSource]="tenderCase"
+    [allowColumnReordering]="true"
+    [allowColumnResizing]="true"
     [columnAutoWidth]="true"
     [showBorders]="true"
     (onRowDblClick)="onRowDblClick($event)">
-
+    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
     <dxo-selection mode="single"></dxo-selection>
     <dxo-paging [pageSize]="10"></dxo-paging>
     <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>

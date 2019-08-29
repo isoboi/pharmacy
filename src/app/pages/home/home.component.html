@@ -4,6 +4,8 @@
         <dx-data-grid 
             id="gridContainer" 
             [dataSource]="dataSource"
+            [allowColumnReordering]="true"
+            [allowColumnResizing]="true"
             [showBorders]="true"
             [selectedRowKeys]="[]"
             [columnAutoWidth]="true"
@@ -12,6 +14,7 @@
             (onSelectionChanged) = "onSelectionChanged($event)">
             <dxo-selection mode="single"></dxo-selection>
             <dxo-paging [pageSize]="5"></dxo-paging>
+            <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
             <dxo-pager 
                 [showPageSizeSelector]="true"
                 [allowedPageSizes]="[5, 10, 20]"

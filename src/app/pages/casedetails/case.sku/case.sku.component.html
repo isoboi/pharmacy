@@ -3,6 +3,9 @@
   class="dx-card case-sku"
   *ngIf="tenderCase"
   [dataSource]="dataSource"
+  [allowColumnReordering]="true"
+  [allowColumnResizing]="true"
+  [columnAutoWidth]="true"
   [showBorders]="true">
   <dxo-editing
     mode="row"
@@ -14,58 +17,59 @@
   <dxo-header-filter [visible]="true"></dxo-header-filter>
   <dxo-search-panel [visible]="true" placeholder="Search..."></dxo-search-panel>
   <dxo-editing mode="cell" [allowUpdating]="tenderCase.TenderCaseStatusId === 1"></dxo-editing>
+  <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
 
-  <dxi-column [allowEditing]="false" [width]="125" [caption]="'Brand'" dataField="BrandName"></dxi-column>
-  <dxi-column [allowEditing]="true" [width]="125" [caption]="'SKU mars'" dataField="ProductId">
+  <dxi-column [allowEditing]="false"  [caption]="'Brand'" dataField="BrandName"></dxi-column>
+  <dxi-column [allowEditing]="true"  [caption]="'SKU mars'" dataField="ProductId">
     <dxo-lookup [dataSource]="SKU_MG.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
   </dxi-column>
-  <dxi-column [allowEditing]="false" [width]="125" [caption]="'SKU name Eng'" dataField="Name"></dxi-column>
-  <dxi-column [allowEditing]="true" [width]="125" [caption]="'SKU name Rus'" dataField="RussianSKUName"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="175" [caption]="'Price (price list, RUB)'" dataField="PriceRUB"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="250" [caption]="'Tender starting price (per pack, RUB)'" dataField="StartingPrice"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="200" [caption]="'Contract price (RUB) per pack'" dataField="ContracPriceRUB"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="200" [caption]="'On-Invoice Discount (base) (%)'" dataField="OnInvoiceDiscount"></dxi-column>
-  <dxi-column [allowEditing]="true" [width]="225" [caption]="'Additional On-Invoice Discount (%)'"
+  <dxi-column [allowEditing]="false"  [caption]="'SKU name Eng'" dataField="Name"></dxi-column>
+  <dxi-column [allowEditing]="true"  [caption]="'SKU name Rus'" dataField="RussianSKUName"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Price (price list, RUB)'" dataField="PriceRUB"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Tender starting price (per pack, RUB)'" dataField="StartingPrice"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Contract price (RUB) per pack'" dataField="ContracPriceRUB"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'On-Invoice Discount (base) (%)'" dataField="OnInvoiceDiscount"></dxi-column>
+  <dxi-column [allowEditing]="true"  [caption]="'Additional On-Invoice Discount (%)'"
               dataField="AddOnInvoiceDiscount"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="175" [caption]="'Price On-Invoice (RUB)'" dataField="PriceOnInvoiceRUB"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="125" [caption]="'Quantity'" dataField="Quantity"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="250" [caption]="'Total Price On-Invoice Discount (RUB)'"
+  <dxi-column [allowEditing]="false"  [caption]="'Price On-Invoice (RUB)'" dataField="PriceOnInvoiceRUB"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Quantity'" dataField="Quantity"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Total Price On-Invoice Discount (RUB)'"
               dataField="TotalPriceOnInvDiscRUB"></dxi-column>
-  <dxi-column [allowEditing]="true" [width]="250" [caption]="'Additional Off-Invoice Discount (%)'"
+  <dxi-column [allowEditing]="true"  [caption]="'Additional Off-Invoice Discount (%)'"
               dataField="AddOffInvoiceDiscount"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="275" [caption]="'Total Additional Off-Invoice Discount (RUB)'"
+  <dxi-column [allowEditing]="false"  [caption]="'Total Additional Off-Invoice Discount (RUB)'"
               dataField="TotalAddOffInvDiscRUB"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="150" [caption]="'Total Discount (%)'" dataField="TotalDiscount"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="275" [caption]="'Final Price w all discounts anticipated (RUB)'"
+  <dxi-column [allowEditing]="false"  [caption]="'Total Discount (%)'" dataField="TotalDiscount"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Final Price w all discounts anticipated (RUB)'"
               dataField="FinalPriceWAllDiscRUB "></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="125" [caption]="'Net Sales (RUB)'" dataField="NetSalesRUB "></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="125" [caption]="'Net Sales (USD)'" dataField="NetSalesUSD"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="175" [caption]="'Tender marginality (%)'" dataField="TenderMarginality"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="200" [caption]="'Case, Total shipped (packs)'" dataField="TotalShippedPacks"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="175" [caption]="'Case, Total shipped (USD)'" dataField="TotalShippedUSD"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="200" [caption]="'Case, total have to ship (packs)'" dataField="TotalToShipPacks"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="200" [caption]="'Case, total have to ship (USD)'" dataField="TotalToShipUSD"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="150" [caption]="'Gross Sales (RUB)'" dataField="GrossSalesRUB "></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="150" [caption]="'Gross Sales (USD)'" dataField="GrossSalesUSD"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="200" [caption]="'Total On-Invoice sales (RUB)'" dataField="TotalOnInvSalesRUB"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="200" [caption]="'Total On-Invoice sales (USD)'" dataField="TotalOnInvSalesUSD"></dxi-column>
-  <dxi-column [allowEditing]="true" [width]="275" [caption]="'Demanded shelf life as per contract (months)'"
+  <dxi-column [allowEditing]="false"  [caption]="'Net Sales (RUB)'" dataField="NetSalesRUB "></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Net Sales (USD)'" dataField="NetSalesUSD"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Tender marginality (%)'" dataField="TenderMarginality"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Case, Total shipped (packs)'" dataField="TotalShippedPacks"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Case, Total shipped (USD)'" dataField="TotalShippedUSD"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Case, total have to ship (packs)'" dataField="TotalToShipPacks"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Case, total have to ship (USD)'" dataField="TotalToShipUSD"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Gross Sales (RUB)'" dataField="GrossSalesRUB "></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Gross Sales (USD)'" dataField="GrossSalesUSD"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Total On-Invoice sales (RUB)'" dataField="TotalOnInvSalesRUB"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Total On-Invoice sales (USD)'" dataField="TotalOnInvSalesUSD"></dxi-column>
+  <dxi-column [allowEditing]="true"  [caption]="'Demanded shelf life as per contract (months)'"
               dataField="DemandedShelfLife"></dxi-column>
-  <dxi-column [allowEditing]="true" [width]="125" [caption]="'Shelf Life (%)'" dataField="ShelfLifePercent"></dxi-column>
-  <dxi-column [allowEditing]="true" [width]="200" [caption]="'Shelf Life (amount of months)'" dataField="ShelfLifeMonth"></dxi-column>
-  <dxi-column [allowEditing]="true" [width]="225" [caption]="'Commertial policy name'" dataField="CPCode">
+  <dxi-column [allowEditing]="true"  [caption]="'Shelf Life (%)'" dataField="ShelfLifePercent"></dxi-column>
+  <dxi-column [allowEditing]="true"  [caption]="'Shelf Life (amount of months)'" dataField="ShelfLifeMonth"></dxi-column>
+  <dxi-column [allowEditing]="true"  [caption]="'Commertial policy name'" dataField="CPCode">
     <dxo-lookup [dataSource]="dataSourceCommercialPolicyRules.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
   </dxi-column>
-  <dxi-column [allowEditing]="true" [width]="125" [caption]="'BU'" dataField="ProductStructureId">
+  <dxi-column [allowEditing]="true"  [caption]="'BU'" dataField="ProductStructureId">
     <dxo-lookup [dataSource]="ProductStructure.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
   </dxi-column>
-  <dxi-column [allowEditing]="true" [width]="125" [caption]="'Franchise'" dataField="Franchise ">
+  <dxi-column [allowEditing]="true"  [caption]="'Franchise'" dataField="Franchise ">
     <dxo-lookup [dataSource]="ProductStructure.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
   </dxi-column>
-  <dxi-column [allowEditing]="false" [width]="125" [caption]="'Exception'" dataField="IsException  "></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="125" [caption]="'Create date'" dataField="CreatedOn"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="125" [caption]="'Change date'" dataField="ModifiedOn"></dxi-column>
-  <dxi-column [allowEditing]="false" [width]="150" [caption]="'Repetition case ID'" dataField="DupCaseId"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Exception'" dataField="IsException  "></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Create date'" dataField="CreatedOn"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Change date'" dataField="ModifiedOn"></dxi-column>
+  <dxi-column [allowEditing]="false"  [caption]="'Repetition case ID'" dataField="DupCaseId"></dxi-column>
 </dx-data-grid>
 
 <app-case-buttons
