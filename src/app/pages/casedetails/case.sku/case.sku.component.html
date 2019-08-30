@@ -61,10 +61,10 @@
   <dxi-column [allowEditing]="true"  [caption]="'Commertial policy name'" dataField="CPCode">
     <dxo-lookup [dataSource]="dataSourceCommercialPolicyRules.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
   </dxi-column>
-  <dxi-column [minWidth]="100" [allowEditing]="true"  [caption]="'BU'" dataField="ProductStructureId">
+  <dxi-column [minWidth]="150" [allowEditing]="true"  [caption]="'BU'" dataField="ProductStructureId">
     <dxo-lookup [dataSource]="ProductStructure.store()" valueExpr="Id" displayExpr="BU"></dxo-lookup>
   </dxi-column>
-  <dxi-column [allowEditing]="true"  [caption]="'Franchise'" dataField="Franchise">
+  <dxi-column [minWidth]="250" [allowEditing]="true"  [caption]="'Franchise'" dataField="Franchise">
     <dxo-lookup [dataSource]="ProductStructure.store()" valueExpr="Id" displayExpr="Franchise"></dxo-lookup>
   </dxi-column>
   <dxi-column [allowEditing]="false"  [caption]="'Exception'" dataField="IsException  "></dxi-column>

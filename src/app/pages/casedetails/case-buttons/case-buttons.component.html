@@ -3,7 +3,7 @@
     *ngIf="tabIndex === 0"
     [disabled]="!(canSave | async)?.value"
     (onClick)="save(actions.save)"
-    text="Save Case" type="default">
+    text="{{id === 'new' ? 'Create' : 'Save'}} Case" type="default">
   </dx-button>
 
   <dx-button

@@ -22,9 +22,10 @@ export class AuthInterceptor implements HttpInterceptor {
           }
         }),
         catchError(((error: HttpErrorResponse): Observable<any> => {
-
           if (error.status === 403) {
             notify({message: 'Permission Denied', position: 'top'}, 'error', 1500);
+          } else if (error.status === 500) {
+            notify({message: error.error.value, position: 'top'}, 'error', 1500);
           } else {
             notify({message: error.message, position: 'top'}, 'error', 1500);
           }
