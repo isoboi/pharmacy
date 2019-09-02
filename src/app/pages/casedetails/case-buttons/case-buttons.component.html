@@ -7,7 +7,7 @@
   </dx-button>
 
   <dx-button
-    [disabled]="tenderCase?.TenderCaseStatusId === tenderCaseStatus.draft"
+    *ngIf="tenderCase?.TenderCaseStatusId === tenderCaseStatus.draft"
     (onClick)="save(actions.approversRequests)"
     text="Approver's requests">
   </dx-button>
