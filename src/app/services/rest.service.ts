@@ -18,7 +18,7 @@ export class RestService {
         keyType,
         version,
         errorHandler: (data) => {
-          console.log(data.httpStatus);
+          // console.log(data);
           if (data.httpStatus === 403) {
             notify({message: 'Permission Denied', position: 'top'}, 'error', 1500);
           } else {

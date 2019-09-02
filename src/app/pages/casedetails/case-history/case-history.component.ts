@@ -27,9 +27,10 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
   selectedRow = null;
   apiUrl = environment.apiUrl;
   canDelete$: Observable<any>;
+  canCreate$: Observable<any>;
   id;
   comment = CommentType;
-  approverList
+  approverList;
   constructor(private restService: RestService,
               private route: ActivatedRoute,
               private caseService: CasesService) {
@@ -40,7 +41,7 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
       this.caseService.getApprover(this.tenderCase.OwnerId)
         .subscribe((data) => {
           this.approverList = data;
-        })
+        });
     }
   }
 
@@ -48,8 +49,8 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
     this.id = this.route.snapshot.params.id;
     this._getAttachments();
     this._getTenderCaseApproved();
-    this.canDelete$ = this.caseService.canDelete(this.id);
-
+    this.canDelete$ = this.caseService.canDeleteApproval(this.id);
+    this.canCreate$ = this.caseService.canCreateApproval();
   }
 
   onUploaded(e) {

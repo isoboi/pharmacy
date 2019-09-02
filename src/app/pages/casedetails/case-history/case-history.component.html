@@ -10,6 +10,7 @@
             <dx-file-uploader
               name="files"
               selectButtonText="Add"
+              [disabled]="!(canCreate$ | async)?.value"
               uploadUrl="{{this.apiUrl}}/Annotation/Upload"
               accept="*"
               [multiple]="true"
@@ -71,31 +72,34 @@
       </dx-data-grid>
     </div>
   </div>
-  <div class="history-right dx-card">
-    <div class="comments" *ngIf="tenderCase">
-      <p class="title">Comments</p>
-      <div class="requestorComment">
-        <dx-form class="mb-3" [readOnly]="tenderCase.TenderCaseStatusId !== 1" [formData]="form">
-          <dxi-item caption="Requestor Comment" dataField="RequestorComment" editorType="dxTextArea"></dxi-item>
-        </dx-form>
-        <dx-button text="Add Requestor Comment" type="success" icon="add" (onClick)="commentSave(comment.requestorComment)"></dx-button>
-      </div>
+  <div class="">
+    <div class="history-right dx-card">
+      <div class="comments" *ngIf="tenderCase">
+        <p class="title">Comments</p>
+        <div class="requestorComment">
+          <dx-form class="mb-3" [readOnly]="tenderCase.TenderCaseStatusId !== 1" [formData]="form">
+            <dxi-item caption="Requestor Comment" dataField="RequestorComment" editorType="dxTextArea"></dxi-item>
+          </dx-form>
+          <dx-button text="Add Requestor Comment" type="success" icon="add" (onClick)="commentSave(comment.requestorComment)"></dx-button>
+        </div>
 
-      <div class="approverComment">
-        <dx-form [formData]="form">
-          <dxi-item caption="Approver comment" dataField="ApproverComment" editorType="dxTextArea"></dxi-item>
-        </dx-form>
-        <dx-button text="Add Approver Comment" type="success" icon="add" (onClick)="commentSave(comment.approverComment)"></dx-button>
+        <div class="approverComment">
+          <dx-form [formData]="form">
+            <dxi-item caption="Approver comment" dataField="ApproverComment" editorType="dxTextArea"></dxi-item>
+          </dx-form>
+          <dx-button text="Add Approver Comment" type="success" icon="add" (onClick)="commentSave(comment.approverComment)"></dx-button>
+        </div>
       </div>
     </div>
+    <div class="history-right dx-card">
+      <p class="title">Approvers</p>
+      <dx-list
+        [items]="approverList?.value"
+        [height]="200">
+      </dx-list>
+    </div>
   </div>
-  <div class="history-right dx-card">
-    <p class="title">Approvers</p>
-    <dx-list
-      [items]="approverList?.value"
-      [height]="200">
-    </dx-list>
-  </div>
+
 
 </div>
 

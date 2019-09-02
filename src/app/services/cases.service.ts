@@ -127,4 +127,12 @@ export class CasesService {
     return this.http.delete(apiUrl + `/TenderCase/${tenderCaseId}`);
   }
 
+  canDeleteApproval(id) {
+    return this.http.get(apiUrl + `/Annotation/BusinessService.CanDelete(entityId=${id})`);
+  }
+
+  canCreateApproval() {
+    return this.http.get(apiUrl + `/Annotation/BusinessService.CanCreate()`);
+  }
+
 }

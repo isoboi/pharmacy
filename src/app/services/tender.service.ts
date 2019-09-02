@@ -3,8 +3,6 @@ import {Tab} from '../models/ui.models';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment.prod';
 import {ActionsTender} from '../models/tender';
-import data from 'devextreme/bundles/dx.all';
-import {map} from 'rxjs/operators';
 
 const tabs: Tab[] = [
   {
@@ -94,11 +92,7 @@ export class TenderService {
     return this.http.get(apiUrl + `/Tender/BusinessService.CanUpdate(entityId=${id})`);
   }
   canDelete(id) {
-    return this.http.get(apiUrl + `/Tender/BusinessService.CanDelete(entityId=${id})`)
-      .pipe(map((x: any) => {
-        x.value = true
-        return x;
-    }));
+    return this.http.get(apiUrl + `/Tender/BusinessService.CanDelete(entityId=${id})`);
   }
   canDecline(id) {
     return this.http.get(apiUrl + `/Tender/BusinessService.Decline(key=${id})`);
