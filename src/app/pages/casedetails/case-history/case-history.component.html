@@ -26,7 +26,7 @@
         [columnAutoWidth]="true"
         [showBorders]="true"
         [selectedRowKeys]="[]"
-        (onRowClick)="onRowClick($event)">
+        (onSelectionChanged)="onSelectionChanged($event)">
 
         <dxo-selection mode="single"></dxo-selection>
         <dxo-paging [pageSize]="10"></dxo-paging>

@@ -55,18 +55,31 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
 
   onUploaded(e) {
     const file = e.file;
-    const fileData = {
-      ObjectId: this.tenderCase.Id,
-      FileName: file.name,
-      FileType: file.type
-    };
+    const items = this.getTenderCaseApproved.items().sort((a, b) => b.Id - a.Id);
+    if (items[0]) {
+      const ObjectId = items[0].Id;
+      const fileData = {
+        ObjectId,
+        FileName: file.name,
+        FileType: file.type
+      };
 
-    this.caseService.addFileData(fileData).subscribe(() => this.attachmentsGrid.instance.refresh());
+      this.caseService.addFileData(fileData).subscribe(() => this.attachmentsGrid.instance.refresh());
+    }
+
   }
 
   onFileDelete() {
+    const items = this.getTenderCaseApproved.items().sort((a, b) => b.Id - a.Id);
+    if (items[0]) {
+      const id = items[0].Id;
+    }
+    // this.caseService.deleteFile()
   }
 
+  onSelectionChanged(e) {
+    this.selectedRow = e;
+  }
   commentSave(commentType) {
     const tenderCaseApproved = this.getTenderCaseApproved.items().filter((item: any) => {
       return String(item.TenderCaseId) === this.id;

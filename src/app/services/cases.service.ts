@@ -94,6 +94,9 @@ export class CasesService {
   addFileData(data): Observable<any> {
     return this.http.post(apiUrl + '/Annotation', data);
   }
+  deleteFile(data): Observable<any> {
+    return this.http.delete(apiUrl + '/Annotation/Delete', data);
+  }
 
   /********************************************************************************************************
   * Case SKU
