@@ -70,11 +70,16 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
   }
 
   onFileDelete() {
-    const items = this.getTenderCaseApproved.items().sort((a, b) => b.Id - a.Id);
-    if (items[0]) {
-      const id = items[0].Id;
-    }
-    // this.caseService.deleteFile()
+    const id = this.selectedRow.selectedRowsData[0].Id;
+    this.caseService.deleteFile(id)
+        .subscribe();
+  }
+
+
+  onDownload() {
+    const id = this.selectedRow.selectedRowsData[0].Id;
+    this.caseService.downloadFile(id)
+        .subscribe();
   }
 
   onSelectionChanged(e) {
@@ -114,12 +119,6 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
           });
       }
     }
-  }
-
-
-
-  onRowClick(evt) {
-    this.selectedRow = evt;
   }
 
   private _getAttachments() {

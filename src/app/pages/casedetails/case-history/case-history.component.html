@@ -4,8 +4,8 @@
       <div class="attachments-header">
         <div class="title">Attachments</div>
         <div class="buttons">
-          <dx-button text="Download" class="download-button" type="success"></dx-button>
-          <dx-button [disabled]="canDelete" text="Delete" type="danger" icon="remove" (onClick)="onFileDelete()"></dx-button>
+          <dx-button text="Download" class="download-button" (onClick)="onDownload()" type="success"></dx-button>
+          <dx-button [disabled]="!canDelete" text="Delete" type="danger" icon="remove" (onClick)="onFileDelete()"></dx-button>
           <div class="file-upload">
             <dx-file-uploader
               name="files"

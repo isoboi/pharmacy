@@ -94,10 +94,14 @@ export class CasesService {
   addFileData(data): Observable<any> {
     return this.http.post(apiUrl + '/Annotation', data);
   }
-  deleteFile(data): Observable<any> {
-    return this.http.delete(apiUrl + '/Annotation/Delete', data);
+
+  deleteFile(id): Observable<any> {
+    return this.http.delete(apiUrl + '/Annotation/' + id);
   }
 
+  downloadFile(id): Observable<any> {
+    return this.http.get(apiUrl + '/Annotation/Download?id=' + id);
+  }
   /********************************************************************************************************
   * Case SKU
    *********************************************************************************************************/
