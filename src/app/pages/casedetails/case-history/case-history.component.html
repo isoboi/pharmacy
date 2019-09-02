@@ -5,7 +5,7 @@
         <div class="title">Attachments</div>
         <div class="buttons">
           <dx-button text="Download" class="download-button" type="success"></dx-button>
-          <dx-button [disabled]="!(canDelete$ | async)?.value" text="Delete" type="danger" icon="remove" (onClick)="onFileDelete()"></dx-button>
+          <dx-button [disabled]="canDelete" text="Delete" type="danger" icon="remove" (onClick)="onFileDelete()"></dx-button>
           <div class="file-upload">
             <dx-file-uploader
               name="files"
@@ -27,7 +27,6 @@
         [showBorders]="true"
         [selectedRowKeys]="[]"
         (onSelectionChanged)="onSelectionChanged($event)">
-
         <dxo-selection mode="single"></dxo-selection>
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>

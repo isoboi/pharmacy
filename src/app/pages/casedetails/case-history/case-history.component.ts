@@ -8,6 +8,7 @@ import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import notify from 'devextreme/ui/notify';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-case-history',
@@ -26,7 +27,7 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
   form = {RequestorComment: '', ApproverComment: ''};
   selectedRow = null;
   apiUrl = environment.apiUrl;
-  canDelete$: Observable<any>;
+  canDelete = false;
   canCreate$: Observable<any>;
   id;
   comment = CommentType;
@@ -49,7 +50,6 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
     this.id = this.route.snapshot.params.id;
     this._getAttachments();
     this._getTenderCaseApproved();
-    this.canDelete$ = this.caseService.canDeleteApproval(this.id);
     this.canCreate$ = this.caseService.canCreateApproval();
   }
 
@@ -79,6 +79,12 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
 
   onSelectionChanged(e) {
     this.selectedRow = e;
+    this.canDelete = false;
+    const id = this.selectedRow.selectedRowsData[0].Id;
+    this.caseService.canDeleteApproval(id)
+      .subscribe((x: any) => {
+        this.canDelete = x.value;
+      });
   }
   commentSave(commentType) {
     const tenderCaseApproved = this.getTenderCaseApproved.items().filter((item: any) => {
