@@ -54,7 +54,7 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
   }
 
   onUploaded(e) {
-    const file = e.value[0];
+    const file = e.file;
     const fileData = {
       ObjectId: this.tenderCase.Id,
       FileName: file.name,
