@@ -28,7 +28,9 @@ export class CaseButtonsComponent implements OnInit {
   ngOnInit() {
     if (this.id !== 'new') {
       this.canSave = this.caseService.canUpdate(this.id);
-      this.canApprove$ = this.caseService.canApprove(this.id);
+      if (this.tabIndex !== 2) {
+        this.canApprove$ = this.caseService.canApprove(this.id);
+      }
       this.canReject$ = this.caseService.canReject(this.id);
     } else {
       this.canSave = this.caseService.canCreate();
