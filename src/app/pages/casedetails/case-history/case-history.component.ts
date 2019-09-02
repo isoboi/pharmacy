@@ -72,7 +72,7 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
   onFileDelete() {
     const id = this.selectedRow.selectedRowsData[0].Id;
     this.caseService.deleteFile(id)
-        .subscribe();
+        .subscribe(() => this.attachmentsGrid.instance.refresh());
   }
 
 
