@@ -40,18 +40,15 @@ export class CaseSkuComponent {
 
     this.dataSource.filter(['TenderCaseId', '=', Number(this.id)]);
     this.dataSource.load();
+
     this.dataSourceSkuMg = this.restService.bindData(
        this.apiUrl + '/CommercialPolicy',
       [ 'Id' ],
       { Id: 'String' }
     );
 
+    this.dataSourceSkuMg.load()
 
-    this.dataSourceCommercialPolicyRules = this.restService.bindData(
-      this.apiUrl + '/CommercialPolicy',
-      [ 'Id' ],
-      { Id: 'String' }
-    );
 
     this.SKU_MG = this.restService.bindData(
       this.apiUrl + '/SKUMG',
@@ -84,7 +81,7 @@ export class CaseSkuComponent {
 
 
   getFilteredCities(options) {
-    console.log(options.data);
+    console.log(options);
     let filter = null;
     if (options.data) {
       const bu = this.ProductStructure.items().find((item) => item.Id === options.data.ProductStructureId).BU

@@ -59,7 +59,7 @@
   <dxi-column [allowEditing]="true"  [caption]="'Shelf Life (%)'" dataField="ShelfLifePercent"></dxi-column>
   <dxi-column [allowEditing]="true"  [caption]="'Shelf Life (amount of months)'" dataField="ShelfLifeMonth"></dxi-column>
   <dxi-column [allowEditing]="true" [caption]="'Commertial policy name'" dataField="CPCode">
-    <dxo-lookup [dataSource]="dataSourceCommercialPolicyRules.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
+    <dxo-lookup [dataSource]="dataSourceSkuMg.items()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
   </dxi-column>
 
   <dxi-column [minWidth]="150" [setCellValue]="setStateValue" [allowEditing]="true"  [caption]="'BU'" dataField="ProductStructureId">
