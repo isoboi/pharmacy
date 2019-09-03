@@ -76,11 +76,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onSelectionChanged(e) {
     const tenderId = e.selectedRowsData[0].Id;
-    this.renderer.addClass(this.removeButtonElement, 'disabled');
+    // this.renderer.addClass(this.removeButtonElement, 'disabled');
     this.tenderService.canDelete(tenderId)
       .subscribe((data: any) => {
         if (data && data.value) {
-          this.renderer.removeClass(this.removeButtonElement, 'disabled');
+          // this.renderer.removeClass(this.removeButtonElement, 'disabled');
         }
       });
     this.selectedTenderId = tenderId;
@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onContentReady() {
     this.removeButtonElement = document.getElementsByClassName('remove-button')[0];
-    this.renderer.addClass(this.removeButtonElement, 'disabled');
+    // this.renderer.addClass(this.removeButtonElement, 'disabled');
   }
 
   private onClick = () => {
@@ -116,7 +116,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.dataSource.reload();
         this.dataSourceSKU.reload();
-        this.renderer.addClass(this.removeButtonElement, 'disabled');
+        // this.renderer.addClass(this.removeButtonElement, 'disabled');
       });
   }
 

@@ -18,12 +18,14 @@ export class RestService {
         keyType,
         version,
         errorHandler: (data) => {
-          // console.log(data);
-          if (data.httpStatus === 403) {
-            notify({message: 'Permission Denied', position: 'top'}, 'error', 1500);
-          } else {
-            notify({message: 'Error', position: 'top'}, 'error', 1500);
+          if (data && data.httpStatus) {
+            if (data.httpStatus === 403) {
+              notify({message: 'Permission Denied', position: 'top'}, 'error', 1500);
+            } else {
+              notify({message: 'Error', position: 'top'}, 'error', 1500);
+            }
           }
+
         },
         onModified: (data) => {
           notify({message: 'Successful', position: 'top'}, 'success', 1500);

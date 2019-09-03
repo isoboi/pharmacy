@@ -58,14 +58,15 @@
               dataField="DemandedShelfLife"></dxi-column>
   <dxi-column [allowEditing]="true"  [caption]="'Shelf Life (%)'" dataField="ShelfLifePercent"></dxi-column>
   <dxi-column [allowEditing]="true"  [caption]="'Shelf Life (amount of months)'" dataField="ShelfLifeMonth"></dxi-column>
-  <dxi-column [allowEditing]="true"  [caption]="'Commertial policy name'" dataField="CPCode">
+  <dxi-column [allowEditing]="true" [caption]="'Commertial policy name'" dataField="CPCode">
     <dxo-lookup [dataSource]="dataSourceCommercialPolicyRules.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
   </dxi-column>
-  <dxi-column [minWidth]="150" [allowEditing]="true"  [caption]="'BU'" dataField="ProductStructureId">
-    <dxo-lookup [dataSource]="ProductStructure.store()" valueExpr="Id" displayExpr="BU"></dxo-lookup>
+
+  <dxi-column [minWidth]="150" [setCellValue]="setStateValue" [allowEditing]="true"  [caption]="'BU'" dataField="ProductStructureId">
+    <dxo-lookup [dataSource]="ProductStructure.items()" valueExpr="Id" displayExpr="BU"></dxo-lookup>
   </dxi-column>
-  <dxi-column [minWidth]="250" [allowEditing]="true"  [caption]="'Franchise'" dataField="Franchise">
-    <dxo-lookup [dataSource]="ProductStructure.store()" valueExpr="Id" displayExpr="Franchise"></dxo-lookup>
+  <dxi-column [minWidth]="250" [allowEditing]="true"  [caption]="'Franchise'" dataField="ProductStructureId">
+    <dxo-lookup [dataSource]="getFilteredCities" valueExpr="Id" displayExpr="Franchise"></dxo-lookup>
   </dxi-column>
   <dxi-column [allowEditing]="false"  [caption]="'Exception'" dataField="IsException  "></dxi-column>
   <dxi-column [allowEditing]="false"  [caption]="'Create date'" dataField="CreatedOn"></dxi-column>

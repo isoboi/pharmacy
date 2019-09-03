@@ -21,6 +21,7 @@ export class CaseSkuComponent {
   dataSourceSkuMg: DataSource;
   SKU_MG: DataSource;
   ProductStructure: DataSource;
+  ProductStructureFranchise: DataSource;
   currentFilter: any;
   dataSourceCommercialPolicyRules: DataSource;
   list;
@@ -36,19 +37,20 @@ export class CaseSkuComponent {
       [ 'Id' ],
       { Id: 'Int32' }
     );
+
     this.dataSource.filter(['TenderCaseId', '=', Number(this.id)]);
     this.dataSource.load();
     this.dataSourceSkuMg = this.restService.bindData(
        this.apiUrl + '/CommercialPolicy',
       [ 'Id' ],
-      { Id: 'string' }
+      { Id: 'String' }
     );
 
 
     this.dataSourceCommercialPolicyRules = this.restService.bindData(
       this.apiUrl + '/CommercialPolicy',
       [ 'Id' ],
-      { Id: 'string' }
+      { Id: 'String' }
     );
 
     this.SKU_MG = this.restService.bindData(
@@ -60,7 +62,39 @@ export class CaseSkuComponent {
     this.ProductStructure = this.restService.bindData(
       this.apiUrl + '/ProductStructure',
       [ 'Id' ],
-      { Id: 'Int32' }
+      { Id: 'String' }
     );
+
+    this.ProductStructure.load();
+
+    this.ProductStructureFranchise = this.restService.bindData(
+      this.apiUrl + '/ProductStructure',
+      [ 'Id' ],
+      { Id: 'String' }
+    );
+    this.ProductStructureFranchise.load();
+    this.getFilteredCities = this.getFilteredCities.bind(this);
+
+  }
+
+  setStateValue(rowData: any, value: any): void {
+    rowData.Franchise = null;
+    (this as any).defaultSetCellValue(rowData, value);
+  }
+
+
+  getFilteredCities(options) {
+    console.log(options.data);
+    let filter = null;
+    if (options.data) {
+      const bu = this.ProductStructure.items().find((item) => item.Id === options.data.ProductStructureId).BU
+      filter = ['BU', '=', bu];
+    }
+
+    return {
+      store: this.ProductStructureFranchise.items(),
+      filter
+    };
   }
 }
+

@@ -78,7 +78,7 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
 
   onDownload() {
     const id = this.selectedRow.selectedRowsData[0].Id;
-    this.download(environment.apiUrl + '/Annotation/Download?id='+ id, 'file' );
+    this.download(environment.apiUrl + '/Annotation/Download?id=' + id, 'file' );
     // this.caseService.downloadFile(id)
     //     .subscribe((data) => {
     //       console.log(data)
