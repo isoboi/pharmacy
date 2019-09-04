@@ -17,6 +17,7 @@ import DataSource from 'devextreme/data/data_source';
 
 export class TenderDescriptionComponent implements OnInit, OnDestroy {
   @Input()tender: Tender;
+  @Input()disableCreate = false;
   @Output()save = new EventEmitter();
   federalDistrict;
   federalSubject;

@@ -11,12 +11,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class TenderButtonsComponent implements OnInit {
 
   @Input() tabIndex;
+  @Input() disableCreate = false;
   @Input()tender: Tender;
   @Output() saveTender = new EventEmitter<any>();
   actions = ActionsTender;
   canCreateCase$;
   canSave$;
-  canUpdate$;
   canDecline$;
   id;
   constructor(private tenderService: TenderService,

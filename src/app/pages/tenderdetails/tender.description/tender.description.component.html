@@ -96,4 +96,4 @@
   [closeOnOutsideClick]="false">
 </dx-load-panel>
 
-<app-tender-buttons [tender]="tender" (saveTender)="saveTender($event)" *ngIf="(isNewTender || tender)" [tabIndex]="0"></app-tender-buttons>
+<app-tender-buttons [disableCreate]="disableCreate" [tender]="tender" (saveTender)="saveTender($event)" *ngIf="(isNewTender || tender)" [tabIndex]="0"></app-tender-buttons>

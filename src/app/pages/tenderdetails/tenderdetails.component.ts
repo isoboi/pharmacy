@@ -48,7 +48,7 @@ export class TenderDetailsComponent implements OnInit {
     this.tabIndex = e.itemIndex;
   }
 
-
+  disableCreateButton = false;
   save(event: ActionTenderEvent) {
     const obj: any = {};
 
@@ -68,20 +68,27 @@ export class TenderDetailsComponent implements OnInit {
       }
     }
 
+    let timeoutTime = 0
     if (this.id === 'new') {
-      notify({message: 'Fill in SKU mandatory fields', position: 'top'}, 'success', 1500)
+      notify({message: 'Fill in SKU mandatory fields', position: 'top'}, 'success', 3000);
+      timeoutTime = 3000;
+      this.disableCreateButton = true;
     }
-    this.tenderService.save(obj, event.action, this.id)
-      .subscribe((x: any) => {
-        if (event.action === this.actions.save) {
-          if (x && x.Id) {
-            this.router.navigate([`/tender/${x.Id}`]);
 
-            setTimeout(() => {
-              location.reload();
-            });
+    setTimeout(() => {
+      this.tenderService.save(obj, event.action, this.id)
+        .subscribe((x: any) => {
+          if (event.action === this.actions.save) {
+            if (x && x.Id) {
+              this.router.navigate([`/tender/${x.Id}`]);
+
+              setTimeout(() => {
+                location.reload();
+              });
+            }
           }
-        }
-      });
+        });
+    }, timeoutTime);
+
   }
 }
