@@ -84,7 +84,7 @@ export class CaseSkuComponent {
     console.log(options);
     let filter = null;
     if (options.data) {
-      const bu = this.ProductStructure.items().find((item) => item.Id === options.data.ProductStructureId).BU
+      const bu = this.ProductStructure.items().find((item) => item.Id === options.data.ProductStructureId).BU;
       filter = ['BU', '=', bu];
     }
 
