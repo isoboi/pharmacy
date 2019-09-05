@@ -5,7 +5,6 @@ import {forkJoin, Observable} from 'rxjs';
 import {Actions} from '../models/case.interface';
 import {environment} from '../../environments/environment.prod';
 
-
 const tabs: Tab[] = [
   {
     id: 0,
@@ -62,7 +61,7 @@ export class CasesService {
       return this.http.get(apiUrl + `/TenderCase/BusinessService.Reject(key=${id})`);
     }
 
-    if (action === this.actions.reject) {
+    if (action === this.actions.draft) {
       return this.http.get(apiUrl + `/TenderCase/BusinessService.ToDraftFromReject(key=${id})`);
     }
 

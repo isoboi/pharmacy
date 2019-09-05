@@ -6,6 +6,7 @@ import {ActionEvent, Actions, TenderCase} from '../../models/case.interface';
 import {Observable, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {custom} from 'devextreme/ui/dialog';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-casedetails',
@@ -122,6 +123,20 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         }
         return;
       }
+    } else if (this.action === this.actions.save && this.id === 'new') {
+      notify({message: 'Successful', position: 'top'}, 'success', 1500);
+      setTimeout(() => {
+        this.router.navigate([`/cases/${x.Id}`]);
+        setTimeout(() => {
+          location.reload();
+        });
+      }, 1500);
+
+    } else if (this.action === this.actions.reject) {
+      notify({message: 'Successful', position: 'top'}, 'success', 1500);
+      setTimeout(() => {
+        location.reload();
+      }, 1500);
     }
   };
 
