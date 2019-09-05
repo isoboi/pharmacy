@@ -73,6 +73,8 @@
 
   <dxi-item [label]="{text: 'Deadline for supply'}" dataField="DeadlineForSupply"></dxi-item>
   <dxi-item type="boolean" [disabled]="true" [label]="{text: 'Artificial'}" dataField="Artificial"></dxi-item>
+  <dxi-item type="boolean" [disabled]="true" [label]="{text: 'CPStatus'}" dataField="CPStatus"></dxi-item>
+  <dxi-item type="boolean" [disabled]="true" [label]="{text: 'DupStatus'}" dataField="DupStatus"></dxi-item>
 
 
   <dxi-item *ngIf="contractStatus" [label]="{text: 'Contract status'}"
