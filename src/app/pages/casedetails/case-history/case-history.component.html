@@ -58,7 +58,9 @@
         <dxo-header-filter [visible]="showHeaderFilter"></dxo-header-filter>
         <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
 
-        <dxi-column dataField="TenderCaseStatusName" caption="Request approval status"></dxi-column>
+        <!--<dxi-column dataField="TenderCaseStatusName" caption="Request approval status"></dxi-column>-->
+        <dxi-column dataField="OldStatusName" caption="MAL"></dxi-column>
+        <dxi-column dataField="NewStatusName" caption="MAL"></dxi-column>
         <dxi-column dataField="MAL" caption="MAL"></dxi-column>
         <dxi-column dataField="ApproverName" caption="Approver"></dxi-column>
         <dxi-column dataField="ApproverCredentials" caption="Approver's credential"></dxi-column>
