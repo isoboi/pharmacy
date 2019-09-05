@@ -122,7 +122,7 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         }
         return;
-      } else if (this.action === this.actions.reject) {
+      } else if (this.action === this.actions.reject || this.action === this.actions.draft) {
         notify({message: 'Successful', position: 'top'}, 'success', 1500);
         setTimeout(() => {
           location.reload();
