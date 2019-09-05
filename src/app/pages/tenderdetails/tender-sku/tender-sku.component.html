@@ -32,12 +32,12 @@
       <dxo-lookup [dataSource]="skuias.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
     </dxi-column>
     <dxi-column [allowEditing]="false" alignment="left" caption="Dosage" dataField="Dosage"></dxi-column>
-    <dxi-column [allowEditing]="true" alignment="left" caption="Tender starting price (per pack, RUB)"
+    <dxi-column type="number" [allowEditing]="true" alignment="left" caption="Tender starting price (per pack, RUB)"
                 dataField="StartingPrice"></dxi-column>
     <dxi-column [allowEditing]="true" alignment="left" caption="Risk" [width]="120" dataField="RiskId">
       <dxo-lookup [dataSource]="risk.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
     </dxi-column>
-    <dxi-column [allowEditing]="true" alignment="left" caption="Tender Volume (packs)"
+    <dxi-column type="number" [allowEditing]="true" alignment="left" caption="Tender Volume (packs)"
                 dataField="TenderVolume"></dxi-column>
     <dxi-column [allowEditing]="false" alignment="left" caption="Tender Value (RUB)"
                 dataField="TenderValueRUB"></dxi-column>
@@ -53,9 +53,9 @@
                 dataField="DiffStartAndEDL "></dxi-column>
     <dxi-column [allowEditing]="false" alignment="left" caption="Diff Tender starting price and Reference price (%)"
                 dataField="DiffStartAndReference"></dxi-column>
-    <dxi-column type="Int32" [allowEditing]="true" alignment="left" caption="Won contract price (per pack in RUB)"
+    <dxi-column type="number" [allowEditing]="true" alignment="left" caption="Won contract price (per pack in RUB)"
                 dataField="WonContractPriceRUB"></dxi-column>
-    <dxi-column [allowEditing]="true" alignment="left" caption="Contract price (RUB) per pack"
+    <dxi-column type="number" [allowEditing]="true" alignment="left" caption="Contract price (RUB) per pack"
                 dataField="ContractPriceRUB"></dxi-column>
     <dxi-column [allowEditing]="true" alignment="left" caption="Contract quantity (packs)"
                 dataField="ContractQuantity"></dxi-column>

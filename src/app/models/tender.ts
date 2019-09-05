@@ -18,6 +18,8 @@ export class Tender {
   HospitalId: string;
   HospitalName: string;
   Id: number;
+  StartingPrice: number;
+  TenderVolume: number;
   IndicationId: number;
   IndicationName: string;
   LegalEntityTypeId: number;
@@ -41,7 +43,9 @@ export class Tender {
   TenderStatusName: string;
   TenderWinnerId: number;
   TenderWinnerName: string;
+  ContractQuantity: number;
   VersionNumber: string;
+  WonContractPriceRUB: number;
 }
 
 export enum ActionsTender {
