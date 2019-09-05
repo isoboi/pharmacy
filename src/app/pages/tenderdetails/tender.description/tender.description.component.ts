@@ -152,13 +152,16 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
       this.tender.HospitalName = hospiral.HospitalName;
       this.clientName.load().then((data) => {
         this.originalClientName = data;
+        const LegalEntityTypeId = this.originalClientName.find((hosp) => hosp.Id == $event.value).LegalEntityTypeId;
+        this.tender.LegalEntityTypeId = LegalEntityTypeId;
+        this.legalEntityType.filter(['Id', '=', LegalEntityTypeId]);
+        this.legalEntityType.load();
       });
+
+
     }
     if ($event.dataField === 'HospitalName' && this.originalClientName) {
-      const LegalEntityTypeId = this.originalClientName.find((hosp) => hosp.Id == $event.value).LegalEntityTypeId;
-      this.tender.LegalEntityTypeId = LegalEntityTypeId;
-      this.legalEntityType.filter(['Id', '=', LegalEntityTypeId]);
-      this.legalEntityType.load();
+
     }
   }
   onInitialized() {

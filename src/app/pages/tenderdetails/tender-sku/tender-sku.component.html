@@ -18,10 +18,13 @@
     <dxo-search-panel [visible]="true" placeholder="Search..."></dxo-search-panel>
     <dxo-editing mode="row" [allowUpdating]="true"></dxo-editing>
 
-    <dxi-column [allowEditing]="false" alignment="left" caption="Brand" [width]="100" dataField="BrandId"></dxi-column>
+    <dxi-column [allowEditing]="false" alignment="left" caption="Brand" [width]="200" dataField="BrandId">
+      <dxo-lookup [dataSource]="brands.items()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
+    </dxi-column>
     <dxi-column [allowEditing]="true" alignment="left" caption="SKU mars" [width]="250" dataField="ProductId">
       <dxo-lookup [dataSource]="products.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
     </dxi-column>
+
     <dxi-column [allowEditing]="false" alignment="left" caption="SKU name Eng" dataField="SKUNameEng"></dxi-column>
     <dxi-column [allowEditing]="false" alignment="left" caption="SKU name Rus" dataField="SKUNameRus"></dxi-column>
     <dxi-column [allowEditing]="true" alignment="left" caption="MNN" [width]="200" dataField="SKUIASId">

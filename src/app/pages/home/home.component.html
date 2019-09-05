@@ -78,6 +78,7 @@
         <dx-data-grid 
             id="gridContainer" 
             [dataSource]="dataSourceSKU"
+            [columnAutoWidth]="true"
             [showBorders]="true"
             (onContentReady)="initialized()">
             <dxo-paging [pageSize]="5"></dxo-paging>
@@ -101,7 +102,7 @@
                     [groupInterval]="10000"></dxo-header-filter>
             </dxi-column>
             <dxi-column 
-                dataField="brandName" 
+                dataField="BrandName"
                 caption="Brand"
 
                 alignment="center">
@@ -109,7 +110,7 @@
                     [dataSource]="orderHeaderFilter"></dxo-header-filter>
             </dxi-column>
             <dxi-column 
-                dataField="SKUNameRus" 
+                dataField="SKUNameEng"
                 caption="SKU Name"
 
                 alignment="center"></dxi-column>

@@ -16,6 +16,7 @@ export class TenderSkuComponent implements OnInit {
   @Input()disabled: boolean;
   tenderSku: DataSource;
   products: DataSource;
+  brands: DataSource;
   skuias: DataSource;
   risk: DataSource;
   EDLPriceList: DataSource;
@@ -45,6 +46,13 @@ export class TenderSkuComponent implements OnInit {
     );
     this.tenderSku.filter(['TenderId', '=', Number(this.id)]);
     this.tenderSku.load();
+
+    this.brands = this.restService.bindData(
+      this.apiUrl + '/Brand',
+      ['Id'],
+      {Id: 'Int32'}
+    );
+    this.brands.load();
     this.products = this.restService.bindData(
       this.apiUrl + '/Product',
       ['Id'],
