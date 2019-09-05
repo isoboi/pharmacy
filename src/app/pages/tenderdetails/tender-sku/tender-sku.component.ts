@@ -4,6 +4,7 @@ import {RestService} from '../../../services/rest.service';
 import {ActivatedRoute} from '@angular/router';
 import {environment} from '../../../../environments/environment';
 import {Tender} from '../../../models/tender';
+import {TenderService} from '../../../services/tender.service';
 
 @Component({
   selector: 'app-tender-sku',
@@ -23,13 +24,16 @@ export class TenderSkuComponent implements OnInit {
   currentFilter: any;
   id;
   apiUrl = environment.apiUrl;
+  canCreateTenderSKU$;
 
   constructor(private restService: RestService,
+              private tenderService: TenderService,
               private route: ActivatedRoute) {
     this.id = this.route.snapshot.params.id;
   }
 
   ngOnInit() {
+    this.canCreateTenderSKU$ = this.tenderService.canCreateTenderSKU();
     this._getTenderSku();
   }
 

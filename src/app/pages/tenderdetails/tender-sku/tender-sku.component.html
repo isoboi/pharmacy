@@ -6,6 +6,10 @@
     [dataSource]="tenderSku"
     [showBorders]="true">
     <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    <dxo-editing
+      mode="row"
+      [allowAdding]="(canCreateTenderSKU$ | async)?.value">
+    </dxo-editing>
     <dxo-selection mode="single"></dxo-selection>
     <dxo-paging [pageSize]="10"></dxo-paging>
     <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>

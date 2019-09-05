@@ -98,4 +98,8 @@ export class TenderService {
     return this.http.get(apiUrl + `/Tender/BusinessService.CanDecline(entityId=${id})`);
   }
 
+  canCreateTenderSKU() {
+    return this.http.get(apiUrl + `/TenderSKU/BusinessService.CanCreate()`);
+  }
+
 }
