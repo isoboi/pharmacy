@@ -122,6 +122,11 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         }
         return;
+      } else if (this.action === this.actions.reject) {
+        notify({message: 'Successful', position: 'top'}, 'success', 1500);
+        setTimeout(() => {
+          location.reload();
+        }, 1500);
       }
     } else if (this.action === this.actions.save && this.id === 'new') {
       notify({message: 'Successful', position: 'top'}, 'success', 1500);
@@ -132,11 +137,6 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         });
       }, 1500);
 
-    } else if (this.action === this.actions.reject) {
-      notify({message: 'Successful', position: 'top'}, 'success', 1500);
-      setTimeout(() => {
-        location.reload();
-      }, 1500);
     }
   };
 
