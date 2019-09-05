@@ -89,4 +89,11 @@ export class TenderSkuComponent implements OnInit {
       {Id: 'decimal'}
     );
   }
+
+  onInitNewRow(event) {
+    event.data = {
+      TenderId: this.id
+    }
+    console.log(event)
+  }
 }

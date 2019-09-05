@@ -4,6 +4,7 @@
     [allowColumnResizing]="true"
     [columnAutoWidth]="true"
     [dataSource]="tenderSku"
+    (onInitNewRow)="onInitNewRow($event)"
     [showBorders]="true">
     <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
     <dxo-editing
