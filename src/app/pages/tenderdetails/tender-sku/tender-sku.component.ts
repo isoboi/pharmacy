@@ -92,7 +92,7 @@ export class TenderSkuComponent implements OnInit {
 
   onInitNewRow(event) {
     event.data = {
-      TenderId: this.id
+      TenderId: Number(this.id)
     };
   }
 }
