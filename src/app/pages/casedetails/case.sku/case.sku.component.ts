@@ -26,7 +26,7 @@ export class CaseSkuComponent {
   dataSourceCommercialPolicyRules: DataSource;
   list;
   apiUrl = environment.apiUrl;
-  private id;
+  private readonly id;
   constructor(private casesService: CasesService,
               private http: HttpClient,
               private route: ActivatedRoute,
