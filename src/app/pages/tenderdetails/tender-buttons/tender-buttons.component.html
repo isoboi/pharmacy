@@ -1,7 +1,7 @@
 <div class="buttons">
   <dx-button [disabled]="disableCreate || !(canSave$ | async)?.value" *ngIf="tabIndex === 0" text="{{id === 'new' ? 'Create' : 'Save'}} Tender" type="default" (onClick)="save(actions.save)"></dx-button>
   <dx-button [disabled]="!(canDecline$ | async)?.value" *ngIf="tabIndex === 0" text="Decline Tender" type="danger" (onClick)="save(actions.decline)"></dx-button>
-  <dx-button [disabled]="!(canCreateCase$ | async)?.value && tender?.TenderStatusId === 3" *ngIf="tabIndex === 2" text="Create Case" type="success" (onClick)="createCase()" ></dx-button>
+  <dx-button [disabled]="!(canCreateCase$ | async)?.value || tender?.TenderStatusId !== 3" *ngIf="tabIndex === 2" text="Create Case" type="success" (onClick)="createCase()" ></dx-button>
   <dx-button [disabled]="tender?.TenderStatusId !== 1" *ngIf="tabIndex === 0" text="Planned" type="default" (onClick)="save(actions.planned)"></dx-button>
   <dx-button [disabled]="tender?.TenderStatusId !== 2" *ngIf="tabIndex === 0" text="Announced" type="default" (onClick)="save(actions.announced)"></dx-button>
 </div>
