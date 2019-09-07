@@ -38,7 +38,6 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   isNewTender = this.route.snapshot.params.id === 'new';
 
   private originalHospital: any;
-  private originalClientName: any;
   constructor(private tenderService: TenderService,
               private route: ActivatedRoute,
               private restService: RestService,
@@ -49,12 +48,13 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
     if (this.isNewTender) {
       this.tender = new Tender();
     }
+
     this.hospitals = this.restService.bindData(
       environment.apiUrl + '/Hospitals',
       ['Id'],
       {Id: 'Int32'}
     );
-
+    this.hospitals.load();
     this.clientName = this.restService.bindData(
       environment.apiUrl + '/Hospitals',
       ['Id'],
@@ -71,10 +71,10 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
       ['Id'],
       {Id: 'Int32'}
     );
-    this.tenderService.get('/Hospitals')
+    this.tenderService.getHospitals()
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
-        this.originalHospital = data;
+        this.originalHospital = data.value;
       });
 
 
@@ -145,27 +145,47 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   }
 
   onFieldDataChanged($event) {
-    if ($event.dataField === 'HospitalId' && this.originalHospital) {
-      const hospiral = this.originalHospital.value.find((hosp) => hosp.Id == $event.value);
-      this.clientName.filter(['INN', '=', hospiral.INN]);
+    // if ($event.dataField === 'HospitalId' && this.originalHospital) {
+    //   const hospiral = this.originalHospital.value.find((hosp) => hosp.Id == $event.value);
+    //   this.clientName.filter(['INN', '=', hospiral.INN]);
+    //   this.tender.LegalEntityTypeId = null;
+    //   this.tender.HospitalName = hospiral.HospitalName;
+    //   this.clientName.load().then((data) => {
+    //     this.originalClientName = data;
+    //     const LegalEntityTypeId = this.originalClientName.find((hosp) => hosp.Id == $event.value).LegalEntityTypeId;
+    //     this.tender.LegalEntityTypeId = LegalEntityTypeId;
+    //     this.legalEntityType.filter(['Id', '=', LegalEntityTypeId]);
+    //     this.legalEntityType.load();
+    //   });
+    //
+    //
+    // }
+    // if ($event.dataField === 'HospitalName' && this.originalClientName) {
+    //
+    // }
+  }
+  public onInnChanged = ($event) => {
+    if ($event && $event.value) {
       this.tender.LegalEntityTypeId = null;
-      this.tender.HospitalName = hospiral.HospitalName;
-      this.clientName.load().then((data) => {
-        this.originalClientName = data;
-        const LegalEntityTypeId = this.originalClientName.find((hosp) => hosp.Id == $event.value).LegalEntityTypeId;
-        this.tender.LegalEntityTypeId = LegalEntityTypeId;
-        this.legalEntityType.filter(['Id', '=', LegalEntityTypeId]);
-        this.legalEntityType.load();
-      });
-
-
-    }
-    if ($event.dataField === 'HospitalName' && this.originalClientName) {
-
+      this.tender.ClientId = null;
+      const hospiral = this.originalHospital.find((hosp) => hosp.Id == $event.value);
+      this.clientName.filter(['INN', '=', hospiral.INN]);
+      this.clientName.load();
     }
   }
+
+  public onClientChanged = ($event) => {
+    if ($event && $event.value) {
+      const LegalEntityTypeId = this.originalHospital.find((hosp) => hosp.Id == $event.value).LegalEntityTypeId;
+      this.tender.LegalEntityTypeId = LegalEntityTypeId;
+      this.legalEntityType.filter(['Id', '=', LegalEntityTypeId]);
+      this.legalEntityType.load();
+    }
+  }
+
   onInitialized() {
     this.showLoadPanel = false;
+    this.tender.ClientId = this.tender.HospitalId;
     this.cdr.detectChanges();
   }
 

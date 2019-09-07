@@ -16,6 +16,7 @@ export class Tender {
   GosZakupkiLink: string;
   HospitalINN: string;
   HospitalId: string;
+  ClientId: string;
   HospitalName: string;
   Id: number;
   StartingPrice: number;

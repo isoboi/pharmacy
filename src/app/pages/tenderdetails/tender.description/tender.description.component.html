@@ -1,4 +1,4 @@
-<dx-form class="tender-description" *ngIf="(isNewTender || tender) " id="form"
+<dx-form class="tender-description" *ngIf="(isNewTender || tender) && originalHospital " id="form"
          (onInitialized)="onInitialized()"
          (onFieldDataChanged)="onFieldDataChanged($event)"
          [formData]="tender">
@@ -18,11 +18,11 @@
   <dxi-item [label]="{text: 'INN'}"
             dataField="HospitalId"
             editorType="dxSelectBox"
-            [editorOptions]="{ dataSource: hospitals, displayExpr:'INN', valueExpr:'Id'}"></dxi-item>
+            [editorOptions]="{ dataSource: originalHospital, onValueChanged: onInnChanged, displayExpr:'INN', valueExpr:'Id'}"></dxi-item>
   <dxi-item [label]="{text: 'Client name'}"
-            dataField="HospitalId"
+            dataField="ClientId"
             editorType="dxSelectBox"
-            [editorOptions]="{ dataSource: clientName, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+            [editorOptions]="{ dataSource: clientName, onValueChanged: onClientChanged, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
   <dxi-item [label]="{text: 'Legal Entity Type'}"
             dataField="LegalEntityTypeId"
             [disabled]="true"
@@ -73,8 +73,8 @@
 
   <dxi-item [label]="{text: 'Deadline for supply'}" dataField="DeadlineForSupply"></dxi-item>
   <dxi-item type="boolean" [disabled]="true" [label]="{text: 'Artificial'}" dataField="Artificial"></dxi-item>
-  <dxi-item type="boolean" [disabled]="true" [label]="{text: 'CPStatus'}" dataField="CPStatus"></dxi-item>
-  <dxi-item type="boolean" [disabled]="true" [label]="{text: 'DupStatus'}" dataField="DupStatus"></dxi-item>
+  <!--<dxi-item type="boolean" [disabled]="true" [label]="{text: 'CPStatus'}" dataField="CPStatus"></dxi-item>-->
+  <!--<dxi-item type="boolean" [disabled]="true" [label]="{text: 'DupStatus'}" dataField="DupStatus"></dxi-item>-->
 
 
   <dxi-item *ngIf="contractStatus" [label]="{text: 'Contract status'}"

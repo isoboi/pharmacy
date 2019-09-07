@@ -55,10 +55,9 @@ export class TenderDetailsComponent implements OnInit {
     const keys = Object.keys(event.tender);
     const tender = Object.assign({}, event.tender);
     tender.HospitalINN = null;
-    tender.LegalEntityTypeId = null;
     tender.LegalEntityTypeName = null;
-    tender.HospitalId = tender.HospitalName;
-    tender.HospitalName = null;
+    tender.HospitalId = tender.ClientId;
+    tender.ClientId = null;
     for (const key of keys) {
       if (tender[key] && tender[key] !== this.originalTender[key]) {
         obj[key] = tender[key];
