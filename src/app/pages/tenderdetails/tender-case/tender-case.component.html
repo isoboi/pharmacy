@@ -13,11 +13,10 @@
     <dxo-filter-row [visible]="true" [applyFilter]="currentFilter"></dxo-filter-row>
     <dxo-header-filter [visible]="true"></dxo-header-filter>
     <dxo-search-panel [visible]="true" placeholder="Search..."></dxo-search-panel>
-
-    <dxi-column alignment="left" dataField="Id" caption="Case ID"></dxi-column>
-    <dxi-column alignment="left" dataField="DiscountNumber" caption="Discount SAP number"></dxi-column>
-    <dxi-column alignment="left" dataField="DiscountValidityDate" caption="Discount validity date"></dxi-column>
-    <dxi-column alignment="left" dataField="DiscountProvided" caption="Discount Provided"></dxi-column>
+    <dxi-column   [allowFiltering]="false" alignment="left" dataField="Id" caption="Case ID"></dxi-column>
+    <dxi-column   [allowFiltering]="false" alignment="left" dataField="DiscountNumber" caption="Discount SAP number"></dxi-column>
+    <dxi-column   [allowFiltering]="false" alignment="left" dataField="DiscountValidityDate" caption="Discount validity date"></dxi-column>
+    <dxi-column   [allowFiltering]="false" alignment="left" dataField="DiscountProvided" caption="Discount Provided"></dxi-column>
   </dx-data-grid>
 </div>
 

@@ -1,147 +1,187 @@
 <div class="content-block">
-    <div class="dx-card">
-        <h4 class="m-0">Tenders</h4>
-        <dx-data-grid 
-            id="gridContainer" 
-            [dataSource]="dataSource"
-            [allowColumnReordering]="true"
-            [allowColumnResizing]="true"
-            [showBorders]="true"
-            [selectedRowKeys]="[]"
-            [columnAutoWidth]="true"
-            (onContentReady)="onContentReady()"
-            (onToolbarPreparing)="onToolbarPreparing($event)"
-            (onInitNewRow)="onInitNewRow()"
-            (onRowDblClick)="onRowDblClick($event)"
-            (onSelectionChanged) = "onSelectionChanged($event)">
-            <dxo-selection mode="single"></dxo-selection>
-            <dxo-paging [pageSize]="5"></dxo-paging>
-            <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
-            <dxo-pager 
-                [showPageSizeSelector]="true"
-                [allowedPageSizes]="[5, 10, 20]"
-                [showInfo]="true">
-            </dxo-pager>
-            <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
-            <dxo-editing
-                mode="row"
-                [allowAdding]="(canCreate$ | async)?.value">
-            </dxo-editing>
-            <dxo-export [enabled]="true" fileName="Tenders" [allowExportSelectedData]="true"></dxo-export>
-            <dxo-filter-row 
-                [visible]="showFilterRow" 
-                [applyFilter]="currentFilter"></dxo-filter-row>
-            <dxo-header-filter 
-                [visible]="showHeaderFilter"></dxo-header-filter>
-            <dxo-search-panel 
-                [visible]="true" 
-                placeholder="Search..."></dxo-search-panel>
-            <dxi-column 
-                dataField="Id"
-                caption="Id">
-            </dxi-column>
-            <dxi-column 
-                dataField="TAMName"
-                caption="TAM">
-            </dxi-column>
-            <dxi-column 
-                dataField="RegionName"
-                caption="RegionName">
-            </dxi-column>
-            <dxi-column 
-                dataField="HospitalINN"
-                caption="Hospital INN">
-            </dxi-column>
-            <dxi-column 
-                dataField="HospitalName"
-                caption="Client name">
-            </dxi-column>
-            <dxi-column 
-                dataField="TenderStatusName">
-            </dxi-column>
-            <dxi-column 
-                dataField="GosZakupkiLink">
-            </dxi-column>
-            <dxi-column 
-                dataField="DateOfTender">
-            </dxi-column>
-            <dxi-column 
-                dataField="Winner">
-            </dxi-column>
-            <dxi-column 
-                dataField="IndicationName">
-            </dxi-column>
-            <dxi-column 
-                dataField="SupplierName">
-            </dxi-column>
-        </dx-data-grid>
-        <dx-data-grid 
-            id="gridContainer" 
-            [dataSource]="dataSourceSKU"
-            [columnAutoWidth]="true"
-            [showBorders]="true"
-            (onContentReady)="initialized()">
-            <dxo-paging [pageSize]="5"></dxo-paging>
-            <dxo-pager 
-                [showPageSizeSelector]="true"
-                [allowedPageSizes]="[5, 10, 20]"
-                [showInfo]="true">
-            </dxo-pager>
-            <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
-            <dxo-filter-row 
-                [visible]="showFilterRow" 
-                [applyFilter]="currentFilter"></dxo-filter-row>
-            <dxo-header-filter 
-                [visible]="showHeaderFilter"></dxo-header-filter>
-            <dxi-column 
-                dataField="Id" 
-                caption="TenderSKU ID"
+  <div class="dx-card">
+    <h4 class="m-0">Tenders</h4>
+    <dx-data-grid
+      id="gridContainer"
+      [dataSource]="dataSource"
+      [allowColumnReordering]="true"
+      [allowColumnResizing]="true"
+      [showBorders]="true"
+      [selectedRowKeys]="[]"
+      [columnAutoWidth]="true"
+      (onContentReady)="onContentReady()"
+      (onToolbarPreparing)="onToolbarPreparing($event)"
+      (onInitNewRow)="onInitNewRow()"
+      (onRowDblClick)="onRowDblClick($event)"
+      (onSelectionChanged)="onSelectionChanged($event)">
+      <dxo-selection mode="single"></dxo-selection>
+      <dxo-paging [pageSize]="5"></dxo-paging>
+      <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+      <dxo-pager
+        [showPageSizeSelector]="true"
+        [allowedPageSizes]="[5, 10, 20]"
+        [showInfo]="true">
+      </dxo-pager>
+      <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
+      <dxo-editing
+        mode="row"
+        [allowAdding]="(canCreate$ | async)?.value">
+      </dxo-editing>
+      <dxo-export [enabled]="true" fileName="Tenders" [allowExportSelectedData]="true"></dxo-export>
+      <dxo-filter-row
+        [visible]="showFilterRow"
+        [applyFilter]="currentFilter"></dxo-filter-row>
+      <dxo-header-filter
+        [visible]="showHeaderFilter"></dxo-header-filter>
+      <dxo-search-panel
+        [visible]="true"
+        placeholder="Search..."></dxo-search-panel>
+      <dxi-column
 
-                alignment="center">
-                <dxo-header-filter 
-                    [groupInterval]="10000"></dxo-header-filter>
-            </dxi-column>
-            <dxi-column 
-                dataField="BrandName"
-                caption="Brand"
+        [allowFiltering]="false"
+        dataField="Id"
+        caption="Id">
+      </dxi-column>
+      <dxi-column
 
-                alignment="center">
-                <dxo-header-filter 
-                    [dataSource]="orderHeaderFilter"></dxo-header-filter>
-            </dxi-column>
-            <dxi-column 
-                dataField="SKUNameEng"
-                caption="SKU Name"
+        [allowFiltering]="false"
+        dataField="TAMName"
+        caption="TAM">
+      </dxi-column>
+      <dxi-column
 
-                alignment="center"></dxi-column>
-            <dxi-column 
-                dataField="SKUId" 
-                caption="SKU Code"></dxi-column>
-            <dxi-column 
-                dataField="TenderVolume"
-                caption="Tender Volume (packs)"
+        [allowFiltering]="false"
+        dataField="RegionName"
+        caption="RegionName">
+      </dxi-column>
+      <dxi-column
 
-                alignment="center"></dxi-column>
-            <dxi-column 
-                dataField="TenderValueUSD" 
-                caption="Tender Value (USD)"
+        [allowFiltering]="false"
+        dataField="HospitalINN"
+        caption="Hospital INN">
+      </dxi-column>
+      <dxi-column
 
-                alignment="center"></dxi-column>
-            <dxi-column 
-                dataField="ForecastedValueUSD" 
-                caption="Forecasted Tender Value (USD)"
+        [allowFiltering]="false"
+        dataField="HospitalName"
+        caption="Client name">
+      </dxi-column>
+      <dxi-column
 
-                alignment="center"></dxi-column>
-            <dxi-column 
-                dataField="DiffStartAndEDL" 
-                caption="Diff Tender Starting price and EDL price, %"
+        [allowFiltering]="false"
+        dataField="TenderStatusName">
+      </dxi-column>
+      <dxi-column
 
-                alignment="center"></dxi-column>
-            <dxi-column 
-                dataField="DiffStartAndReference" 
-                caption="Diff Tender Starting price and Reference price, %"
+        [allowFiltering]="false"
+        dataField="GosZakupkiLink">
+      </dxi-column>
+      <dxi-column
 
-                alignment="center"></dxi-column>
-        </dx-data-grid>      
-    </div>
+        [allowFiltering]="false"
+        dataField="DateOfTender">
+      </dxi-column>
+      <dxi-column
+
+        [allowFiltering]="false"
+        dataField="Winner">
+      </dxi-column>
+      <dxi-column
+
+        [allowFiltering]="false"
+        dataField="IndicationName">
+      </dxi-column>
+      <dxi-column
+
+        [allowFiltering]="false"
+        dataField="SupplierName">
+      </dxi-column>
+    </dx-data-grid>
+    <dx-data-grid
+      id="gridContainer"
+      [dataSource]="dataSourceSKU"
+      [columnAutoWidth]="true"
+      [showBorders]="true"
+      (onContentReady)="initialized()">
+      <dxo-paging [pageSize]="5"></dxo-paging>
+      <dxo-pager
+        [showPageSizeSelector]="true"
+        [allowedPageSizes]="[5, 10, 20]"
+        [showInfo]="true">
+      </dxo-pager>
+      <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
+      <dxo-filter-row
+        [visible]="showFilterRow"
+        [applyFilter]="currentFilter"></dxo-filter-row>
+      <dxo-header-filter
+        [visible]="showHeaderFilter"></dxo-header-filter>
+      <dxi-column
+
+        [allowFiltering]="false"
+        dataField="Id"
+        caption="TenderSKU ID"
+
+        alignment="center">
+        <dxo-header-filter
+          [groupInterval]="10000"></dxo-header-filter>
+      </dxi-column>
+      <dxi-column
+
+        [allowFiltering]="false"
+        dataField="BrandName"
+        caption="Brand"
+
+        alignment="center">
+        <dxo-header-filter
+          [dataSource]="orderHeaderFilter"></dxo-header-filter>
+      </dxi-column>
+      <dxi-column
+
+        [allowFiltering]="false"
+        dataField="SKUNameEng"
+        caption="SKU Name"
+
+        alignment="center"></dxi-column>
+      <dxi-column
+
+        [allowFiltering]="false"
+        dataField="SKUId"
+        caption="SKU Code"></dxi-column>
+      <dxi-column
+
+        [allowFiltering]="false"
+        dataField="TenderVolume"
+        caption="Tender Volume (packs)"
+
+        alignment="center"></dxi-column>
+      <dxi-column
+
+        [allowFiltering]="false"
+        dataField="TenderValueUSD"
+        caption="Tender Value (USD)"
+
+        alignment="center"></dxi-column>
+      <dxi-column
+
+        [allowFiltering]="false"
+        dataField="ForecastedValueUSD"
+        caption="Forecasted Tender Value (USD)"
+
+        alignment="center"></dxi-column>
+      <dxi-column
+
+        [allowFiltering]="false"
+        dataField="DiffStartAndEDL"
+        caption="Diff Tender Starting price and EDL price, %"
+
+        alignment="center"></dxi-column>
+      <dxi-column
+
+        [allowFiltering]="false"
+        dataField="DiffStartAndReference"
+        caption="Diff Tender Starting price and Reference price, %"
+
+        alignment="center"></dxi-column>
+    </dx-data-grid>
+  </div>
 </div>

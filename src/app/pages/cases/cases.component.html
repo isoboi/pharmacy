@@ -35,153 +35,77 @@
         [visible]="true"
         placeholder="Search..."></dxo-search-panel>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="Id"
 
         caption="Case ID">
       </dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="ParentId"
         alignment="center"
-
         caption="Parent ID">
       </dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="ChildId"
         alignment="center"
 
         caption="Child ID">
       </dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="RegionName"
 
         alignment="center"
         caption="Region">
       </dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="RegionName"
 
         alignment="center"
         caption="Client name">
       </dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="CreatedBy"
 
         alignment="center"
         caption="TAM">
       </dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="DiscountNumber"
 
         alignment="center"
         caption="Discount SAP number">
       </dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="DiscountValidityDate"
 
         alignment="center"
         caption="Discount Validity Date">
       </dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="OwnerName"
 
         alignment="center"
         caption="Approver">
       </dxi-column>
-      <!-- <dxi-column
-          dataField="OwnerName"
-
-          alignment="center"
-          caption="Approver">
-      </dxi-column>
-      <dxi-column
-          dataField="AddOffInvoiceDiscount"
-
-          alignment="center"
-          caption="Additional Off-Invoice Discount (%)">
-      </dxi-column>
-      <dxi-column
-          dataField="PriceOnInvoiceRUB"
-
-          alignment="center"
-          caption="Price On-Invoice (руб)">
-      </dxi-column>
-      <dxi-column
-          dataField="TotalAddOffInvDiscRUB"
-
-          alignment="center"
-          caption="Total Additional Off-Invoice Discount (RUB)">
-      </dxi-column>
-      <dxi-column
-          dataField="TotalPriceOnInvDiscRUB"
-
-          alignment="center"
-          caption="Total Additional On-Invoice Discount (RUB)">
-      </dxi-column>
-      <dxi-column
-          dataField="TotalDiscount"
-
-          alignment="center"
-          caption="Total Discount (%)">
-      </dxi-column>
-      <dxi-column
-          dataField="FinalPriceWAllDiscRUB"
-
-          alignment="center"
-          caption="Final Price w all discounts anticipated (RUB) ">
-      </dxi-column>
-      <dxi-column
-          dataField="NetSalesRUB"
-
-          alignment="center"
-          caption="Net Sales (RUB) ">
-      </dxi-column>
-      <dxi-column
-          dataField="NetSalesUSD"
-
-          alignment="center"
-          caption="Net Sales (USD)">
-      </dxi-column>
-      <dxi-column
-          dataField="TenderMarginality"
-
-          alignment="center"
-          caption="Tender marginality (%)">
-      </dxi-column>
-      <dxi-column
-          dataField="TotalShippedPacks"
-
-          alignment="center"
-          caption="Case, Total shipped (packs)">
-      </dxi-column>
-      <dxi-column
-          dataField="TotalShippedUSD"
-
-          alignment="center"
-          caption="Case, Total shipped (USD)">
-      </dxi-column>
-      <dxi-column
-          dataField="TotalToShipPacks"
-
-          alignment="center"
-          caption="Case, total have to ship (packs)">
-      </dxi-column>
-      <dxi-column
-          dataField="TotalToShipUSD"
-
-          alignment="center"
-          caption="Case, total have to ship (USD)">
-      </dxi-column>
-      <dxi-column
-          dataField="DiscountProvided"
-
-          alignment="center"
-          caption="Discount Provided">
-      </dxi-column> -->
     </dx-data-grid>
-    <!-- </div>
 
-    <div class="dx-card responsive-paddings mt-4"> -->
-    <!-- <h5 class="m-0">Details of selected tender</h5>   -->
     <dx-data-grid
       id="gridContainer"
       [dataSource]="dataSourceSKU"
@@ -205,6 +129,8 @@
 
           placeholder="Search..."></dxo-search-panel> -->
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="Id"
         caption="Case ID"
 
@@ -213,6 +139,8 @@
           [groupInterval]="10000"></dxo-header-filter>
       </dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="brandName"
         caption="Brand"
 
@@ -221,93 +149,121 @@
           [dataSource]="orderHeaderFilter"></dxo-header-filter>
       </dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="SKUNameEng"
         caption="SKU Name Eng"
 
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="SKUCode"
         caption="SKU mars"
 
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="OnInvoiceDiscount"
         caption="On-Invoice Discount (base) (%)"
 
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="AddOnInvoiceDiscount"
         caption="Additional On-Invoice Discount (%)"
 
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="AddOffInvoiceDiscount"
         caption="Additional Off-Invoice Discount (%)"
 
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="Quantity"
         caption="Quantity"
 
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="ContracPriceRUB"
         caption="Contract price (RUB) per pack"
 
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="PriceRUB"
         caption="Price (price list, RUB)"
 
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="PriceOnInvoiceRUB"
         caption="Price On-Invoice (руб)"
 
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="TotalDiscount"
         caption="Total Discount (%)"
 
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="FinalPriceWAllDiscRUB "
         caption="Final Price w all discounts anticipated (RUB)"
 
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="NetSalesRUB "
         caption="Net Sales (RUB)"
 
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="CPStatus"
         caption="Commertial policy test"
 
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="DupStatus"
         caption="Repetition test on cases"
-
         alignment="center"
       ></dxi-column>
       <dxi-column
+
+        [allowFiltering]="false"
         dataField="CreatedOn"
         caption="Create date"
-
         alignment="center"
       ></dxi-column>
     </dx-data-grid>

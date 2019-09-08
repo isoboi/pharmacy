@@ -23,28 +23,28 @@
       <dxo-lookup [dataSource]="brands.items()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
     </dxi-column>
 
-    <dxi-column [allowEditing]="false" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" alignment="left" caption="SKU mars" [width]="250" dataField="ProductId">
+    <dxi-column [allowEditing]="false"   [allowFiltering]="false" alignment="left" caption="SKU mars" [width]="250" dataField="ProductId">
     </dxi-column>
 
     <dxi-column [allowEditing]="true" alignment="left" caption="SKU name Eng" dataField="SKUNameEng">
       <dxo-lookup [dataSource]="products.store()" valueExpr="Name" displayExpr="Name"></dxo-lookup>
     </dxi-column>
 
-    <dxi-column [allowEditing]="false" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" alignment="left" caption="SKU name Rus" dataField="SKUNameRus"></dxi-column>
+    <dxi-column [allowEditing]="false"   [allowFiltering]="false" alignment="left" caption="SKU name Rus" dataField="SKUNameRus"></dxi-column>
     <dxi-column [allowEditing]="true" alignment="left" caption="MNN" [width]="200" dataField="SKUIASId">
       <dxo-lookup [dataSource]="skuias.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
     </dxi-column>
-    <dxi-column [allowEditing]="false" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" alignment="left" caption="Dosage" dataField="Dosage"></dxi-column>
-    <dxi-column dataType="number" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" [allowEditing]="true" alignment="left" caption="Tender starting price (per pack, RUB)"
+    <dxi-column [allowEditing]="false"   [allowFiltering]="false" alignment="left" caption="Dosage" dataField="Dosage"></dxi-column>
+    <dxi-column dataType="number"   [allowFiltering]="false" [allowEditing]="true" alignment="left" caption="Tender starting price (per pack, RUB)"
                 dataField="StartingPrice"></dxi-column>
     <dxi-column [allowEditing]="true" alignment="left" caption="Risk" [width]="120" dataField="RiskId">
       <dxo-lookup [dataSource]="risk.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
     </dxi-column>
-    <dxi-column dataType="number" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" [allowEditing]="true" alignment="left" caption="Tender Volume (packs)"
+    <dxi-column dataType="number"   [allowFiltering]="false" [allowEditing]="true" alignment="left" caption="Tender Volume (packs)"
                 dataField="TenderVolume"></dxi-column>
-    <dxi-column [allowEditing]="false" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" alignment="left" caption="Tender Value (RUB)"
+    <dxi-column [allowEditing]="false"   [allowFiltering]="false" alignment="left" caption="Tender Value (RUB)"
                 dataField="TenderValueRUB"></dxi-column>
-    <dxi-column [allowEditing]="false" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" alignment="left" caption="Tender Value (USD)"
+    <dxi-column [allowEditing]="false"   [allowFiltering]="false" alignment="left" caption="Tender Value (USD)"
                 dataField="TenderValueUSD"></dxi-column>
     <dxi-column [allowEditing]="false" alignment="left" caption="EDL Price (RUB)" dataField="EDLPriceRUB">
       <dxo-lookup [dataSource]="EDLPriceList.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
@@ -52,23 +52,23 @@
     <dxi-column [allowEditing]="false" alignment="left" caption="Reference price (RUB)" dataField="ReferencePriceRUB">
       <dxo-lookup [dataSource]="ReferencePriceList.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
     </dxi-column>
-    <dxi-column [allowEditing]="false" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" alignment="left" caption="Diff Tender starting price and EDL price (%)"
+    <dxi-column [allowEditing]="false"   [allowFiltering]="false" alignment="left" caption="Diff Tender starting price and EDL price (%)"
                 dataField="DiffStartAndEDL "></dxi-column>
-    <dxi-column [allowEditing]="false" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" alignment="left" caption="Diff Tender starting price and Reference price (%)"
+    <dxi-column [allowEditing]="false"   [allowFiltering]="false" alignment="left" caption="Diff Tender starting price and Reference price (%)"
                 dataField="DiffStartAndReference"></dxi-column>
-    <dxi-column dataType="number" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" [allowEditing]="true" alignment="left" caption="Won contract price (per pack in RUB)"
+    <dxi-column dataType="number"   [allowFiltering]="false" [allowEditing]="true" alignment="left" caption="Won contract price (per pack in RUB)"
                 dataField="WonContractPriceRUB"></dxi-column>
-    <dxi-column dataType="number" [allowEditing]="true" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" alignment="left" caption="Contract price (RUB) per pack"
+    <dxi-column dataType="number" [allowEditing]="true"   [allowFiltering]="false" alignment="left" caption="Contract price (RUB) per pack"
                 dataField="ContractPriceRUB"></dxi-column>
-    <dxi-column [allowEditing]="true" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" alignment="left" caption="Contract quantity (packs)"
+    <dxi-column [allowEditing]="true"   [allowFiltering]="false" alignment="left" caption="Contract quantity (packs)"
                 dataField="ContractQuantity"></dxi-column>
     <dxi-column [allowEditing]="false" alignment="left" caption="Forecast Price per Pack (USD)"
                 dataField="ForecastPriceRUB">
       <dxo-lookup [dataSource]="ForecastPriceList.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
     </dxi-column>
-    <dxi-column [allowEditing]="false" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" alignment="left" caption="Forecasted Tender Value (RUB)"
+    <dxi-column [allowEditing]="false"   [allowFiltering]="false" alignment="left" caption="Forecasted Tender Value (RUB)"
                 dataField="ForecastedValueRUB"></dxi-column>
-    <dxi-column [allowEditing]="false" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" alignment="left" caption="Forecasted Tender Value (USD)"
+    <dxi-column [allowEditing]="false"   [allowFiltering]="false" alignment="left" caption="Forecasted Tender Value (USD)"
                 dataField="ForecastedValueUSD"></dxi-column>
   </dx-data-grid>
 </div>
