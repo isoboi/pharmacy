@@ -27,7 +27,7 @@
     </dxi-column>
 
     <dxi-column [allowEditing]="true" alignment="left" caption="SKU name Eng" dataField="SKUNameEng">
-      <dxo-lookup [dataSource]="products.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
+      <dxo-lookup [dataSource]="products.store()" valueExpr="Name" displayExpr="Name"></dxo-lookup>
     </dxi-column>
 
     <dxi-column [allowEditing]="false" [allowSorting]="false" [allowSearch]="false" [allowFiltering]="false" alignment="left" caption="SKU name Rus" dataField="SKUNameRus"></dxi-column>
