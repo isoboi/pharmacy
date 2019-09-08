@@ -61,9 +61,6 @@ export class TenderDetailsComponent implements OnInit {
     for (const key of keys) {
       if (tender[key] && tender[key] !== this.originalTender[key]) {
         obj[key] = tender[key];
-        if (this.id !== 'new') {
-          this.originalTender[key] = tender[key];
-        }
       }
     }
 
@@ -77,6 +74,13 @@ export class TenderDetailsComponent implements OnInit {
     setTimeout(() => {
       this.tenderService.save(obj, event.action, this.id)
         .subscribe((x: any) => {
+          for (const key of keys) {
+            if (tender[key] && tender[key] !== this.originalTender[key]) {
+              if (this.id !== 'new') {
+                this.originalTender[key] = tender[key];
+              }
+            }
+          }
           if (event.action === this.actions.save) {
             if (x && x.Id) {
               this.router.navigate([`/tender/${x.Id}`]);
