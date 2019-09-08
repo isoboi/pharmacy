@@ -84,12 +84,11 @@ export class TenderDetailsComponent implements OnInit {
           if (event.action === this.actions.save) {
             if (x && x.Id) {
               this.router.navigate([`/tender/${x.Id}`]);
-
-              setTimeout(() => {
-                location.reload();
-              });
             }
           }
+          setTimeout(() => {
+            location.reload();
+          });
         });
     }, timeoutTime);
 
