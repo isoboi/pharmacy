@@ -37,7 +37,7 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject();
   isNewTender = this.route.snapshot.params.id === 'new';
 
-  private originalHospital: any;
+  originalHospital: any;
   constructor(private tenderService: TenderService,
               private route: ActivatedRoute,
               private restService: RestService,
