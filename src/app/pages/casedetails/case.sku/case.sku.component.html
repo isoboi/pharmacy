@@ -36,10 +36,10 @@
   <dxi-column [allowEditing]="true"  [caption]="'Additional On-Invoice Discount (%)'"
               dataField="AddOnInvoiceDiscount"></dxi-column>
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Price On-Invoice (RUB)'" dataField="PriceOnInvoiceRUB"></dxi-column>
-  <dxi-column [allowEditing]="true"  [caption]="'Quantity'" dataField="Quantity"></dxi-column>
+  <dxi-column [dataType]="'number'" [allowEditing]="true"  [caption]="'Quantity'" dataField="Quantity"></dxi-column>
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Total Price On-Invoice Discount (RUB)'"
               dataField="TotalPriceOnInvDiscRUB"></dxi-column>
-  <dxi-column [allowEditing]="true"  [caption]="'Additional Off-Invoice Discount (%)'"
+  <dxi-column [dataType]="'number'" [allowEditing]="true"  [caption]="'Additional Off-Invoice Discount (%)'"
               dataField="AddOffInvoiceDiscount"></dxi-column>
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Total Additional Off-Invoice Discount (RUB)'"
               dataField="TotalAddOffInvDiscRUB"></dxi-column>
@@ -57,10 +57,10 @@
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Gross Sales (USD)'" dataField="GrossSalesUSD"></dxi-column>
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Total On-Invoice sales (RUB)'" dataField="TotalOnInvSalesRUB"></dxi-column>
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Total On-Invoice sales (USD)'" dataField="TotalOnInvSalesUSD"></dxi-column>
-  <dxi-column [allowEditing]="true"    [allowFiltering]="false"  [caption]="'Demanded shelf life as per contract (months)'"
+  <dxi-column [dataType]="'number'" [allowEditing]="true"    [allowFiltering]="false"  [caption]="'Demanded shelf life as per contract (months)'"
               dataField="DemandedShelfLife"></dxi-column>
-  <dxi-column [allowEditing]="true"    [allowFiltering]="false"  [caption]="'Shelf Life (%)'" dataField="ShelfLifePercent"></dxi-column>
-  <dxi-column [allowEditing]="true"    [allowFiltering]="false"  [caption]="'Shelf Life (amount of months)'" dataField="ShelfLifeMonth"></dxi-column>
+  <dxi-column [dataType]="'number'" [allowEditing]="true" [allowFiltering]="false"  [caption]="'Shelf Life (%)'" dataField="ShelfLifePercent"></dxi-column>
+  <dxi-column [dataType]="'number'" [allowEditing]="true"    [allowFiltering]="false"  [caption]="'Shelf Life (amount of months)'" dataField="ShelfLifeMonth"></dxi-column>
   <dxi-column [allowEditing]="true"  [caption]="'Commertial policy name'" dataField="CPCode">
     <dxo-lookup [dataSource]="dataSourceSkuMg.items()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
   </dxi-column>

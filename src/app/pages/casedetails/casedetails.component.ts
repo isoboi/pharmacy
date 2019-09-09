@@ -112,6 +112,10 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private success = (x) => {
+    if (this.action === this.actions.reject) {
+      this.router.navigate(['/cases']);
+      return;
+    }
     if (this.action !== this.actions.save) {
       if (this.action === this.actions.approversRequests) {
         if (x) {
