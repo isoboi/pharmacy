@@ -6,6 +6,7 @@
   [allowColumnReordering]="true"
   [allowColumnResizing]="true"
   [columnAutoWidth]="true"
+  (onInitNewRow)="onInitNewRow($event)"
   (onRowUpdated)="onRowUpdated($event)"
   [showBorders]="true">
   <dxo-editing

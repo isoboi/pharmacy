@@ -97,6 +97,11 @@ export class CaseSkuComponent {
       filter
     };
   }
+  onInitNewRow(event) {
+    event.data = {
+      TenderId: Number(this.id)
+    };
+  }
 
   onRowUpdated() {
     this.dataSource.reload();
