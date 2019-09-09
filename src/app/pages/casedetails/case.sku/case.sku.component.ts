@@ -99,7 +99,7 @@ export class CaseSkuComponent {
   }
   onInitNewRow(event) {
     event.data = {
-      TenderId: Number(this.id)
+      TenderCaseId: Number(this.id)
     };
   }
 
