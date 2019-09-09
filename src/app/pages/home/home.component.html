@@ -3,6 +3,7 @@
     <h4 class="m-0">Tenders</h4>
     <dx-data-grid
       id="gridContainer"
+      class="mb-3"
       [dataSource]="dataSource"
       [allowColumnReordering]="true"
       [allowColumnResizing]="true"
@@ -205,17 +206,15 @@
           [dataSource]="orderHeaderFilter"></dxo-header-filter>
       </dxi-column>
       <dxi-column
-
         [allowFiltering]="false"
         dataField="SKUNameEng"
         caption="SKU Name"
-
         alignment="center"></dxi-column>
       <dxi-column
         dataField="SKUMGId"
         caption="SKU Code"></dxi-column>
+      <dxi-column dataField="ProductId" caption="SKU mars" alignment="center"></dxi-column>
       <dxi-column
-
         [allowFiltering]="false"
         dataField="TenderVolume"
         caption="Tender Volume (packs)"
