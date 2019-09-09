@@ -43,10 +43,21 @@
         caption="Id">
       </dxi-column>
       <dxi-column
-
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="CreatedOn"
+        caption="Create Date">
+      </dxi-column>
+      <dxi-column
         [allowFiltering]="false"
         dataField="TAMName"
         caption="TAM">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="FederalDistrictName"
+        caption="Federal District">
       </dxi-column>
       <dxi-column
 
@@ -61,13 +72,71 @@
         caption="Hospital INN">
       </dxi-column>
       <dxi-column
-
         [allowFiltering]="false"
         dataField="HospitalName"
         caption="Client name">
       </dxi-column>
       <dxi-column
-
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="LegalEntityTypeName"
+        caption="Legal Entity Type">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="SourceOfFinName"
+        caption="Channel of Financing">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="FederalLawNumber"
+        caption="Federal law (#)">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="StatusChangedOn"
+        caption="Status Change Date">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="TenderStatusCommentName"
+        caption="Tender Status Comment">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="NotificationNumber"
+        caption="Notification ID">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="Artificial"
+        caption="Artificial">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="DeadlineForSupply"
+        caption="Deadline for Supply">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="ContractStatusName"
+        caption="Contract Status">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="ContractStatusCommentName"
+        caption="Contract Status Comment">
+      </dxi-column>
+      <dxi-column
         [allowFiltering]="false"
         dataField="TenderStatusName">
       </dxi-column>
