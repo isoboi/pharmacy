@@ -35,14 +35,11 @@
         [visible]="true"
         placeholder="Search..."></dxo-search-panel>
       <dxi-column
-
         [allowFiltering]="false"
         dataField="Id"
-
         caption="Case ID">
       </dxi-column>
       <dxi-column
-
         [allowFiltering]="false"
         dataField="ParentId"
         alignment="center"
@@ -103,6 +100,73 @@
 
         alignment="center"
         caption="Approver">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="TenderCaseStatusId"
+        caption="Case Status">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="RelatedCaseCommentName"
+        caption="Related Case Comment">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="SourceOfFinName"
+        caption="Channel of Financing">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="FederalLawNumber"
+        caption="Federal Law (#)">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="NotificationNumber"
+        caption="Notification ID">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="SupplierName"
+        caption="Supplier of the Tender">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="SalesChannelName"
+        caption="Sales Channel">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        dataField="WeightedAveConractPriceRUB"
+        caption="Weighted Average contract price (RUB)">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        caption="Repetition Test"
+        dataField="DupStatus">
+      </dxi-column>
+
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        caption="Commertial Policy Test"
+        dataField="CPStatus">
+      </dxi-column>
+      <dxi-column
+        [visible]="false"
+        [allowFiltering]="false"
+        caption="Discount Provided"
+        dataField="DiscountProvided">
       </dxi-column>
     </dx-data-grid>
 

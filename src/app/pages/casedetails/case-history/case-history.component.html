@@ -58,6 +58,19 @@
         <dxo-header-filter [visible]="showHeaderFilter"></dxo-header-filter>
         <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
 
+
+        <dxi-column
+          [visible]="false"
+          [allowFiltering]="false"
+          caption="MAL"
+          dataField="FinalApproverName">
+        </dxi-column>
+        <dxi-column
+          [visible]="false"
+          [allowFiltering]="false"
+          caption="Change Date"
+          dataField="ModifiedOn">
+        </dxi-column>
         <!--<dxi-column dataField="TenderCaseStatusName" caption="Request approval status"></dxi-column>-->
         <dxi-column    [allowFiltering]="false"  dataField="OldStatusName"></dxi-column>
         <dxi-column    [allowFiltering]="false"  dataField="NewStatusName"></dxi-column>
