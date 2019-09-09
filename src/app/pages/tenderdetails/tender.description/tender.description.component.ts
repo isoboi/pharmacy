@@ -20,7 +20,9 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   @Input()disableCreate = false;
   @Output()save = new EventEmitter();
   federalDistrict;
+  fdDataSource: DataSource;
   federalSubject;
+  regionDataSource: DataSource;
   hospitals: DataSource;
   federalLaw;
   tenderStatusComment;
@@ -71,6 +73,19 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
       ['Id'],
       {Id: 'Int32'}
     );
+    this.fdDataSource = this.restService.bindData(
+      environment.apiUrl + '/FederalDistrict',
+      ['Id'],
+      {Id: 'Int32'}
+    );
+
+    this.regionDataSource = this.restService.bindData(
+      environment.apiUrl + '/FederalSubject',
+      ['Id'],
+      {Id: 'Int32'}
+    );
+
+
     this.tenderService.getHospitals()
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
@@ -78,11 +93,11 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
       });
 
 
-    this.tenderService.getFederalDistrict()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.federalDistrict = data;
-      });
+    // this.tenderService.getFederalDistrict()
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((data) => {
+    //     this.federalDistrict = data;
+    //   });
     this.tenderService.getFederalSubject()
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
@@ -181,6 +196,14 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
       this.legalEntityType.filter(['Id', '=', LegalEntityTypeId]);
       this.legalEntityType.load();
     }
+  }
+
+  public fdChanged = ($event) => {
+    if (this.tender) {
+      this.tender.RegionId = null;
+    }
+    this.regionDataSource.filter(['FederalDistrictId', '=', $event.value]);
+    this.regionDataSource.load();
   }
 
   onInitialized() {

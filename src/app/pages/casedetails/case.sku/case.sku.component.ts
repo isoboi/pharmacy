@@ -19,7 +19,7 @@ export class CaseSkuComponent {
   @Input() tenderCase: TenderCase;
   dataSource: DataSource;
   dataSourceSkuMg: DataSource;
-  SKU_MG: DataSource;
+  productDataSource: DataSource;
   ProductStructure: DataSource;
   ProductStructureFranchise: DataSource;
   currentFilter: any;
@@ -50,8 +50,8 @@ export class CaseSkuComponent {
     this.dataSourceSkuMg.load()
 
 
-    this.SKU_MG = this.restService.bindData(
-      this.apiUrl + '/SKUMG',
+    this.productDataSource = this.restService.bindData(
+      this.apiUrl + '/Product',
       [ 'Id' ],
       { Id: 'Int32' }
     );
@@ -84,14 +84,22 @@ export class CaseSkuComponent {
     console.log(options);
     let filter = null;
     if (options.data) {
-      const bu = this.ProductStructure.items().find((item) => item.Id === options.data.ProductStructureId).BU;
-      filter = ['BU', '=', bu];
+      const bu = this.ProductStructure.items().find((item) => item.Id === options.data.ProductStructureId);
+      if (bu) {
+        filter = ['BU', '=', bu];
+      } else {
+        filter = ['BU', '=', ''];
+      }
     }
 
     return {
       store: this.ProductStructureFranchise.items(),
       filter
     };
+  }
+
+  onRowUpdated() {
+    this.dataSource.reload();
   }
 }
 

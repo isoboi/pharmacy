@@ -95,4 +95,7 @@ export class TenderSkuComponent implements OnInit {
       TenderId: Number(this.id)
     };
   }
+  onRowUpdated(event) {
+    this.tenderSku.reload();
+  }
 }

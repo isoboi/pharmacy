@@ -5,6 +5,7 @@
     [columnAutoWidth]="true"
     [dataSource]="tenderSku"
     (onInitNewRow)="onInitNewRow($event)"
+    (onRowUpdated)="onRowUpdated($event)"
     [showBorders]="true">
     <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
     <dxo-editing
@@ -26,8 +27,8 @@
     <dxi-column [allowEditing]="false"   [allowFiltering]="false" alignment="left" caption="SKU mars" [width]="250" dataField="ProductId">
     </dxi-column>
 
-    <dxi-column [allowEditing]="true" alignment="left" caption="SKU name Eng" dataField="SKUNameEng">
-      <dxo-lookup [dataSource]="products.store()" valueExpr="Name" displayExpr="Name"></dxo-lookup>
+    <dxi-column [allowEditing]="true" alignment="left" caption="SKU name Eng" dataField="SKUMGId">
+      <dxo-lookup [dataSource]="products.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
     </dxi-column>
 
     <dxi-column [allowEditing]="false"   [allowFiltering]="false" alignment="left" caption="SKU name Rus" dataField="SKUNameRus"></dxi-column>

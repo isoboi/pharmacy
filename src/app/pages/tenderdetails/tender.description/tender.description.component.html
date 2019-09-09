@@ -8,12 +8,12 @@
   <dxi-item [label]="{text: 'Federal district'}"
             dataField="FederalDistrictId"
             editorType="dxSelectBox"
-            [editorOptions]="{ items: federalDistrict?.value, displayExpr:'Name', valueExpr:'Id' }"
+            [editorOptions]="{ dataSource: fdDataSource, onValueChanged: fdChanged, displayExpr:'Name', valueExpr:'Id' }"
   ></dxi-item>
   <dxi-item [label]="{text: 'Region'}"
             dataField="RegionId"
             editorType="dxSelectBox"
-            [editorOptions]="{ items: federalSubject?.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+            [editorOptions]="{ dataSource: regionDataSource, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
 
   <dxi-item [label]="{text: 'INN'}"
             dataField="HospitalId"
