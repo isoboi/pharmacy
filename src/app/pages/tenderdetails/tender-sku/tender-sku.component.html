@@ -19,7 +19,7 @@
     <dxo-header-filter [visible]="true"></dxo-header-filter>
     <dxo-search-panel [visible]="true" placeholder="Search..."></dxo-search-panel>
     <dxo-editing mode="row" [allowUpdating]="true"></dxo-editing>
-
+    <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="tenderSku"></dxo-state-storing>
     <dxi-column [allowEditing]="false" alignment="left" caption="Brand" [width]="200" dataField="BrandId">
       <dxo-lookup [dataSource]="brands.items()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
     </dxi-column>

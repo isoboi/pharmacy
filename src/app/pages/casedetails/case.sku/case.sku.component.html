@@ -21,6 +21,7 @@
   <dxo-editing mode="cell" [allowUpdating]="tenderCase.TenderCaseStatusId === 1"></dxo-editing>
   <dxo-editing mode="row" [allowUpdating]="true"></dxo-editing>
   <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+  <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="caseSku"></dxo-state-storing>
 
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"   [caption]="'Brand'" dataField="BrandName"></dxi-column>
   <dxi-column [allowEditing]="false"  [caption]="'SKU mars'" dataField="ProductId">

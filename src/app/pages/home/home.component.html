@@ -37,6 +37,7 @@
       <dxo-search-panel
         [visible]="true"
         placeholder="Search..."></dxo-search-panel>
+      <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="tenders"></dxo-state-storing>
       <dxi-column
 
         [allowFiltering]="false"
@@ -185,6 +186,7 @@
         [applyFilter]="currentFilter"></dxo-filter-row>
       <dxo-header-filter
         [visible]="showHeaderFilter"></dxo-header-filter>
+      <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="tendersSku"></dxo-state-storing>
       <dxi-column
 
         [allowFiltering]="false"

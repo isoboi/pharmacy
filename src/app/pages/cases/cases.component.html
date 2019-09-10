@@ -34,6 +34,7 @@
       <dxo-search-panel
         [visible]="true"
         placeholder="Search..."></dxo-search-panel>
+      <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="cases"></dxo-state-storing>
       <dxi-column
         [allowFiltering]="false"
         dataField="Id"
@@ -195,6 +196,7 @@
         [applyFilter]="currentFilter"></dxo-filter-row>
       <dxo-header-filter
         [visible]="showHeaderFilter"></dxo-header-filter>
+      <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="casesSku"></dxo-state-storing>
       <!-- <dxo-search-panel
           [visible]="true"
 
