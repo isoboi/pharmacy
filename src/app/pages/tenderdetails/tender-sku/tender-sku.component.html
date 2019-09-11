@@ -63,7 +63,7 @@
                 dataField="ContractPriceRUB"></dxi-column>
     <dxi-column [dataType]="'number'" [allowEditing]="true"   [allowFiltering]="false" alignment="left" caption="Contract quantity (packs)"
                 dataField="ContractQuantity"></dxi-column>
-    <dxi-column [allowEditing]="false" alignment="left" caption="Forecast Price per Pack (USD)"
+    <dxi-column [allowEditing]="false" alignment="left" caption="Forecast Price per Pack (RUB)"
                 dataField="ForecastPriceRUB">
       <dxo-lookup [dataSource]="ForecastPriceList.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
     </dxi-column>

@@ -35,7 +35,7 @@
 
         <dxi-column    [allowFiltering]="false"  minWidth="100" dataField="FileName" caption="File"></dxi-column>
         <dxi-column    [allowFiltering]="false"  dataField="FileType" caption="Type"></dxi-column>
-        <dxi-column    [allowFiltering]="false"  dataField="OwnerId" caption="User"></dxi-column>
+        <dxi-column    [allowFiltering]="false"  dataField="CreatedByName" caption="User"></dxi-column>
         <dxi-column    [allowFiltering]="false"  dataField="NoteText" caption="Description"></dxi-column>
         <dxi-column    [allowFiltering]="false"  dataField="CreatedOn" caption="Create date"></dxi-column>
         <dxi-column    [allowFiltering]="false"  dataField="ModifiedOn" caption="Change date"></dxi-column>
@@ -72,16 +72,15 @@
           dataField="ModifiedOn">
         </dxi-column>
         <!--<dxi-column dataField="TenderCaseStatusName" caption="Request approval status"></dxi-column>-->
-        <dxi-column    [allowFiltering]="false"  dataField="OldStatusName"></dxi-column>
-        <dxi-column    [allowFiltering]="false"  dataField="NewStatusName"></dxi-column>
-        <dxi-column    [allowFiltering]="false"  dataField="MAL" caption="MAL"></dxi-column>
-        <dxi-column    [allowFiltering]="false"  dataField="ApproverName" caption="Approver"></dxi-column>
-        <dxi-column    [allowFiltering]="false"  dataField="ApproverCredentials" caption="Approver's credential"></dxi-column>
-        <dxi-column    [allowFiltering]="false"  dataField="ModifiedOn" caption="Change date" sortOrder="asc"></dxi-column>
-        <dxi-column    [allowFiltering]="false"  dataField="StatusStartDate" caption="State start"></dxi-column>
-        <dxi-column    [allowFiltering]="false"  dataField="StatusEndDate" caption="State end"></dxi-column>
-        <dxi-column    [allowFiltering]="false"  dataField="ApproverComment" caption="Approver comment"></dxi-column>
-        <dxi-column    [allowFiltering]="false"  dataField="RequestorComment" caption="Requestor Comment"></dxi-column>
+        <dxi-column [allowFiltering]="false"  dataField="OldStatusName"></dxi-column>
+        <dxi-column [allowFiltering]="false"  dataField="NewStatusName"></dxi-column>
+        <dxi-column [visible]="false" [allowFiltering]="false"  dataField="FinalApproverName" caption="MAL"></dxi-column>
+        <dxi-column [allowFiltering]="false"  dataField="ApproverName" caption="Approver"></dxi-column>
+        <dxi-column [visible]="false" [allowFiltering]="false"  dataField="ModifiedOn" caption="Change date" sortOrder="asc"></dxi-column>
+        <dxi-column [allowFiltering]="false"  dataField="StatusStartDate" caption="State start"></dxi-column>
+        <dxi-column [allowFiltering]="false"  dataField="StatusEndDate" caption="State end"></dxi-column>
+        <dxi-column [allowFiltering]="false"  dataField="ApproverComment" caption="Approver comment"></dxi-column>
+        <dxi-column [allowFiltering]="false"  dataField="RequestorComment" caption="Requestor Comment"></dxi-column>
       </dx-data-grid>
     </div>
   </div>

@@ -29,7 +29,6 @@ export class CaseDescriptionComponent implements OnInit{
     this.isNewCase = this.id === 'new';
     if (this.isNewCase) {
       this.tenderCase = new TenderCase();
-      console.log(this.tenderCase)
       this.tenderId = this.route.snapshot.queryParams['tenderId'];
     }
   }
@@ -41,7 +40,6 @@ export class CaseDescriptionComponent implements OnInit{
   }
 
   save(action) {
-    console.log(this.tenderCase)
     this.saveCase.emit({tenderCase: this.tenderCase, action});
   }
 

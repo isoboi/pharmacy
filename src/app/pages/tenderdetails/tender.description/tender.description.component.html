@@ -49,6 +49,7 @@
             dataField="StatusChangedOn"></dxi-item>
 
   <dxi-item [label]="{text: 'Tender Status Comment'}"
+            [disabled]="true"
             dataField="TenderStatusCommentId"
             editorType="dxSelectBox"
             [editorOptions]="{ items: tenderStatusComment?.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
