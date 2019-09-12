@@ -23,7 +23,7 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
 
   scrollWidth: string;
 
-  @HostListener('document:keydown.escape', ['$event'])
+  @HostListener('document:keydown.escape')
   onKeyDownHandler() {
 
     this.closePopup();
@@ -64,21 +64,16 @@ export class PopupComponent implements AfterViewInit, OnDestroy {
     outer.style.visibility = 'hidden';
     outer.style.width = '100px';
     document.body.appendChild(outer);
-
     const widthNoScroll = outer.offsetWidth;
     // force scrollbars
     outer.style.overflow = 'scroll';
-
     // add innerdiv
     const inner = document.createElement('div');
     inner.style.width = '100%';
     outer.appendChild(inner);
-
     const widthWithScroll = inner.offsetWidth;
-
     // remove divs
     outer.parentNode.removeChild(outer);
-
     return String(widthNoScroll - widthWithScroll);
   }
 }
