@@ -57,9 +57,11 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.id = this.route.snapshot.params.id;
 
-    this.canUpdate$ = this.tenderService.canUpdate(this.id);
+
     if (this.isNewTender) {
       this.tender = new Tender();
+    } else {
+      this.canUpdate$ = this.tenderService.canUpdate(this.id);
     }
 
     this.hospitals = this.restService.bindData(
