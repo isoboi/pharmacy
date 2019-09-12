@@ -76,7 +76,7 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
       ],
     });
     myDialog.show().then((dialogResult) => {
-      if (dialogResult) {
+      if (dialogResult.buttonText) {
         this.patchTenderCase(null, this.actions.approve, this.id);
       }
     });
