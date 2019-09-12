@@ -36,19 +36,16 @@
         placeholder="Search..."></dxo-search-panel>
       <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="cases"></dxo-state-storing>
       <dxi-column
-        [allowFiltering]="false"
         dataField="Id"
         caption="Case ID">
       </dxi-column>
       <dxi-column
-        [allowFiltering]="false"
         dataField="ParentId"
         alignment="center"
         caption="Parent ID">
       </dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="ChildId"
         alignment="center"
 
@@ -56,7 +53,6 @@
       </dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="RegionName"
 
         alignment="center"
@@ -64,20 +60,17 @@
       </dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="HospitalName"
         alignment="center"
         caption="Client name">
       </dxi-column>
       <dxi-column
-        [allowFiltering]="false"
         dataField="TAMName"
         alignment="center"
         caption="TAM">
       </dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="DiscountNumber"
 
         alignment="center"
@@ -85,7 +78,6 @@
       </dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="DiscountValidityDate"
 
         alignment="center"
@@ -93,7 +85,6 @@
       </dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="OwnerName"
 
         alignment="center"
@@ -101,67 +92,56 @@
       </dxi-column>
       <dxi-column
         [visible]="false"
-        [allowFiltering]="false"
         dataField="TenderCaseStatusName"
         caption="Case Status">
       </dxi-column>
       <dxi-column
         [visible]="false"
-        [allowFiltering]="false"
         dataField="RelatedCaseCommentName"
         caption="Related Case Comment">
       </dxi-column>
       <dxi-column
         [visible]="false"
-        [allowFiltering]="false"
         dataField="SourceOfFinName"
         caption="Channel of Financing">
       </dxi-column>
       <dxi-column
         [visible]="false"
-        [allowFiltering]="false"
         dataField="FederalLawNumber"
         caption="Federal Law (#)">
       </dxi-column>
       <dxi-column
         [visible]="false"
-        [allowFiltering]="false"
         dataField="NotificationNumber"
         caption="Notification ID">
       </dxi-column>
       <dxi-column
         [visible]="false"
-        [allowFiltering]="false"
         dataField="SupplierName"
         caption="Supplier of the Tender">
       </dxi-column>
       <dxi-column
         [visible]="false"
-        [allowFiltering]="false"
         dataField="SalesChannelName"
         caption="Sales Channel">
       </dxi-column>
       <dxi-column
         [visible]="false"
-        [allowFiltering]="false"
         dataField="WeightedAveConractPriceRUB"
         caption="Weighted Average contract price (RUB)">
       </dxi-column>
       <dxi-column
         [visible]="false"
-        [allowFiltering]="false"
         caption="Repetition Test"
         dataField="DupStatus">
       </dxi-column>
 
       <dxi-column
         [visible]="false"
-        [allowFiltering]="false"
         caption="Commertial Policy Test"
         dataField="CPStatus">
       </dxi-column>
       <dxi-column
-        [allowFiltering]="false"
         caption="Discount Provided"
         dataField="DiscountProvided">
       </dxi-column>
@@ -192,7 +172,6 @@
           placeholder="Search..."></dxo-search-panel> -->
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="Id"
         caption="Case ID"
 
@@ -202,7 +181,6 @@
       </dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="BCrandName"
         caption="Brand"
 
@@ -212,7 +190,6 @@
       </dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="SKUNameEng"
         caption="SKU Name Eng"
 
@@ -224,14 +201,12 @@
         alignment="center"
       ></dxi-column>
       <dxi-column
-        [allowFiltering]="false"
         dataField="OnInvoiceDiscount"
         caption="On-Invoice Discount (base) (%)"
         alignment="center"
       ></dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="AddOnInvoiceDiscount"
         caption="Additional On-Invoice Discount (%)"
 
@@ -239,7 +214,6 @@
       ></dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="AddOffInvoiceDiscount"
         caption="Additional Off-Invoice Discount (%)"
 
@@ -247,7 +221,6 @@
       ></dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="Quantity"
         caption="Quantity"
 
@@ -255,7 +228,6 @@
       ></dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="ContractPriceRUB"
         caption="Contract price (RUB) per pack"
 
@@ -263,7 +235,6 @@
       ></dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="PriceRUB"
         caption="Price (price list, RUB)"
 
@@ -271,7 +242,6 @@
       ></dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="PriceOnInvoiceRUB"
         caption="Price On-Invoice (руб)"
 
@@ -279,7 +249,6 @@
       ></dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="TotalDiscount"
         caption="Total Discount (%)"
 
@@ -287,7 +256,6 @@
       ></dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="FinalPriceWAllDiscRUB"
         caption="Final Price w all discounts anticipated (RUB)"
 
@@ -295,7 +263,6 @@
       ></dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="NetSalesRUB"
         caption="Net Sales (RUB)"
 
@@ -303,7 +270,6 @@
       ></dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="CPStatus"
         caption="Commertial policy test"
 
@@ -311,14 +277,12 @@
       ></dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="DupStatus"
         caption="Repetition test on cases"
         alignment="center"
       ></dxi-column>
       <dxi-column
 
-        [allowFiltering]="false"
         dataField="CreatedOn"
         caption="Create date"
         alignment="center"
