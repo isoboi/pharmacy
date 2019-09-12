@@ -1,0 +1,5 @@
+<div class="popup" (click)="closePopup()">
+	<div class="popup-content" [ngStyle]="styles" (click)="preventDefault($event)">
+		<ng-content></ng-content>
+	</div>
+</div>

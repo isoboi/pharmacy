@@ -3,11 +3,13 @@ import {TenderService} from '../../../services/tender.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {Tender} from '../../../models/tender';
+import {ActionsTender, Tender} from '../../../models/tender';
 import {environment} from '../../../../environments/environment';
 import {RestService} from '../../../services/rest.service';
 import DataSource from 'devextreme/data/data_source';
+import * as overlay from 'devextreme/ui/overlay';
 
+overlay.baseZIndex(99999);
 
 @Component({
   selector: 'app-tender-description',
@@ -16,9 +18,9 @@ import DataSource from 'devextreme/data/data_source';
 })
 
 export class TenderDescriptionComponent implements OnInit, OnDestroy {
-  @Input()tender: Tender;
-  @Input()disableCreate = false;
-  @Output()save = new EventEmitter();
+  @Input() tender: Tender;
+  @Input() disableCreate = false;
+  @Output() save = new EventEmitter();
   federalDistrict;
   fdDataSource: DataSource;
   federalSubject;
@@ -36,14 +38,19 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   clientName: DataSource;
   legalEntityType: DataSource;
   tenderWinner: DataSource;
+  showPopup = false;
+  popUpValue: number;
+
   private destroy$ = new Subject();
   isNewTender = this.route.snapshot.params.id === 'new';
 
   originalHospital: any;
+
   constructor(private tenderService: TenderService,
               private route: ActivatedRoute,
               private restService: RestService,
-              private cdr: ChangeDetectorRef) {}
+              private cdr: ChangeDetectorRef) {
+  }
 
 
   ngOnInit() {
@@ -156,7 +163,11 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   }
 
   saveTender(action) {
-    this.save.emit({tender: this.tender, action});
+    if (action === ActionsTender.decline) {
+      this.showPopup = true;
+    } else {
+      this.save.emit({tender: this.tender, action});
+    }
   }
 
   onFieldDataChanged($event) {
@@ -179,6 +190,7 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
     //
     // }
   }
+
   public onInnChanged = ($event) => {
     if ($event && $event.value) {
       this.tender.LegalEntityTypeId = null;
@@ -187,7 +199,7 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
       this.clientName.filter(['INN', '=', hospiral.INN]);
       this.clientName.load();
     }
-  }
+  };
 
   public onClientChanged = ($event) => {
     if ($event && $event.value) {
@@ -196,7 +208,7 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
       this.legalEntityType.filter(['Id', '=', LegalEntityTypeId]);
       this.legalEntityType.load();
     }
-  }
+  };
 
   public fdChanged = ($event) => {
     if (this.tender) {
@@ -210,6 +222,22 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
     this.showLoadPanel = false;
     this.tender.ClientId = this.tender.HospitalId;
     this.cdr.detectChanges();
+  }
+
+  onPopUpValueChanged($event) {
+    this.popUpValue = $event.value;
+  }
+
+  onOk() {
+    const tender = new Tender();
+    tender.TenderStatusCommentId = this.popUpValue;
+    this.tenderService.save(tender, '', this.tender.Id)
+      .subscribe((x) => {
+        this.showPopup = false;
+        this.tender.TenderStatusCommentId = this.popUpValue;
+        this.popUpValue = null;
+        this.save.emit({tender: this.tender, action: ActionsTender.decline});
+      });
   }
 
   ngOnDestroy() {

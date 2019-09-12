@@ -37,6 +37,7 @@ import {CaseButtonsComponent} from './pages/casedetails/case-buttons/case-button
 import {TenderButtonsComponent} from './pages/tenderdetails/tender-buttons/tender-buttons.component';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {AuthInterceptor} from './services/auth.interceptor';
+import {PopupComponent} from './pages/popup/popup.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import {AuthInterceptor} from './services/auth.interceptor';
     TenderSkuComponent,
     TenderCaseComponent,
     CaseButtonsComponent,
-    TenderButtonsComponent
+    TenderButtonsComponent,
+    PopupComponent
   ],
   imports: [
     HttpClientModule,

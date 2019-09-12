@@ -100,3 +100,31 @@
 </dx-load-panel>
 
 <app-tender-buttons [disableCreate]="disableCreate" [tender]="tender" (saveTender)="saveTender($event)" *ngIf="(isNewTender || tender)" [tabIndex]="0"></app-tender-buttons>
+
+
+<app-popup *ngIf="showPopup">
+  <div class="popup-title">
+    Please, choose the reason for declining
+  </div>
+  <dx-select-box
+    [items]="tenderStatusComment?.value"
+    [displayExpr]="'Name'"
+    [valueExpr]="'Id'"
+    (onValueChanged)="onPopUpValueChanged($event)"
+    placeholder="Select a product...">
+  </dx-select-box>
+
+  <div class="buttons">
+    <dx-button
+      text="Ok"
+      type="danger"
+      [disabled]="!popUpValue"
+      (onClick)="onOk()">
+    </dx-button>
+    <dx-button
+      text="Cancel"
+      type="danger"
+      (onClick)="showPopup = false">
+    </dx-button>
+  </div>
+</app-popup>

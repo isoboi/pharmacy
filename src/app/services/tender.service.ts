@@ -3,6 +3,7 @@ import {Tab} from '../models/ui.models';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment.prod';
 import {ActionsTender} from '../models/tender';
+import {Observable} from 'rxjs';
 
 const tabs: Tab[] = [
   {
@@ -60,7 +61,7 @@ export class TenderService {
     return this.http.get(apiUrl + url);
   }
 
-  save(obj, action, id) {
+  save(obj, action, id): Observable<any> {
     if (action === this.actions.decline) {
       return this.http.get(apiUrl + `/Tender/BusinessService.Decline(key=${id})`);
     }

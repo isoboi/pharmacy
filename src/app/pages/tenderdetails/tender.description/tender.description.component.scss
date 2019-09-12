@@ -1,4 +1,19 @@
+.popup-title{
+  font-size: 18px;
+  margin-bottom: 40px;
+}
 
+dx-select-box {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 40px;
+  max-width: 400px;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-between;
+}
 
 .tender-description ::ng-deep{
   .dx-box-item-content{
