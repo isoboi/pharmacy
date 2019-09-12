@@ -40,7 +40,8 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   tenderWinner: DataSource;
   showPopup = false;
   popUpValue: number;
-
+  canUpdate$;
+  id;
   private destroy$ = new Subject();
   isNewTender = this.route.snapshot.params.id === 'new';
 
@@ -54,6 +55,9 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    this.id = this.route.snapshot.params.id;
+
+    this.canUpdate$ = this.tenderService.canUpdate(this.id);
     if (this.isNewTender) {
       this.tender = new Tender();
     }

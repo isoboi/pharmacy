@@ -30,10 +30,7 @@ export class TenderDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.tabs = this.tenderService.getTabs();
-    for (let i = 1; i < this.tabs.length; i++) {
-      const tab = this.tabs[i];
-      tab.disabled = this.id === 'new';
-    }
+    this.disableTabs(this.id === 'new')
     if (this.id !== 'new') {
 
       this.tender = this.tenderService.getTender(this.route.snapshot.params.id);
@@ -41,6 +38,18 @@ export class TenderDetailsComponent implements OnInit {
         .subscribe((x) => {
           this.originalTender = x;
         });
+
+      this.tenderService.canUpdate(this.id)
+        .subscribe((x: any) => {
+          this.disableTabs(!x.value);
+        })
+    }
+  }
+
+  private disableTabs(disabled) {
+    for (let i = 1; i < this.tabs.length; i++) {
+      const tab = this.tabs[i];
+      tab.disabled = disabled;
     }
   }
 

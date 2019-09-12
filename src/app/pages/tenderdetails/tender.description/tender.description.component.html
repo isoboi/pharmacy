@@ -1,6 +1,7 @@
 <dx-form class="tender-description" *ngIf="(isNewTender || tender) && originalHospital " id="form"
          (onInitialized)="onInitialized()"
          (onFieldDataChanged)="onFieldDataChanged($event)"
+         [disabled]="!(canUpdate$ | async)?.value"
          [formData]="tender">
   <dxi-item [disabled]="true" [label]="{text: 'Tender ID internal'}" dataField="Id"></dxi-item>
   <dxi-item [disabled]="true" [label]="{text: 'Create date'}" dataField="CreatedOn"></dxi-item>

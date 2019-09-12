@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment.prod';
 import {ActionsTender} from '../models/tender';
 import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 const tabs: Tab[] = [
   {
