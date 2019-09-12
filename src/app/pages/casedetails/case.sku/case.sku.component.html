@@ -74,7 +74,7 @@
   <dxi-column [minWidth]="250" [allowEditing]="true"  [caption]="'Franchise'" dataField="ProductStructureId">
     <dxo-lookup [dataSource]="getFilteredCities" valueExpr="Id" displayExpr="Franchise"></dxo-lookup>
   </dxi-column>
-  <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Exception'" dataField="IsException  "></dxi-column>
+  <dxi-column dataType="boolean" [allowEditing]="false"     [allowFiltering]="false"  [caption]="'Exception'" dataField="IsException"></dxi-column>
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Create date'" dataField="CreatedOn"></dxi-column>
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Change date'" dataField="ModifiedOn"></dxi-column>
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Repetition case ID'" dataField="DupCaseId"></dxi-column>

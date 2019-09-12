@@ -54,10 +54,7 @@ export class CasesComponent implements OnDestroy {
       ['Id'],
       {Id: 'Int32'});
 
-    this.dataSourceSKU = this.restService.bindData(
-      environment.apiUrl + '/TenderCaseSKU',
-      ['Id'],
-      {Id: 'Int32'});
+
   }
 
   ngOnDestroy() {
@@ -87,6 +84,10 @@ export class CasesComponent implements OnDestroy {
         }
       });
     this.filterValue = tenderCaseId;
+    this.dataSourceSKU = this.restService.bindData(
+      environment.apiUrl + '/TenderCaseSKU',
+      ['Id'],
+      {Id: 'Int32'});
     this.dataSourceSKU.filter(['TenderCaseId', '=', tenderCaseId]);
     this.dataSourceSKU.load();
 

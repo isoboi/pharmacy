@@ -32,7 +32,7 @@
     </dxi-column>
 
     <dxi-column [allowEditing]="false"   [allowFiltering]="false" alignment="left" caption="SKU name Rus" dataField="SKUNameRus"></dxi-column>
-    <dxi-column [allowEditing]="true" alignment="left" caption="MNN" [width]="200" dataField="SKUIASId">
+    <dxi-column [allowEditing]="false" alignment="left" caption="MNN" [width]="200" dataField="SKUIASId">
       <dxo-lookup [dataSource]="skuias.store()" valueExpr="Id" displayExpr="Name"></dxo-lookup>
     </dxi-column>
     <dxi-column [allowEditing]="false"   [allowFiltering]="false" alignment="left" caption="Dosage" dataField="Dosage"></dxi-column>
