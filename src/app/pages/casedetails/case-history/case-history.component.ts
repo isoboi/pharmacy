@@ -144,6 +144,7 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
       ['Id'],
       {Id: 'Int32'}
     );
+    this.attachments.filter(['TenderCaseId', '=', Number(this.id)]);
   }
 
   private _getTenderCaseApproved() {
