@@ -1,6 +1,6 @@
 
 export class Tender {
-  Artificial = false;
+  Artificial: boolean;
   ContractStatusCommentId: number;
   ContractStatusCommentName: string;
   ContractStatusId: number;

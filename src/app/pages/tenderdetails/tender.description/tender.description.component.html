@@ -1,7 +1,7 @@
 <dx-form class="tender-description" *ngIf="(isNewTender || tender) && originalHospital " id="form"
          (onInitialized)="onInitialized()"
          (onFieldDataChanged)="onFieldDataChanged($event)"
-         [disabled]="!isNewTender && !(canUpdate$ | async)?.value"
+         [disabled]="tender.TenderStatusId === 4 || (!isNewTender && !(canUpdate$ | async)?.value)"
          [formData]="tender">
   <dxi-item [disabled]="true" [label]="{text: 'Tender ID internal'}" dataField="Id"></dxi-item>
   <dxi-item [disabled]="true" [label]="{text: 'Create date'}" dataField="CreatedOn"></dxi-item>
@@ -112,7 +112,7 @@
     [displayExpr]="'Name'"
     [valueExpr]="'Id'"
     (onValueChanged)="onPopUpValueChanged($event)"
-    placeholder="Select a product...">
+    placeholder="Reason for declining...">
   </dx-select-box>
 
   <div class="buttons">

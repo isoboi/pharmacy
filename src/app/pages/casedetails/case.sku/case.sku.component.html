@@ -3,11 +3,13 @@
   class="dx-card case-sku"
   *ngIf="tenderCase"
   [dataSource]="dataSource"
+  [disabled]="tenderCase.TenderCaseStatusId > 1 && tenderCase.TenderCaseStatusId !== 11"
   [allowColumnReordering]="true"
   [allowColumnResizing]="true"
   [columnAutoWidth]="true"
   (onInitNewRow)="onInitNewRow($event)"
   (onRowUpdated)="onRowUpdated()"
+  (onContentReady)="onContentReady($event)"
   [showBorders]="true">
   <dxo-editing
     mode="row"
@@ -79,8 +81,3 @@
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Change date'" dataField="ModifiedOn"></dxi-column>
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Repetition case ID'" dataField="DupCaseId"></dxi-column>
 </dx-data-grid>
-
-<app-case-buttons
-  [tenderCase]="tenderCase"
-  [tabIndex]="1">
-</app-case-buttons>

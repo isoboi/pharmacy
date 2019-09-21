@@ -60,6 +60,7 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
 
     if (this.isNewTender) {
       this.tender = new Tender();
+      this.tender.Artificial = false;
     } else {
       this.canUpdate$ = this.tenderService.canUpdate(this.id);
     }

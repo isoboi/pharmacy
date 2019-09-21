@@ -38,12 +38,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       ['Id'],
       {Id: 'Int32'}
     );
-
-    this.dataSourceSKU = this.restService.bindData(
-      environment.apiUrl + '/TenderSKU',
-      ['Id'],
-      {Id: 'Int32'}
-    );
   }
 
   @ViewChild(DxDataGridComponent, {static: false}) dataGrid: DxDataGridComponent;
@@ -84,6 +78,13 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       });
     this.selectedTenderId = tenderId;
+    if (!this.dataSourceSKU) {
+      this.dataSourceSKU = this.restService.bindData(
+        environment.apiUrl + '/TenderSKU',
+        ['Id'],
+        {Id: 'Int32'}
+      );
+    }
     this.dataSourceSKU.filter(['TenderId', '=', tenderId]);
     this.dataSourceSKU.load();
   }

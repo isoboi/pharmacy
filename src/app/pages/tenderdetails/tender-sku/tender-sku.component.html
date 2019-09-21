@@ -3,7 +3,9 @@
     [allowColumnReordering]="true"
     [allowColumnResizing]="true"
     [columnAutoWidth]="true"
+    [disabled]="tender?.TenderStatusId > 2"
     [dataSource]="tenderSku"
+    (onContentReady)="onContentReady($event)"
     (onInitNewRow)="onInitNewRow($event)"
     (onRowUpdated)="onRowUpdated($event)"
     [showBorders]="true">

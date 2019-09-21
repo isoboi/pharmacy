@@ -47,7 +47,7 @@ export class CaseSkuComponent {
       { Id: 'String' }
     );
 
-    this.dataSourceSkuMg.load()
+    this.dataSourceSkuMg.load();
 
 
     this.productDataSource = this.restService.bindData(
@@ -81,7 +81,6 @@ export class CaseSkuComponent {
 
 
   getFilteredCities(options) {
-    console.log(options);
     let filter = null;
     if (options.data) {
       const bu = this.ProductStructure.items().find((item) => item.Id === options.data.ProductStructureId);
@@ -96,6 +95,11 @@ export class CaseSkuComponent {
       store: this.ProductStructureFranchise.items(),
       filter
     };
+  }
+
+
+  onContentReady(e) {
+    e.component.columnOption("command:edit", "visibleIndex", -1);
   }
   onInitNewRow(event) {
     event.data = {

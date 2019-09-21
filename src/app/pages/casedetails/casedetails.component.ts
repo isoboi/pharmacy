@@ -52,6 +52,7 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.tenderCase
         .pipe(takeUntil(this.destroy$))
         .subscribe((x) => {
+          console.log(x);
           this.tenderCaseOriginal = JSON.parse(JSON.stringify(x));
         });
     }

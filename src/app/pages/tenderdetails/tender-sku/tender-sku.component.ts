@@ -90,6 +90,10 @@ export class TenderSkuComponent implements OnInit {
     );
   }
 
+  onContentReady(e) {
+    e.component.columnOption("command:edit", "visibleIndex", -1);
+  }
+
   onInitNewRow(event) {
     event.data = {
       TenderId: Number(this.id)

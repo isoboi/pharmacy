@@ -50,7 +50,7 @@ export class CaseHistoryComponent implements OnInit, OnChanges {
     this.id = this.route.snapshot.params.id;
     this._getAttachments();
     this._getTenderCaseApproved();
-    this.canCreate$ = this.caseService.canCreateApproval();
+    this.canCreate$ = this.caseService.canCreateApproval(this.id);
   }
 
   onUploaded(e) {
