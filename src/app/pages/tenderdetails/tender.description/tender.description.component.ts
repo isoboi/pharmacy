@@ -23,18 +23,17 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   @Output() save = new EventEmitter();
   federalDistrict;
   fdDataSource: DataSource;
-  federalSubject;
   regionDataSource: DataSource;
   hospitals: DataSource;
-  federalLaw;
-  tenderStatusComment;
+  federalLaw: DataSource;
   indication;
-  tenderStatus;
+  tenderStatus: DataSource;
+  tenderStatusComment: DataSource;
   distributor;
   contractStatus;
   contractStatusComment;
   showLoadPanel = true;
-  sourceOfFinancing;
+  sourceOfFinancing: DataSource;
   clientName: DataSource;
   legalEntityType: DataSource;
   tenderWinner: DataSource;
@@ -44,9 +43,6 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   id;
   private destroy$ = new Subject();
   isNewTender = this.route.snapshot.params.id === 'new';
-
-  originalHospital: any;
-
   constructor(private tenderService: TenderService,
               private route: ActivatedRoute,
               private restService: RestService,
@@ -64,13 +60,107 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
     } else {
       this.canUpdate$ = this.tenderService.canUpdate(this.id);
     }
+    this._getData();
 
+
+
+    // this.tenderService.getFederalDistrict()
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((data) => {
+    //     this.federalDistrict = data;
+    //   });
+
+
+    this.tenderService.get('/Indication')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.indication = data;
+      });
+
+
+    this.tenderService.get('/Distributor')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.distributor = data;
+      });
+
+    this.tenderService.get('/ContractStatus')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.contractStatus = data;
+      });
+
+    this.tenderService.get('/ContractStatusComment')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        this.contractStatusComment = data;
+      });
+
+  }
+
+  saveTender(action) {
+    if (action === ActionsTender.decline) {
+      this.showPopup = true;
+    } else {
+      this.save.emit({tender: this.tender, action});
+    }
+  }
+
+  public onInnChanged = ($event) => {
+    if ($event && $event.value) {
+      this.tender.LegalEntityTypeId = null;
+      this.tender.ClientId = null;
+      const hospital = $event.component._dataSource._items.find((hosp) => hosp.Id == $event.value);
+      this.clientName.filter(['INN', '=', hospital.INN]);
+      this.clientName.load();
+    }
+  };
+
+  public onClientChanged = ($event) => {
+    if ($event && $event.value) {
+      const LegalEntityTypeId = $event.component._dataSource._items.find((hosp) => hosp.Id == $event.value).LegalEntityTypeId;
+      this.tender.LegalEntityTypeId = LegalEntityTypeId;
+      this.legalEntityType.filter(['Id', '=', LegalEntityTypeId]);
+      this.legalEntityType.load();
+    }
+  };
+
+  public fdChanged = ($event) => {
+    if (this.tender) {
+      this.tender.RegionId = null;
+    }
+    this.regionDataSource.filter(['FederalDistrictId', '=', $event.value]);
+    this.regionDataSource.load();
+  };
+
+  onInitialized() {
+    this.showLoadPanel = false;
+    this.tender.ClientId = this.tender.HospitalId;
+    this.cdr.detectChanges();
+  }
+
+  onPopUpValueChanged($event) {
+    this.popUpValue = $event.value;
+  }
+
+  onOk() {
+    const tender = new Tender();
+    tender.TenderStatusCommentId = this.popUpValue;
+    this.tenderService.save(tender, '', this.tender.Id)
+      .subscribe((x) => {
+        this.showPopup = false;
+        this.tender.TenderStatusCommentId = this.popUpValue;
+        this.popUpValue = null;
+        this.save.emit({tender: this.tender, action: ActionsTender.decline});
+      });
+  }
+
+  private _getData() {
     this.hospitals = this.restService.bindData(
       environment.apiUrl + '/Hospitals',
       ['Id'],
       {Id: 'Int32'}
     );
-    this.hospitals.load();
     this.clientName = this.restService.bindData(
       environment.apiUrl + '/Hospitals',
       ['Id'],
@@ -100,151 +190,27 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
     );
 
 
-    this.tenderService.getHospitals()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        this.originalHospital = data.value;
-      });
+    this.federalLaw = this.restService.bindData(
+      environment.apiUrl + '/FederalLaw',
+      ['Id'],
+      {Id: 'Int32'}
+    );
+    this.sourceOfFinancing = this.restService.bindData(
+      environment.apiUrl + '/SourceOfFinancing',
+      ['Id'],
+      {Id: 'Int32'}
+    );
+    this.tenderStatus = this.restService.bindData(
+      environment.apiUrl + '/TenderStatus',
+      ['Id'],
+      {Id: 'Int32'}
+    );
 
-
-    // this.tenderService.getFederalDistrict()
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe((data) => {
-    //     this.federalDistrict = data;
-    //   });
-    this.tenderService.getFederalSubject()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.federalSubject = data;
-      });
-    this.tenderService.getFederalLaw()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.federalLaw = data;
-      });
-
-    this.tenderService.get('/TenderStatus')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.tenderStatus = data;
-      });
-
-    this.tenderService.get('/TenderStatusComment')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.tenderStatusComment = data;
-      });
-
-    this.tenderService.get('/Indication')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.indication = data;
-      });
-
-
-    this.tenderService.get('/Distributor')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.distributor = data;
-      });
-
-    this.tenderService.get('/ContractStatus')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.contractStatus = data;
-      });
-
-    this.tenderService.get('/ContractStatusComment')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.contractStatusComment = data;
-      });
-
-    this.tenderService.get('/SourceOfFinancing')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        if (data && data.value) {
-          this.sourceOfFinancing = data.value;
-        }
-      });
-  }
-
-  saveTender(action) {
-    if (action === ActionsTender.decline) {
-      this.showPopup = true;
-    } else {
-      this.save.emit({tender: this.tender, action});
-    }
-  }
-
-  onFieldDataChanged($event) {
-    // if ($event.dataField === 'HospitalId' && this.originalHospital) {
-    //   const hospiral = this.originalHospital.value.find((hosp) => hosp.Id == $event.value);
-    //   this.clientName.filter(['INN', '=', hospiral.INN]);
-    //   this.tender.LegalEntityTypeId = null;
-    //   this.tender.HospitalName = hospiral.HospitalName;
-    //   this.clientName.load().then((data) => {
-    //     this.originalClientName = data;
-    //     const LegalEntityTypeId = this.originalClientName.find((hosp) => hosp.Id == $event.value).LegalEntityTypeId;
-    //     this.tender.LegalEntityTypeId = LegalEntityTypeId;
-    //     this.legalEntityType.filter(['Id', '=', LegalEntityTypeId]);
-    //     this.legalEntityType.load();
-    //   });
-    //
-    //
-    // }
-    // if ($event.dataField === 'HospitalName' && this.originalClientName) {
-    //
-    // }
-  }
-
-  public onInnChanged = ($event) => {
-    if ($event && $event.value) {
-      this.tender.LegalEntityTypeId = null;
-      this.tender.ClientId = null;
-      const hospiral = this.originalHospital.find((hosp) => hosp.Id == $event.value);
-      this.clientName.filter(['INN', '=', hospiral.INN]);
-      this.clientName.load();
-    }
-  };
-
-  public onClientChanged = ($event) => {
-    if ($event && $event.value) {
-      const LegalEntityTypeId = this.originalHospital.find((hosp) => hosp.Id == $event.value).LegalEntityTypeId;
-      this.tender.LegalEntityTypeId = LegalEntityTypeId;
-      this.legalEntityType.filter(['Id', '=', LegalEntityTypeId]);
-      this.legalEntityType.load();
-    }
-  };
-
-  public fdChanged = ($event) => {
-    if (this.tender) {
-      this.tender.RegionId = null;
-    }
-    this.regionDataSource.filter(['FederalDistrictId', '=', $event.value]);
-    this.regionDataSource.load();
-  }
-
-  onInitialized() {
-    this.showLoadPanel = false;
-    this.tender.ClientId = this.tender.HospitalId;
-    this.cdr.detectChanges();
-  }
-
-  onPopUpValueChanged($event) {
-    this.popUpValue = $event.value;
-  }
-
-  onOk() {
-    const tender = new Tender();
-    tender.TenderStatusCommentId = this.popUpValue;
-    this.tenderService.save(tender, '', this.tender.Id)
-      .subscribe((x) => {
-        this.showPopup = false;
-        this.tender.TenderStatusCommentId = this.popUpValue;
-        this.popUpValue = null;
-        this.save.emit({tender: this.tender, action: ActionsTender.decline});
-      });
+    this.tenderStatusComment = this.restService.bindData(
+      environment.apiUrl + '/TenderStatusComment',
+      ['Id'],
+      {Id: 'Int32'}
+    );
   }
 
   ngOnDestroy() {

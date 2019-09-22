@@ -17,7 +17,6 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   case: any;
   channel;
   id: string;
-  selectBoxes: any;
   tabIndex = 0;
   tabs = CasesService.getTabs();
   tenderCase: Observable<any>;
@@ -36,11 +35,6 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.casesService.getDetail()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(([relatedCaseComment, distributor, channel]) => {
-        this.selectBoxes = {relatedCaseComment, distributor, channel};
-      });
     this.id = this.route.snapshot.params.id;
 
     for (let i = 1; i < this.tabs.length; i++) {
@@ -52,7 +46,6 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
       this.tenderCase
         .pipe(takeUntil(this.destroy$))
         .subscribe((x) => {
-          console.log(x);
           this.tenderCaseOriginal = JSON.parse(JSON.stringify(x));
         });
     }

@@ -1,6 +1,5 @@
-<dx-form class="tender-description" *ngIf="(isNewTender || tender) && originalHospital " id="form"
+<dx-form class="tender-description" *ngIf="(isNewTender || tender)" id="form"
          (onInitialized)="onInitialized()"
-         (onFieldDataChanged)="onFieldDataChanged($event)"
          [disabled]="tender.TenderStatusId === 4 || (!isNewTender && !(canUpdate$ | async)?.value)"
          [formData]="tender">
   <dxi-item [disabled]="true" [label]="{text: 'Tender ID internal'}" dataField="Id"></dxi-item>
@@ -19,7 +18,7 @@
   <dxi-item [label]="{text: 'INN'}"
             dataField="HospitalId"
             editorType="dxSelectBox"
-            [editorOptions]="{ dataSource: originalHospital, onValueChanged: onInnChanged, displayExpr:'INN', valueExpr:'Id'}"></dxi-item>
+            [editorOptions]="{ dataSource: hospitals?.store(), onValueChanged: onInnChanged, displayExpr:'INN', valueExpr:'Id'}"></dxi-item>
   <dxi-item [label]="{text: 'Client name'}"
             dataField="ClientId"
             editorType="dxSelectBox"
@@ -33,18 +32,18 @@
   <dxi-item [label]="{text: 'Channel of financing'}"
             dataField="SourceOfFinId"
             editorType="dxSelectBox"
-            [editorOptions]="{ items: sourceOfFinancing, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+            [editorOptions]="{ dataSource: sourceOfFinancing?.store(), displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
 
   <dxi-item [label]="{text: 'Federal law'}"
             dataField="FederalLawId"
             editorType="dxSelectBox"
-            [editorOptions]="{ items: federalLaw?.value, displayExpr:'FederalLawNumber', valueExpr:'Id' }"></dxi-item>
+            [editorOptions]="{ dataSource: federalLaw?.store(), displayExpr:'FederalLawNumber', valueExpr:'Id' }"></dxi-item>
 
   <dxi-item [label]="{text: 'Tender Status'}"
             dataField="TenderStatusId"
             [disabled]="true"
             editorType="dxSelectBox"
-            [editorOptions]="{ items: tenderStatus?.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+            [editorOptions]="{ dataSource: tenderStatus?.store(), displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
   <dxi-item [disabled]="true"
             [label]="{text: 'Change of tender status, date'}"
             dataField="StatusChangedOn"></dxi-item>
@@ -53,7 +52,7 @@
             [disabled]="true"
             dataField="TenderStatusCommentId"
             editorType="dxSelectBox"
-            [editorOptions]="{ items: tenderStatusComment?.value, displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
+            [editorOptions]="{ dataSource: tenderStatusComment?.store(), displayExpr:'Name', valueExpr:'Id' }"></dxi-item>
   <dxi-item [label]="{text: 'Notification ID'}" dataField="NotificationNumber"></dxi-item>
   <dxi-item [label]="{text: 'Link to gos zakupki web-site'}" dataField="GosZakupkiLink"></dxi-item>
 

@@ -2,6 +2,9 @@ import {Component, EventEmitter, Input, Output, ChangeDetectorRef, OnDestroy, On
 import {ActionEvent, TenderCase, TenderCaseStatus} from '../../../models/case.interface';
 import {RestService} from '../../../services/rest.service';
 import {ActivatedRoute} from '@angular/router';
+import {environment} from '../../../../environments/environment';
+import DataSource from 'devextreme/data/data_source';
+import {CasesService} from '../../../services/cases.service';
 
 @Component({
   selector: 'app-case-description',
@@ -11,14 +14,17 @@ import {ActivatedRoute} from '@angular/router';
 export class CaseDescriptionComponent implements OnInit{
 
   @Input() tenderCase: TenderCase;
-  @Input() selectBoxes;
   @Output() saveCase = new EventEmitter<ActionEvent>();
   showLoadPanel = true;
   tenderCaseStatus = TenderCaseStatus;
   id: string;
   isNewCase: boolean;
   tenderId;
+  relatedCaseComment: DataSource;
+  distributor: DataSource;
+  channel: DataSource;
   constructor(private restService: RestService,
+              private casesService: CasesService,
               private route: ActivatedRoute,
               private cdr: ChangeDetectorRef) {
 
@@ -31,6 +37,10 @@ export class CaseDescriptionComponent implements OnInit{
       this.tenderCase = new TenderCase();
       this.tenderId = this.route.snapshot.queryParams['tenderId'];
     }
+
+    this.relatedCaseComment = this.casesService.getRelatedCaseComment();
+    this.distributor = this.casesService.getDistributor();
+    this.channel = this.casesService.getChannel();
   }
 
   onInitialized() {

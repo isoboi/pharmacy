@@ -5,6 +5,7 @@ import {forkJoin, Observable} from 'rxjs';
 import {Actions} from '../models/case.interface';
 import {environment} from '../../environments/environment.prod';
 import {map} from 'rxjs/operators';
+import {RestService} from './rest.service';
 
 const tabs: Tab[] = [
   {
@@ -32,25 +33,32 @@ const apiUrl = environment.apiUrl;
 
 export class CasesService {
   private actions = Actions;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private restService: RestService) {
   }
 
   static getTabs(): Tab[] {
     return tabs;
   }
 
-  getDetail() {
-    return forkJoin([this.getRelatedCaseComment(), this.getDistributor(), this.getChannel()]);
-  }
 
   getRelatedCaseComment() {
-    return this.http.get(apiUrl + '/RelatedCaseComment');
+    return this.restService.bindData(
+      environment.apiUrl + '/RelatedCaseComment',
+      ['Id'],
+      {Id: 'Int32'});
   }
   getDistributor() {
-    return this.http.get(apiUrl + '/Distributor');
+    return this.restService.bindData(
+      environment.apiUrl + '/Distributor',
+      ['Id'],
+      {Id: 'Int32'});
   }
   getChannel() {
-    return this.http.get(apiUrl + '/Channel');
+    return this.restService.bindData(
+      environment.apiUrl + '/Channel',
+      ['Id'],
+      {Id: 'String'});
   }
 
   getTenderCase(id): Observable<any> {
