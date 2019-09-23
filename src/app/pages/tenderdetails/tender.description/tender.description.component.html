@@ -18,7 +18,7 @@
   <dxi-item [label]="{text: 'INN'}"
             dataField="HospitalId"
             editorType="dxSelectBox"
-            [editorOptions]="{ dataSource: hospitals?.store(), onValueChanged: onInnChanged, displayExpr:'INN', valueExpr:'Id'}"></dxi-item>
+            [editorOptions]="{ dataSource: hospitals?.store(), searchEnabled: true, onValueChanged: onInnChanged, displayExpr:'INN', valueExpr:'Id'}"></dxi-item>
   <dxi-item [label]="{text: 'Client name'}"
             dataField="ClientId"
             editorType="dxSelectBox"
