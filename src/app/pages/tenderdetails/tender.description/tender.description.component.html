@@ -107,7 +107,7 @@
     Please, choose the reason for declining
   </div>
   <dx-select-box
-    [items]="tenderStatusComment?.store()"
+    [dataSource]="tenderStatusComment?.store()"
     [displayExpr]="'Name'"
     [valueExpr]="'Id'"
     (onValueChanged)="onPopUpValueChanged($event)"
