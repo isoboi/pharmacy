@@ -1,7 +1,6 @@
 <div class="dx-card case-desc">
   <dx-form *ngIf="isNewCase || tenderCase"
            id="form" (onInitialized)="onInitialized()"
-           [disabled]="!isNewCase && tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft"
            [formData]="tenderCase">
     <dxi-item [disabled]="true" [label]="{text: 'Case ID'}" dataField="Id"></dxi-item>
     <dxi-item [disabled]="true" [label]="{text: 'Parent ID'}" dataField="ParentId"></dxi-item>
@@ -11,8 +10,10 @@
     
     <dxi-item [label]="{text: 'Related case comment'}"
               editorType="dxSelectBox"
+              [disabled]="!isNewCase && tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft"
               [editorOptions]="{ dataSource: relatedCaseComment.store(), displayExpr:'Name', valueExpr:'Id' }"
               dataField="RelatedCaseCommentId"></dxi-item>
+
     <dxi-item [disabled]="true" [editorOptions]="{ value: tenderId }" [label]="{text: 'Tender ID'}" dataField="TenderId"></dxi-item>
     <dxi-item [disabled]="true" [label]="{text: 'Case Status'}" dataField="TenderCaseStatusName"></dxi-item>
     <dxi-item [disabled]="true" [label]="{text: 'Region'}" dataField="RegionName"></dxi-item>
@@ -21,21 +22,28 @@
     <dxi-item [disabled]="true" [label]="{text: 'Channel of financing'}" dataField="SourceOfFinName"></dxi-item>
     <dxi-item [disabled]="true" [label]="{text: 'Federal law'}" dataField="FederalLawNumber"></dxi-item>
     <dxi-item [disabled]="true" [label]="{text: 'Notification ID '}" dataField="NotificationNumber"></dxi-item>
+
     <dxi-item [label]="{text: 'Supplier of the tender'}"
               editorType="dxSelectBox"
-              [disabled]="id === 'new'"
+              [disabled]="!isNewCase && tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft && tenderCase?.TenderCaseStatusId !== 7 || id === 'new'"
               [editorOptions]="{ dataSource: distributor.store(), displayExpr:'Name', valueExpr:'Id' }"
               dataField="SupplierId"></dxi-item>
-    <dxi-item [label]="{text: 'Discount SAP number'}" dataField="DiscountNumber"></dxi-item>
+
+    <dxi-item [label]="{text: 'Discount SAP number'}"
+              [disabled]="!isNewCase && tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft && tenderCase?.TenderCaseStatusId !== 8"
+              dataField="DiscountNumber"></dxi-item>
     <dxi-item [label]="{text: 'Discount validity date'}" editorType="dxDateBox"
+              [disabled]="!isNewCase && tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft && tenderCase?.TenderCaseStatusId !== 8"
               dataField="DiscountValidityDate"></dxi-item>
     <dxi-item [label]="{text: 'Sales channel in SAP'}"
+              [disabled]="!isNewCase && tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft"
               editorType="dxSelectBox"
               [editorOptions]="{ dataSource: channel.store(), displayExpr:'Name', valueExpr:'Id' }"
               dataField="SalesChannelId"></dxi-item>
+
     <dxi-item [disabled]="true" [label]="{text: 'Weighted average contract price (RUB)'}"
               dataField="WeightedAveConractPriceRUB"></dxi-item>
-    <dxi-item [disabled]="isNewCase" editorType="dxCheckBox" [label]="{text: 'Discount Provided'}" dataField="DiscountProvided"></dxi-item>
+    <dxi-item [disabled]="isNewCase || tenderCase?.TenderCaseStatusId !== 10" editorType="dxCheckBox" [label]="{text: 'Discount Provided'}" dataField="DiscountProvided"></dxi-item>
     <dxi-item type="boolean" [disabled]="true" [label]="{text: 'Repetition Test'}" dataField="DupStatus"></dxi-item>
     <dxi-item type="boolean" [disabled]="true" [label]="{text: 'Commercial Policy Test'}" dataField="CPStatus"></dxi-item>
   </dx-form>
