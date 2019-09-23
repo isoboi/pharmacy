@@ -121,7 +121,6 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
         }
         return;
       } else if (this.action === this.actions.reject || this.action === this.actions.draft || this.actions.approve) {
-        notify({message: 'Successful', position: 'top'}, 'success', 1500);
         setTimeout(() => {
           if (this.action === this.actions.approve) {
             this.router.navigate(['/cases']);
@@ -129,6 +128,7 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
             location.reload();
           }
         }, 1500);
+        notify({message: 'Successful', position: 'top'}, 'success', 1500);
       }
     } else if (this.action === this.actions.save && this.id === 'new') {
       notify({message: 'Successful', position: 'top'}, 'success', 1500);
