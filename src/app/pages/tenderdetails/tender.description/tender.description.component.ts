@@ -26,12 +26,12 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   regionDataSource: DataSource;
   hospitals: DataSource;
   federalLaw: DataSource;
-  indication;
+  indication: DataSource;
   tenderStatus: DataSource;
   tenderStatusComment: DataSource;
-  distributor;
-  contractStatus;
-  contractStatusComment;
+  distributor: DataSource;
+  contractStatus: DataSource;
+  contractStatusComment: DataSource;
   showLoadPanel = true;
   sourceOfFinancing: DataSource;
   clientName: DataSource;
@@ -61,40 +61,6 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
       this.canUpdate$ = this.tenderService.canUpdate(this.id);
     }
     this._getData();
-
-
-
-    // this.tenderService.getFederalDistrict()
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe((data) => {
-    //     this.federalDistrict = data;
-    //   });
-
-
-    this.tenderService.get('/Indication')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.indication = data;
-      });
-
-
-    this.tenderService.get('/Distributor')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.distributor = data;
-      });
-
-    this.tenderService.get('/ContractStatus')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.contractStatus = data;
-      });
-
-    this.tenderService.get('/ContractStatusComment')
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data) => {
-        this.contractStatusComment = data;
-      });
 
   }
 
@@ -208,6 +174,28 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
 
     this.tenderStatusComment = this.restService.bindData(
       environment.apiUrl + '/TenderStatusComment',
+      ['Id'],
+      {Id: 'Int32'}
+    );
+
+    this.indication = this.restService.bindData(
+      environment.apiUrl + '/Indication',
+      ['Id'],
+      {Id: 'Int32'}
+    );
+    this.distributor = this.restService.bindData(
+      environment.apiUrl + '/Distributor',
+      ['Id'],
+      {Id: 'Int32'}
+    );
+
+    this.contractStatus = this.restService.bindData(
+      environment.apiUrl + '/ContractStatus',
+      ['Id'],
+      {Id: 'Int32'}
+    );
+    this.contractStatusComment = this.restService.bindData(
+      environment.apiUrl + '/ContractStatusComment',
       ['Id'],
       {Id: 'Int32'}
     );

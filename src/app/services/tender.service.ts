@@ -39,29 +39,6 @@ export class TenderService {
     return this.http.get(apiUrl + `/Tender/${id}`);
   }
 
-  getFederalDistrict() {
-    return this.http.get(apiUrl + '/FederalDistrict');
-  }
-
-  getFederalSubject() {
-    return this.http.get(apiUrl +  '/FederalSubject');
-  }
-
-  getHospitals() {
-    return this.http.get(apiUrl +  '/Hospitals');
-  }
-
-  getFederalLaw() {
-    return this.http.get(apiUrl +  '/FederalLaw');
-  }
-  getDistributor() {
-    return this.http.get(apiUrl +  '/Distributor');
-  }
-
-  get(url: string) {
-    return this.http.get(apiUrl + url);
-  }
-
   save(obj, action, id): Observable<any> {
     if (action === this.actions.decline) {
       return this.http.get(apiUrl + `/Tender/BusinessService.Decline(key=${id})`);
