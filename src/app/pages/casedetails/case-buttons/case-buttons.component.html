@@ -1,7 +1,7 @@
 <div class="buttons dx-card" *ngIf="!id || tenderCase">
   <dx-button
     *ngIf="tabIndex === 0"
-    [disabled]="!(canSave | async)?.value"
+    [disabled]="(!(canSave | async)?.value) && tenderCase?.TenderCaseStatusId !== 7 && tenderCase?.TenderCaseStatusId !== 8 && tenderCase?.TenderCaseStatusId !== 10"
     (onClick)="save(actions.save)"
     text="{{id === 'new' ? 'Create' : 'Save'}} Case" type="default">
   </dx-button>
