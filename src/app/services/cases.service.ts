@@ -62,11 +62,7 @@ export class CasesService {
   }
 
   getTenderCase(id): Observable<any> {
-    return this.http.get(apiUrl + `/TenderCase/${id}`)
-      .pipe(map((data: any) => {
-        data.TenderCaseStatusId = 7;
-        return data;
-      }));
+    return this.http.get(apiUrl + `/TenderCase/${id}`);
   }
 
   patchTenderCase(obj, action, id): Observable<any> {
