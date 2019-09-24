@@ -11,7 +11,7 @@
     <dxi-item [label]="{text: 'Related case comment'}"
               editorType="dxSelectBox"
               [disabled]="!isNewCase && tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft"
-              [editorOptions]="{ dataSource: relatedCaseComment.store(), displayExpr:'Name', valueExpr:'Id' }"
+              [editorOptions]="{ dataSource: relatedCaseComment, displayExpr:'Name', valueExpr:'Id' }"
               dataField="RelatedCaseCommentId"></dxi-item>
 
     <dxi-item [disabled]="true" [editorOptions]="{ value: tenderId }" [label]="{text: 'Tender ID'}" dataField="TenderId"></dxi-item>
@@ -26,7 +26,7 @@
     <dxi-item [label]="{text: 'Supplier of the tender'}"
               editorType="dxSelectBox"
               [disabled]="!isNewCase && tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft && tenderCase?.TenderCaseStatusId !== 7 || id === 'new'"
-              [editorOptions]="{ dataSource: distributor.store(), displayExpr:'Name', valueExpr:'Id' }"
+              [editorOptions]="{ dataSource: distributor, displayExpr:'Name', valueExpr:'Id' }"
               dataField="SupplierId"></dxi-item>
 
     <dxi-item [label]="{text: 'Discount SAP number'}"
@@ -38,7 +38,7 @@
     <dxi-item [label]="{text: 'Sales channel in SAP'}"
               [disabled]="!isNewCase && tenderCase?.TenderCaseStatusId !== tenderCaseStatus.draft"
               editorType="dxSelectBox"
-              [editorOptions]="{ dataSource: channel.store(), displayExpr:'Name', valueExpr:'Id' }"
+              [editorOptions]="{ dataSource: channel, displayExpr:'Name', valueExpr:'Id' }"
               dataField="SalesChannelId"></dxi-item>
 
     <dxi-item [disabled]="true" [label]="{text: 'Weighted average contract price (RUB)'}"
