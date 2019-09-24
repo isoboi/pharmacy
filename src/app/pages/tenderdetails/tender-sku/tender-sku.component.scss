@@ -4,3 +4,8 @@
     text-align: center !important;
   }
 }
+
+
+::ng-deep #gridContainer {
+  max-height: 440px;
+}

@@ -25,12 +25,11 @@
         [dataSource]="attachments"
         [columnAutoWidth]="true"
         [showBorders]="true"
+        id="gridContainer"
         [selectedRowKeys]="[]"
         (onSelectionChanged)="onSelectionChanged($event)">
         <dxo-selection mode="single"></dxo-selection>
-        <dxo-paging [pageSize]="10"></dxo-paging>
-        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
-        <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
+        <dxo-scrolling columnRenderingMode="virtual" mode="infinite"></dxo-scrolling>
         <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="attachments"></dxo-state-storing>
         <dxo-editing mode="row" [allowUpdating]="true"></dxo-editing>
         <dxi-column [allowEditing]="false" [allowFiltering]="false"  minWidth="100" dataField="FileName" caption="File"></dxi-column>
@@ -51,14 +50,12 @@
         [allowColumnReordering]="true"
         [allowColumnResizing]="true"
         [showBorders]="true"
+        id="gridContainer2"
         [selectedRowKeys]="[]">
-
         <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
-        <dxo-paging [pageSize]="10"></dxo-paging>
-        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[5, 10, 20]" [showInfo]="true"></dxo-pager>
+        <dxo-scrolling columnRenderingMode="virtual" mode="infinite"></dxo-scrolling>
         <dxo-filter-row [visible]="showFilterRow" [applyFilter]="currentFilter"></dxo-filter-row>
         <dxo-header-filter [visible]="showHeaderFilter"></dxo-header-filter>
-        <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
         <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="caseHistory"></dxo-state-storing>
         <dxi-column
           [visible]="false"

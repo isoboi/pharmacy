@@ -16,14 +16,8 @@
       (onToolbarPreparing)="onToolbarPreparing($event)"
       (onSelectionChanged)="onSelectionChanged($event)">
       <dxo-selection mode="single"></dxo-selection>
-      <dxo-paging [pageSize]="5"></dxo-paging>
       <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
-      <dxo-pager
-        [showPageSizeSelector]="true"
-        [allowedPageSizes]="[5, 10, 20]"
-        [showInfo]="true">
-      </dxo-pager>
-      <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
+      <dxo-scrolling columnRenderingMode="virtual" mode="infinite"></dxo-scrolling>
 
       <dxo-export [enabled]="true" fileName="Tenders" [allowExportSelectedData]="true"></dxo-export>
       <dxo-filter-row
@@ -148,18 +142,12 @@
     </dx-data-grid>
 
     <dx-data-grid
-      id="gridContainer"
+      id="gridContainer2"
       [dataSource]="dataSourceSKU"
       [columnAutoWidth]="true"
       [showBorders]="true"
       (onContentReady)="initialized()">
-      <dxo-paging [pageSize]="10"></dxo-paging>
-      <dxo-pager
-        [showPageSizeSelector]="true"
-        [allowedPageSizes]="[5, 10, 20]"
-        [showInfo]="true">
-      </dxo-pager>
-      <dxo-scrolling columnRenderingMode="virtual"></dxo-scrolling>
+      <dxo-scrolling columnRenderingMode="virtual" mode="infinite"></dxo-scrolling>
       <dxo-filter-row
         [visible]="showFilterRow"
         [applyFilter]="currentFilter"></dxo-filter-row>
