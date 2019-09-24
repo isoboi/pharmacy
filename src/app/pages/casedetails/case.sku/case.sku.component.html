@@ -36,7 +36,9 @@
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Tender starting price (per pack, RUB)'" dataField="StartingPrice"></dxi-column>
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Contract price (RUB) per pack'" dataField="ContractPriceRUB"></dxi-column>
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'On-Invoice Discount (base) (%)'" dataField="OnInvoiceDiscount"></dxi-column>
-  <dxi-column [allowEditing]="true"  [caption]="'Additional On-Invoice Discount (%)'"
+  <dxi-column [allowEditing]="true"
+              [caption]="'Additional On-Invoice Discount (%)'"
+              [dataType]="'number'"
               dataField="AddOnInvoiceDiscount"></dxi-column>
   <dxi-column [allowEditing]="false"    [allowFiltering]="false"  [caption]="'Price On-Invoice (RUB)'" dataField="PriceOnInvoiceRUB"></dxi-column>
   <dxi-column [dataType]="'number'" [allowEditing]="true"  [caption]="'Quantity'" dataField="Quantity"></dxi-column>
