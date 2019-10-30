@@ -29,4 +29,16 @@
     (onClick)="save(actions.draft)"
     text="Draft">
   </dx-button>
+
+  <dx-button
+    [disabled]="(canCreateRelatedCase$ | async)?.value"
+    (onClick)="save(actions.relatedCase)"
+    text="Create related case">
+  </dx-button>
+
+  <dx-button
+    (onClick)="save(actions.copy)"
+    type="default"
+    text="Copy">
+  </dx-button>
 </div>

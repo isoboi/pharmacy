@@ -4,4 +4,5 @@
   <dx-button [disabled]="!(canCreateCase$ | async)?.value || tender?.TenderStatusId !== 3" *ngIf="tabIndex === 2" text="Create Case" type="success" (onClick)="createCase()" ></dx-button>
   <dx-button [disabled]="tender?.TenderStatusId !== 1" *ngIf="tabIndex === 0" text="Planned" type="default" (onClick)="save(actions.planned)"></dx-button>
   <dx-button [disabled]="tender?.TenderStatusId !== 2" *ngIf="tabIndex === 0" text="Announced" type="default" (onClick)="save(actions.announced)"></dx-button>
+  <dx-button *ngIf="tabIndex === 0" text="Copy" type="default" (onClick)="save(actions.copy)"></dx-button>
 </div>

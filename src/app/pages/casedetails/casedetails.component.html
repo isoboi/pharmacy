@@ -9,6 +9,8 @@
   <app-case-description
     *ngIf="tabIndex === 0"
     [tenderCase]="tenderCase | async"
+    (createRelatedCase)="createRelatedCase($event)"
+    (copyCase)="copyCase($event)"
     (saveCase)="saveCase($event)">
   </app-case-description>
 

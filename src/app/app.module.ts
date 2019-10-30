@@ -19,7 +19,7 @@ import {
   DxTabsModule,
   DxButtonModule,
   DxLoadPanelModule,
-  DxFileUploaderModule, DxListModule
+  DxFileUploaderModule, DxListModule, DxPopupModule, DxScrollViewModule
 } from 'devextreme-angular';
 import {Service} from './pages/home/app.service';
 import {RestService} from './services/rest.service';
@@ -79,7 +79,9 @@ import {PopupComponent} from './pages/popup/popup.component';
     LoginFormModule,
     AppRoutingModule,
     DxFileUploaderModule,
-    DxListModule
+    DxListModule,
+    DxPopupModule,
+    DxScrollViewModule
   ],
 
   providers: [

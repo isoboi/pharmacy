@@ -54,7 +54,8 @@ export enum ActionsTender {
   decline = 'Decline Tender',
   create = 'Create Case',
   planned = 'Planned',
-  announced = 'Announced'
+  announced = 'Announced',
+  copy = 'Copy',
 }
 
 export interface ActionTenderEvent {

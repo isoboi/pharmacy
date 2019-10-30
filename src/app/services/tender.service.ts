@@ -56,6 +56,11 @@ export class TenderService {
     return this.http.patch(apiUrl + `/Tender/${id}`, obj);
   }
 
+  copyTender(tender) {
+    console.log(tender);
+    return this.http.post(apiUrl + '/Tender/Copy', tender);
+  }
+
   detele(tenderId) {
     return this.http.delete(apiUrl + `/Tender/${tenderId}`);
   }

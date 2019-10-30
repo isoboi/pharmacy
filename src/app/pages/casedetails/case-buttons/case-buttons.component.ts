@@ -1,15 +1,16 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import {ActionEvent, Actions, TenderCase, TenderCaseStatus} from '../../../models/case.interface';
 import {ActivatedRoute} from '@angular/router';
 import {CasesService} from '../../../services/cases.service';
-import {Observable} from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-case-buttons',
   templateUrl: './case-buttons.component.html',
   styleUrls: ['./case-buttons.component.scss']
 })
-export class CaseButtonsComponent implements OnInit {
+export class CaseButtonsComponent implements OnInit, OnDestroy {
 
   @Input() tabIndex = 0;
   @Input() tenderCase: TenderCase;
@@ -20,22 +21,35 @@ export class CaseButtonsComponent implements OnInit {
   canSave: Observable<any>;
   canApprove$: Observable<any>;
   canReject$: Observable<any>;
+  canCreateRelatedCase$: Observable<any>;
+
+  private destroy$ = new Subject();
+
   constructor(private activateRoute: ActivatedRoute,
               private caseService: CasesService) {
-    this.id = activateRoute.snapshot.params.id;
   }
 
   ngOnInit() {
-    if (this.id !== 'new') {
-      this.canSave = this.caseService.canUpdate(this.id);
-      if (this.tabIndex !== 2) {
-        this.canApprove$ = this.caseService.canApprove(this.id);
-      }
-      this.canReject$ = this.caseService.canReject(this.id);
-    } else {
-      this.canSave = this.caseService.canCreate();
-    }
+    this.activateRoute.params
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(params => {
+        this.id = params.id;
+        if (this.id !== 'new') {
+          this.canSave = this.caseService.canUpdate(this.id);
+          this.canReject$ = this.caseService.canReject(this.id);
+          this.canCreateRelatedCase$ = this.caseService.canCreateRelatedCase(this.id);
+          if (this.tabIndex !== 2) {
+            this.canApprove$ = this.caseService.canApprove(this.id);
+          }
+        } else {
+          this.canSave = this.caseService.canCreate();
+        }
+      });
+  }
 
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   save(action) {

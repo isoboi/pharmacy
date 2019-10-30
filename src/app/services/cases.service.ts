@@ -89,6 +89,17 @@ export class CasesService {
     return this.http.patch(apiUrl + `/TenderCase/${id}`, obj);
   }
 
+  patchCase(data) {
+    return this.http.patch(apiUrl + `/TenderCase/${data.Id}`, data.caseCommentId);
+  }
+
+  createRelatedCase(id) {
+    return this.http.get(apiUrl + `/TenderCase/BusinessService.CreateRelatedCase(key=${id})`);
+  }
+
+  copyCase(tender) {
+    return this.http.post(apiUrl + '/TenderCase/Copy', tender);
+  }
 
   postComment(data) {
     return this.http.post(apiUrl + `/ApproverComment`, data);
@@ -136,6 +147,10 @@ export class CasesService {
 
   canDelete(id) {
     return this.http.get(apiUrl + `/TenderCase/BusinessService.CanDelete(entityId=${id})`);
+  }
+
+  canCreateRelatedCase(id) {
+    return this.http.get(apiUrl + `/TenderCase/BusinessService.CanCreateRelatedCase(entityId=${id})`);
   }
 
   detele(tenderCaseId) {

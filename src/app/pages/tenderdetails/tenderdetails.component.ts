@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Service } from '../home/app.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TenderService } from '../../services/tender.service';
 import {ActionsTender, ActionTenderEvent, Tender} from '../../models/tender';
 import notify from 'devextreme/ui/notify';
 import {TenderCase} from '../../models/case.interface';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-tenderdetails',
   templateUrl: './tenderdetails.component.html',
   styleUrls: ['./tenderdetails.component.scss']
 })
-export class TenderDetailsComponent implements OnInit {
+export class TenderDetailsComponent implements OnInit, OnDestroy {
 
   tender;
   tabs;
@@ -21,6 +23,7 @@ export class TenderDetailsComponent implements OnInit {
 
   private actions = ActionsTender;
   private originalTender = new Tender();
+  private destroy$ = new Subject();
 
   constructor(
     private service: Service,
@@ -36,8 +39,15 @@ export class TenderDetailsComponent implements OnInit {
     this.disableTabs(this.id === 'new');
     if (this.id !== 'new') {
 
-      this.tender = this.tenderService.getTender(this.route.snapshot.params.id);
-      this.tender
+      this.route.params
+        .pipe(
+          takeUntil(this.destroy$),
+          switchMap(param => {
+            this.id = param.id;
+            this.tender = this.tenderService.getTender(param.id);
+            return this.tender;
+          })
+        )
         .subscribe((x: Tender) => {
           this.originalTender = x;
           this.disableTabs(x.TenderStatusId === 4);
@@ -48,6 +58,11 @@ export class TenderDetailsComponent implements OnInit {
           this.disableTabs(!x.value);
         });
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   private disableTabs(disabled) {
@@ -104,5 +119,11 @@ export class TenderDetailsComponent implements OnInit {
         });
     }, timeoutTime);
 
+  }
+
+  copyTender(tender: any) {
+    tender.Key = +this.id;
+    this.tenderService.copyTender(tender)
+      .subscribe(res => this.router.navigate(['tender', res]));
   }
 }

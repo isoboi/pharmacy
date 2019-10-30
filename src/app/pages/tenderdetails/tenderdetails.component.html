@@ -9,7 +9,11 @@
 
     <app-tender-description
       [disableCreate] = "disableCreateButton"
-      (save)="save($event)" *ngIf="tabIndex === 0" [tender]="tender | async"></app-tender-description>
+      *ngIf="tabIndex === 0"
+      [tender]="tender | async"
+      (copyTender)="copyTender($event)"
+      (save)="save($event)">
+    </app-tender-description>
     <app-tender-sku *ngIf="tabIndex === 1" [tender]="tender | async"></app-tender-sku>
 
     <app-tender-case  *ngIf="tabIndex === 2" [tender]="tender | async"></app-tender-case>

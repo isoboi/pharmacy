@@ -35,7 +35,9 @@ export enum Actions {
   approversRequests = 'Approver\'s requests',
   approve = 'Approve',
   reject = 'Reject',
-  draft = 'Draft'
+  draft = 'Draft',
+  relatedCase = 'Create related case',
+  copy = 'Copy'
 }
 
 export interface ActionEvent {

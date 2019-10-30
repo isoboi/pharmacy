@@ -21,6 +21,7 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   @Input() tender: Tender;
   @Input() disableCreate = false;
   @Output() save = new EventEmitter();
+  @Output() copyTender = new EventEmitter();
   federalDistrict;
   fdDataSource: DataSource;
   regionDataSource: DataSource;
@@ -38,11 +39,36 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
   legalEntityType: DataSource;
   tenderWinner: DataSource;
   showPopup = false;
+  copyPopup = false;
   popUpValue: number;
   canUpdate$;
   id;
+  isNewTender: boolean;
+
+  tenderFields = {
+    SourceOfFinId: true,
+    FederalLawId: true,
+    NotificationNumber: true,
+    GosZakupkiLink: true,
+    DateOfTender: true,
+    TenderWinnerId: true,
+    IndicationId: true,
+    DeadlineForSupply: true,
+    ContractStatusId: true,
+    ContractStatusCommentId: true,
+  };
+
+  tenderSKUFields = {
+    StartingPrice: true,
+    RiskId: true,
+    TenderVolume: true,
+    WonContractPriceRUB: true,
+    ContractPriceRUB: true,
+    ContractQuantity: true
+  };
+
   private destroy$ = new Subject();
-  isNewTender = this.route.snapshot.params.id === 'new';
+
   constructor(private tenderService: TenderService,
               private route: ActivatedRoute,
               private restService: RestService,
@@ -51,25 +77,46 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-    this.id = this.route.snapshot.params.id;
+    this.route.params
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(params => {
+        this.isNewTender = params.id === 'new';
+        this.id = params.id;
 
-
-    if (this.isNewTender) {
-      this.tender = new Tender();
-      this.tender.Artificial = false;
-    } else {
-      this.canUpdate$ = this.tenderService.canUpdate(this.id);
-    }
-    this._getData();
-
+        if (this.isNewTender) {
+          this.tender = new Tender();
+          this.tender.Artificial = false;
+        } else {
+          this.canUpdate$ = this.tenderService.canUpdate(this.id);
+        }
+        this._getData();
+      });
   }
 
   saveTender(action) {
+    if (action === ActionsTender.copy) {
+      this.copyPopup = true;
+      return;
+    }
     if (action === ActionsTender.decline) {
       this.showPopup = true;
     } else {
       this.save.emit({tender: this.tender, action});
     }
+  }
+
+  onClosePopup(e) {
+    if (e) {
+      const tender = this.getSelectedFields(this.tenderFields).join(',');
+      const tenderSku = this.getSelectedFields(this.tenderSKUFields).join(',');
+      const tenderData = {
+        Columns: tender,
+        SkuColumns: tenderSku
+      };
+
+      this.copyTender.emit(tenderData);
+    }
+    this.copyPopup = false;
   }
 
   public onInnChanged = ($event) => {
@@ -119,6 +166,17 @@ export class TenderDescriptionComponent implements OnInit, OnDestroy {
         this.popUpValue = null;
         this.save.emit({tender: this.tender, action: ActionsTender.decline});
       });
+  }
+
+  private getSelectedFields(allFields) {
+    const fields = [];
+    for (const key in allFields) {
+      if (allFields[key]) {
+        fields.push(key);
+      }
+    }
+
+    return fields;
   }
 
   private _getData() {

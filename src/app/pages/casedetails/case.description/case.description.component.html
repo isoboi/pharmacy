@@ -64,3 +64,124 @@
   [tabIndex]="0"
   (saveCase)="save($event)">
 </app-case-buttons>
+
+<dx-popup
+  class="popup"
+  [width]="450"
+  [height]="250"
+  [showTitle]="true"
+  title="Please, choose a reason for creating"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="showPopup">
+
+  <dx-select-box
+    displayExpr="Name"
+    placeholder="Choose related case comment"
+    [dataSource]="relatedCaseComment"
+    (onSelectionChanged)="onChangeCaseComment($event)"
+  ></dx-select-box>
+
+  <div class="dx-popup-footer">
+    <dx-button
+      text="OK"
+      type="success"
+      [disabled]="!selectedCaseComment"
+      (click)="onClosePopup(true)"
+    ></dx-button>
+
+    <dx-button text="cancel" type="danger" (click)="onClosePopup(false)"></dx-button>
+  </div>
+
+</dx-popup>
+
+<dx-popup
+  class="popup"
+  title="Please, Select fields to copy"
+  [maxHeight]="710"
+  [width]="450"
+  [showTitle]="true"
+  [dragEnabled]="false"
+  [closeOnOutsideClick]="true"
+  [(visible)]="copyPopup">
+
+  <dx-scroll-view>
+    <div class="dx-fieldset">
+      <div class="dx-field">
+        <div class="dx-field-label">Discount SAP number</div>
+        <div class="dx-field-value">
+          <dx-check-box [(value)]="caseFields.DiscountNumber"></dx-check-box>
+        </div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Quantity</div>
+        <div class="dx-field-value">
+          <dx-check-box [(value)]="caseSkuFields.Quantity"></dx-check-box>
+        </div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Additional On-Invoice Discount (%)</div>
+        <div class="dx-field-value">
+          <dx-check-box [(value)]="caseSkuFields.AddOnInvoiceDiscount"></dx-check-box>
+        </div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Additional Off-Invoice Discount (%)</div>
+        <div class="dx-field-value">
+          <dx-check-box [(value)]="caseSkuFields.AddOffInvoiceDiscount"></dx-check-box>
+        </div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Demanded shelf life as per contract (months)</div>
+        <div class="dx-field-value">
+          <dx-check-box [(value)]="caseSkuFields.DemandedShelfLife"></dx-check-box>
+        </div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Shelf Life (%)</div>
+        <div class="dx-field-value">
+          <dx-check-box [(value)]="caseSkuFields.ShelfLifePercent"></dx-check-box>
+        </div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Shelf Life (amount of months)</div>
+        <div class="dx-field-value">
+          <dx-check-box [(value)]="caseSkuFields.ShelfLifeMonth"></dx-check-box>
+        </div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Commertial policy name</div>
+        <div class="dx-field-value">
+          <dx-check-box [(value)]="caseSkuFields.CPCode"></dx-check-box>
+        </div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">BU</div>
+        <div class="dx-field-value">
+          <dx-check-box [(value)]="caseSkuFields.ProductStructureId"></dx-check-box>
+        </div>
+      </div>
+      <div class="dx-field">
+        <div class="dx-field-label">Franchise</div>
+        <div class="dx-field-value">
+          <dx-check-box [(value)]="caseSkuFields.ProductStructureId"></dx-check-box>
+        </div>
+      </div>
+    </div>
+
+    <div class="dx-popup-footer">
+      <dx-button
+        text="OK"
+        type="success"
+        (click)="onCloseSavePopup(true)">
+      </dx-button>
+
+      <dx-button
+        text="cancel"
+        type="danger"
+        (click)="onCloseSavePopup(false)">
+      </dx-button>
+    </div>
+  </dx-scroll-view>
+
+</dx-popup>

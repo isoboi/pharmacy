@@ -3,8 +3,8 @@ import {Service} from '../home/app.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CasesService} from '../../services/cases.service';
 import {ActionEvent, Actions, TenderCase} from '../../models/case.interface';
-import {Observable, Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import { Observable, of, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import {custom} from 'devextreme/ui/dialog';
 import notify from 'devextreme/ui/notify';
 
@@ -16,11 +16,11 @@ import notify from 'devextreme/ui/notify';
 export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   case: any;
   channel;
-  id: string;
   tabIndex = 0;
   tabs = CasesService.getTabs();
   tenderCase: Observable<any>;
   tenderCaseOriginal = new TenderCase();
+  id = this.route.snapshot.params.id;
 
   private action: string;
   private actions = Actions;
@@ -35,16 +35,20 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params.id;
-
     for (let i = 1; i < this.tabs.length; i++) {
       const tab = this.tabs[i];
       tab.disabled = this.id === 'new';
     }
     if (this.id !== 'new') {
-      this.tenderCase = this.casesService.getTenderCase(this.id);
-      this.tenderCase
-        .pipe(takeUntil(this.destroy$))
+      this.route.params
+        .pipe(
+          takeUntil(this.destroy$),
+          switchMap(param => {
+            this.id = param.id;
+            this.tenderCase = this.casesService.getTenderCase(param.id);
+            return this.tenderCase;
+          })
+        )
         .subscribe((x) => {
           this.tenderCaseOriginal = JSON.parse(JSON.stringify(x));
         });
@@ -96,6 +100,20 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     }
     this.patchTenderCase(obj, event.action, this.id);
+  }
+
+  createRelatedCase(e) {
+    this.casesService.patchCase(e)
+      .pipe(switchMap(tenderCase => {
+        console.log('worked');
+        return this.casesService.createRelatedCase(e.id);
+    })).subscribe(console.log);
+  }
+
+  copyCase(cases: any) {
+    cases.Key = +this.id;
+    this.casesService.copyCase(cases)
+      .subscribe(res => this.router.navigate(['cases', res]));
   }
 
   private patchTenderCase(obj, action, id) {

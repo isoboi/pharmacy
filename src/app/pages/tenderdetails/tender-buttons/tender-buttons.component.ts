@@ -24,15 +24,17 @@ export class TenderButtonsComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params.id;
-    if (this.id !== 'new') {
-      this.canCreateCase$ = this.tenderService.canCreateCase();
-      this.canSave$ = this.tenderService.canUpdate(this.id);
-      this.canDecline$ = this.tenderService.canDecline(this.id);
-    } else {
-      this.canSave$ = this.tenderService.canCreate();
-    }
-
+    this.route.params
+      .subscribe(params => {
+        this.id = params.id;
+        if (this.id !== 'new') {
+          this.canCreateCase$ = this.tenderService.canCreateCase();
+          this.canSave$ = this.tenderService.canUpdate(this.id);
+          this.canDecline$ = this.tenderService.canDecline(this.id);
+        } else {
+          this.canSave$ = this.tenderService.canCreate();
+        }
+      });
   }
 
   save(event) {
