@@ -104,10 +104,9 @@ export class CasedetailsComponent implements OnInit, AfterViewInit, OnDestroy {
 
   createRelatedCase(e) {
     this.casesService.patchCase(e)
-      .pipe(switchMap(tenderCase => {
-        console.log('worked');
-        return this.casesService.createRelatedCase(e.id);
-    })).subscribe(console.log);
+      .pipe(switchMap(() => {
+        return this.casesService.createRelatedCase(this.id);
+    })).subscribe((res: any) => this.router.navigate(['cases', res.value]));
   }
 
   copyCase(cases: any) {
