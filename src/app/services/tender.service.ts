@@ -20,6 +20,16 @@ const tabs: Tab[] = [
     id: 2,
     text: 'Tender Case',
     disabled: false
+  },
+  {
+    id: 3,
+    text: 'Shipment Plans',
+    disabled: false
+  },
+  {
+    id: 4,
+    text: 'Shipment Plans (Graphic)',
+    disabled: false
   }
 ];
 const apiUrl = environment.apiUrl;

@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
 
-  apiUrl: 'https://navpharm365app.ncdev.ru/odata'
+  apiUrl: 'https://navpharm365app.ncdev.ru/odata',
+  defaultApiUrl: 'https://navpharm365app.ncdev.ru'
 };
 
 /*

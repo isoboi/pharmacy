@@ -19,7 +19,7 @@ import {
   DxTabsModule,
   DxButtonModule,
   DxLoadPanelModule,
-  DxFileUploaderModule, DxListModule, DxPopupModule, DxScrollViewModule
+  DxFileUploaderModule, DxListModule, DxPopupModule, DxScrollViewModule, DxDateBoxModule, DxChartModule
 } from 'devextreme-angular';
 import {Service} from './pages/home/app.service';
 import {RestService} from './services/rest.service';
@@ -38,6 +38,8 @@ import {TenderButtonsComponent} from './pages/tenderdetails/tender-buttons/tende
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {AuthInterceptor} from './services/auth.interceptor';
 import {PopupComponent} from './pages/popup/popup.component';
+import { TenderShipmentPlansComponent } from './pages/tenderdetails/tender-shipment-plans/tender-shipment-plans.component';
+import { ShipmentsPlanGraphicComponent } from './pages/tenderdetails/shipments-plan-graphic/shipments-plan-graphic.component';
 
 
 @NgModule({
@@ -59,7 +61,9 @@ import {PopupComponent} from './pages/popup/popup.component';
     TenderCaseComponent,
     CaseButtonsComponent,
     TenderButtonsComponent,
-    PopupComponent
+    PopupComponent,
+    TenderShipmentPlansComponent,
+    ShipmentsPlanGraphicComponent
   ],
   imports: [
     HttpClientModule,
@@ -81,7 +85,9 @@ import {PopupComponent} from './pages/popup/popup.component';
     DxFileUploaderModule,
     DxListModule,
     DxPopupModule,
-    DxScrollViewModule
+    DxScrollViewModule,
+    DxDateBoxModule,
+    DxChartModule
   ],
 
   providers: [

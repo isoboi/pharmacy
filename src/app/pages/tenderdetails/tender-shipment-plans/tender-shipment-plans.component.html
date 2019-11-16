@@ -1,0 +1,150 @@
+<div class="toolbar">
+  <div class="dx-field item">
+    <div class="dx-field-label">Period</div>
+    <div class="dx-field-value">
+      <dx-date-box
+        type="date">
+      </dx-date-box>
+      <dx-button
+        class="btn"
+        icon="save"
+        stylingMode="contained"
+        type="success">
+      </dx-button>
+    </div>
+  </div>
+  <div class="dx-field item">
+    <div class="dx-field-label">Period for Planned Shipment Plan</div>
+    <div class="dx-field-value">
+      <dx-date-box
+        type="date">
+      </dx-date-box>
+      <dx-button
+        class="btn"
+        icon="save"
+        stylingMode="contained"
+        type="success">
+      </dx-button>
+    </div>
+  </div>
+  <div class="item">
+    <dx-button
+      class="save-btn"
+      stylingMode="contained"
+      text="Save"
+      type="default">
+    </dx-button>
+
+    <dx-button
+      class="save-btn"
+      stylingMode="contained"
+      text="Save Version"
+      type="default">
+    </dx-button>
+  </div>
+</div>
+
+<div class="tender-shipment">
+  <dx-data-grid
+    class="tenderSku"
+    [dataSource]="[]"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [showBorders]="true">
+
+    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    <dxo-selection mode="single"></dxo-selection>
+    <dxo-scrolling columnRenderingMode="virtual" mode="infinite"></dxo-scrolling>
+    <dxo-search-panel [visible]="true" placeholder="Search..."></dxo-search-panel>
+    <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="tenderCase"></dxo-state-storing>
+
+    <dxi-column alignment="left"
+                dataField="TenderId"
+                caption="Tender ID">
+    </dxi-column>
+
+    <dxi-column alignment="left"
+                dataField="BrandName"
+                caption="Brand">
+    </dxi-column>
+
+    <dxi-column alignment="left"
+                dataField="SKUNameEng"
+                caption="SKU name Eng">
+    </dxi-column>
+
+    <dxi-column alignment="left"
+                dataField="TenderVolume"
+                caption="Tender Volume (packs)">
+    </dxi-column>
+  </dx-data-grid>
+
+<!-- ********************************** -->
+
+  <dx-data-grid
+    [dataSource]="[]"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [showBorders]="true">
+
+    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    <dxo-selection mode="single"></dxo-selection>
+    <dxo-scrolling columnRenderingMode="virtual" mode="infinite"></dxo-scrolling>
+    <dxo-search-panel [visible]="true" placeholder="Search..."></dxo-search-panel>
+    <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="tenderCase"></dxo-state-storing>
+
+    <dxi-column alignment="left"
+                dataField="Period"
+                caption="Period">
+    </dxi-column>
+
+    <dxi-column alignment="left"
+                dataField="Planned"
+                caption="Planned">
+    </dxi-column>
+
+    <dxi-column alignment="left"
+                dataField="Announced"
+                caption="Announced">
+    </dxi-column>
+
+    <dxi-column alignment="left"
+                dataField="Alive"
+                caption="Alive">
+    </dxi-column>
+
+    <dxi-column allowEditing="true"
+                alignment="left"
+                dataField="Actual"
+                caption="Actual">
+    </dxi-column>
+
+
+    <dxo-summary>
+      <dxi-total-item
+        column="Period"
+        displayFormat="Сумма по периоду">
+      </dxi-total-item>
+
+      <dxi-total-item
+        column="Planned"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        column="Announced"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        column="Alive"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        column="Actual"
+        summaryType="sum">
+      </dxi-total-item>
+    </dxo-summary>
+  </dx-data-grid>
+</div>

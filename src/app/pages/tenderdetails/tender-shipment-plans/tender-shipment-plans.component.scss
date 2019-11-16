@@ -1,0 +1,27 @@
+.tenderSku {
+  margin-bottom: 20px;
+}
+
+.toolbar {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+
+  .item {
+    min-width: 350px;
+    width: 350px;
+
+    .dx-field-value {
+      display: flex;
+
+      .btn {
+        margin-left: 8px;
+      }
+    }
+
+    .save-btn {
+      margin: 0 12px;
+    }
+  }
+}
