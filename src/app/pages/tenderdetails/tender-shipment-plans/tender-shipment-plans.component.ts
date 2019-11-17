@@ -21,30 +21,39 @@ export class TenderShipmentPlansComponent implements OnInit {
 
   ngOnInit() {
     this.getTenderSku();
-    this.getTenderSkuPlan();
+
     this.TenderSKUPlanArchive();
+  }
+
+  onSelectionChanged(e) {
+    const tenderSkuId = e.selectedRowsData[0].Id;
+    this.getTenderSkuPlan(tenderSkuId);
   }
 
   private getTenderSku() {
     this.tenderSku = this.restService.bindData(
-      environment.defaultApiUrl + '/TenderManager/odata/TenderSKU',
+      environment.apiUrl + '/TenderSKU',
       ['TenderId'],
       {Id: 'Int32'}
     );
   }
 
-  private getTenderSkuPlan() {
-    this.tenderSkuPlan = this.restService.bindData(
-      environment.defaultApiUrl + '/TenderManager/odata/TenderSKUPlan',
-      ['Id'],
-      {Id: 'Int32'}
-    );
+  private getTenderSkuPlan(tenderSkuId) {
+    if (!this.tenderSkuPlan) {
+      this.tenderSkuPlan = this.restService.bindData(
+        environment.apiUrl + '/TenderSKUPlan',
+        ['Id'],
+        {Id: 'Int32'}
+      );
+    }
+    this.tenderSkuPlan.filter(['TenderSKUId', '=', tenderSkuId]);
+    this.tenderSkuPlan.load();
   }
 
   private TenderSKUPlanArchive() {
     this.tenderSKUPlanArchive = this.restService.bindData(
-      environment.defaultApiUrl + '/TenderManager/odata/TenderSKUPlanArchive',
-      ['Id'],
+      environment.apiUrl + '/TenderSKUPlanArchive',
+      ['TenderId'],
       {Id: 'Int32'}
     );
   }

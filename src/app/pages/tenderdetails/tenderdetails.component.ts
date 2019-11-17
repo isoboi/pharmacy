@@ -17,7 +17,7 @@ export class TenderDetailsComponent implements OnInit, OnDestroy {
 
   tender;
   tabs;
-  tabIndex = 4;
+  tabIndex = 3;
   disableCreateButton = false;
   id = this.route.snapshot.params.id;
 

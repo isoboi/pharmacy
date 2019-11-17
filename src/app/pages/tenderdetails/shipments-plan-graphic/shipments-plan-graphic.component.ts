@@ -62,7 +62,7 @@ export class ShipmentsPlanGraphicComponent implements OnInit {
 
   private getTenderSkuPlan() {
     this.tenderSkuPlan = this.restService.bindData(
-      environment.defaultApiUrl + '/TenderManager/odata/TenderSKUPlan',
+      environment.apiUrl + '/TenderSKUPlan',
       ['Id'],
       {Id: 'Int32'}
     );

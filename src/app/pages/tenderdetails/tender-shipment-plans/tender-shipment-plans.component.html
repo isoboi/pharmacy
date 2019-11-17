@@ -47,10 +47,11 @@
 <div class="tender-shipment">
   <dx-data-grid
     class="tenderSku"
-    [dataSource]="[]"
+    [dataSource]="tenderSku"
     [allowColumnResizing]="true"
     [columnAutoWidth]="true"
-    [showBorders]="true">
+    [showBorders]="true"
+    (onSelectionChanged)="onSelectionChanged($event)">
 
     <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
     <dxo-selection mode="single"></dxo-selection>
@@ -82,7 +83,76 @@
 <!-- ********************************** -->
 
   <dx-data-grid
-    [dataSource]="[]"
+    [dataSource]="tenderSkuPlan"
+    [allowColumnResizing]="true"
+    [columnAutoWidth]="true"
+    [showBorders]="true">
+
+    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    <dxo-selection mode="single"></dxo-selection>
+    <dxo-scrolling columnRenderingMode="virtual" mode="infinite"></dxo-scrolling>
+    <dxo-search-panel [visible]="true" placeholder="Search..."></dxo-search-panel>
+    <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="tenderCase"></dxo-state-storing>
+
+    <dxi-column alignment="left"
+                dataField="Period"
+                caption="Period">
+    </dxi-column>
+
+    <dxi-column alignment="left"
+                dataField="Planned"
+                caption="Planned">
+    </dxi-column>
+
+    <dxi-column alignment="left"
+                dataField="Announced"
+                caption="Announced">
+    </dxi-column>
+
+    <dxi-column alignment="left"
+                dataField="Alive"
+                caption="Alive">
+    </dxi-column>
+
+    <dxi-column allowEditing="true"
+                alignment="left"
+                dataField="Actual"
+                caption="Actual">
+    </dxi-column>
+
+
+    <dxo-summary>
+      <dxi-total-item
+        column="Period"
+        displayFormat="Сумма по периоду">
+      </dxi-total-item>
+
+      <dxi-total-item
+        column="Planned"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        column="Announced"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        column="Alive"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        column="Actual"
+        summaryType="sum">
+      </dxi-total-item>
+    </dxo-summary>
+  </dx-data-grid>
+
+
+  <!-- ********************************* -->
+  <dx-data-grid
+    [dataSource]="tenderSKUPlanArchive"
     [allowColumnResizing]="true"
     [columnAutoWidth]="true"
     [showBorders]="true">
