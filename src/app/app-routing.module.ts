@@ -6,6 +6,7 @@ import { CasedetailsComponent } from './pages/casedetails/casedetails.component'
 import { CasesComponent } from './pages/cases/cases.component';
 import { PlangraphicComponent } from './pages/plangraphic/plangraphic.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { ShipmentsPlanGraphicComponent } from './pages/shipments-plan-graphic/shipments-plan-graphic.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'cases/:id',
     component: CasedetailsComponent
+  },
+  {
+    path: 'shipments-plan',
+    component: ShipmentsPlanGraphicComponent
   },
   {
     path: '**',

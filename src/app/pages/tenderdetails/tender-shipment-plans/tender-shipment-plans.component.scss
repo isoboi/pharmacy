@@ -1,9 +1,9 @@
 .tenderSku {
-  margin-bottom: 20px;
+  margin: 20px 0;
 }
 
 .toolbar {
-  margin-top: 20px;
+  margin: 30px 0;
   display: flex;
   justify-content: space-between;
   align-items: start;
@@ -24,4 +24,8 @@
       margin: 0 12px;
     }
   }
+}
+
+.gridContainer {
+  max-height: 440px;
 }

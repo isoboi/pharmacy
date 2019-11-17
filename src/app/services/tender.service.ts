@@ -25,11 +25,6 @@ const tabs: Tab[] = [
     id: 3,
     text: 'Shipment Plans',
     disabled: false
-  },
-  {
-    id: 4,
-    text: 'Shipment Plans (Graphic)',
-    disabled: false
   }
 ];
 const apiUrl = environment.apiUrl;
@@ -96,4 +91,11 @@ export class TenderService {
     return this.http.get(apiUrl + `/TenderSKU/BusinessService.CanCreate()`);
   }
 
+  setPeriod(date: string) {
+    return this.http.get(apiUrl + `/TenderSKUPlan/BusinessService.SetPeriod(period=${date})`);
+  }
+
+  setPlanPeriod(date: string) {
+    return this.http.get(apiUrl + `/TenderSKUPlan/BusinessService.SetPlanPeriod(planPeriod=${date})`);
+  }
 }

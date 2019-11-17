@@ -39,7 +39,8 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {AuthInterceptor} from './services/auth.interceptor';
 import {PopupComponent} from './pages/popup/popup.component';
 import { TenderShipmentPlansComponent } from './pages/tenderdetails/tender-shipment-plans/tender-shipment-plans.component';
-import { ShipmentsPlanGraphicComponent } from './pages/tenderdetails/shipments-plan-graphic/shipments-plan-graphic.component';
+import { ShipmentsPlanGraphicComponent } from './pages/shipments-plan-graphic/shipments-plan-graphic.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -87,7 +88,8 @@ import { ShipmentsPlanGraphicComponent } from './pages/tenderdetails/shipments-p
     DxPopupModule,
     DxScrollViewModule,
     DxDateBoxModule,
-    DxChartModule
+    DxChartModule,
+    FormsModule
   ],
 
   providers: [

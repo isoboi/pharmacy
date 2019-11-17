@@ -15,6 +15,12 @@ export const navigation = [
     path: '/cases',
     icon: 'folder',
     selected: false
+  },
+  {
+    text: 'Shipments Plan (Graphic)',
+    path: '/shipments-plan',
+    icon: 'chart',
+    selected: false
   }
   // {
   //   text: 'План график',
