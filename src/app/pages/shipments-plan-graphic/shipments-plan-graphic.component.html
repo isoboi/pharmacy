@@ -1,13 +1,47 @@
 <div class="content-block">
   <div class="dx-card">
     <h4 class="title">Shipments Plan (Graphic)</h4>
+    <div class="select-box">
+      <div class="dx-field operator">
+        <div class="dx-field-label">TAM</div>
+        <div class="dx-field-value">
+          <dx-select-box [items]="operators$ | async"
+                         valueExpr="Id"
+                         displayExpr="Name"
+                         value="total"
+                         placeholder="Выбрать TAM"
+                         (onValueChanged)="onChangeOperator($event)">
+          </dx-select-box>
+        </div>
+      </div>
+
+      <div class="dx-field ">
+        <div class="dx-field-label">Мера отображения данных</div>
+        <div class="dx-field-value">
+          <dx-select-box [items]="graphicOptions"
+                         displayExpr="Value"
+                         [value]="graphicOptions[0]"
+                         (onValueChanged)="onChangeOption($event)">
+          </dx-select-box>
+        </div>
+      </div>
+    </div>
     <dx-chart
       [dataSource]="tenderSkuPlan">
 
-      <dxi-series valueField="Planned" name="Planned"></dxi-series>
-      <dxi-series valueField="Announced" name="Announced"></dxi-series>
-      <dxi-series valueField="Alive" name="Alive"></dxi-series>
-      <dxi-series valueField="Actual" name="Actual"></dxi-series>
+      <ng-container *ngIf="graphicOption.Id === 0">
+        <dxi-series valueField="Planned" name="Planned"></dxi-series>
+        <dxi-series valueField="Announced" name="Announced"></dxi-series>
+        <dxi-series valueField="Alive" name="Alive"></dxi-series>
+        <dxi-series valueField="Actual" name="Actual"></dxi-series>
+      </ng-container>
+
+      <ng-container *ngIf="graphicOption.Id === 1">
+        <dxi-series valueField="PlannedUSD" name="Planned (USD)"></dxi-series>
+        <dxi-series valueField="AnnouncedUSD" name="Announced (USD)"></dxi-series>
+        <dxi-series valueField="AliveUSD" name="Alive (USD)"></dxi-series>
+        <dxi-series valueField="ActualUSD" name="Actual (USD)"></dxi-series>
+      </ng-container>
 
       <dxo-common-series-settings
         argumentField="PeriodDate"
