@@ -1,30 +1,33 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import DataSource from 'devextreme/data/data_source';
 import { environment } from '../../../../environments/environment';
 import { RestService } from '../../../services/rest.service';
 import { TenderService } from '../../../services/tender.service';
 import { DxDataGridComponent } from 'devextreme-angular';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-tender-shipment-plans',
   templateUrl: './tender-shipment-plans.component.html',
   styleUrls: ['./tender-shipment-plans.component.scss']
 })
-export class TenderShipmentPlansComponent implements OnInit {
+export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
 
   @ViewChild('tenderSkuPlanGrid', {static: true}) tenderSkuPlanGrid: DxDataGridComponent;
 
   currentFilter: any;
   tenderSkuId: any;
+  periodPlan: any;
+  tenderSku: DataSource;
+  tenderSkuPlan: DataSource;
+  tenderSKUPlanArchive: DataSource;
   period = {
     PeriodStart: null,
     PeriodEnd: null,
     TenderSKUId: null
   };
-  periodPlan: any;
-  tenderSku: DataSource;
-  tenderSkuPlan: DataSource;
-  tenderSKUPlanArchive: DataSource;
+
+  private destroy$ = new Subject();
 
   constructor(
     private restService: RestService,
@@ -33,14 +36,18 @@ export class TenderShipmentPlansComponent implements OnInit {
 
   ngOnInit() {
     this.getTenderSku();
+  }
 
-    this.TenderSKUPlanArchive();
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   onSelectionChanged(e) {
     this.tenderSkuId = e.selectedRowsData[0].Id;
     this.period.TenderSKUId = this.tenderSkuId;
-    this.getTenderSkuPlan(this.tenderSkuId);
+    this.getTenderSkuPlan();
+    this.TenderSKUPlanArchive();
   }
 
   onCreateNewVersion() {
@@ -54,7 +61,6 @@ export class TenderShipmentPlansComponent implements OnInit {
       const dateNow = new Date();
 
       if (dateNow.getMonth() <= alivePeriodDate.getMonth() && dateNow.getFullYear() <= alivePeriodDate.getFullYear()) {
-        console.log(e);
         this.tenderSkuPlanGrid.instance.editCell(e.rowIndex, e.columnIndex);
       }
     }
@@ -93,7 +99,7 @@ export class TenderShipmentPlansComponent implements OnInit {
     );
   }
 
-  private getTenderSkuPlan(tenderSkuId) {
+  private getTenderSkuPlan() {
     if (!this.tenderSkuPlan) {
       this.tenderSkuPlan = this.restService.bindData(
         environment.apiUrl + '/TenderSKUPlan',
@@ -101,17 +107,19 @@ export class TenderShipmentPlansComponent implements OnInit {
         {Id: 'Int32'}
       );
     }
-    this.tenderSkuPlan.filter(['TenderSKUId', '=', 2241]);
+    this.tenderSkuPlan.filter(['TenderSKUId', '=', this.tenderSkuId]);
     this.tenderSkuPlan.load();
   }
 
   private TenderSKUPlanArchive() {
-    this.tenderSKUPlanArchive = this.restService.bindData(
-      environment.apiUrl + '/TenderSKUPlanArchive',
-      ['Id'],
-      {Id: 'Int32'}
-    );
-    this.tenderSKUPlanArchive.filter(['TenderSKUId', '=', 2241]);
+    if (!this.tenderSKUPlanArchive) {
+      this.tenderSKUPlanArchive = this.restService.bindData(
+        environment.apiUrl + '/TenderSKUPlanArchive',
+        ['Id'],
+        {Id: 'Int32'}
+      );
+    }
+    this.tenderSKUPlanArchive.filter(['TenderSKUId', '=', this.tenderSkuId]);
     this.tenderSKUPlanArchive.load();
   }
 }
