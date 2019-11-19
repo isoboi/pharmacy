@@ -4,7 +4,8 @@ import { environment } from '../../../../environments/environment';
 import { RestService } from '../../../services/rest.service';
 import { TenderService } from '../../../services/tender.service';
 import { DxDataGridComponent } from 'devextreme-angular';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-tender-shipment-plans',
@@ -21,6 +22,7 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
   tenderSku: DataSource;
   tenderSkuPlan: DataSource;
   tenderSKUPlanArchive: DataSource;
+  tenderPlanVersion$: Observable<any>;
   period = {
     PeriodStart: null,
     PeriodEnd: null,
@@ -36,6 +38,7 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getTenderSku();
+    this.getTenderPlanVersion();
   }
 
   ngOnDestroy(): void {
@@ -66,6 +69,11 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
     }
   }
 
+  onTenderPlanVersion(e) {
+    this.tenderSKUPlanArchive.filter(['TenderPlanVersionId', '=', e.value]);
+    this.tenderSKUPlanArchive.load();
+  }
+
   setPeriod() {
     const period = {
       PeriodStart: this.getDate(this.period.PeriodStart),
@@ -73,7 +81,8 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
       TenderSKUId: this.period.TenderSKUId
     };
     this.tenderService.setPeriod(period)
-      .subscribe(console.log);
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
   }
 
   setPeriodPlan() {
@@ -83,7 +92,8 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
       TenderSKUId: this.period.TenderSKUId
     };
     this.tenderService.setPlanPeriod(period)
-      .subscribe(console.log);
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
   }
 
   private getDate(dateValue: Date) {
@@ -121,5 +131,13 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
     }
     this.tenderSKUPlanArchive.filter(['TenderSKUId', '=', this.tenderSkuId]);
     this.tenderSKUPlanArchive.load();
+  }
+
+  private getTenderPlanVersion() {
+    this.tenderPlanVersion$ = this.tenderService.getTenderPlanVersion()
+      .pipe(
+        takeUntil(this.destroy$),
+        map((item: any) => item.value)
+      );
   }
 }

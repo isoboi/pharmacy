@@ -23,7 +23,7 @@ const tabs: Tab[] = [
   },
   {
     id: 3,
-    text: 'Shipment Plans',
+    text: 'Shipment Plan',
     disabled: false
   }
 ];
@@ -101,5 +101,9 @@ export class TenderService {
 
   createNewVersion(id: string | number) {
     return this.http.post(apiUrl + '/TenderSKUPlan/CreateNewVersion?tenderSKUId=' + id, null);
+  }
+
+  getTenderPlanVersion() {
+    return this.http.get(apiUrl + '/TenderPlanVersion');
   }
 }

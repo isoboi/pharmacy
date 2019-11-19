@@ -172,6 +172,19 @@
   </dx-data-grid>
 
   <!-- ********************************* -->
+
+  <div class="dx-field TenderPlanVersion">
+    <div class="dx-field-label">Архив срезов</div>
+    <div class="dx-field-value">
+      <dx-select-box [items]="tenderPlanVersion$ | async"
+                     valueExpr="Id"
+                     displayExpr="VersionName"
+                     placeholder="Select..."
+                     (onValueChanged)="onTenderPlanVersion($event)">
+      </dx-select-box>
+    </div>
+  </div>
+
   <dx-data-grid
     class="gridContainer"
     [dataSource]="tenderSKUPlanArchive"

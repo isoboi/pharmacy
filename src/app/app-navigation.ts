@@ -17,8 +17,8 @@ export const navigation = [
     selected: false
   },
   {
-    text: 'Shipments Plan (Graphic)',
-    path: '/shipments-plan',
+    text: 'Shipment Plan (Graphic)',
+    path: '/shipment-plan',
     icon: 'chart',
     selected: false
   }
