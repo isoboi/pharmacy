@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import DataSource from 'devextreme/data/data_source';
 import { environment } from '../../../../environments/environment';
 import { RestService } from '../../../services/rest.service';
 import { TenderService } from '../../../services/tender.service';
+import { DxDataGridComponent } from 'devextreme-angular';
 
 @Component({
   selector: 'app-tender-shipment-plans',
@@ -11,8 +12,15 @@ import { TenderService } from '../../../services/tender.service';
 })
 export class TenderShipmentPlansComponent implements OnInit {
 
+  @ViewChild('tenderSkuPlanGrid', {static: true}) tenderSkuPlanGrid: DxDataGridComponent;
+
   currentFilter: any;
-  period: any;
+  tenderSkuId: any;
+  period = {
+    PeriodStart: null,
+    PeriodEnd: null,
+    TenderSKUId: null
+  };
   periodPlan: any;
   tenderSku: DataSource;
   tenderSkuPlan: DataSource;
@@ -30,19 +38,45 @@ export class TenderShipmentPlansComponent implements OnInit {
   }
 
   onSelectionChanged(e) {
-    const tenderSkuId = e.selectedRowsData[0].Id;
-    this.getTenderSkuPlan(tenderSkuId);
+    this.tenderSkuId = e.selectedRowsData[0].Id;
+    this.period.TenderSKUId = this.tenderSkuId;
+    this.getTenderSkuPlan(this.tenderSkuId);
+  }
+
+  onCreateNewVersion() {
+    this.tenderService.createNewVersion(this.tenderSkuId)
+      .subscribe();
+  }
+
+  onCellClick(e: any) {
+    if (e.column.dataField === 'Alive' && e.row) {
+      const alivePeriodDate = new Date(e.row.data.PeriodDate);
+      const dateNow = new Date();
+
+      if (dateNow.getMonth() <= alivePeriodDate.getMonth() && dateNow.getFullYear() <= alivePeriodDate.getFullYear()) {
+        console.log(e);
+        this.tenderSkuPlanGrid.instance.editCell(e.rowIndex, e.columnIndex);
+      }
+    }
   }
 
   setPeriod() {
-    const date = this.getDate(this.period);
-    this.tenderService.setPeriod(date)
+    const period = {
+      PeriodStart: this.getDate(this.period.PeriodStart),
+      PeriodEnd: this.getDate(this.period.PeriodEnd),
+      TenderSKUId: this.period.TenderSKUId
+    };
+    this.tenderService.setPeriod(period)
       .subscribe(console.log);
   }
 
   setPeriodPlan() {
-    const date = this.getDate(this.periodPlan);
-    this.tenderService.setPlanPeriod(date)
+    const period = {
+      PeriodStart: this.getDate(this.periodPlan),
+      PeriodEnd: null,
+      TenderSKUId: this.period.TenderSKUId
+    };
+    this.tenderService.setPlanPeriod(period)
       .subscribe(console.log);
   }
 
@@ -74,8 +108,10 @@ export class TenderShipmentPlansComponent implements OnInit {
   private TenderSKUPlanArchive() {
     this.tenderSKUPlanArchive = this.restService.bindData(
       environment.apiUrl + '/TenderSKUPlanArchive',
-      ['TenderId'],
+      ['Id'],
       {Id: 'Int32'}
     );
+    this.tenderSKUPlanArchive.filter(['TenderSKUId', '=', 2241]);
+    this.tenderSKUPlanArchive.load();
   }
 }

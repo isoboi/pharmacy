@@ -3,7 +3,7 @@
 }
 
 .toolbar {
-  margin: 30px 0;
+  margin-top: 40px;
   display: flex;
   justify-content: space-between;
   align-items: start;
@@ -28,4 +28,12 @@
 
 .gridContainer {
   max-height: 440px;
+}
+
+.tenderSkuPlan {
+  margin-bottom: 20px;
+}
+
+.text-right {
+  text-align: right;
 }

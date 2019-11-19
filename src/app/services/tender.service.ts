@@ -91,11 +91,15 @@ export class TenderService {
     return this.http.get(apiUrl + `/TenderSKU/BusinessService.CanCreate()`);
   }
 
-  setPeriod(date: string) {
-    return this.http.get(apiUrl + `/TenderSKUPlan/BusinessService.SetPeriod(period=${date})`);
+  setPeriod(period: any) {
+    return this.http.post(apiUrl + '/TenderSKUPlan/SetPeriod', period);
   }
 
-  setPlanPeriod(date: string) {
-    return this.http.get(apiUrl + `/TenderSKUPlan/BusinessService.SetPlanPeriod(planPeriod=${date})`);
+  setPlanPeriod(periodPlan: any) {
+    return this.http.post(apiUrl + '/TenderSKUPlan/SetPlanPeriod', periodPlan);
+  }
+
+  createNewVersion(id: string | number) {
+    return this.http.post(apiUrl + '/TenderSKUPlan/CreateNewVersion?tenderSKUId=' + id, null);
   }
 }

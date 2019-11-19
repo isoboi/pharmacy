@@ -92,6 +92,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.router.navigate(['/tender/new']);
   }
 
+  onRowPrepared(e) {
+    if (e.rowType === 'data') {
+      if (e.data.ActualVsAlive) {
+        e.rowElement.classList.add('actual-vs-alive');
+        console.log(e.rowElement);
+      }
+    }
+  }
+
   onToolbarPreparing(e) {
     const toolbarItems = e.toolbarOptions.items;
     // Adds a new item

@@ -37,13 +37,72 @@
 
 <!-- ********************************** -->
 
+  <div class="toolbar">
+    <div class="dx-field item">
+      <div class="dx-field-label">Period start</div>
+      <div class="dx-field-value">
+        <dx-date-box
+          [(ngModel)]="period.PeriodStart"
+          type="date">
+        </dx-date-box>
+      </div>
+    </div>
+    <div class="dx-field item">
+      <div class="dx-field-label">Period end</div>
+      <div class="dx-field-value">
+        <dx-date-box
+          [(ngModel)]="period.PeriodEnd"
+          type="date">
+        </dx-date-box>
+        <dx-button
+          class="btn"
+          icon="save"
+          stylingMode="contained"
+          type="success"
+          [disabled]="!period.PeriodStart || !period.PeriodEnd"
+          (click)="setPeriod()">
+        </dx-button>
+      </div>
+    </div>
+    <div class="dx-field item">
+      <div class="dx-field-label">Period for Planned Shipment Plan</div>
+      <div class="dx-field-value">
+        <dx-date-box
+          [(ngModel)]="periodPlan"
+          type="date">
+        </dx-date-box>
+        <dx-button
+          class="btn"
+          icon="save"
+          stylingMode="contained"
+          type="success"
+          [disabled]="!periodPlan"
+          (click)="setPeriodPlan()">
+        </dx-button>
+      </div>
+    </div>
+    <div class="item text-right">
+      <dx-button
+        class="save-btn"
+        stylingMode="contained"
+        text="Save Version"
+        type="default"
+        [disabled]="!tenderSkuId"
+        (click)="onCreateNewVersion()">
+      </dx-button>
+    </div>
+  </div>
+
+<!--***********************************-->
   <dx-data-grid
-    class="gridContainer"
+    class="gridContainer tenderSkuPlan"
+    #tenderSkuPlanGrid
     [dataSource]="tenderSkuPlan"
     [allowColumnResizing]="true"
     [columnAutoWidth]="true"
     [errorRowEnabled]="false"
-    [showBorders]="true">
+    [showBorders]="true"
+    (onCellClick)="onCellClick($event)">
 
     <dxo-editing mode="cell" [allowUpdating]="true"></dxo-editing>
     <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
@@ -70,7 +129,7 @@
                 caption="Announced">
     </dxi-column>
 
-    <dxi-column [allowEditing]="true"
+    <dxi-column [allowEditing]="false"
                 alignment="left"
                 dataField="Alive"
                 caption="Alive">
@@ -111,60 +170,6 @@
       </dxi-total-item>
     </dxo-summary>
   </dx-data-grid>
-
-  <!-- ********************* -->
-
-  <div class="toolbar">
-    <div class="dx-field item">
-      <div class="dx-field-label">Period</div>
-      <div class="dx-field-value">
-        <dx-date-box
-          [(ngModel)]="period"
-          type="date">
-        </dx-date-box>
-        <dx-button
-          class="btn"
-          icon="save"
-          stylingMode="contained"
-          type="success"
-          [disabled]="!period"
-          (click)="setPeriod()">
-        </dx-button>
-      </div>
-    </div>
-    <div class="dx-field item">
-      <div class="dx-field-label">Period for Planned Shipment Plan</div>
-      <div class="dx-field-value">
-        <dx-date-box
-          [(ngModel)]="periodPlan"
-          type="date">
-        </dx-date-box>
-        <dx-button
-          class="btn"
-          icon="save"
-          stylingMode="contained"
-          type="success"
-          [disabled]="!periodPlan"
-          (click)="setPeriodPlan()">
-        </dx-button>
-      </div>
-    </div>
-    <div class="item">
-      <dx-button
-        class="save-btn"
-        stylingMode="contained"
-        text="Save"
-        type="default">
-      </dx-button>
-
-      <dx-button
-        class="save-btn"
-        stylingMode="contained"
-        text="Save Version"
-        type="default">
-      </dx-button>
-    </div>
-  </div>
 
   <!-- ********************************* -->
   <dx-data-grid
