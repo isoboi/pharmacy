@@ -54,7 +54,6 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
     this.tenderSkuId = e.selectedRowsData[0].Id;
     this.period.TenderSKUId = this.tenderSkuId;
     this.getTenderSkuPlan();
-    this.TenderSKUPlanArchive();
   }
 
   onCreateNewVersion() {
@@ -68,13 +67,22 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
       const alivePeriodDate = new Date(e.row.data.PeriodDate);
       const dateNow = new Date();
 
-      if (dateNow.getMonth() <= alivePeriodDate.getMonth() && dateNow.getFullYear() <= alivePeriodDate.getFullYear()) {
+      if (dateNow.getFullYear() < alivePeriodDate.getFullYear()) {
+        this.tenderSkuPlanGrid.instance.editCell(e.rowIndex, e.columnIndex);
+      } else if (dateNow.getFullYear() === alivePeriodDate.getFullYear() && dateNow.getMonth() <= alivePeriodDate.getMonth()) {
         this.tenderSkuPlanGrid.instance.editCell(e.rowIndex, e.columnIndex);
       }
     }
   }
 
   onTenderPlanVersion(e) {
+    if (!this.tenderSKUPlanArchive) {
+      this.tenderSKUPlanArchive = this.restService.bindData(
+        environment.apiUrl + '/TenderSKUPlanArchive',
+        ['Id'],
+        {Id: 'Int32'}
+      );
+    }
     this.tenderSKUPlanArchive.filter(['TenderPlanVersionId', '=', e.value]);
     this.tenderSKUPlanArchive.load();
   }
@@ -128,18 +136,6 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
     }
     this.tenderSkuPlan.filter(['TenderSKUId', '=', this.tenderSkuId]);
     this.tenderSkuPlan.load();
-  }
-
-  private TenderSKUPlanArchive() {
-    if (!this.tenderSKUPlanArchive) {
-      this.tenderSKUPlanArchive = this.restService.bindData(
-        environment.apiUrl + '/TenderSKUPlanArchive',
-        ['Id'],
-        {Id: 'Int32'}
-      );
-    }
-    this.tenderSKUPlanArchive.filter(['TenderSKUId', '=', this.tenderSkuId]);
-    this.tenderSKUPlanArchive.load();
   }
 
   private getTenderPlanVersion() {
