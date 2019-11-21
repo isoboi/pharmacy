@@ -14,22 +14,26 @@
     <dxo-search-panel [visible]="true" placeholder="Search..."></dxo-search-panel>
     <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="tenderCase"></dxo-state-storing>
 
-    <dxi-column alignment="left"
+    <dxi-column alignment="center"
+                cssClass="text-center"
                 dataField="TenderId"
                 caption="Tender ID">
     </dxi-column>
 
-    <dxi-column alignment="left"
+    <dxi-column alignment="center"
+                cssClass="text-center"
                 dataField="BrandName"
                 caption="Brand">
     </dxi-column>
 
-    <dxi-column alignment="left"
+    <dxi-column alignment="center"
+                cssClass="text-center"
                 dataField="SKUNameEng"
                 caption="SKU name Eng">
     </dxi-column>
 
-    <dxi-column alignment="left"
+    <dxi-column alignment="center"
+                cssClass="text-center"
                 dataField="TenderVolume"
                 caption="Tender Volume (packs)">
     </dxi-column>
@@ -38,37 +42,42 @@
 <!-- ********************************** -->
 
   <div class="toolbar">
-    <div class="dx-field item">
-      <div class="dx-field-label">Period start</div>
-      <div class="dx-field-value">
-        <dx-date-box
-          [(ngModel)]="period.PeriodStart"
-          type="date">
-        </dx-date-box>
+    <div>
+      <div class="dx-field item">
+        <div class="dx-field-label">Period start</div>
+        <div class="dx-field-value">
+          <dx-date-box
+            [(ngModel)]="period.PeriodStart"
+            displayFormat="dd.MM.yyyy"
+            type="date">
+          </dx-date-box>
+        </div>
+      </div>
+      <div class="dx-field item">
+        <div class="dx-field-label">Period end</div>
+        <div class="dx-field-value">
+          <dx-date-box
+            [(ngModel)]="period.PeriodEnd"
+            displayFormat="dd.MM.yyyy"
+            type="date">
+          </dx-date-box>
+          <dx-button
+            class="btn"
+            icon="save"
+            stylingMode="contained"
+            type="success"
+            [disabled]="!period.PeriodStart || !period.PeriodEnd"
+            (click)="setPeriod()">
+          </dx-button>
+        </div>
       </div>
     </div>
-    <div class="dx-field item">
-      <div class="dx-field-label">Period end</div>
-      <div class="dx-field-value">
-        <dx-date-box
-          [(ngModel)]="period.PeriodEnd"
-          type="date">
-        </dx-date-box>
-        <dx-button
-          class="btn"
-          icon="save"
-          stylingMode="contained"
-          type="success"
-          [disabled]="!period.PeriodStart || !period.PeriodEnd"
-          (click)="setPeriod()">
-        </dx-button>
-      </div>
-    </div>
-    <div class="dx-field item">
-      <div class="dx-field-label">Period for Planned Shipment Plan</div>
+    <div class="dx-field item period-for-planned">
+      <div class="dx-field-label">Period for Planned</div>
       <div class="dx-field-value">
         <dx-date-box
           [(ngModel)]="periodPlan"
+          displayFormat="dd.MM.yyyy"
           type="date">
         </dx-date-box>
         <dx-button
@@ -112,60 +121,132 @@
     <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="tenderCase"></dxo-state-storing>
 
     <dxi-column [allowEditing]="false"
-                alignment="left"
+                alignment="center"
+                cssClass="text-center"
                 dataField="Period"
                 caption="Period">
     </dxi-column>
 
     <dxi-column [allowEditing]="false"
-                alignment="left"
+                alignment="center"
+                cssClass="text-center"
                 dataField="Planned"
                 caption="Planned">
     </dxi-column>
 
     <dxi-column [allowEditing]="false"
-                alignment="left"
+                alignment="center"
+                cssClass="text-center"
                 dataField="Announced"
                 caption="Announced">
     </dxi-column>
 
     <dxi-column [allowEditing]="false"
-                alignment="left"
+                alignment="center"
+                cssClass="text-center"
                 dataField="Alive"
+                dataType="number"
                 caption="Alive">
     </dxi-column>
 
     <dxi-column [allowEditing]="false"
                 allowEditing="true"
-                alignment="left"
+                alignment="center"
+                cssClass="text-center"
                 dataField="Actual"
                 caption="Actual">
+    </dxi-column>
+
+    <dxi-column [allowEditing]="false"
+                alignment="center"
+                cssClass="text-center"
+                dataField="PlannedUSD"
+                caption="Planned (USD)">
+    </dxi-column>
+
+    <dxi-column [allowEditing]="false"
+                alignment="center"
+                cssClass="text-center"
+                dataField="AnnouncedUSD"
+                caption="Announced (USD)">
+    </dxi-column>
+
+    <dxi-column [allowEditing]="false"
+                alignment="center"
+                cssClass="text-center"
+                dataField="AliveUSD"
+                dataType="number"
+                caption="Alive (USD)">
+    </dxi-column>
+
+    <dxi-column [allowEditing]="false"
+                allowEditing="true"
+                alignment="center"
+                cssClass="text-center"
+                dataField="ActualUSD"
+                caption="Actual (USD)">
     </dxi-column>
 
 
     <dxo-summary>
       <dxi-total-item
         column="Period"
-        displayFormat="Сумма по периоду">
+        displayFormat="Total amount for a period">
       </dxi-total-item>
 
       <dxi-total-item
+        alignment="center"
+        cssClass="text-center"
         column="Planned"
         summaryType="sum">
       </dxi-total-item>
 
       <dxi-total-item
+        alignment="center"
+        cssClass="text-center"
         column="Announced"
         summaryType="sum">
       </dxi-total-item>
 
       <dxi-total-item
+        alignment="center"
+        cssClass="text-center"
         column="Alive"
         summaryType="sum">
       </dxi-total-item>
 
       <dxi-total-item
+        alignment="center"
+        cssClass="text-center"
         column="Actual"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        alignment="center"
+        cssClass="text-center"
+        column="PlannedUSD"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        alignment="center"
+        cssClass="text-center"
+        column="AnnouncedUSD"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        alignment="center"
+        cssClass="text-center"
+        column="AliveUSD"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        alignment="center"
+        cssClass="text-center"
+        column="ActualUSD"
         summaryType="sum">
       </dxi-total-item>
     </dxo-summary>
@@ -174,7 +255,7 @@
   <!-- ********************************* -->
 
   <div class="dx-field TenderPlanVersion">
-    <div class="dx-field-label">Архив срезов</div>
+    <div class="dx-field-label">Version</div>
     <div class="dx-field-value">
       <dx-select-box [items]="tenderPlanVersion$ | async"
                      valueExpr="Id"
@@ -199,37 +280,65 @@
     <dxo-search-panel [visible]="true" placeholder="Search..."></dxo-search-panel>
     <dxo-state-storing [enabled]="true" type="sessionStorage" storageKey="tenderCase"></dxo-state-storing>
 
-    <dxi-column alignment="left"
+    <dxi-column alignment="center"
+                cssClass="text-center"
                 dataField="Period"
                 caption="Period">
     </dxi-column>
 
-    <dxi-column alignment="left"
+    <dxi-column alignment="center"
+                cssClass="text-center"
                 dataField="Planned"
                 caption="Planned">
     </dxi-column>
 
-    <dxi-column alignment="left"
+    <dxi-column alignment="center"
+                cssClass="text-center"
                 dataField="Announced"
                 caption="Announced">
     </dxi-column>
 
-    <dxi-column alignment="left"
+    <dxi-column alignment="center"
+                cssClass="text-center"
                 dataField="Alive"
                 caption="Alive">
     </dxi-column>
 
-    <dxi-column allowEditing="true"
-                alignment="left"
+    <dxi-column alignment="center"
+                cssClass="text-center"
                 dataField="Actual"
                 caption="Actual">
+    </dxi-column>
+
+    <dxi-column alignment="center"
+                cssClass="text-center"
+                dataField="PlannedUSD"
+                caption="Planned (USD)">
+    </dxi-column>
+
+    <dxi-column alignment="center"
+                cssClass="text-center"
+                dataField="AnnouncedUSD"
+                caption="Announced (USD)">
+    </dxi-column>
+
+    <dxi-column alignment="center"
+                cssClass="text-center"
+                dataField="AliveUSD"
+                caption="Alive (USD)">
+    </dxi-column>
+
+    <dxi-column alignment="center"
+                cssClass="text-center"
+                dataField="ActualUSD"
+                caption="Actual (USD)">
     </dxi-column>
 
 
     <dxo-summary>
       <dxi-total-item
         column="Period"
-        displayFormat="Сумма по периоду">
+        displayFormat="Total amount for a period">
       </dxi-total-item>
 
       <dxi-total-item
@@ -249,6 +358,26 @@
 
       <dxi-total-item
         column="Actual"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        column="PlannedUSD"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        column="AnnouncedUSD"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        column="AliveUSD"
+        summaryType="sum">
+      </dxi-total-item>
+
+      <dxi-total-item
+        column="ActualUSD"
         summaryType="sum">
       </dxi-total-item>
     </dxo-summary>

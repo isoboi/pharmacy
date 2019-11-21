@@ -6,11 +6,11 @@
   margin-top: 40px;
   display: flex;
   justify-content: space-between;
-  align-items: start;
+  align-items: flex-start;
 
   .item {
-    min-width: 350px;
-    width: 350px;
+    min-width: 250px;
+    width: 250px;
 
     .dx-field-value {
       display: flex;
@@ -23,6 +23,11 @@
     .save-btn {
       margin: 0 12px;
     }
+  }
+
+  .period-for-planned {
+    min-width: 300px;
+    width: 300px;
   }
 }
 
@@ -41,4 +46,10 @@
 .TenderPlanVersion {
   margin-top: 30px;
   width: 500px;
+}
+
+:host ::ng-deep {
+  .text-center {
+    text-align: center !important;
+  }
 }

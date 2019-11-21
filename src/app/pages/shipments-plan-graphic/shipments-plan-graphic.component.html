@@ -29,6 +29,8 @@
     <dx-chart
       [dataSource]="tenderSkuPlan">
 
+      <dxo-tooltip [enabled]="true"></dxo-tooltip>
+
       <ng-container *ngIf="graphicOption.Id === 0">
         <dxi-series valueField="Planned" name="Planned"></dxi-series>
         <dxi-series valueField="Announced" name="Announced"></dxi-series>
@@ -50,7 +52,7 @@
 
       <dxo-argument-axis discreteAxisDivisionMode="crossLabels">
         <dxo-grid [visible]="false"></dxo-grid>
-        <dxo-label overlappingBehavior="rotate"></dxo-label>
+        <dxo-label overlappingBehavior="rotate" [customizeText]="customizeDateText"></dxo-label>
       </dxo-argument-axis>
 
       <dxi-value-axis>

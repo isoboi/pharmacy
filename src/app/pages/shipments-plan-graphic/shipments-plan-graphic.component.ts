@@ -18,7 +18,7 @@ export class ShipmentsPlanGraphicComponent implements OnInit {
   graphicOptions: any[] = [
     {
       Id: 0,
-      Value: 'шт'
+      Value: 'packs'
     },
     {
       Id: 1,
@@ -35,6 +35,13 @@ export class ShipmentsPlanGraphicComponent implements OnInit {
   ngOnInit() {
     this.getTenderSkuPlan();
     this.getOperators();
+  }
+
+  customizeDateText(dateValue) {
+    const date = new Date(dateValue.value);
+    const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    const month = date.getMonth() < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+    return day + '.' + month + '.' + date.getFullYear();
   }
 
   customizeText(e) {

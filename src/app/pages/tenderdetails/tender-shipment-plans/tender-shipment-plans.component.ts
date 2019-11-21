@@ -6,6 +6,7 @@ import { TenderService } from '../../../services/tender.service';
 import { DxDataGridComponent } from 'devextreme-angular';
 import { Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-tender-shipment-plans',
@@ -17,6 +18,7 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
   @ViewChild('tenderSkuPlanGrid', {static: true}) tenderSkuPlanGrid: DxDataGridComponent;
 
   currentFilter: any;
+  tenderId: any;
   tenderSkuId: any;
   periodPlan: any;
   tenderSku: DataSource;
@@ -33,10 +35,12 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
 
   constructor(
     private restService: RestService,
-    private tenderService: TenderService
+    private tenderService: TenderService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    this.tenderId = this.activatedRoute.snapshot.params.id;
     this.getTenderSku();
     this.getTenderPlanVersion();
   }
@@ -82,7 +86,9 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
     };
     this.tenderService.setPeriod(period)
       .pipe(takeUntil(this.destroy$))
-      .subscribe();
+      .subscribe(() => {
+        this.getTenderSkuPlan();
+      });
   }
 
   setPeriodPlan() {
