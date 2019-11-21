@@ -114,7 +114,7 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
       ['Id'],
       {Id: 'Int32'}
     );
-    this.tenderSku.filter(['TenderId', '=', this.tenderId]);
+    this.tenderSku.filter(['TenderId', '=', +this.tenderId]);
     this.tenderSku.load();
   }
 
