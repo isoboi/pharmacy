@@ -17,6 +17,12 @@
 
     <dxi-column alignment="center"
                 cssClass="text-center"
+                dataField="Id"
+                caption="ID">
+    </dxi-column>
+
+    <dxi-column alignment="center"
+                cssClass="text-center"
                 dataField="TenderId"
                 caption="Tender ID">
     </dxi-column>
@@ -67,7 +73,7 @@
             icon="save"
             stylingMode="contained"
             type="success"
-            [disabled]="!period.PeriodStart || !period.PeriodEnd"
+            [disabled]="!period.PeriodStart || !period.PeriodEnd || !period.TenderSKUId"
             (click)="setPeriod()">
           </dx-button>
         </div>
