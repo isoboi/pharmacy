@@ -59,6 +59,7 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
 
   onCreateNewVersion() {
     this.tenderService.createNewVersion(this.tenderSkuId)
+      .pipe(takeUntil(this.destroy$))
       .subscribe();
   }
 
@@ -86,9 +87,7 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
     };
     this.tenderService.setPeriod(period)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.getTenderSkuPlan();
-      });
+      .subscribe(() => this.tenderSkuPlan.reload());
   }
 
   setPeriodPlan() {
@@ -104,15 +103,19 @@ export class TenderShipmentPlansComponent implements OnInit, OnDestroy {
 
   private getDate(dateValue: Date) {
     const date = new Date(dateValue);
-    return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+    const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    const month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+    return day + '.' + month + '.' + date.getFullYear();
   }
 
   private getTenderSku() {
     this.tenderSku = this.restService.bindData(
       environment.apiUrl + '/TenderSKU',
-      ['TenderId'],
+      ['Id'],
       {Id: 'Int32'}
     );
+    this.tenderSku.filter(['TenderId', '=', this.tenderId]);
+    this.tenderSku.load();
   }
 
   private getTenderSkuPlan() {

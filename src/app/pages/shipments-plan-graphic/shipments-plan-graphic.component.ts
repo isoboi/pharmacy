@@ -40,7 +40,7 @@ export class ShipmentsPlanGraphicComponent implements OnInit {
   customizeDateText(dateValue) {
     const date = new Date(dateValue.value);
     const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
-    const month = date.getMonth() < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+    const month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
     return day + '.' + month + '.' + date.getFullYear();
   }
 
