@@ -27,7 +27,8 @@
       </div>
     </div>
     <dx-chart
-      [dataSource]="tenderSkuPlan">
+      [dataSource]="tenderSkuPlan"
+      [loadingIndicator]="true">
 
       <dxo-tooltip [enabled]="true"></dxo-tooltip>
 
@@ -45,14 +46,21 @@
         <dxi-series valueField="ActualUSD" name="Actual (USD)"></dxi-series>
       </ng-container>
 
-      <dxo-common-series-settings
-        argumentField="PeriodDate"
-        type="line">
+      <dxo-common-series-settings argumentField="PeriodDate" type="line">
+        <dxo-aggregation [enabled]="true" method="sum"></dxo-aggregation>
+        <dxo-fullstackedbar>
+          <dxo-aggregation [enabled]="true"></dxo-aggregation>
+        </dxo-fullstackedbar>
       </dxo-common-series-settings>
 
-      <dxo-argument-axis discreteAxisDivisionMode="crossLabels">
+      <dxo-argument-axis discreteAxisDivisionMode="crossLabels"
+                         aggregationGroupWidth="200"
+                         aggregationInterval="month">
+        <dxo-label overlappingBehavior="rotate"
+                   [customizeText]="customizeDateText">
+        </dxo-label>
+        <dxo-tick-interval [months]="1"></dxo-tick-interval>
         <dxo-grid [visible]="false"></dxo-grid>
-        <dxo-label overlappingBehavior="rotate" [customizeText]="customizeDateText"></dxo-label>
       </dxo-argument-axis>
 
       <dxi-value-axis>

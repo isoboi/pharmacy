@@ -10,7 +10,7 @@ export const version = 4;
 })
 
 export class RestService {
-  bindData(url: string, key: string[], keyType: any) {
+  bindData(url: string, key: string[], keyType: any, params: any = {}) {
     return new DataSource({
       store: new ODataStore({
         url,
@@ -31,6 +31,7 @@ export class RestService {
           notify({message: 'Successful', position: 'top'}, 'success', 1500);
         }
       }),
+      ...params
     });
   }
 }
